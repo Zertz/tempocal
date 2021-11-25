@@ -2,7 +2,7 @@
   "name": "tempocal",
   "version": "0.0.3",
   "description": "Calendar built with Temporal",
-  "source": "src/index.tsx",
+  "source": "src/index.html",
   "repository": "https://github.com/Zertz/tempocal",
   "author": "Pier-Luc Gendreau",
   "license": "MIT",
