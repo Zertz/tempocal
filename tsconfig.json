@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "target": "ES2021"
+  }
+}

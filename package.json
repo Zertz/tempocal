@@ -1,0 +1,37 @@
+{
+  "name": "tempocal",
+  "version": "0.0.1",
+  "description": "Calendar built with Temporal",
+  "source": "src/index.tsx",
+  "repository": "https://github.com/Zertz/tempocal",
+  "author": "Pier-Luc Gendreau",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build",
+    "prepublishOnly": "yarn build",
+    "start": "parcel src/index.html",
+    "watch": "parcel watch"
+  },
+  "dependencies": {
+    "@js-temporal/polyfill": "^0.2.0",
+    "@parcel/transformer-react-refresh-wrap": "^2.0.1",
+    "classnames": "^2.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@parcel/packager-ts": "^2.0.1",
+    "@parcel/transformer-typescript-types": "^2.0.1",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "parcel": "^2.0.1",
+    "postcss": "^8.4.1",
+    "prettier": "^2.5.0",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.5.2"
+  }
+}
