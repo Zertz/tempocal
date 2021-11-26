@@ -1,6 +1,6 @@
 {
   "name": "tempocal",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Calendar built with Temporal",
   "source": "src/index.html",
   "repository": "https://github.com/Zertz/tempocal",
