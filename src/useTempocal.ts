@@ -1,12 +1,13 @@
 import { Intl, Temporal } from "@js-temporal/polyfill";
 import { useCallback, useMemo } from "react";
-import { getMonthNames, getMonthStartDay, getWeekdayNames } from "./utils";
+import { Locale, Value } from "./types";
+import { getMonthNames, getMonthStartDate, getWeekdayNames } from "./utils";
 
-function useMonthStartDay(value: Temporal.PlainDate | Temporal.PlainDateTime) {
-  return useMemo(() => getMonthStartDay(value), [value]);
+export function useMonthStartDate(value: Value) {
+  return useMemo(() => getMonthStartDate(value), [value]);
 }
 
-function useMonthNames(
+export function useMonthNames(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   monthsInYear: number
 ) {
@@ -16,7 +17,7 @@ function useMonthNames(
   );
 }
 
-function useWeekdayNames(
+export function useWeekdayNames(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   daysInWeek: number
 ) {
@@ -26,7 +27,7 @@ function useWeekdayNames(
   );
 }
 
-type Value<Mode> = Mode extends "date"
+type RequiredValue<Mode> = Mode extends "date"
   ? Temporal.PlainDate
   : Mode extends "datetime"
   ? Temporal.PlainDateTime
@@ -45,12 +46,12 @@ export function useTempocal<Mode extends "date" | "datetime">(
     setValue,
     value,
   }: {
-    locale: Parameters<typeof Intl.DateTimeFormat>[0];
-    setValue: (value: Value<Mode>) => void;
-    value: Value<Mode>;
+    locale: Locale;
+    setValue: (value: RequiredValue<Mode>) => void;
+    value: RequiredValue<Mode>;
   }
 ) {
-  const monthStartDay = useMonthStartDay(value);
+  const monthStartDate = useMonthStartDate(value);
   const monthNames = useMonthNames(locale, value.monthsInYear);
   const weekdayNames = useWeekdayNames(locale, value.daysInWeek);
 
@@ -71,7 +72,7 @@ export function useTempocal<Mode extends "date" | "datetime">(
   return {
     monthName: monthNames[value.month - 1],
     monthNames,
-    monthStartDay,
+    monthStartDate,
     onChange,
     weekdayNames,
   };

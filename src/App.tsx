@@ -1,13 +1,15 @@
 import { Temporal, toTemporalInstant } from "@js-temporal/polyfill";
 import classnames from "classnames";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { Calendar } from "./Calendar";
+import { Locale } from "./types";
 import { useTempocal } from "./useTempocal";
 
 // @ts-expect-error
 Date.prototype.toTemporalInstant = toTemporalInstant;
 
 export function App() {
-  const [locale, setLocale] = useState("en-US");
+  const [locale, setLocale] = useState<Locale>("en-US");
 
   const date = useRef(new Date());
 
@@ -19,13 +21,24 @@ export function App() {
     )
   );
 
-  const { monthName, monthNames, monthStartDay, onChange, weekdayNames } =
-    useTempocal("date", { locale, setValue, value });
+  const { monthName, monthNames, onChange } = useTempocal("date", {
+    locale,
+    setValue,
+    value,
+  });
+
+  const dateFormatter = useMemo(
+    () =>
+      new Intl.DateTimeFormat(locale === "fr" ? "fr-CA" : locale, {
+        dateStyle: "long",
+      }),
+    [locale]
+  );
 
   return (
     <div className="flex flex-col gap-8 px-12 pt-8">
       <h1 className="text-7xl">Tempocal</h1>
-      <p>{value.toLocaleString()}</p>
+      <p>{dateFormatter.format(new Date(value.toLocaleString()))}</p>
       <select
         className="border border-gray-300 px-1 py-0.5 rounded w-min"
         onChange={({ target: { value } }) => setLocale(value)}
@@ -59,8 +72,10 @@ export function App() {
             <li key={monthName}>
               <button
                 className={classnames(
-                  "border hover:bg-gray-100 overflow-hidden rounded transition-colors w-full",
-                  value.month === i + 1 ? "border-blue-400" : "border-gray-300"
+                  "border overflow-hidden rounded transition-colors w-full",
+                  value.month === i + 1
+                    ? "bg-blue-200 border-blue-600"
+                    : "hover:bg-gray-100 border-gray-300"
                 )}
                 onClick={() => onChange({ month: i + 1 })}
                 type="button"
@@ -73,46 +88,41 @@ export function App() {
       </div>
       <div className="flex flex-col text-center w-64">
         {monthName}
-        <ul
-          className="grid gap-1"
-          style={{
-            gridTemplateColumns: `repeat(${value.daysInWeek}, minmax(0, 1fr))`,
+        <Calendar
+          locale={locale}
+          onChange={onChange}
+          value={value}
+          dayClassName={(day) =>
+            classnames(
+              "border overflow-hidden rounded transition-colors w-full",
+              value.day === day
+                ? "bg-blue-200 border-blue-600"
+                : "hover:bg-gray-100 border-gray-300"
+            )
+          }
+          monthClassName={() => "gap-1"}
+          weekdayClassName={() => "font-medium"}
+          renderDay={({ day }) => {
+            if (value.month === 12 && day === 25) {
+              return "🎄";
+            }
+
+            const now = Temporal.Now.plainDate("iso8601");
+
+            if (
+              day === now.day &&
+              now.month === value.month &&
+              now.year === value.year
+            ) {
+              return "⭐️";
+            }
+
+            return day;
           }}
-        >
-          {weekdayNames.map((weekDay) => (
-            <li key={weekDay}>{weekDay}</li>
-          ))}
-          {[...Array(value.daysInMonth)].map((_, day) => (
-            <li
-              key={day}
-              className={classnames(
-                "",
-                day === 0
-                  ? {
-                      "col-start-1": monthStartDay === 0,
-                      "col-start-2": monthStartDay === 1,
-                      "col-start-3": monthStartDay === 2,
-                      "col-start-4": monthStartDay === 3,
-                      "col-start-5": monthStartDay === 4,
-                      "col-start-6": monthStartDay === 5,
-                      "col-start-7": monthStartDay === 6,
-                    }
-                  : undefined
-              )}
-            >
-              <button
-                className={classnames(
-                  "border hover:bg-gray-100 overflow-hidden rounded transition-colors w-full",
-                  value.day === day + 1 ? "border-blue-400" : "border-gray-300"
-                )}
-                onClick={() => onChange({ day: day + 1 })}
-                type="button"
-              >
-                {day + 1}
-              </button>
-            </li>
-          ))}
-        </ul>
+          renderWeekday={({ weekday, weekdayName }) =>
+            weekday === 2 ? "😭" : weekdayName
+          }
+        />
       </div>
     </div>
   );

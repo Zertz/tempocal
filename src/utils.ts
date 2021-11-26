@@ -1,9 +1,9 @@
 import { Intl, Temporal } from "@js-temporal/polyfill";
 
-export function getMonthStartDay(
+export function getMonthStartDate(
   value: Temporal.PlainDate | Temporal.PlainDateTime
 ) {
-  return value.toPlainYearMonth().toPlainDate({ day: 1 }).dayOfWeek;
+  return value.toPlainYearMonth().toPlainDate({ day: 1 });
 }
 
 export function getMonthNames(
