@@ -1,6 +1,6 @@
 import { Temporal, toTemporalInstant } from "@js-temporal/polyfill";
 import classnames from "classnames";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { Calendar } from "./Calendar";
 import { Locale } from "./types";
 import { useTempocal } from "./useTempocal";
@@ -11,14 +11,12 @@ Date.prototype.toTemporalInstant = toTemporalInstant;
 export function App() {
   const [locale, setLocale] = useState<Locale>("en-US");
 
-  const date = useRef(new Date());
-
   const [value, setValue] = useState(
-    new Temporal.PlainDate(
-      date.current.getFullYear(),
-      date.current.getMonth() + 1,
-      date.current.getDate()
-    )
+    Temporal.PlainDate.from({
+      year: 2021,
+      month: 11,
+      day: 25,
+    })
   );
 
   const { monthName, monthNames, onChange } = useTempocal("date", {
@@ -29,7 +27,7 @@ export function App() {
 
   const dateFormatter = useMemo(
     () =>
-      new Intl.DateTimeFormat(locale === "fr" ? "fr-CA" : locale, {
+      new Intl.DateTimeFormat(locale, {
         dateStyle: "long",
       }),
     [locale]

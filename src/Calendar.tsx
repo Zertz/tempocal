@@ -34,11 +34,11 @@ export function Calendar({
         gridTemplateColumns: `repeat(${value.daysInWeek}, minmax(0, 1fr))`,
       }}
     >
-      {[...Array(value.daysInWeek)].map((_, weekday) => (
+      {weekdayNames.map((weekdayName, weekday) => (
         <li key={weekday} className={weekdayClassName?.(weekday + 1)}>
           {renderWeekday({
             weekday: weekday + 1,
-            weekdayName: weekdayNames[weekday],
+            weekdayName,
           })}
         </li>
       ))}
@@ -48,10 +48,7 @@ export function Calendar({
           style={
             day === 0
               ? {
-                  gridColumnStart:
-                    monthStartDate.dayOfWeek === 7
-                      ? 1
-                      : monthStartDate.dayOfWeek + 1,
+                  gridColumnStart: monthStartDate.dayOfWeek,
                 }
               : undefined
           }
