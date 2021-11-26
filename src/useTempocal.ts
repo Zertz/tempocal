@@ -55,33 +55,18 @@ export function useTempocal<Mode extends "date" | "datetime">(
   const monthNames = useMonthNames(locale, value.monthsInYear);
   const weekdayNames = useWeekdayNames(locale, value.daysInWeek);
 
-  // TODO
-  // Weekdays are 1-7
-  // If dayOfWeek is 1 and weekday is Mon, it means Mon must be at index 0 in weekdayNames
-  // If dayOfWeek is 6 and weekday is Sat, it means Sat must be at index 5 in weekdayNames
-  console.info(
-    monthStartDate.dayOfWeek,
-    weekdayNames.find(
-      (weekdayName) =>
-        weekdayName ===
-        monthStartDate.toLocaleString(locale, {
-          weekday: "short",
-        })
-    )
-  );
-
   const onChange = useCallback(
     (params: Like<Mode>) => {
       const item = value.with(params);
 
       setValue(
-        // @ts-expect-error
+        // @ts-expect-error Help.
         mode === "date"
           ? Temporal.PlainDate.from(item)
           : Temporal.PlainDateTime.from(item)
       );
     },
-    [value]
+    [mode, setValue, value]
   );
 
   return {

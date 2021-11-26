@@ -5,7 +5,7 @@ import { Calendar } from "./Calendar";
 import { Locale } from "./types";
 import { useTempocal } from "./useTempocal";
 
-// @ts-expect-error
+// @ts-expect-error Yes.
 Date.prototype.toTemporalInstant = toTemporalInstant;
 
 export function App() {

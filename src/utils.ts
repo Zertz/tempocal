@@ -44,7 +44,7 @@ export function getWeekdayNames(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   daysInWeek: number
 ) {
-  let firstDayOfWeek = getFirstDayOfWeek(Temporal.Now.plainDate("iso8601"));
+  const firstDayOfWeek = getFirstDayOfWeek(Temporal.Now.plainDate("iso8601"));
 
   const weekdayNames: string[] = [];
 
