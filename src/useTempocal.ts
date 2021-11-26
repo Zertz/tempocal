@@ -1,7 +1,23 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { useCallback, useMemo } from "react";
 import { Locale, Value } from "./types";
-import { getMonthNames, getMonthStartDate, getWeekdayNames } from "./utils";
+import {
+  getCalendarMonthDateRange,
+  getMonthNames,
+  getMonthStartDate,
+  getWeekdayNames,
+} from "./utils";
+
+export function useCalendarMonthDateRange(value: Value, rollover: boolean) {
+  return useMemo(
+    () => getCalendarMonthDateRange(value, rollover),
+    [rollover, value]
+  );
+}
+
+export function useDates(from: Value, to: Value) {
+  return useMemo(() => console.info({ from, to }), [from, to]);
+}
 
 export function useMonthStartDate(value: Value) {
   return useMemo(() => getMonthStartDate(value), [value]);
@@ -39,21 +55,25 @@ type Like<Mode> = Mode extends "date"
   ? Temporal.DateTimeLike
   : never;
 
-export function useTempocal<Mode extends "date" | "datetime">(
-  mode: Mode,
-  {
-    locale,
-    setValue,
-    value,
-  }: {
-    locale: Locale;
-    setValue: (value: RequiredValue<Mode>) => void;
-    value: RequiredValue<Mode>;
-  }
-) {
-  const monthStartDate = useMonthStartDate(value);
+export function useTempocal<Mode extends "date" | "datetime">({
+  locale,
+  mode,
+  setValue,
+  value,
+}: {
+  locale: Locale;
+  mode: Mode;
+  setValue: (value: RequiredValue<Mode>) => void;
+  value: RequiredValue<Mode>;
+}) {
   const monthNames = useMonthNames(locale, value.monthsInYear);
   const weekdayNames = useWeekdayNames(locale, value.daysInWeek);
+
+  const onSelect = useCallback(
+    // @ts-expect-error You're not wrong.
+    (nextValue: Temporal.PlainDate) => setValue(nextValue),
+    [setValue]
+  );
 
   const onChange = useCallback(
     (params: Like<Mode>) => {
@@ -72,8 +92,8 @@ export function useTempocal<Mode extends "date" | "datetime">(
   return {
     monthName: monthNames[value.month - 1],
     monthNames,
-    monthStartDate,
     onChange,
+    onSelect,
     weekdayNames,
   };
 }

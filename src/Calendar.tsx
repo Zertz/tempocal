@@ -1,28 +1,37 @@
+import { Temporal } from "@js-temporal/polyfill";
 import { ReactNode } from "react";
 import { Locale, Value } from "./types";
-import { useMonthStartDate, useTempocal, useWeekdayNames } from "./useTempocal";
+import {
+  useCalendarMonthDateRange,
+  useMonthStartDate,
+  useTempocal,
+  useWeekdayNames,
+} from "./useTempocal";
 
 export function Calendar({
   locale,
-  onChange,
+  onSelect,
   value,
   dayClassName,
   monthClassName,
   weekdayClassName,
   renderDay = ({ day }) => day,
   renderWeekday = ({ weekdayName }) => weekdayName,
-}: Pick<ReturnType<typeof useTempocal>, "onChange"> & {
+  rollover,
+}: Pick<ReturnType<typeof useTempocal>, "onSelect"> & {
   locale: Locale;
   value: Value;
-  dayClassName?: (day: number) => string;
+  dayClassName?: (date: Temporal.PlainDate) => string;
   monthClassName?: () => string;
   weekdayClassName?: (weekday: number) => string;
-  renderDay?: (props: { day: number }) => ReactNode;
+  renderDay?: (date: Temporal.PlainDate) => ReactNode;
   renderWeekday?: (props: {
     weekday: number;
     weekdayName: string;
   }) => ReactNode;
+  rollover: boolean;
 }) {
+  const { start, end } = useCalendarMonthDateRange(value, rollover);
   const monthStartDate = useMonthStartDate(value);
   const weekdayNames = useWeekdayNames(locale, value.daysInWeek);
 
@@ -42,26 +51,30 @@ export function Calendar({
           })}
         </li>
       ))}
-      {[...Array(value.daysInMonth)].map((_, day) => (
-        <li
-          key={day}
-          style={
-            day === 0
-              ? {
-                  gridColumnStart: monthStartDate.dayOfWeek,
-                }
-              : undefined
-          }
-        >
-          <button
-            className={dayClassName?.(day + 1)}
-            onClick={() => onChange({ day: day + 1 })}
-            type="button"
+      {[...Array(start.until(end).days + 1)].map((_, day) => {
+        const date = start.add({ days: day });
+
+        return (
+          <li
+            key={day}
+            style={
+              day === 0
+                ? {
+                    gridColumnStart: rollover ? 1 : monthStartDate.dayOfWeek,
+                  }
+                : undefined
+            }
           >
-            {renderDay({ day: day + 1 })}
-          </button>
-        </li>
-      ))}
+            <button
+              className={dayClassName?.(date)}
+              onClick={() => onSelect(date)}
+              type="button"
+            >
+              {renderDay(date)}
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 }

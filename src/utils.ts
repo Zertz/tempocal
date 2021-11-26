@@ -15,8 +15,35 @@ export function getFirstDayOfWeek(value: Value) {
   return firstDayOfWeek;
 }
 
+export function getCalendarMonthDateRange(value: Value, rollover: boolean) {
+  const start = getMonthStartDate(value);
+  const end = getMonthEndDate(value);
+
+  if (!rollover) {
+    return {
+      start,
+      end,
+    };
+  }
+
+  return {
+    start:
+      start.dayOfWeek === 1
+        ? start
+        : start.subtract({ days: start.dayOfWeek - 1 }),
+    end:
+      end.dayOfWeek === end.daysInWeek
+        ? end
+        : end.add({ days: end.daysInWeek - end.dayOfWeek }),
+  };
+}
+
 export function getMonthStartDate(value: Value) {
   return value.toPlainYearMonth().toPlainDate({ day: 1 });
+}
+
+export function getMonthEndDate(value: Value) {
+  return getMonthStartDate(value).add({ months: 1 }).subtract({ days: 1 });
 }
 
 export function getMonthNames(
