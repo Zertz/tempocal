@@ -9,8 +9,7 @@
   "scripts": {
     "build": "parcel build",
     "prepublishOnly": "yarn build",
-    "start": "parcel src/index.html",
-    "watch": "parcel watch"
+    "start": "parcel src/index.html"
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.2.0",

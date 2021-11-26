@@ -1,4 +1,4 @@
-# tempocal
+# Tempocal
 
 > Primitives to build a calendar using the Temporal API
 

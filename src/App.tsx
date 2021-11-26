@@ -1,80 +1,14 @@
-import { Temporal, Intl, toTemporalInstant } from "@js-temporal/polyfill";
+import { Temporal, toTemporalInstant } from "@js-temporal/polyfill";
 import classnames from "classnames";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { useTempocal } from "./useTempocal";
 
 // @ts-expect-error
 Date.prototype.toTemporalInstant = toTemporalInstant;
 
-function useMonthNames(
-  locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  monthsInYear: number
-) {
-  return useMemo(() => {
-    const monthNames: string[] = [];
-
-    for (let i = 0; i < monthsInYear; i += 1) {
-      const date = new Date(
-        `2017-${`${i + 1}`.padStart(2, "0")}-01T12:00:00.000Z`
-      );
-
-      const month = new Intl.DateTimeFormat(locale, {
-        month: "long",
-      }).format(date);
-
-      monthNames.push(month);
-    }
-
-    return monthNames;
-  }, [locale, monthsInYear]);
-}
-
-function useWeekdayNames(
-  locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  daysInWeek: number
-) {
-  return useMemo(() => {
-    const weekdayNames: string[] = [];
-
-    for (let i = 0; i < daysInWeek; i += 1) {
-      const date = new Date(
-        `2017-01-${`${i + 1}`.padStart(2, "0")}T12:00:00.000Z`
-      );
-
-      const weekday = new Intl.DateTimeFormat(locale, {
-        weekday: "short",
-      }).format(date);
-
-      weekdayNames.push(weekday);
-    }
-
-    return weekdayNames;
-  }, [daysInWeek, locale]);
-}
-
-function useTempocal(locale: Parameters<typeof Intl.DateTimeFormat>[0]) {
-  const now = Temporal.Now.plainDate("iso8601");
-
-  const plainYearMonth = new Temporal.PlainYearMonth(now.year, now.month);
-
-  const monthStartDay = plainYearMonth.toPlainDate({ day: 1 }).dayOfWeek;
-
-  const monthNames = useMonthNames(locale, now.monthsInYear);
-  const weekdayNames = useWeekdayNames(locale, now.daysInWeek);
-
-  return {
-    daysInWeek: now.daysInWeek,
-    daysInMonth: now.daysInMonth,
-    daysInYear: now.daysInYear,
-    month: now.month,
-    monthName: monthNames[now.month - 1],
-    monthNames,
-    monthStartDay,
-    weekdayNames,
-  };
-}
-
 export function App() {
   const [locale, setLocale] = useState("en-US");
+  const [value, setValue] = useState(Temporal.Now.plainDate("iso8601"));
 
   const {
     daysInMonth,
@@ -82,25 +16,63 @@ export function App() {
     monthName,
     monthNames,
     monthStartDay,
+    onChange,
     weekdayNames,
-  } = useTempocal(locale);
+  } = useTempocal({ locale, setValue, value });
 
   return (
     <div className="flex flex-col gap-8 px-12 pt-8">
       <h1 className="text-7xl">Tempocal</h1>
+      <p>{value.toLocaleString()}</p>
       <select
-        className="border border-gray-500 px-1 py-0.5 rounded w-min"
+        className="border border-gray-300 px-1 py-0.5 rounded w-min"
         onChange={({ target: { value } }) => setLocale(value)}
+        title="Locale"
         value={locale}
       >
         <option value="en-US">en-US</option>
         <option value="es-ES">es-ES</option>
         <option value="fr-CA">fr-CA</option>
       </select>
+      <select
+        className="border border-gray-300 px-1 py-0.5 rounded w-min"
+        onChange={({ target: { value } }) => onChange({ year: Number(value) })}
+        title="Year"
+        value={value.year}
+      >
+        {[...Array(20)].map((_, year) => (
+          <option key={year} value={year + 2010}>
+            {year + 2010}
+          </option>
+        ))}
+      </select>
+      <div className="flex flex-col text-center w-64">
+        <ul
+          className="grid gap-1"
+          style={{
+            gridTemplateColumns: `repeat(2, minmax(0, 1fr))`,
+          }}
+        >
+          {monthNames.map((monthName, i) => (
+            <li key={monthName}>
+              <button
+                className={classnames(
+                  "border hover:bg-gray-100 overflow-hidden rounded transition-colors w-full",
+                  value.month === i + 1 ? "border-blue-400" : "border-gray-300"
+                )}
+                onClick={() => onChange({ month: i + 1 })}
+                type="button"
+              >
+                {monthName}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="flex flex-col text-center w-64">
         {monthName}
         <ul
-          className="grid"
+          className="grid gap-1"
           style={{
             gridTemplateColumns: `repeat(${daysInWeek}, minmax(0, 1fr))`,
           }}
@@ -112,6 +84,7 @@ export function App() {
             <li
               key={day}
               className={classnames(
+                "",
                 day === 0
                   ? {
                       "col-start-1": monthStartDay === 0,
@@ -125,20 +98,17 @@ export function App() {
                   : undefined
               )}
             >
-              {day + 1}
+              <button
+                className={classnames(
+                  "border hover:bg-gray-100 overflow-hidden rounded transition-colors w-full",
+                  value.day === day + 1 ? "border-blue-400" : "border-gray-300"
+                )}
+                onClick={() => onChange({ day: day + 1 })}
+                type="button"
+              >
+                {day + 1}
+              </button>
             </li>
-          ))}
-        </ul>
-      </div>
-      <div className="flex flex-col text-center w-64">
-        <ul
-          className="grid"
-          style={{
-            gridTemplateColumns: `repeat(2, minmax(0, 1fr))`,
-          }}
-        >
-          {monthNames.map((monthName) => (
-            <li key={monthName}>{monthName}</li>
           ))}
         </ul>
       </div>
