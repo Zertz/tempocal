@@ -1,6 +1,6 @@
 import { Temporal, toTemporalInstant } from "@js-temporal/polyfill";
 import classnames from "classnames";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTempocal } from "./useTempocal";
 
 // @ts-expect-error
@@ -8,17 +8,19 @@ Date.prototype.toTemporalInstant = toTemporalInstant;
 
 export function App() {
   const [locale, setLocale] = useState("en-US");
-  const [value, setValue] = useState(Temporal.Now.plainDate("iso8601"));
 
-  const {
-    daysInMonth,
-    daysInWeek,
-    monthName,
-    monthNames,
-    monthStartDay,
-    onChange,
-    weekdayNames,
-  } = useTempocal({ locale, setValue, value });
+  const date = useRef(new Date());
+
+  const [value, setValue] = useState(
+    new Temporal.PlainDate(
+      date.current.getFullYear(),
+      date.current.getMonth() + 1,
+      date.current.getDate()
+    )
+  );
+
+  const { monthName, monthNames, monthStartDay, onChange, weekdayNames } =
+    useTempocal("date", { locale, setValue, value });
 
   return (
     <div className="flex flex-col gap-8 px-12 pt-8">
@@ -74,13 +76,13 @@ export function App() {
         <ul
           className="grid gap-1"
           style={{
-            gridTemplateColumns: `repeat(${daysInWeek}, minmax(0, 1fr))`,
+            gridTemplateColumns: `repeat(${value.daysInWeek}, minmax(0, 1fr))`,
           }}
         >
           {weekdayNames.map((weekDay) => (
             <li key={weekDay}>{weekDay}</li>
           ))}
-          {[...Array(daysInMonth)].map((_, day) => (
+          {[...Array(value.daysInMonth)].map((_, day) => (
             <li
               key={day}
               className={classnames(
