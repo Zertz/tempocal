@@ -2,6 +2,7 @@ import { toTemporalInstant } from "@js-temporal/polyfill";
 import { useMemo, useState } from "react";
 import { DatePicker } from "./DatePicker";
 import { DateRangePicker } from "./DateRangePicker";
+import { OutOfTheBox } from "./OutOfTheBox";
 import { Locale } from "./types";
 
 // @ts-expect-error Yes.
@@ -19,8 +20,10 @@ export function App() {
   );
 
   return (
-    <div className="flex flex-col gap-8 px-12 pt-8">
-      <h1 className="text-7xl">Tempocal</h1>
+    <div className="flex flex-col gap-8 p-4">
+      <h1 className="text-7xl">
+        <a href="https://github.com/Zertz/tempocal">Tempocal</a>
+      </h1>
       <select
         className="border border-gray-300 px-1 py-0.5 rounded w-min"
         onChange={({ target: { value } }) => setLocale(value)}
@@ -31,6 +34,7 @@ export function App() {
         <option value="es-ES">es-ES</option>
         <option value="fr-CA">fr-CA</option>
       </select>
+      <OutOfTheBox dateFormatter={dateFormatter} locale={locale} />
       <DatePicker dateFormatter={dateFormatter} locale={locale} />
       <DateRangePicker dateFormatter={dateFormatter} locale={locale} />
     </div>

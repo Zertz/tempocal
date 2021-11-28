@@ -39,18 +39,11 @@ export function DateRangePicker({
     [setValues]
   );
 
-  const { monthName: monthName1, onSelect: onSelect1 } = useTempocal({
+  const { monthNames, onSelect } = useTempocal({
     locale,
     mode: "date",
     setValue,
     value: values[0],
-  });
-
-  const { monthName: monthName2, onSelect: onSelect2 } = useTempocal({
-    locale,
-    mode: "date",
-    setValue,
-    value: values[1],
   });
 
   return (
@@ -61,50 +54,28 @@ export function DateRangePicker({
         {dateFormatter.format(new Date(values[1].toLocaleString()))}
       </p>
       <div className="flex gap-4 border border-gray-300 p-2 pt-0.5 rounded w-min">
-        <div className="flex flex-col text-center w-64">
-          {monthName1}
-          <Calendar
-            className="gap-1"
-            locale={locale}
-            onSelect={onSelect1}
-            value={values[0]}
-            dayClassName={(day) =>
-              classnames(
-                "border overflow-hidden rounded transition-colors w-full",
-                values[0].month === day.month
-                  ? "text-gray-700"
-                  : "text-gray-400",
-                Temporal.PlainDate.compare(values[0], day) <= 0
-                  ? "bg-blue-100 border-blue-600"
-                  : "hover:bg-gray-100 border-gray-300"
-              )
-            }
-            weekdayClassName={() => "font-medium"}
-            rollover
-          />
-        </div>
-        <div className="flex flex-col text-center w-64">
-          {monthName2}
-          <Calendar
-            className="gap-1"
-            locale={locale}
-            onSelect={onSelect2}
-            value={values[1]}
-            dayClassName={(day) =>
-              classnames(
-                "border overflow-hidden rounded transition-colors w-full",
-                values[1].month === day.month
-                  ? "text-gray-700"
-                  : "text-gray-400",
+        <Calendar
+          locale={locale}
+          monthsBefore={1}
+          monthsAfter={1}
+          onSelect={onSelect}
+          value={values[0]}
+          headerProps={() => ({ className: "font-bold" })}
+          renderHeader={(date) => monthNames[date.month - 1]}
+          monthProps={() => ({
+            className: "gap-1 text-center w-72",
+          })}
+          weekdayProps={() => ({ className: "font-medium" })}
+          dayProps={(day) => ({
+            className: classnames(
+              "border overflow-hidden rounded text-gray-700 transition-colors w-full",
+              Temporal.PlainDate.compare(values[0], day) <= 0 &&
                 Temporal.PlainDate.compare(values[1], day) >= 0
-                  ? "bg-blue-100 border-blue-600"
-                  : "hover:bg-gray-100 border-gray-300"
-              )
-            }
-            weekdayClassName={() => "font-medium"}
-            rollover
-          />
-        </div>
+                ? "bg-blue-100 border-blue-600"
+                : "hover:bg-gray-100 border-gray-300"
+            ),
+          })}
+        />
       </div>
     </div>
   );

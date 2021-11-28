@@ -2,7 +2,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import { Value } from "./types";
 
 export function getFirstDayOfWeek(value: Value) {
-  let firstDayOfWeek: Value;
+  let firstDayOfWeek: Value | undefined = undefined;
 
   do {
     if (value.dayOfWeek === 1) {

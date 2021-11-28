@@ -2,6 +2,7 @@
   "compilerOptions": {
     "isolatedModules": true,
     "moduleResolution": "node",
+    "strict": true,
     "target": "ES2021"
   }
 }
