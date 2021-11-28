@@ -1,4 +1,3 @@
 .parcel-cache
-dist-lib
-dist-www
+dist
 node_modules

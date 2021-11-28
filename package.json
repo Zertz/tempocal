@@ -2,27 +2,17 @@
   "name": "tempocal",
   "version": "0.1.0",
   "description": "Calendar built with Temporal",
-  "source": "src/index.ts",
-  "main": "dist-lib/main.js",
-  "module": "dist-lib/module.js",
-  "types": "dist-lib/types.d.ts",
   "repository": "https://github.com/Zertz/tempocal",
   "author": "Pier-Luc Gendreau",
   "license": "MIT",
+  "private": true,
   "scripts": {
-    "build:www": "parcel build examples --dist-dir dist-www",
-    "build:lib": "parcel build --dist-dir dist-lib",
+    "build": "parcel build packages/*",
     "lint": "eslint . --ext ts,tsx",
-    "prepublishOnly": "yarn build:lib",
-    "start": "parcel examples/index.html --dist-dir dist-www"
+    "prepublishOnly": "yarn build",
+    "start": "parcel packages/* --open"
   },
-  "dependencies": {
-    "@js-temporal/polyfill": "^0.2.0",
-    "@parcel/transformer-react-refresh-wrap": "^2.0.1",
-    "classnames": "^2.3.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@parcel/packager-ts": "^2.0.1",
     "@parcel/transformer-typescript-types": "^2.0.1",
@@ -40,9 +30,9 @@
     "tailwindcss": "^2.2.19",
     "typescript": "^4.5.2"
   },
-  "files": [
-    "dist-lib",
-    "LICENSE",
-    "README.md"
+  "files": [],
+  "workspaces": [
+    "packages/lib",
+    "packages/www"
   ]
 }

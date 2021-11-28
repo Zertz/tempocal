@@ -1,6 +1,6 @@
 import { toTemporalInstant } from "@js-temporal/polyfill";
 import { useMemo, useState } from "react";
-import { Locale } from "../src/types";
+import { Locale } from "../lib/types";
 import { DatePicker } from "./DatePicker";
 import { DateRangePicker } from "./DateRangePicker";
 import { OutOfTheBox } from "./OutOfTheBox";

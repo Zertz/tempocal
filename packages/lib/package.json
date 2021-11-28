@@ -1,0 +1,19 @@
+{
+  "name": "@tempocal/react",
+  "version": "0.1.0",
+  "source": "index.ts",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
+  "dependencies": {
+    "@js-temporal/polyfill": "^0.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8"
+  },
+  "files": [
+    "dist",
+    "../../LICENSE",
+    "../../README.md"
+  ]
+}
