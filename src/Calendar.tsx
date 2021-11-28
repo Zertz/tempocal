@@ -9,27 +9,30 @@ import {
 } from "./useTempocal";
 
 export function Calendar({
+  className,
   locale,
   onSelect,
   value,
   dayClassName,
-  monthClassName,
   weekdayClassName,
   renderDay = ({ day }) => day,
   renderWeekday = ({ weekdayName }) => weekdayName,
   rollover,
 }: Pick<ReturnType<typeof useTempocal>, "onSelect"> & {
+  className?: string;
   locale: Locale;
   value: Value;
   dayClassName?: (date: Temporal.PlainDate) => string;
-  monthClassName?: () => string;
-  weekdayClassName?: (weekday: number) => string;
+  weekdayClassName?: (props: {
+    weekday: number;
+    weekdayName: string;
+  }) => string;
   renderDay?: (date: Temporal.PlainDate) => ReactNode;
   renderWeekday?: (props: {
     weekday: number;
     weekdayName: string;
   }) => ReactNode;
-  rollover: boolean;
+  rollover?: boolean;
 }) {
   const { start, end } = useCalendarMonthDateRange(value, rollover);
   const monthStartDate = useMonthStartDate(value);
@@ -37,20 +40,24 @@ export function Calendar({
 
   return (
     <ul
-      className={monthClassName?.()}
+      className={className}
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${value.daysInWeek}, minmax(0, 1fr))`,
       }}
     >
-      {weekdayNames.map((weekdayName, weekday) => (
-        <li key={weekday} className={weekdayClassName?.(weekday + 1)}>
-          {renderWeekday({
-            weekday: weekday + 1,
-            weekdayName,
-          })}
-        </li>
-      ))}
+      {weekdayNames.map((weekdayName, weekday) => {
+        const props = {
+          weekday: weekday + 1,
+          weekdayName,
+        };
+
+        return (
+          <li key={weekday} className={weekdayClassName?.(props)}>
+            {renderWeekday(props)}
+          </li>
+        );
+      })}
       {[...Array(start.until(end).days + 1)].map((_, day) => {
         const date = start.add({ days: day });
 
