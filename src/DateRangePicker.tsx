@@ -22,14 +22,19 @@ export function DateRangePicker({
     }),
     Temporal.PlainDate.from({
       year: 2021,
-      month: 11,
+      month: 12,
       day: 25,
     }),
   ]);
 
   const setValue = useCallback(
     (value: typeof values[number]) => {
-      setValues((values) => [value, values[0]]);
+      setValues((values) =>
+        // value.isBefore(values[0])
+        Temporal.PlainDate.compare(value, values[0]) < 0
+          ? [value, values[1]]
+          : [values[0], value]
+      );
     },
     [setValues]
   );
