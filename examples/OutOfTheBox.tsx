@@ -1,8 +1,8 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { useState } from "react";
-import { Calendar } from "./Calendar";
-import { Locale } from "./types";
-import { useTempocal } from "./useTempocal";
+import { Calendar } from "../src/Calendar";
+import { Locale } from "../src/types";
+import { useTempocal } from "../src/useTempocal";
 
 export function OutOfTheBox({
   dateFormatter,

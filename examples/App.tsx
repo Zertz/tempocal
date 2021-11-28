@@ -1,9 +1,9 @@
 import { toTemporalInstant } from "@js-temporal/polyfill";
 import { useMemo, useState } from "react";
+import { Locale } from "../src/types";
 import { DatePicker } from "./DatePicker";
 import { DateRangePicker } from "./DateRangePicker";
 import { OutOfTheBox } from "./OutOfTheBox";
-import { Locale } from "./types";
 
 // @ts-expect-error Yes.
 Date.prototype.toTemporalInstant = toTemporalInstant;
