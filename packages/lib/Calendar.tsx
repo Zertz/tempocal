@@ -1,5 +1,4 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { ReactNode } from "react";
 import { Locale, Value } from "./types";
 import {
   useCalendarMonthDateRange,
@@ -36,14 +35,14 @@ type MonthProps = Pick<ReturnType<typeof useTempocal>, "onSelect"> & {
   renderWeekday?: (props: {
     weekday: number;
     weekdayName: string;
-  }) => ReactNode;
+  }) => React.ReactNode;
   dayProps?: (
     date: Temporal.PlainDate
   ) => React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   >;
-  renderDay?: (date: Temporal.PlainDate) => ReactNode;
+  renderDay?: (date: Temporal.PlainDate) => React.ReactNode;
 };
 
 export function Calendar({
