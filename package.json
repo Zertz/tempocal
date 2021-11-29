@@ -10,6 +10,7 @@
     "build": "parcel build packages/*",
     "lint": "eslint . --ext ts,tsx",
     "prepublishOnly": "yarn build",
+    "publish:lib": "yarn publish packages/lib --access public",
     "start": "parcel packages/www --open"
   },
   "dependencies": {},
