@@ -1,4 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
+import * as React from "react";
 import { Locale, Value } from "./types";
 import {
   useCalendarMonthDateRange,
