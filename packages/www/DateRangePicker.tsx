@@ -56,15 +56,14 @@ export function DateRangePicker({
       <div className="flex gap-4 border border-gray-300 p-2 pt-0.5 rounded w-min">
         <Calendar
           locale={locale}
-          monthsBefore={1}
           monthsAfter={1}
           onSelect={onSelect}
           value={values[0]}
-          headerProps={() => ({ className: "font-bold" })}
-          renderHeader={(date) => monthNames[date.month - 1]}
-          monthProps={() => ({
+          calendarProps={() => ({
             className: "gap-1 text-center w-72",
           })}
+          headerProps={() => ({ className: "font-bold" })}
+          renderHeader={(date) => monthNames[date.month - 1]}
           weekdayProps={() => ({ className: "font-medium" })}
           dayProps={(day) => ({
             className: classnames(

@@ -35,7 +35,7 @@ export function OutOfTheBox({
         onSelect={onSelect}
         rollover
         value={value}
-        monthProps={() => ({ className: "w-72" })}
+        calendarProps={() => ({ className: "w-72" })}
       />
     </div>
   );

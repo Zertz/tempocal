@@ -12,7 +12,7 @@ type MonthProps = Pick<ReturnType<typeof useTempocal>, "onSelect"> & {
   locale: Locale;
   rollover?: boolean;
   value: Value;
-  monthProps?: () => Omit<
+  calendarProps?: () => Omit<
     React.DetailedHTMLProps<
       React.HTMLAttributes<HTMLUListElement>,
       HTMLUListElement
@@ -53,7 +53,7 @@ export function Calendar({
   rollover = false,
   value,
   onSelect,
-  monthProps,
+  calendarProps,
   headerProps,
   renderHeader,
   weekdayProps,
@@ -73,7 +73,7 @@ export function Calendar({
           rollover={rollover}
           value={value.add({ months: month - monthsBefore })}
           onSelect={onSelect}
-          monthProps={monthProps}
+          calendarProps={calendarProps}
           headerProps={headerProps}
           renderHeader={renderHeader}
           weekdayProps={weekdayProps}
@@ -91,7 +91,7 @@ function Month({
   rollover = false,
   value,
   onSelect,
-  monthProps,
+  calendarProps,
   headerProps,
   renderHeader,
   weekdayProps,
@@ -105,7 +105,7 @@ function Month({
 
   return (
     <ul
-      {...monthProps?.()}
+      {...calendarProps?.()}
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${value.daysInWeek}, minmax(0, 1fr))`,
