@@ -30,7 +30,7 @@ export function DatePicker({
   return (
     <div className="flex flex-col gap-8 pt-8">
       <h2 className="text-3xl">DatePicker</h2>
-      <p>{dateFormatter.format(new Date(value.toLocaleString()))}</p>
+      <p>{dateFormatter.format(new Date(value.toString()))}</p>
       <Calendar
         locale={locale}
         onSelect={onSelect}

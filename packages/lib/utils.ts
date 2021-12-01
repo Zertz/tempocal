@@ -78,7 +78,7 @@ export function getWeekdayNames(
   for (let i = 0; i < daysInWeek; i += 1) {
     const weekday = new Intl.DateTimeFormat(locale, {
       weekday: "short",
-    }).format(new Date(firstDayOfWeek.add({ days: i }).toLocaleString()));
+    }).format(new Date(firstDayOfWeek.add({ days: i }).toString()));
 
     weekdayNames.push(weekday);
   }

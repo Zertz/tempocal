@@ -50,8 +50,8 @@ export function DateRangePicker({
     <div className="flex flex-col gap-8 pt-8">
       <h2 className="text-3xl">DateRangePicker</h2>
       <p>
-        {dateFormatter.format(new Date(values[0].toLocaleString()))} -{" "}
-        {dateFormatter.format(new Date(values[1].toLocaleString()))}
+        {dateFormatter.format(new Date(values[0].toString()))} -{" "}
+        {dateFormatter.format(new Date(values[1].toString()))}
       </p>
       <div className="flex gap-4 border border-gray-300 p-2 pt-0.5 rounded w-min">
         <Calendar
