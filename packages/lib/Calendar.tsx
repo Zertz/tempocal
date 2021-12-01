@@ -44,6 +44,13 @@ type MonthProps = Pick<ReturnType<typeof useTempocal>, "onSelect"> & {
     HTMLButtonElement
   >;
   renderDay?: (date: Temporal.PlainDate) => React.ReactNode;
+  footerProps?: (
+    date: Temporal.PlainDate
+  ) => Omit<
+    React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>,
+    "style"
+  >;
+  renderFooter?: (date: Temporal.PlainDate) => React.ReactNode;
 };
 
 export function Calendar({
@@ -60,6 +67,8 @@ export function Calendar({
   renderWeekday = ({ weekdayName }) => weekdayName,
   dayProps,
   renderDay = ({ day }) => day,
+  footerProps,
+  renderFooter,
 }: MonthProps & {
   monthsBefore?: number;
   monthsAfter?: number;
@@ -80,6 +89,8 @@ export function Calendar({
           renderWeekday={renderWeekday}
           dayProps={dayProps}
           renderDay={renderDay}
+          footerProps={footerProps}
+          renderFooter={renderFooter}
         />
       ))}
     </>
@@ -98,6 +109,8 @@ function Month({
   renderWeekday = ({ weekdayName }) => weekdayName,
   dayProps,
   renderDay = ({ day }) => day,
+  footerProps,
+  renderFooter,
 }: MonthProps) {
   const { start, end } = useCalendarMonthDateRange(value, rollover);
   const monthStartDate = useMonthStartDate(value);
@@ -157,6 +170,16 @@ function Month({
           </li>
         );
       })}
+      {renderFooter && (
+        <li
+          {...footerProps?.(monthStartDate)}
+          style={{
+            gridColumn: `span ${value.daysInWeek} / span ${value.daysInWeek}`,
+          }}
+        >
+          {renderFooter(monthStartDate)}
+        </li>
+      )}
     </ul>
   );
 }

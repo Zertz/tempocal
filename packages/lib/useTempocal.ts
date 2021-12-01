@@ -99,7 +99,6 @@ export function useTempocal<Mode extends "date" | "datetime">({
   );
 
   return {
-    monthName: monthNames[value.month - 1],
     monthNames,
     onChange,
     onSelect,

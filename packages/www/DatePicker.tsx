@@ -20,7 +20,7 @@ export function DatePicker({
     })
   );
 
-  const { monthName, monthNames, onChange, onSelect } = useTempocal({
+  const { monthNames, onChange, onSelect } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -40,18 +40,11 @@ export function DatePicker({
           className:
             "gap-1 border border-gray-300 p-2 rounded text-center w-72",
         })}
-        headerProps={() => ({ className: "flex items-center gap-2 font-bold" })}
+        headerProps={() => ({ className: "flex gap-2" })}
         renderHeader={() => (
           <>
-            <button
-              className="mr-auto"
-              onClick={() => onChange(value.subtract({ months: 1 }))}
-              type="button"
-            >
-              &larr;
-            </button>
             <select
-              className="border border-gray-300 px-1 py-0.5 rounded w-min"
+              className="border border-gray-300 ml-auto px-1 py-0.5 rounded w-min"
               onChange={({ target: { value } }) =>
                 onChange({ month: Number(value) })
               }
@@ -65,7 +58,7 @@ export function DatePicker({
               ))}
             </select>
             <select
-              className="border border-gray-300 px-1 py-0.5 rounded w-min"
+              className="border border-gray-300 mr-auto px-1 py-0.5 rounded w-min"
               onChange={({ target: { value } }) =>
                 onChange({ year: Number(value) })
               }
@@ -78,13 +71,6 @@ export function DatePicker({
                 </option>
               ))}
             </select>
-            <button
-              className="ml-auto"
-              onClick={() => onChange(value.add({ months: 1 }))}
-              type="button"
-            >
-              &rarr;
-            </button>
           </>
         )}
         weekdayProps={() => ({ className: "font-medium" })}
