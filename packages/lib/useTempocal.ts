@@ -50,9 +50,9 @@ type RequiredValue<Mode> = Mode extends "date"
   : never;
 
 type ChangeValue<Mode> = Mode extends "date"
-  ? Temporal.PlainDate
+  ? Temporal.PlainDate | Temporal.PlainDateLike
   : Mode extends "datetime"
-  ? Temporal.PlainDateTime
+  ? Temporal.PlainDateTime | Temporal.PlainDateTimeLike
   : never;
 
 export function useTempocal<Mode extends "date" | "datetime">({
@@ -81,6 +81,7 @@ export function useTempocal<Mode extends "date" | "datetime">({
         params instanceof Temporal.PlainDate ||
         params instanceof Temporal.PlainDateTime
       ) {
+        // @ts-expect-error Help.
         setValue(params);
 
         return;
