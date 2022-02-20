@@ -1,9 +1,9 @@
 import { Temporal } from "@js-temporal/polyfill";
 import classnames from "classnames";
 import { useCallback, useState } from "react";
-import { Calendar } from "../lib/Calendar";
-import { Locale } from "../lib/types";
-import { useTempocal } from "../lib/useTempocal";
+import { Calendar } from "../../lib/Calendar";
+import { Locale } from "../../lib/types";
+import { useTempocal } from "../../lib/useTempocal";
 
 export function DateRangePicker({
   dateFormatter,
@@ -48,7 +48,6 @@ export function DateRangePicker({
 
   return (
     <div className="flex flex-col gap-8 pt-8">
-      <h2 className="text-3xl">DateRangePicker</h2>
       <p>
         {dateFormatter.format(new Date(values[0].toString()))} -{" "}
         {dateFormatter.format(new Date(values[1].toString()))}

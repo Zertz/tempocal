@@ -1,11 +1,11 @@
 import { Temporal } from "@js-temporal/polyfill";
 import classnames from "classnames";
 import { useState } from "react";
-import { Calendar } from "../lib/Calendar";
-import { Locale } from "../lib/types";
-import { useTempocal } from "../lib/useTempocal";
+import { Calendar } from "../../lib/Calendar";
+import { Locale } from "../../lib/types";
+import { useTempocal } from "../../lib/useTempocal";
 
-export function DateTimePicker({
+export function DateTimePicker2({
   dateTimeFormatter,
   locale,
 }: {
@@ -29,9 +29,8 @@ export function DateTimePicker({
 
   return (
     <div className="flex flex-col gap-8 pt-8">
-      <h2 className="text-3xl">DateTimePicker</h2>
       <p>{dateTimeFormatter.format(new Date(value.toString()))}</p>
-      <section className="border border-gray-300 p-2 rounded w-72">
+      <section className="grid grid-rows-[min-content,1fr] grid-cols-[1fr,min-content] gap-2 border border-gray-300 overflow-hidden p-2 rounded w-96 h-[14rem]">
         <header className="flex items-center gap-2 font-bold">
           <button
             className="mr-auto"
@@ -55,7 +54,7 @@ export function DateTimePicker({
           rollover
           value={value}
           calendarProps={() => ({
-            className: "gap-1 text-center",
+            className: "row-start-2 col-start-1 gap-1 text-center",
           })}
           weekdayProps={() => ({ className: "font-medium" })}
           dayProps={(day) => ({
@@ -69,35 +68,34 @@ export function DateTimePicker({
             ),
           })}
         />
-        <footer className="flex gap-2 mt-2">
-          <select
-            className="border border-gray-300 ml-auto px-1 py-0.5 rounded w-min"
-            onChange={({ target: { value } }) =>
-              onChange({ hour: Number(value) })
-            }
+        <footer className="flex gap-2 row-start-1 row-span-2 col-start-2">
+          <ul
+            className="border border-gray-300 ml-auto overflow-auto px-1 py-0.5 rounded w-12"
             title="Hours"
-            value={value.hour}
           >
             {[...Array(24)].map((_, hour) => (
-              <option key={hour} value={hour}>
-                {`${hour}`.padStart(2, "0")}
-              </option>
+              <li key={hour}>
+                <button onClick={() => onChange({ hour })} type="button">
+                  {`${hour}`.padStart(2, "0")}
+                </button>
+              </li>
             ))}
-          </select>
-          <select
-            className="border border-gray-300 mr-auto px-1 py-0.5 rounded w-min"
-            onChange={({ target: { value } }) =>
-              onChange({ minute: Number(value) })
-            }
+          </ul>
+          <ul
+            className="border border-gray-300 mr-auto overflow-auto px-1 py-0.5 rounded w-12"
             title="Minutes"
-            value={value.minute}
           >
             {[...Array(60 / 5)].map((_, minute) => (
-              <option key={minute} value={minute * 5}>
-                {`${minute * 5}`.padStart(2, "0")}
-              </option>
+              <li key={minute}>
+                <button
+                  onClick={() => onChange({ minute: minute * 5 })}
+                  type="button"
+                >
+                  {`${minute * 5}`.padStart(2, "0")}
+                </button>
+              </li>
             ))}
-          </select>
+          </ul>
         </footer>
       </section>
     </div>

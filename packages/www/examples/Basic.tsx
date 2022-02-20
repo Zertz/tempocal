@@ -1,10 +1,10 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { useState } from "react";
-import { Calendar } from "../lib/Calendar";
-import { Locale } from "../lib/types";
-import { useTempocal } from "../lib/useTempocal";
+import { Calendar } from "../../lib/Calendar";
+import { Locale } from "../../lib/types";
+import { useTempocal } from "../../lib/useTempocal";
 
-export function OutOfTheBox({
+export function Basic({
   dateFormatter,
   locale,
 }: {
@@ -28,7 +28,6 @@ export function OutOfTheBox({
 
   return (
     <div className="flex flex-col gap-8 pt-8">
-      <h2 className="text-3xl">OutOfTheBox</h2>
       <p>{dateFormatter.format(new Date(value.toString()))}</p>
       <Calendar
         locale={locale}
