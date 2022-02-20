@@ -28,7 +28,7 @@ export function DatePicker({
   });
 
   return (
-    <div className="flex flex-col gap-8 pt-8">
+    <div className="flex flex-col gap-4">
       <p>{dateFormatter.format(new Date(value.toString()))}</p>
       <Calendar
         locale={locale}

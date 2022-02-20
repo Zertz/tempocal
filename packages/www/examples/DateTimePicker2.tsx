@@ -28,7 +28,7 @@ export function DateTimePicker2({
   });
 
   return (
-    <div className="flex flex-col gap-8 pt-8">
+    <div className="flex flex-col gap-4">
       <p>{dateTimeFormatter.format(new Date(value.toString()))}</p>
       <section className="grid grid-rows-[min-content,1fr] grid-cols-[1fr,min-content] gap-2 border border-gray-300 overflow-hidden p-2 rounded w-96 h-[14rem]">
         <header className="flex items-center gap-2 font-bold">

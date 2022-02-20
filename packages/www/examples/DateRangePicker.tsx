@@ -47,7 +47,7 @@ export function DateRangePicker({
   });
 
   return (
-    <div className="flex flex-col gap-8 pt-8">
+    <div className="flex flex-col gap-4">
       <p>
         {dateFormatter.format(new Date(values[0].toString()))} -{" "}
         {dateFormatter.format(new Date(values[1].toString()))}
