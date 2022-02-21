@@ -1,9 +1,7 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import { useState } from "react";
-import { Calendar } from "../../lib/Calendar";
-import { Locale } from "../../lib/types";
-import { useTempocal } from "../../lib/useTempocal";
 
 export function DateTimePicker2({
   dateTimeFormatter,

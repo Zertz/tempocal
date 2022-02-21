@@ -1,5 +1,5 @@
+import { Locale } from "@tempocal/react";
 import { useMemo } from "react";
-import { Locale } from "../lib/types";
 import { Basic } from "./examples/Basic";
 import { DatePicker } from "./examples/DatePicker";
 import { DateRangePicker } from "./examples/DateRangePicker";
