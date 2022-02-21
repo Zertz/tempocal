@@ -8,6 +8,22 @@ export function Overview() {
           <h2 className="font-bold text-4xl">Features</h2>
         </div>
         <ul className="space-y-2">
+          <li>
+            🕰 Built on{" "}
+            <a
+              className="hover:text-gray-300 underline"
+              href="https://github.com/tc39/proposal-temporal"
+            >
+              Temporal API
+            </a>{" "}
+            (stage 3) and{" "}
+            <a
+              className="hover:text-gray-300 underline"
+              href="https://github.com/js-temporal/temporal-polyfill"
+            >
+              temporal-polyfill
+            </a>
+          </li>
           <li>🤓 Available as ESM and CJS!</li>
         </ul>
       </div>
