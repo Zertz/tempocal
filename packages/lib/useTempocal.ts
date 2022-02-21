@@ -15,10 +15,6 @@ export function useCalendarMonthDateRange(value: Value, rollover: boolean) {
   );
 }
 
-export function useDates(from: Value, to: Value) {
-  return useMemo(() => console.info({ from, to }), [from, to]);
-}
-
 export function useMonthStartDate(value: Value) {
   return useMemo(() => getMonthStartDate(value), [value]);
 }
