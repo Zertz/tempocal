@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Locale } from "../lib/types";
 import { Basic } from "./examples/Basic";
 import { DatePicker } from "./examples/DatePicker";
@@ -6,9 +6,7 @@ import { DateRangePicker } from "./examples/DateRangePicker";
 import { DateTimePicker } from "./examples/DateTimePicker";
 import { DateTimePicker2 } from "./examples/DateTimePicker2";
 
-export function Examples() {
-  const [locale, setLocale] = useState<Locale>("en-US");
-
+export function Examples({ locale }: { locale: Locale }) {
   const { dateFormatter, dateTimeFormatter } = useMemo(
     () => ({
       dateFormatter: new Intl.DateTimeFormat(locale, {
@@ -24,18 +22,6 @@ export function Examples() {
 
   return (
     <>
-      <select
-        className="border border-gray-300 px-1 py-0.5 rounded w-min"
-        onChange={({ target: { value } }) => setLocale(value)}
-        title="Locale"
-        value={locale}
-      >
-        <option value="en-US">en-US</option>
-        <option value="es-ES">es-ES</option>
-        <option value="fr-CA">fr-CA</option>
-        <option value="pt-BR">pt-BR</option>
-        <option value="ru-RU">ru-RU</option>
-      </select>
       <Example
         title="Basic"
         url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/Basic.tsx"

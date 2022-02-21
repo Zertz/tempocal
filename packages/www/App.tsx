@@ -1,6 +1,7 @@
 import { toTemporalInstant } from "@js-temporal/polyfill";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { TabPanel, useTabs } from "react-headless-tabs";
+import { Locale } from "../lib/types";
 import { Examples } from "./Examples";
 import { Overview } from "./Overview";
 
@@ -14,6 +15,8 @@ const inactiveClassName =
 Date.prototype.toTemporalInstant = toTemporalInstant;
 
 export function App() {
+  const [locale, setLocale] = useState<Locale>("en-US");
+
   const defaultTab = useMemo(() => {
     if (typeof window === "undefined" || !window.location.hash) {
       return;
@@ -49,7 +52,7 @@ export function App() {
             Contribute on GitHub
           </a>
         </div>
-        <nav className="flex border-b border-gray-400 overflow-x-auto">
+        <nav className="flex items-center border-b border-gray-400 overflow-x-auto">
           <button
             className={`${baseClassName} ${
               selectedTab === "overview" ? activeClassName : inactiveClassName
@@ -76,6 +79,20 @@ export function App() {
           >
             Examples
           </button>
+          <div className="ml-auto" hidden={selectedTab !== "examples"}>
+            <select
+              className="border border-gray-300 px-1 py-0.5 rounded w-min"
+              onChange={({ target: { value } }) => setLocale(value)}
+              title="Locale"
+              value={locale}
+            >
+              <option value="en-US">en-US</option>
+              <option value="es-ES">es-ES</option>
+              <option value="fr-CA">fr-CA</option>
+              <option value="pt-BR">pt-BR</option>
+              <option value="ru-RU">ru-RU</option>
+            </select>
+          </div>
         </nav>
         <TabPanel
           className="py-6 space-y-12"
@@ -93,7 +110,7 @@ export function App() {
           className="py-6 space-y-12"
           hidden={selectedTab !== "examples"}
         >
-          <Examples />
+          <Examples locale={locale} />
         </TabPanel>
       </main>
     </div>
