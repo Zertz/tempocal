@@ -1,5 +1,7 @@
-# [Tempocal](https://tempocal.vercel.app/)
+# Tempocal
 
-> Primitives to build a calendar using the Temporal API
+[![npm](https://badgen.net/npm/v/@tempocal/react)](https://www.npmjs.com/package/@tempocal/react)
 
-**This is very much a work in progress!**
+> Headless and highly flexible primitives to build a calendar using the Temporal API
+
+👉 **Check out the [documentation](https://tempocal.pierluc.io/#documentation) and [interactive examples](https://tempocal.pierluc.io/#examples)!**
