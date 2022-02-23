@@ -2,6 +2,7 @@ import { toTemporalInstant } from "@js-temporal/polyfill";
 import { Locale } from "@tempocal/react";
 import { useEffect, useMemo, useState } from "react";
 import { TabPanel, useTabs } from "react-headless-tabs";
+import { Documentation } from "./Documentation";
 import { Examples } from "./Examples";
 import { Overview } from "./Overview";
 
@@ -104,7 +105,7 @@ export function App() {
           className="py-6 space-y-12"
           hidden={selectedTab !== "documentation"}
         >
-          👀
+          <Documentation />
         </TabPanel>
         <TabPanel
           className="py-6 space-y-12"

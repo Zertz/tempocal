@@ -24,7 +24,16 @@ export function Overview() {
               temporal-polyfill
             </a>
           </li>
-          <li>🤓 Available as ESM and CJS!</li>
+          <li>
+            🤝 Works great with{" "}
+            <a
+              className="hover:text-gray-300 underline"
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl"
+            >
+              Intl API
+            </a>
+          </li>
+          <li>🤓 Available as ESM and CJS</li>
         </ul>
       </div>
       <div>

@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export function Basic({
   dateFormatter,
@@ -24,9 +24,15 @@ export function Basic({
     value,
   });
 
+  const formattedDate = useMemo(() => {
+    return dateFormatter.format(
+      new Date(value.year, value.month - 1, value.day)
+    );
+  }, [dateFormatter, value]);
+
   return (
     <div className="flex flex-col gap-4">
-      <p>{dateFormatter.format(new Date(value.toString()))}</p>
+      <p>{formattedDate}</p>
       <Calendar
         locale={locale}
         onChange={onChange}

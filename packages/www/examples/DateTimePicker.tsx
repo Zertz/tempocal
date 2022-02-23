@@ -1,7 +1,7 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export function DateTimePicker({
   dateTimeFormatter,
@@ -25,9 +25,15 @@ export function DateTimePicker({
     value,
   });
 
+  const formattedDateTime = useMemo(() => {
+    return dateTimeFormatter.format(
+      new Date(value.year, value.month - 1, value.day, value.hour, value.minute)
+    );
+  }, [dateTimeFormatter, value]);
+
   return (
     <div className="flex flex-col gap-4">
-      <p>{dateTimeFormatter.format(new Date(value.toString()))}</p>
+      <p>{formattedDateTime}</p>
       <section className="border border-gray-300 p-2 rounded w-72">
         <header className="flex items-center gap-2 font-bold">
           <button
