@@ -18,7 +18,7 @@ export function DateTimePicker({
     })
   );
 
-  const { monthNames, onChange, onSelect } = useTempocal({
+  const { monthNames, onChange } = useTempocal({
     locale,
     mode: "datetime",
     setValue,
@@ -48,7 +48,7 @@ export function DateTimePicker({
         </header>
         <Calendar
           locale={locale}
-          onSelect={onSelect}
+          onChange={onChange}
           rollover
           value={value}
           calendarProps={() => ({

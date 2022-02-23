@@ -65,12 +65,6 @@ export function useTempocal<Mode extends "date" | "datetime">({
   const monthNames = useMonthNames(locale, value.monthsInYear);
   const weekdayNames = useWeekdayNames(locale, value.daysInWeek);
 
-  const onSelect = useCallback(
-    // @ts-expect-error You're not wrong.
-    (nextValue: Temporal.PlainDate) => setValue(nextValue),
-    [setValue]
-  );
-
   const onChange = useCallback(
     (params: ChangeValue<Mode>) => {
       if (
@@ -98,7 +92,6 @@ export function useTempocal<Mode extends "date" | "datetime">({
   return {
     monthNames,
     onChange,
-    onSelect,
     weekdayNames,
   };
 }

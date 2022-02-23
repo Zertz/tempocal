@@ -37,7 +37,7 @@ export function DateRangePicker({
     [setValues]
   );
 
-  const { monthNames, onSelect } = useTempocal({
+  const { monthNames, onChange } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -54,7 +54,7 @@ export function DateRangePicker({
         <Calendar
           locale={locale}
           monthsAfter={1}
-          onSelect={onSelect}
+          onChange={onChange}
           value={values[0]}
           calendarProps={() => ({
             className: "gap-1 text-center w-72",

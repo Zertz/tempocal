@@ -8,7 +8,7 @@ import {
   useWeekdayNames,
 } from "./useTempocal";
 
-type MonthProps = Pick<ReturnType<typeof useTempocal>, "onSelect"> & {
+type MonthProps = Pick<ReturnType<typeof useTempocal>, "onChange"> & {
   locale: Locale;
   rollover?: boolean;
   value: Value;
@@ -59,7 +59,7 @@ export function Calendar({
   monthsAfter = 0,
   rollover = false,
   value,
-  onSelect,
+  onChange,
   calendarProps,
   headerProps,
   renderHeader,
@@ -81,7 +81,7 @@ export function Calendar({
           locale={locale}
           rollover={rollover}
           value={value.add({ months: month - monthsBefore })}
-          onSelect={onSelect}
+          onChange={onChange}
           calendarProps={calendarProps}
           headerProps={headerProps}
           renderHeader={renderHeader}
@@ -101,7 +101,7 @@ function Month({
   locale,
   rollover = false,
   value,
-  onSelect,
+  onChange,
   calendarProps,
   headerProps,
   renderHeader,
@@ -161,7 +161,7 @@ function Month({
             }
           >
             <button
-              onClick={() => onSelect(date)}
+              onClick={() => onChange(date)}
               type="button"
               {...dayProps?.(date)}
             >
