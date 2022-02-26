@@ -50,6 +50,10 @@ export function getMonthNames(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   monthsInYear: number
 ) {
+  const monthFormatter = new Intl.DateTimeFormat(locale, {
+    month: "long",
+  });
+
   const monthNames: string[] = [];
 
   for (let i = 0; i < monthsInYear; i += 1) {
@@ -57,9 +61,7 @@ export function getMonthNames(
       `2017-${`${i + 1}`.padStart(2, "0")}-01T12:00:00.000Z`
     );
 
-    const month = new Intl.DateTimeFormat(locale, {
-      month: "long",
-    }).format(date);
+    const month = monthFormatter.format(date);
 
     monthNames.push(month);
   }
@@ -73,12 +75,16 @@ export function getWeekdayNames(
 ) {
   const firstDayOfWeek = getFirstDayOfWeek(Temporal.Now.plainDate("iso8601"));
 
+  const weekdayFormatter = new Intl.DateTimeFormat(locale, {
+    weekday: "short",
+  });
+
   const weekdayNames: string[] = [];
 
   for (let i = 0; i < daysInWeek; i += 1) {
-    const weekday = new Intl.DateTimeFormat(locale, {
-      weekday: "short",
-    }).format(new Date(firstDayOfWeek.add({ days: i }).toString()));
+    const weekday = weekdayFormatter.format(
+      new Date(firstDayOfWeek.add({ days: i }).toString())
+    );
 
     weekdayNames.push(weekday);
   }
