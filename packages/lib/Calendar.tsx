@@ -161,7 +161,16 @@ function Month({
             }
           >
             <button
-              onClick={() => onChange(date)}
+              onClick={() => {
+                const params: Temporal.PlainDateLike = {
+                  year: date.year,
+                  month: date.month,
+                  monthCode: date.monthCode,
+                  day: date.day,
+                };
+
+                onChange(params);
+              }}
               type="button"
               {...dayProps?.(date)}
             >
