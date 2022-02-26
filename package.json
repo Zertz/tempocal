@@ -11,7 +11,7 @@
     "lint": "eslint . --ext ts,tsx",
     "prepublishOnly": "yarn build",
     "publish:lib": "yarn publish packages/lib --access public",
-    "start": "parcel packages/www --open"
+    "start": "parcel packages/* --open"
   },
   "dependencies": {},
   "devDependencies": {
