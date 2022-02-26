@@ -15,6 +15,9 @@ export function DateTimePicker({
       year: 2021,
       month: 11,
       day: 25,
+      hour: 8,
+      minute: 30,
+      second: 0,
     })
   );
 
