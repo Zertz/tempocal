@@ -62,11 +62,11 @@ export function DateRangePicker({
           headerProps={() => ({ className: "font-bold" })}
           renderHeader={(date) => monthNames[date.month - 1]}
           weekdayProps={() => ({ className: "font-medium" })}
-          dayProps={(day) => ({
+          dayProps={(date) => ({
             className: classnames(
               "border overflow-hidden rounded text-gray-700 transition-colors w-full",
-              Temporal.PlainDate.compare(values[0], day) <= 0 &&
-                Temporal.PlainDate.compare(values[1], day) >= 0
+              Temporal.PlainDate.compare(values[0], date) <= 0 &&
+                Temporal.PlainDate.compare(values[1], date) >= 0
                 ? "bg-blue-100 border-blue-600"
                 : "hover:bg-gray-100 border-gray-300"
             ),

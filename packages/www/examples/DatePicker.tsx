@@ -80,16 +80,16 @@ export function DatePicker({
         renderWeekday={({ weekday, weekdayName }) =>
           weekday === 1 ? "😭" : weekdayName
         }
-        dayProps={(day) => ({
+        dayProps={(date) => ({
           className: classnames(
             "border overflow-hidden rounded transition-colors w-full",
             "disabled:opacity-75 disabled:pointer-events-none disabled:text-red-400",
-            value.month === day.month ? "text-gray-700" : "text-gray-400",
-            value.equals(day)
+            value.month === date.month ? "text-gray-700" : "text-gray-400",
+            value.equals(date)
               ? "bg-blue-100 border-blue-600"
               : "hover:bg-gray-100 border-gray-300"
           ),
-          disabled: day.dayOfWeek === 1 && day.day % 5 !== 0,
+          disabled: date.dayOfWeek === 1 && date.day % 5 !== 0,
         })}
         renderDay={({ year, month, day }) => {
           if (value.month === 12 && day === 25) {
