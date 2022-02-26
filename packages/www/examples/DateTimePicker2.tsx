@@ -81,7 +81,12 @@ export function DateTimePicker2({
             title="Hours"
           >
             {[...Array(24)].map((_, hour) => (
-              <li key={hour}>
+              <li
+                key={hour}
+                className={classnames("border px-0.5 rounded", {
+                  "bg-blue-100 border-blue-600": value.hour === hour,
+                })}
+              >
                 <button onClick={() => onChange({ hour })} type="button">
                   {`${hour}`.padStart(2, "0")}
                 </button>
@@ -92,16 +97,20 @@ export function DateTimePicker2({
             className="border border-gray-300 mr-auto overflow-auto px-1 py-0.5 rounded w-12"
             title="Minutes"
           >
-            {[...Array(60 / 5)].map((_, minute) => (
-              <li key={minute}>
-                <button
-                  onClick={() => onChange({ minute: minute * 5 })}
-                  type="button"
+            {[...Array(60 / 5)]
+              .map((_, minute) => minute * 5)
+              .map((minute) => (
+                <li
+                  key={minute}
+                  className={classnames("border px-0.5 rounded", {
+                    "bg-blue-100 border-blue-600": value.minute === minute,
+                  })}
                 >
-                  {`${minute * 5}`.padStart(2, "0")}
-                </button>
-              </li>
-            ))}
+                  <button onClick={() => onChange({ minute })} type="button">
+                    {`${minute}`.padStart(2, "0")}
+                  </button>
+                </li>
+              ))}
           </ul>
         </footer>
       </section>
