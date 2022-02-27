@@ -42,6 +42,7 @@ export function DateTimePicker2({
           <button
             className="mr-auto"
             onClick={() => onChange(value.subtract({ months: 1 }))}
+            title="Previous month"
             type="button"
           >
             &larr;
@@ -50,6 +51,7 @@ export function DateTimePicker2({
           <button
             className="ml-auto"
             onClick={() => onChange(value.add({ months: 1 }))}
+            title="Next month"
             type="button"
           >
             &rarr;
