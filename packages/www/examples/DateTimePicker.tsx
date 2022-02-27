@@ -1,7 +1,7 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
-import { useMemo, useState } from "react";
+import * as React from "react";
 
 export function DateTimePicker({
   dateTimeFormatter,
@@ -10,7 +10,7 @@ export function DateTimePicker({
   dateTimeFormatter: Intl.DateTimeFormat;
   locale: Locale;
 }) {
-  const [value, setValue] = useState(
+  const [value, setValue] = React.useState(
     Temporal.PlainDateTime.from({
       year: 2021,
       month: 11,
@@ -28,7 +28,7 @@ export function DateTimePicker({
     value,
   });
 
-  const formattedDateTime = useMemo(() => {
+  const formattedDateTime = React.useMemo(() => {
     return dateTimeFormatter.format(
       new Date(value.year, value.month - 1, value.day, value.hour, value.minute)
     );

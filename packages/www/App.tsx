@@ -1,6 +1,6 @@
 import { toTemporalInstant } from "@js-temporal/polyfill";
 import { Locale } from "@tempocal/react";
-import { useEffect, useMemo, useState } from "react";
+import * as React from "react";
 import { TabPanel, useTabs } from "react-headless-tabs";
 import { Documentation } from "./Documentation";
 import { Examples } from "./Examples";
@@ -16,9 +16,9 @@ const inactiveClassName =
 Date.prototype.toTemporalInstant = toTemporalInstant;
 
 export function App() {
-  const [locale, setLocale] = useState<Locale>("en-US");
+  const [locale, setLocale] = React.useState<Locale>("en-US");
 
-  const defaultTab = useMemo(() => {
+  const defaultTab = React.useMemo(() => {
     if (typeof window === "undefined" || !window.location.hash) {
       return;
     }
@@ -31,7 +31,7 @@ export function App() {
     defaultTab
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!selectedTab) {
       return;
     }

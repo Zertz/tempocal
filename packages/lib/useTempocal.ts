@@ -1,5 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { useCallback, useMemo } from "react";
+import * as React from "react";
 import { Locale, Value } from "./types";
 import {
   getCalendarMonthDateRange,
@@ -9,21 +9,21 @@ import {
 } from "./utils";
 
 export function useCalendarMonthDateRange(value: Value, rollover: boolean) {
-  return useMemo(
+  return React.useMemo(
     () => getCalendarMonthDateRange(value, rollover),
     [rollover, value]
   );
 }
 
 export function useMonthStartDate(value: Value) {
-  return useMemo(() => getMonthStartDate(value), [value]);
+  return React.useMemo(() => getMonthStartDate(value), [value]);
 }
 
 export function useMonthNames(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   monthsInYear: number
 ) {
-  return useMemo(
+  return React.useMemo(
     () => getMonthNames(locale, monthsInYear),
     [locale, monthsInYear]
   );
@@ -33,7 +33,7 @@ export function useWeekdayNames(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   daysInWeek: number
 ) {
-  return useMemo(
+  return React.useMemo(
     () => getWeekdayNames(locale, daysInWeek),
     [daysInWeek, locale]
   );
@@ -65,7 +65,7 @@ export function useTempocal<Mode extends "date" | "datetime">({
   const monthNames = useMonthNames(locale, value.monthsInYear);
   const weekdayNames = useWeekdayNames(locale, value.daysInWeek);
 
-  const onChange = useCallback(
+  const onChange = React.useCallback(
     (params: ChangeValue<Mode>) => {
       if (
         params instanceof Temporal.PlainDate ||

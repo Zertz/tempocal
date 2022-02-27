@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
-import { useMemo, useState } from "react";
+import * as React from "react";
 
 export function Basic({
   dateFormatter,
@@ -9,7 +9,7 @@ export function Basic({
   dateFormatter: Intl.DateTimeFormat;
   locale: Locale;
 }) {
-  const [value, setValue] = useState(
+  const [value, setValue] = React.useState(
     Temporal.PlainDate.from({
       year: 2021,
       month: 11,
@@ -24,7 +24,7 @@ export function Basic({
     value,
   });
 
-  const formattedDate = useMemo(() => {
+  const formattedDate = React.useMemo(() => {
     return dateFormatter.format(
       new Date(value.year, value.month - 1, value.day)
     );

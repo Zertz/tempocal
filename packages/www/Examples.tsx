@@ -1,5 +1,5 @@
 import { Locale } from "@tempocal/react";
-import { useMemo } from "react";
+import * as React from "react";
 import { Basic } from "./examples/Basic";
 import { DatePicker } from "./examples/DatePicker";
 import { DateRangePicker } from "./examples/DateRangePicker";
@@ -7,7 +7,7 @@ import { DateTimePicker } from "./examples/DateTimePicker";
 import { DateTimePicker2 } from "./examples/DateTimePicker2";
 
 export function Examples({ locale }: { locale: Locale }) {
-  const { dateFormatter, dateTimeFormatter } = useMemo(
+  const { dateFormatter, dateTimeFormatter } = React.useMemo(
     () => ({
       dateFormatter: new Intl.DateTimeFormat(locale, {
         dateStyle: "long",

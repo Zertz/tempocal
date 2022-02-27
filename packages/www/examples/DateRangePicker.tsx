@@ -1,7 +1,7 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
-import { useCallback, useState } from "react";
+import * as React from "react";
 
 export function DateRangePicker({
   dateFormatter,
@@ -10,7 +10,7 @@ export function DateRangePicker({
   dateFormatter: Intl.DateTimeFormat;
   locale: Locale;
 }) {
-  const [values, setValues] = useState<
+  const [values, setValues] = React.useState<
     [Temporal.PlainDate, Temporal.PlainDate]
   >([
     Temporal.PlainDate.from({
@@ -25,7 +25,7 @@ export function DateRangePicker({
     }),
   ]);
 
-  const setValue = useCallback(
+  const setValue = React.useCallback(
     (value: typeof values[number]) => {
       setValues((values) =>
         // value.isBefore(values[0])

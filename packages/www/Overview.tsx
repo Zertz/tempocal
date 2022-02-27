@@ -1,3 +1,4 @@
+import * as React from "react";
 import { CodeBlock } from "./Code";
 
 export function Overview() {
