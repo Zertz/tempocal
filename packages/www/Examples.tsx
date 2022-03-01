@@ -1,6 +1,7 @@
 import { Locale } from "@tempocal/react";
 import * as React from "react";
 import { Basic } from "./examples/Basic";
+import { DateInput } from "./examples/DateInput";
 import { DatePicker } from "./examples/DatePicker";
 import { DateRangePicker } from "./examples/DateRangePicker";
 import { DateTimePicker } from "./examples/DateTimePicker";
@@ -27,6 +28,12 @@ export function Examples({ locale }: { locale: Locale }) {
         url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/Basic.tsx"
       >
         <Basic dateFormatter={dateFormatter} locale={locale} />
+      </Example>
+      <Example
+        title="DateInput"
+        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateInput.tsx"
+      >
+        <DateInput dateFormatter={dateFormatter} locale={locale} />
       </Example>
       <Example
         title="DatePicker"
@@ -79,7 +86,7 @@ function Example({
           View source
         </a>
       </div>
-      <div className="flex flex-col items-start bg-gray-200 overflow-x-auto p-2 rounded text-gray-700">
+      <div className="flex flex-col items-start bg-gray-200 p-2 rounded text-gray-700">
         {children}
       </div>
     </div>
