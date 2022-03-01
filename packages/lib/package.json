@@ -12,8 +12,6 @@
     "react": ">=16.8"
   },
   "files": [
-    "dist",
-    "../../LICENSE",
-    "../../README.md"
+    "dist"
   ]
 }
