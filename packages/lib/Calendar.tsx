@@ -191,7 +191,7 @@ function Day({
       style={
         !rollover && day === 0
           ? {
-              gridColumnStart: date.dayOfWeek + 1,
+              gridColumnStart: date.dayOfWeek === 7 ? 1 : date.dayOfWeek + 1,
             }
           : undefined
       }

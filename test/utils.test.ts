@@ -82,7 +82,7 @@ describe("utils", () => {
     const { start, end } = getCalendarMonthDateRange(
       Temporal.PlainDate.from({
         year: 2022,
-        month: 3,
+        month: 7,
         day: 7,
       }),
       true
@@ -92,8 +92,8 @@ describe("utils", () => {
       start.equals(
         Temporal.PlainDate.from({
           year: 2022,
-          month: 2,
-          day: 27,
+          month: 6,
+          day: 26,
         })
       )
     ).toBeTruthy();
@@ -102,8 +102,8 @@ describe("utils", () => {
       end.equals(
         Temporal.PlainDate.from({
           year: 2022,
-          month: 4,
-          day: 2,
+          month: 8,
+          day: 6,
         })
       )
     ).toBeTruthy();
