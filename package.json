@@ -9,8 +9,7 @@
   "scripts": {
     "build": "parcel build packages/*",
     "lint": "eslint . --ext ts,tsx",
-    "prepublishOnly": "yarn build",
-    "publish:lib": "yarn publish packages/lib --access public",
+    "publish:lib": "git clean -xdf && yarn && yarn build && yarn publish packages/lib --access public",
     "start": "parcel packages/* --open",
     "test": "tsc && jest"
   },
