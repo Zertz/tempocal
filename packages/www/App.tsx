@@ -1,7 +1,7 @@
 import { toTemporalInstant } from "@js-temporal/polyfill";
-import { Locale } from "@tempocal/react";
 import * as React from "react";
 import { TabPanel, useTabs } from "react-headless-tabs";
+import { Locale } from "../lib";
 import { Documentation } from "./Documentation";
 import { Examples } from "./Examples";
 import { Overview } from "./Overview";

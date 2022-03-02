@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import * as React from "react";
+import { Calendar, Locale, useTempocal } from "../../lib";
 
 export function Basic({
   dateFormatter,

@@ -1,5 +1,5 @@
-import { Locale } from "@tempocal/react";
 import * as React from "react";
+import { Locale } from "../lib";
 import { Basic } from "./examples/Basic";
 import { DateInput } from "./examples/DateInput";
 import { DatePicker } from "./examples/DatePicker";
