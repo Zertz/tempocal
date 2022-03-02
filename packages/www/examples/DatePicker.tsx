@@ -31,13 +31,23 @@ export function DatePicker({
     );
   }, [dateFormatter, value]);
 
+  const [rollover, setRollover] = React.useState(true);
+
   return (
     <div className="flex flex-col gap-4">
       <p>{formattedDate}</p>
+      <label className="flex items-center gap-1">
+        <input
+          checked={rollover}
+          onChange={() => setRollover((rollover) => !rollover)}
+          type="checkbox"
+        />
+        <span>Display days from previous and next months</span>
+      </label>
       <Calendar
         locale={locale}
         onChange={onChange}
-        rollover
+        rollover={rollover}
         value={value}
         calendarProps={() => ({
           className:
