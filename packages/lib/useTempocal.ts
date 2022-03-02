@@ -78,21 +78,17 @@ export function useTempocal<Mode extends "date" | "datetime">({
       }
 
       if (value) {
-        const item = value.with(params);
+        // @ts-expect-error Help.
+        setValue(value.with(params));
 
-        setValue(
-          // @ts-expect-error Help.
-          mode === "date"
-            ? Temporal.PlainDate.from(item)
-            : Temporal.PlainDateTime.from(item)
-        );
+        return;
       }
 
       setValue(
         // @ts-expect-error Help.
         mode === "date"
-          ? Temporal.PlainDate.from(params)
-          : Temporal.PlainDateTime.from(params)
+          ? Temporal.Now.plainDate("iso8601").with(params)
+          : Temporal.Now.plainDateTime("iso8601").with(params)
       );
     },
     [mode, setValue, value]
