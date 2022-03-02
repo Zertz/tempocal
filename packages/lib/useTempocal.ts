@@ -21,7 +21,7 @@ export function useMonthStartDate(value: Value) {
 
 export function useMonthNames(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  monthsInYear: number
+  monthsInYear = 12
 ) {
   return React.useMemo(
     () => getMonthNames(locale, monthsInYear),
@@ -31,7 +31,7 @@ export function useMonthNames(
 
 export function useWeekdayNames(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  daysInWeek: number
+  daysInWeek = 7
 ) {
   return React.useMemo(
     () => getWeekdayNames(locale, daysInWeek),
@@ -60,10 +60,10 @@ export function useTempocal<Mode extends "date" | "datetime">({
   locale: Locale;
   mode: Mode;
   setValue: (value: RequiredValue<Mode>) => void;
-  value: RequiredValue<Mode>;
+  value: RequiredValue<Mode> | undefined;
 }) {
-  const monthNames = useMonthNames(locale, value.monthsInYear);
-  const weekdayNames = useWeekdayNames(locale, value.daysInWeek);
+  const monthNames = useMonthNames(locale, value?.monthsInYear);
+  const weekdayNames = useWeekdayNames(locale, value?.daysInWeek);
 
   const onChange = React.useCallback(
     (params: ChangeValue<Mode>) => {
@@ -77,13 +77,22 @@ export function useTempocal<Mode extends "date" | "datetime">({
         return;
       }
 
-      const item = value.with(params);
+      if (value) {
+        const item = value.with(params);
+
+        setValue(
+          // @ts-expect-error Help.
+          mode === "date"
+            ? Temporal.PlainDate.from(item)
+            : Temporal.PlainDateTime.from(item)
+        );
+      }
 
       setValue(
         // @ts-expect-error Help.
         mode === "date"
-          ? Temporal.PlainDate.from(item)
-          : Temporal.PlainDateTime.from(item)
+          ? Temporal.PlainDate.from(params)
+          : Temporal.PlainDateTime.from(params)
       );
     },
     [mode, setValue, value]
