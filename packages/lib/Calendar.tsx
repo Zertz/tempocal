@@ -108,7 +108,7 @@ function Month({
   weekdayProps,
   renderWeekday = ({ weekdayName }) => weekdayName,
   dayProps,
-  renderDay = ({ day }) => day,
+  renderDay,
   footerProps,
   renderFooter,
 }: MonthProps) {
@@ -150,33 +150,15 @@ function Month({
         const date = start.add({ days: day });
 
         return (
-          <li
-            key={day}
-            style={
-              day === 0
-                ? {
-                    gridColumnStart: rollover ? 1 : monthStartDate.dayOfWeek,
-                  }
-                : undefined
-            }
-          >
-            <button
-              onClick={() => {
-                const params: Temporal.PlainDateLike = {
-                  year: date.year,
-                  month: date.month,
-                  monthCode: date.monthCode,
-                  day: date.day,
-                };
-
-                onChange(params);
-              }}
-              type="button"
-              {...dayProps?.(date)}
-            >
-              {renderDay(date)}
-            </button>
-          </li>
+          <Day
+            key={date.dayOfYear}
+            date={date}
+            day={day}
+            onChange={onChange}
+            dayProps={dayProps}
+            renderDay={renderDay}
+            rollover={rollover}
+          />
         );
       })}
       {renderFooter && (
@@ -190,5 +172,46 @@ function Month({
         </li>
       )}
     </ul>
+  );
+}
+
+function Day({
+  date,
+  day,
+  onChange,
+  dayProps,
+  renderDay = ({ day }) => day,
+  rollover,
+}: Pick<MonthProps, "onChange" | "dayProps" | "renderDay" | "rollover"> & {
+  date: Temporal.PlainDate;
+  day: number;
+}) {
+  return (
+    <li
+      style={
+        !rollover && day === 0
+          ? {
+              gridColumnStart: date.dayOfWeek + 1,
+            }
+          : undefined
+      }
+    >
+      <button
+        onClick={() => {
+          const params: Temporal.PlainDateLike = {
+            year: date.year,
+            month: date.month,
+            monthCode: date.monthCode,
+            day: date.day,
+          };
+
+          onChange(params);
+        }}
+        type="button"
+        {...dayProps?.(date)}
+      >
+        {renderDay(date)}
+      </button>
+    </li>
   );
 }
