@@ -54,10 +54,13 @@ describe("DatePicker", () => {
     expect(getByText("November 27, 2021")).toBeTruthy();
 
     fireEvent.change(getByTitle("Month"), { target: { value: 2 } });
-    expect(getByText("February 27, 2021")).toBeTruthy();
+    expect(getByText("November 27, 2021")).toBeTruthy();
 
     fireEvent.change(getByTitle("Year"), { target: { value: 2022 } });
-    expect(getByText("February 27, 2022")).toBeTruthy();
+    expect(getByText("November 27, 2021")).toBeTruthy();
+
+    fireEvent.click(getByText("25"));
+    expect(getByText("February 25, 2022")).toBeTruthy();
   });
 });
 

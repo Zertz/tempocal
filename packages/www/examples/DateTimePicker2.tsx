@@ -21,7 +21,7 @@ export function DateTimePicker2({
     })
   );
 
-  const { monthNames, onChange } = useTempocal({
+  const { monthNames, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "datetime",
     setValue,
@@ -41,7 +41,7 @@ export function DateTimePicker2({
         <header className="flex items-center gap-2 font-bold">
           <button
             className="mr-auto"
-            onClick={() => onChange(value.subtract({ months: 1 }))}
+            onClick={() => onChangeSelectedValue(value.subtract({ months: 1 }))}
             title="Previous month"
             type="button"
           >
@@ -50,7 +50,7 @@ export function DateTimePicker2({
           {monthNames[value.month - 1]}
           <button
             className="ml-auto"
-            onClick={() => onChange(value.add({ months: 1 }))}
+            onClick={() => onChangeSelectedValue(value.add({ months: 1 }))}
             title="Next month"
             type="button"
           >
@@ -59,7 +59,7 @@ export function DateTimePicker2({
         </header>
         <Calendar
           locale={locale}
-          onChange={onChange}
+          onChange={onChangeSelectedValue}
           rollover
           value={value}
           calendarProps={() => ({
@@ -89,7 +89,10 @@ export function DateTimePicker2({
                   "bg-blue-100 border-blue-600": value.hour === hour,
                 })}
               >
-                <button onClick={() => onChange({ hour })} type="button">
+                <button
+                  onClick={() => onChangeSelectedValue({ hour })}
+                  type="button"
+                >
                   {`${hour}`.padStart(2, "0")}
                 </button>
               </li>
@@ -108,7 +111,10 @@ export function DateTimePicker2({
                     "bg-blue-100 border-blue-600": value.minute === minute,
                   })}
                 >
-                  <button onClick={() => onChange({ minute })} type="button">
+                  <button
+                    onClick={() => onChangeSelectedValue({ minute })}
+                    type="button"
+                  >
                     {`${minute}`.padStart(2, "0")}
                   </button>
                 </li>

@@ -3,6 +3,8 @@ import classnames from "classnames";
 import * as React from "react";
 import { Calendar, Locale, useTempocal } from "../../lib";
 
+type DateRange = [Temporal.PlainDate, Temporal.PlainDate];
+
 export function DateRangePicker({
   dateFormatter,
   locale,
@@ -10,9 +12,7 @@ export function DateRangePicker({
   dateFormatter: Intl.DateTimeFormat;
   locale: Locale;
 }) {
-  const [values, setValues] = React.useState<
-    [Temporal.PlainDate, Temporal.PlainDate]
-  >([
+  const [values, setValues] = React.useState<DateRange>([
     Temporal.PlainDate.from({
       year: 2021,
       month: 11,
@@ -28,7 +28,6 @@ export function DateRangePicker({
   const setValue = React.useCallback(
     (value: typeof values[number]) => {
       setValues((values) =>
-        // value.isBefore(values[0])
         Temporal.PlainDate.compare(value, values[0]) < 0
           ? [value, values[1]]
           : [values[0], value]
@@ -37,24 +36,34 @@ export function DateRangePicker({
     [setValues]
   );
 
-  const { monthNames, onChange } = useTempocal({
+  const { monthNames, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "date",
     setValue,
     value: values[0],
   });
 
+  const formattedDates = React.useMemo(() => {
+    return [
+      dateFormatter.format(
+        new Date(values[0].year, values[0].month - 1, values[0].day)
+      ),
+      dateFormatter.format(
+        new Date(values[1].year, values[1].month - 1, values[1].day)
+      ),
+    ];
+  }, [dateFormatter, values]);
+
   return (
     <div className="flex flex-col gap-4">
       <p>
-        {dateFormatter.format(new Date(values[0].toString()))} -{" "}
-        {dateFormatter.format(new Date(values[1].toString()))}
+        {formattedDates[0]} - {formattedDates[1]}
       </p>
       <div className="flex gap-4 border border-gray-300 p-2 pt-0.5 rounded w-min">
         <Calendar
           locale={locale}
           monthsAfter={1}
-          onChange={onChange}
+          onChange={onChangeSelectedValue}
           value={values[0]}
           calendarProps={() => ({
             className: "gap-1 text-center w-72",

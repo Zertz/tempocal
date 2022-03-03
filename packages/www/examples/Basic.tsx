@@ -17,7 +17,7 @@ export function Basic({
     })
   );
 
-  const { onChange } = useTempocal({
+  const { onChangeSelectedValue } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -35,7 +35,7 @@ export function Basic({
       <p>{formattedDate}</p>
       <Calendar
         locale={locale}
-        onChange={onChange}
+        onChange={onChangeSelectedValue}
         rollover
         value={value}
         calendarProps={() => ({ className: "w-72" })}

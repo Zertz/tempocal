@@ -65,7 +65,28 @@ export function useTempocal<Mode extends "date" | "datetime">({
   const monthNames = useMonthNames(locale, value?.monthsInYear);
   const weekdayNames = useWeekdayNames(locale, value?.daysInWeek);
 
-  const onChange = React.useCallback(
+  const [calendarValue, setCalendarValue] = React.useState(() => {
+    if (value) {
+      return Temporal.PlainDate.from(value);
+    }
+
+    return Temporal.Now.plainDate("iso8601");
+  });
+
+  const onChangeCalendarValue = React.useCallback(
+    (params: Temporal.PlainDate | Temporal.PlainDateLike) => {
+      if (params instanceof Temporal.PlainDate) {
+        setCalendarValue(params);
+
+        return;
+      }
+
+      setCalendarValue(calendarValue.with(params));
+    },
+    [calendarValue]
+  );
+
+  const onChangeSelectedValue = React.useCallback(
     (params: ChangeValue<Mode>) => {
       if (
         params instanceof Temporal.PlainDate ||
@@ -95,8 +116,10 @@ export function useTempocal<Mode extends "date" | "datetime">({
   );
 
   return {
+    calendarValue,
     monthNames,
-    onChange,
+    onChangeCalendarValue,
+    onChangeSelectedValue,
     weekdayNames,
   };
 }

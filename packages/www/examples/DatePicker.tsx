@@ -18,7 +18,12 @@ export function DatePicker({
     })
   );
 
-  const { monthNames, onChange } = useTempocal({
+  const {
+    calendarValue,
+    monthNames,
+    onChangeCalendarValue,
+    onChangeSelectedValue,
+  } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -46,9 +51,9 @@ export function DatePicker({
       </label>
       <Calendar
         locale={locale}
-        onChange={onChange}
+        onChange={onChangeSelectedValue}
         rollover={rollover}
-        value={value}
+        value={calendarValue}
         calendarProps={() => ({
           className:
             "gap-1 border border-gray-300 p-2 rounded text-center w-72",
@@ -59,10 +64,10 @@ export function DatePicker({
             <select
               className="border border-gray-300 ml-auto px-1 py-0.5 rounded w-min"
               onChange={({ target: { value } }) =>
-                onChange({ month: Number(value) })
+                onChangeCalendarValue({ month: Number(value) })
               }
               title="Month"
-              value={value.month}
+              value={calendarValue.month}
             >
               {monthNames.map((monthName, index) => (
                 <option key={monthName} value={index + 1}>
@@ -73,14 +78,14 @@ export function DatePicker({
             <select
               className="border border-gray-300 mr-auto px-1 py-0.5 rounded w-min"
               onChange={({ target: { value } }) =>
-                onChange({ year: Number(value) })
+                onChangeCalendarValue({ year: Number(value) })
               }
               title="Year"
-              value={value.year}
+              value={calendarValue.year}
             >
               {[...Array(20)].map((_, year) => (
-                <option key={year} value={year - 10 + value.year}>
-                  {year - 10 + value.year}
+                <option key={year} value={year - 10 + calendarValue.year}>
+                  {year - 10 + calendarValue.year}
                 </option>
               ))}
             </select>
@@ -88,13 +93,15 @@ export function DatePicker({
         )}
         weekdayProps={() => ({ className: "font-medium" })}
         renderWeekday={({ weekday, weekdayName }) =>
-          weekday === 1 ? "😭" : weekdayName
+          weekday === 2 ? "😭" : weekdayName
         }
         dayProps={(date) => ({
           className: classnames(
-            "border overflow-hidden rounded transition-colors w-full",
+            "border overflow-hidden rounded text-gray-700 transition-colors w-full",
             "disabled:opacity-75 disabled:pointer-events-none disabled:text-red-400",
-            value.month === date.month ? "text-gray-700" : "text-gray-400",
+            calendarValue.month === date.month
+              ? "text-gray-700"
+              : "text-gray-400",
             value.equals(date)
               ? "bg-blue-100 border-blue-600"
               : "hover:bg-gray-100 border-gray-300"
@@ -102,7 +109,7 @@ export function DatePicker({
           disabled: date.dayOfWeek === 1 && date.day % 5 !== 0,
         })}
         renderDay={({ year, month, day }) => {
-          if (value.month === 12 && day === 25) {
+          if (month === 12 && day === 25) {
             return "🎄";
           }
 

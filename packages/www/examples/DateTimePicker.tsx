@@ -21,7 +21,7 @@ export function DateTimePicker({
     })
   );
 
-  const { monthNames, onChange } = useTempocal({
+  const { monthNames, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "datetime",
     setValue,
@@ -41,7 +41,7 @@ export function DateTimePicker({
         <header className="flex items-center gap-2 font-bold">
           <button
             className="mr-auto"
-            onClick={() => onChange(value.subtract({ months: 1 }))}
+            onClick={() => onChangeSelectedValue(value.subtract({ months: 1 }))}
             title="Previous month"
             type="button"
           >
@@ -50,7 +50,7 @@ export function DateTimePicker({
           {monthNames[value.month - 1]}
           <button
             className="ml-auto"
-            onClick={() => onChange(value.add({ months: 1 }))}
+            onClick={() => onChangeSelectedValue(value.add({ months: 1 }))}
             title="Next month"
             type="button"
           >
@@ -59,7 +59,7 @@ export function DateTimePicker({
         </header>
         <Calendar
           locale={locale}
-          onChange={onChange}
+          onChange={onChangeSelectedValue}
           rollover
           value={value}
           calendarProps={() => ({
@@ -81,7 +81,7 @@ export function DateTimePicker({
           <select
             className="border border-gray-300 ml-auto px-1 py-0.5 rounded w-min"
             onChange={({ target: { value } }) =>
-              onChange({ hour: Number(value) })
+              onChangeSelectedValue({ hour: Number(value) })
             }
             title="Hours"
             value={value.hour}
@@ -95,7 +95,7 @@ export function DateTimePicker({
           <select
             className="border border-gray-300 mr-auto px-1 py-0.5 rounded w-min"
             onChange={({ target: { value } }) =>
-              onChange({ minute: Number(value) })
+              onChangeSelectedValue({ minute: Number(value) })
             }
             title="Minutes"
             value={value.minute}

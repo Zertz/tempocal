@@ -20,7 +20,7 @@ export function DateInput({
     })
   );
 
-  const { monthNames, onChange } = useTempocal({
+  const { monthNames, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -52,7 +52,7 @@ export function DateInput({
       <div className="absolute top-7 left-0" hidden={!isOpen}>
         <Calendar
           locale={locale}
-          onChange={onChange}
+          onChange={onChangeSelectedValue}
           rollover
           value={value}
           calendarProps={() => ({
@@ -65,7 +65,7 @@ export function DateInput({
               <select
                 className="border border-gray-300 ml-auto px-1 py-0.5 rounded w-min"
                 onChange={({ target: { value } }) =>
-                  onChange({ month: Number(value) })
+                  onChangeSelectedValue({ month: Number(value) })
                 }
                 title="Month"
                 value={value.month}
@@ -79,7 +79,7 @@ export function DateInput({
               <select
                 className="border border-gray-300 mr-auto px-1 py-0.5 rounded w-min"
                 onChange={({ target: { value } }) =>
-                  onChange({ year: Number(value) })
+                  onChangeSelectedValue({ year: Number(value) })
                 }
                 title="Year"
                 value={value.year}

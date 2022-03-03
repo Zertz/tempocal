@@ -4,14 +4,14 @@ import { Locale, Value } from "./types";
 import {
   useCalendarMonthDateRange,
   useMonthStartDate,
-  useTempocal,
   useWeekdayNames,
 } from "./useTempocal";
 
-type MonthProps = Pick<ReturnType<typeof useTempocal>, "onChange"> & {
+type MonthProps = {
   locale: Locale;
   rollover?: boolean;
   value: Value;
+  onChange: (params: Temporal.PlainDate | Temporal.PlainDateLike) => void;
   calendarProps?: () => Omit<
     React.DetailedHTMLProps<
       React.HTMLAttributes<HTMLUListElement>,
