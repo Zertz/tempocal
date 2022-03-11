@@ -24,8 +24,8 @@ export function Documentation() {
   calendarValue,
   onChangeCalendarValue,
   onChangeSelectedValue,
-  monthNames,
-  weekdayNames,
+  months,
+  weekdays,
 } = useTempocal({
   locale: Locale;
   mode: "date" | "datetime";
@@ -43,13 +43,14 @@ export function Documentation() {
           <div className="pt-8 space-y-2">
             <CodeBlock>
               {
-                "onChangeCalendarValue: (params: Temporal.PlainDate | Temporal.PlainDateLike) => void"
+                "onChangeCalendarValue: (params?: Temporal.PlainDate | Temporal.PlainDateLike) => void"
               }
             </CodeBlock>
             <p>
               Fully or partially updates the visible date. Typically used to
               navigate the calendar using, for example, month and year
-              selectors.
+              selectors. If <Code>params</Code> is not specified,{" "}
+              <Code>calendarValue</Code> will be set to now.
             </p>
           </div>
           <div className="pt-8 space-y-2">
@@ -64,12 +65,12 @@ export function Documentation() {
             </p>
           </div>
           <div className="pt-8 space-y-2">
-            <CodeBlock>monthNames: string[]</CodeBlock>
-            <p>Month names in the specified locale, in order.</p>
+            <CodeBlock>{`months: { month: number; longName: string; shortName: string; narrowName: string; }[]`}</CodeBlock>
+            <p>Months in the specified locale, in order.</p>
           </div>
           <div className="pt-8 space-y-2">
-            <CodeBlock>weekdayNames: string[]</CodeBlock>
-            <p>Weekday names in the specified locale, in order.</p>
+            <CodeBlock>{`weekdays: { weekday: number; longName: string; shortName: string; narrowName: string; }[]`}</CodeBlock>
+            <p>Weekdays in the specified locale, in order.</p>
           </div>
         </div>
       </div>

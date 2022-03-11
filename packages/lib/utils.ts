@@ -47,48 +47,78 @@ export function getMonthEndDate(value: Value) {
   return getMonthStartDate(value).add({ months: 1 }).subtract({ days: 1 });
 }
 
-export function getMonthNames(
+export function getMonths(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   monthsInYear: number
 ) {
-  const monthFormatter = new Intl.DateTimeFormat(locale, {
+  const longMonthFormatter = new Intl.DateTimeFormat(locale, {
     month: "long",
   });
 
-  const monthNames: string[] = [];
+  const shortMonthFormatter = new Intl.DateTimeFormat(locale, {
+    month: "short",
+  });
+
+  const narrowMonthFormatter = new Intl.DateTimeFormat(locale, {
+    month: "narrow",
+  });
+
+  const months: {
+    month: number;
+    longName: string;
+    shortName: string;
+    narrowName: string;
+  }[] = [];
 
   for (let i = 0; i < monthsInYear; i += 1) {
-    const date = new Date(
-      `2017-${`${i + 1}`.padStart(2, "0")}-01T12:00:00.000Z`
-    );
+    const date = new Date(2022, i, 1, 12, 0, 0, 0);
 
-    const month = monthFormatter.format(date);
-
-    monthNames.push(month);
+    months.push({
+      month: i + 1,
+      longName: longMonthFormatter.format(date),
+      shortName: shortMonthFormatter.format(date),
+      narrowName: narrowMonthFormatter.format(date),
+    });
   }
 
-  return monthNames;
+  return months;
 }
 
-export function getWeekdayNames(
+export function getWeekdays(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   daysInWeek: number
 ) {
   const firstDayOfWeek = getFirstDayOfWeek(Temporal.Now.plainDate("iso8601"));
 
-  const weekdayFormatter = new Intl.DateTimeFormat(locale, {
+  const longWeekdayFormatter = new Intl.DateTimeFormat(locale, {
+    weekday: "long",
+  });
+
+  const shortWeekdayFormatter = new Intl.DateTimeFormat(locale, {
     weekday: "short",
   });
 
-  const weekdayNames: string[] = [];
+  const narrowWeekdayFormatter = new Intl.DateTimeFormat(locale, {
+    weekday: "narrow",
+  });
+
+  const weekdays: {
+    weekday: number;
+    longName: string;
+    shortName: string;
+    narrowName: string;
+  }[] = [];
 
   for (let i = 0; i < daysInWeek; i += 1) {
-    const weekday = weekdayFormatter.format(
-      new Date(firstDayOfWeek.add({ days: i }).toString())
-    );
+    const date = new Date(firstDayOfWeek.add({ days: i }).toString());
 
-    weekdayNames.push(weekday);
+    weekdays.push({
+      weekday: i + 1,
+      longName: longWeekdayFormatter.format(date),
+      shortName: shortWeekdayFormatter.format(date),
+      narrowName: narrowWeekdayFormatter.format(date),
+    });
   }
 
-  return weekdayNames;
+  return weekdays;
 }

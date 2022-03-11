@@ -20,7 +20,7 @@ export function DateInput({
     })
   );
 
-  const { monthNames, onChangeSelectedValue } = useTempocal({
+  const { months, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -70,9 +70,9 @@ export function DateInput({
                 title="Month"
                 value={value.month}
               >
-                {monthNames.map((monthName, index) => (
-                  <option key={monthName} value={index + 1}>
-                    {monthName}
+                {months.map(({ month, longName }) => (
+                  <option key={longName} value={month}>
+                    {longName}
                   </option>
                 ))}
               </select>

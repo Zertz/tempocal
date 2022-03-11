@@ -4,7 +4,7 @@ import { Locale, Value } from "./types";
 import {
   useCalendarMonthDateRange,
   useMonthStartDate,
-  useWeekdayNames,
+  useWeekdays,
 } from "./useTempocal";
 
 type MonthProps = {
@@ -28,14 +28,18 @@ type MonthProps = {
   renderHeader?: (date: Temporal.PlainDate) => React.ReactNode;
   weekdayProps?: (props: {
     weekday: number;
-    weekdayName: string;
+    longName: string;
+    shortName: string;
+    narrowName: string;
   }) => React.DetailedHTMLProps<
     React.LiHTMLAttributes<HTMLLIElement>,
     HTMLLIElement
   >;
   renderWeekday?: (props: {
     weekday: number;
-    weekdayName: string;
+    longName: string;
+    shortName: string;
+    narrowName: string;
   }) => React.ReactNode;
   dayProps?: (
     date: Temporal.PlainDate
@@ -57,16 +61,16 @@ export function Calendar({
   locale,
   monthsBefore = 0,
   monthsAfter = 0,
-  rollover = false,
+  rollover,
   value,
   onChange,
   calendarProps,
   headerProps,
   renderHeader,
   weekdayProps,
-  renderWeekday = ({ weekdayName }) => weekdayName,
+  renderWeekday,
   dayProps,
-  renderDay = ({ day }) => day,
+  renderDay,
   footerProps,
   renderFooter,
 }: MonthProps & {
@@ -106,7 +110,7 @@ function Month({
   headerProps,
   renderHeader,
   weekdayProps,
-  renderWeekday = ({ weekdayName }) => weekdayName,
+  renderWeekday,
   dayProps,
   renderDay,
   footerProps,
@@ -114,7 +118,7 @@ function Month({
 }: MonthProps) {
   const { start, end } = useCalendarMonthDateRange(value, rollover);
   const monthStartDate = useMonthStartDate(value);
-  const weekdayNames = useWeekdayNames(locale, value.daysInWeek);
+  const weekdays = useWeekdays(locale, value.daysInWeek);
 
   return (
     <ul
@@ -134,18 +138,11 @@ function Month({
           {renderHeader(monthStartDate)}
         </li>
       )}
-      {weekdayNames.map((weekdayName, weekday) => {
-        const props = {
-          weekday: weekday + 1,
-          weekdayName,
-        };
-
-        return (
-          <li key={weekday} {...weekdayProps?.(props)}>
-            {renderWeekday(props)}
-          </li>
-        );
-      })}
+      {weekdays.map((weekday) => (
+        <li key={weekday.weekday} {...weekdayProps?.(weekday)}>
+          {renderWeekday ? renderWeekday(weekday) : weekday.shortName}
+        </li>
+      ))}
       {[...Array(start.until(end).days + 1)].map((_, day) => {
         const date = start.add({ days: day });
 
@@ -180,8 +177,8 @@ function Day({
   day,
   onChange,
   dayProps,
-  renderDay = ({ day }) => day,
-  rollover,
+  renderDay,
+  rollover = false,
 }: Pick<MonthProps, "onChange" | "dayProps" | "renderDay" | "rollover"> & {
   date: Temporal.PlainDate;
   day: number;
@@ -210,7 +207,7 @@ function Day({
         type="button"
         {...dayProps?.(date)}
       >
-        {renderDay(date)}
+        {renderDay ? renderDay(date) : date.day}
       </button>
     </li>
   );

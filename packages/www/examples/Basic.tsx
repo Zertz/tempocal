@@ -36,7 +36,6 @@ export function Basic({
       <Calendar
         locale={locale}
         onChange={onChangeSelectedValue}
-        rollover
         value={value}
         calendarProps={() => ({ className: "w-72" })}
       />

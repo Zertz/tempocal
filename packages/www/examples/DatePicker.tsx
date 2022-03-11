@@ -20,7 +20,7 @@ export function DatePicker({
 
   const {
     calendarValue,
-    monthNames,
+    months,
     onChangeCalendarValue,
     onChangeSelectedValue,
   } = useTempocal({
@@ -69,9 +69,9 @@ export function DatePicker({
               title="Month"
               value={calendarValue.month}
             >
-              {monthNames.map((monthName, index) => (
-                <option key={monthName} value={index + 1}>
-                  {monthName}
+              {months.map(({ month, longName }) => (
+                <option key={longName} value={month}>
+                  {longName}
                 </option>
               ))}
             </select>
@@ -92,8 +92,8 @@ export function DatePicker({
           </>
         )}
         weekdayProps={() => ({ className: "font-medium" })}
-        renderWeekday={({ weekday, weekdayName }) =>
-          weekday === 2 ? "😭" : weekdayName
+        renderWeekday={({ weekday, narrowName }) =>
+          weekday === 2 ? "😭" : narrowName
         }
         dayProps={(date) => ({
           className: classnames(

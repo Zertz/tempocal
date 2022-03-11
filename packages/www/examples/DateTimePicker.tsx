@@ -21,7 +21,7 @@ export function DateTimePicker({
     })
   );
 
-  const { monthNames, onChangeSelectedValue } = useTempocal({
+  const { months, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "datetime",
     setValue,
@@ -47,7 +47,7 @@ export function DateTimePicker({
           >
             &larr;
           </button>
-          {monthNames[value.month - 1]}
+          {months[value.month - 1].longName}
           <button
             className="ml-auto"
             onClick={() => onChangeSelectedValue(value.add({ months: 1 }))}

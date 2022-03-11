@@ -3,9 +3,9 @@ import * as React from "react";
 import { Locale, Value } from "./types";
 import {
   getCalendarMonthDateRange,
-  getMonthNames,
+  getMonths,
   getMonthStartDate,
-  getWeekdayNames,
+  getWeekdays,
 } from "./utils";
 
 export function useCalendarMonthDateRange(value: Value, rollover: boolean) {
@@ -19,22 +19,22 @@ export function useMonthStartDate(value: Value) {
   return React.useMemo(() => getMonthStartDate(value), [value]);
 }
 
-export function useMonthNames(
+export function useMonths(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  monthsInYear = 12
+  monthsInYear: number
 ) {
   return React.useMemo(
-    () => getMonthNames(locale, monthsInYear),
+    () => getMonths(locale, monthsInYear),
     [locale, monthsInYear]
   );
 }
 
-export function useWeekdayNames(
+export function useWeekdays(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  daysInWeek = 7
+  daysInWeek: number
 ) {
   return React.useMemo(
-    () => getWeekdayNames(locale, daysInWeek),
+    () => getWeekdays(locale, daysInWeek),
     [daysInWeek, locale]
   );
 }
@@ -62,9 +62,6 @@ export function useTempocal<Mode extends "date" | "datetime">({
   setValue: (value: RequiredValue<Mode>) => void;
   value: RequiredValue<Mode> | undefined;
 }) {
-  const monthNames = useMonthNames(locale, value?.monthsInYear);
-  const weekdayNames = useWeekdayNames(locale, value?.daysInWeek);
-
   const [calendarValue, setCalendarValue] = React.useState(() => {
     if (value) {
       return Temporal.PlainDate.from(value);
@@ -72,6 +69,9 @@ export function useTempocal<Mode extends "date" | "datetime">({
 
     return Temporal.Now.plainDate("iso8601");
   });
+
+  const months = useMonths(locale, calendarValue.monthsInYear);
+  const weekdays = useWeekdays(locale, calendarValue.daysInWeek);
 
   const onChangeCalendarValue = React.useCallback(
     (params: Temporal.PlainDate | Temporal.PlainDateLike) => {
@@ -117,9 +117,9 @@ export function useTempocal<Mode extends "date" | "datetime">({
 
   return {
     calendarValue,
-    monthNames,
+    months,
     onChangeCalendarValue,
     onChangeSelectedValue,
-    weekdayNames,
+    weekdays,
   };
 }

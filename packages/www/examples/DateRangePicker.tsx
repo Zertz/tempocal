@@ -36,7 +36,7 @@ export function DateRangePicker({
     [setValues]
   );
 
-  const { monthNames, onChangeSelectedValue } = useTempocal({
+  const { months, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -69,7 +69,7 @@ export function DateRangePicker({
             className: "gap-1 text-center w-72",
           })}
           headerProps={() => ({ className: "font-bold" })}
-          renderHeader={(date) => monthNames[date.month - 1]}
+          renderHeader={(date) => months[date.month - 1].longName}
           weekdayProps={() => ({ className: "font-medium" })}
           dayProps={(date) => ({
             className: classnames(
