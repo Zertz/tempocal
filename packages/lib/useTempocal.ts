@@ -74,7 +74,13 @@ export function useTempocal<Mode extends "date" | "datetime">({
   const weekdays = useWeekdays(locale, calendarValue.daysInWeek);
 
   const onChangeCalendarValue = React.useCallback(
-    (params: Temporal.PlainDate | Temporal.PlainDateLike) => {
+    (params?: Temporal.PlainDate | Temporal.PlainDateLike) => {
+      if (!params) {
+        setCalendarValue(Temporal.Now.plainDate("iso8601"));
+
+        return;
+      }
+
       if (params instanceof Temporal.PlainDate) {
         setCalendarValue(params);
 
