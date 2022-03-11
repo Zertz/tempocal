@@ -1,6 +1,6 @@
 {
   "name": "@tempocal/react",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "source": "index.ts",
   "main": "dist/main.js",
   "module": "dist/module.js",
