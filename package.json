@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Highly flexible building blocks to build calendars with Temporal API",
   "repository": "https://github.com/Zertz/tempocal",
+  "homepage": "https://tempocal.pierluc.io/",
   "author": "Pier-Luc Gendreau",
   "license": "MIT",
   "private": true,
