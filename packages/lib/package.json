@@ -1,6 +1,6 @@
 {
   "name": "@tempocal/react",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "repository": "https://github.com/Zertz/tempocal",
   "homepage": "https://tempocal.pierluc.io/",
   "source": "index.ts",
