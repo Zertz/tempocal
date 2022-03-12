@@ -49,7 +49,9 @@ export function getMonthEndDate(value: Value) {
 
 export function getMonths(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  monthsInYear: number
+  referenceValue: Temporal.PlainDate,
+  minValue?: Temporal.PlainDate,
+  maxValue?: Temporal.PlainDate
 ) {
   const longMonthFormatter = new Intl.DateTimeFormat(locale, {
     month: "long",
@@ -68,16 +70,29 @@ export function getMonths(
     longName: string;
     shortName: string;
     narrowName: string;
+    available: boolean;
   }[] = [];
 
-  for (let i = 0; i < monthsInYear; i += 1) {
-    const date = new Date(2022, i, 1, 12, 0, 0, 0);
+  for (let i = 0; i < referenceValue.monthsInYear; i += 1) {
+    const value = referenceValue.with({ month: i + 1 });
+    const date = new Date(value.toString());
+
+    const isBeforeMinValue =
+      minValue &&
+      (value.year < minValue.year ||
+        (value.year === minValue.year && value.month < minValue.month));
+
+    const isAfterMaxValue =
+      maxValue &&
+      (value.year > maxValue.year ||
+        (value.year === maxValue.year && value.month > maxValue.month));
 
     months.push({
       month: i + 1,
       longName: longMonthFormatter.format(date),
       shortName: shortMonthFormatter.format(date),
       narrowName: narrowMonthFormatter.format(date),
+      available: !isBeforeMinValue && !isAfterMaxValue,
     });
   }
 
@@ -121,4 +136,21 @@ export function getWeekdays(
   }
 
   return weekdays;
+}
+
+export function getYears(
+  minValue: Temporal.PlainDate | undefined,
+  maxValue: Temporal.PlainDate | undefined
+) {
+  const years: number[] = [];
+
+  if (!minValue || !maxValue) {
+    return years;
+  }
+
+  for (let i = minValue.year; i < maxValue.year + 1; i += 1) {
+    years.push(i);
+  }
+
+  return years;
 }

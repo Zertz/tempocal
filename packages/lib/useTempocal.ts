@@ -6,6 +6,7 @@ import {
   getMonths,
   getMonthStartDate,
   getWeekdays,
+  getYears,
 } from "./utils";
 
 export function useCalendarMonthDateRange(value: Value, rollover: boolean) {
@@ -21,11 +22,13 @@ export function useMonthStartDate(value: Value) {
 
 export function useMonths(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  monthsInYear: number
+  referenceValue: Temporal.PlainDate,
+  minValue?: Temporal.PlainDate,
+  maxValue?: Temporal.PlainDate
 ) {
   return React.useMemo(
-    () => getMonths(locale, monthsInYear),
-    [locale, monthsInYear]
+    () => getMonths(locale, referenceValue, minValue, maxValue),
+    [locale, maxValue, minValue, referenceValue]
   );
 }
 
@@ -36,6 +39,16 @@ export function useWeekdays(
   return React.useMemo(
     () => getWeekdays(locale, daysInWeek),
     [daysInWeek, locale]
+  );
+}
+
+export function useYears(
+  minValue: Temporal.PlainDate | undefined,
+  maxValue: Temporal.PlainDate | undefined
+) {
+  return React.useMemo(
+    () => getYears(minValue, maxValue),
+    [maxValue, minValue]
   );
 }
 
@@ -52,12 +65,18 @@ type ChangeValue<Mode> = Mode extends "date"
   : never;
 
 export function useTempocal<Mode extends "date" | "datetime">({
+  clampCalendarValue,
   locale,
+  maxValue,
+  minValue,
   mode,
   setValue,
   value,
 }: {
+  clampCalendarValue?: boolean;
   locale: Locale;
+  maxValue?: Temporal.PlainDate;
+  minValue?: Temporal.PlainDate;
   mode: Mode;
   setValue: (value: RequiredValue<Mode>) => void;
   value: RequiredValue<Mode> | undefined;
@@ -70,26 +89,52 @@ export function useTempocal<Mode extends "date" | "datetime">({
     return Temporal.Now.plainDate("iso8601");
   });
 
-  const months = useMonths(locale, calendarValue.monthsInYear);
+  const months = useMonths(locale, calendarValue, minValue, maxValue);
   const weekdays = useWeekdays(locale, calendarValue.daysInWeek);
+  const years = useYears(minValue, maxValue);
+
+  const updateCalendarValue = React.useCallback(
+    (nextCalendarValue: Temporal.PlainDate) => {
+      if (!clampCalendarValue) {
+        setCalendarValue(nextCalendarValue);
+
+        return;
+      }
+
+      if (minValue && minValue.since(nextCalendarValue).days > 0) {
+        setCalendarValue(minValue);
+
+        return;
+      }
+
+      if (maxValue && maxValue.until(nextCalendarValue).days > 0) {
+        setCalendarValue(maxValue);
+
+        return;
+      }
+
+      setCalendarValue(nextCalendarValue);
+    },
+    [clampCalendarValue, maxValue, minValue]
+  );
 
   const onChangeCalendarValue = React.useCallback(
     (params?: Temporal.PlainDate | Temporal.PlainDateLike) => {
       if (!params) {
-        setCalendarValue(Temporal.Now.plainDate("iso8601"));
+        updateCalendarValue(Temporal.Now.plainDate("iso8601"));
 
         return;
       }
 
       if (params instanceof Temporal.PlainDate) {
-        setCalendarValue(params);
+        updateCalendarValue(params);
 
         return;
       }
 
-      setCalendarValue(calendarValue.with(params));
+      updateCalendarValue(calendarValue.with(params));
     },
-    [calendarValue]
+    [calendarValue, updateCalendarValue]
   );
 
   const onChangeSelectedValue = React.useCallback(
@@ -127,5 +172,6 @@ export function useTempocal<Mode extends "date" | "datetime">({
     onChangeCalendarValue,
     onChangeSelectedValue,
     weekdays,
+    years,
   };
 }
