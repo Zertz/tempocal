@@ -57,6 +57,13 @@ export function DateRangePicker({
   return (
     <div className="flex flex-col gap-4">
       <p>
+        🚜 🚧{" "}
+        <em>
+          While Tempocal can be used to select a date range, the example needs
+          some love for the user experience to be adequate.
+        </em>
+      </p>
+      <p>
         {formattedDates[0]} - {formattedDates[1]}
       </p>
       <div className="flex gap-4 border border-gray-300 p-2 pt-0.5 rounded w-min">
