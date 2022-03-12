@@ -26,8 +26,12 @@ export function Documentation() {
   onChangeSelectedValue,
   months,
   weekdays,
+  years,
 } = useTempocal({
+  clampCalendarValue?: boolean;
   locale: Locale;
+  maxValue?: Temporal.PlainDate;
+  minValue?: Temporal.PlainDate;
   mode: "date" | "datetime";
   setValue: (value: Temporal.PlainDate | Temporal.PlainDateTime) => void;
   value: Temporal.PlainDate | Temporal.PlainDateTime;
@@ -71,6 +75,14 @@ export function Documentation() {
           <div className="pt-8 space-y-2">
             <CodeBlock>{`weekdays: { weekday: number; longName: string; shortName: string; narrowName: string; }[]`}</CodeBlock>
             <p>Weekdays in the specified locale, in order.</p>
+          </div>
+          <div className="pt-8 space-y-2">
+            <CodeBlock>{`years: number[]`}</CodeBlock>
+            <p>
+              Contains the years between <Code>minValue</Code> and{" "}
+              <Code>maxValue</Code>, inclusively, when both are specified.
+              Returns an empty array otherwise.
+            </p>
           </div>
         </div>
       </div>

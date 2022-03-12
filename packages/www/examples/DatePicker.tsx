@@ -18,13 +18,23 @@ export function DatePicker({
     })
   );
 
+  const [maxValue, setMaxValue] = React.useState(value.add({ years: 2 }));
+  const [minValue, setMinValue] = React.useState(value.subtract({ years: 2 }));
+
+  const [clampCalendarValue, setClampCalendarValue] = React.useState(true);
+  const [rollover, setRollover] = React.useState(true);
+
   const {
     calendarValue,
     months,
     onChangeCalendarValue,
     onChangeSelectedValue,
+    years,
   } = useTempocal({
+    clampCalendarValue,
     locale,
+    maxValue,
+    minValue,
     mode: "date",
     setValue,
     value,
@@ -36,8 +46,6 @@ export function DatePicker({
     );
   }, [dateFormatter, value]);
 
-  const [rollover, setRollover] = React.useState(true);
-
   return (
     <div className="flex flex-col gap-4">
       <p>{formattedDate}</p>
@@ -48,6 +56,16 @@ export function DatePicker({
           type="checkbox"
         />
         <span>Display days from previous and next months</span>
+      </label>
+      <label className="flex items-center gap-1">
+        <input
+          checked={clampCalendarValue}
+          onChange={() =>
+            setClampCalendarValue((clampCalendarValue) => !clampCalendarValue)
+          }
+          type="checkbox"
+        />
+        <span>Clamp calendar within min and max values</span>
       </label>
       <Calendar
         locale={locale}
@@ -69,8 +87,8 @@ export function DatePicker({
               title="Month"
               value={calendarValue.month}
             >
-              {months.map(({ month, longName }) => (
-                <option key={longName} value={month}>
+              {months.map(({ month, longName, available }) => (
+                <option key={longName} disabled={!available} value={month}>
                   {longName}
                 </option>
               ))}
@@ -83,9 +101,9 @@ export function DatePicker({
               title="Year"
               value={calendarValue.year}
             >
-              {[...Array(20)].map((_, year) => (
-                <option key={year} value={year - 10 + calendarValue.year}>
-                  {year - 10 + calendarValue.year}
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
                 </option>
               ))}
             </select>
