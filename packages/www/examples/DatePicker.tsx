@@ -10,12 +10,19 @@ export function DatePicker({
   dateFormatter: Intl.DateTimeFormat;
   locale: Locale;
 }) {
+  const [value, setValue] = React.useState(
+    Temporal.PlainDate.from({
+      year: 2021,
+      month: 11,
+      day: 25,
+    })
+  );
+
+  const [maxValue, setMaxValue] = React.useState(value.add({ years: 2 }));
+  const [minValue, setMinValue] = React.useState(value.subtract({ years: 2 }));
+
   const [clampCalendarValue, setClampCalendarValue] = React.useState(true);
   const [rollover, setRollover] = React.useState(true);
-
-  const [value, setValue] = React.useState(Temporal.Now.plainDate("iso8601"));
-  const [maxValue, setMaxValue] = React.useState(value.add({ years: 1 }));
-  const [minValue, setMinValue] = React.useState(value.subtract({ years: 1 }));
 
   const {
     calendarValue,
