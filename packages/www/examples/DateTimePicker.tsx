@@ -2,6 +2,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import classnames from "classnames";
 import * as React from "react";
 import { Calendar, Locale, useTempocal } from "../../lib";
+import { Select } from "../Select";
 
 export function DateTimePicker({
   dateTimeFormatter,
@@ -37,7 +38,7 @@ export function DateTimePicker({
   return (
     <div className="flex flex-col gap-4">
       <p>{formattedDateTime}</p>
-      <section className="border border-gray-300 p-2 rounded w-72">
+      <section className="w-72 rounded border border-gray-300 p-2">
         <header className="flex items-center gap-2 font-bold">
           <button
             className="mr-auto"
@@ -66,20 +67,25 @@ export function DateTimePicker({
             className: "gap-1 text-center",
           })}
           weekdayProps={() => ({ className: "font-medium" })}
-          dayProps={(date) => ({
-            className: classnames(
-              "border overflow-hidden rounded transition-colors w-full",
-              "disabled:opacity-75 disabled:pointer-events-none disabled:text-red-400",
-              value.month === date.month ? "text-gray-700" : "text-gray-400",
-              value.toPlainDate().equals(date)
-                ? "bg-blue-100 border-blue-600"
-                : "hover:bg-gray-100 border-gray-300"
-            ),
-          })}
+          renderDay={(date, props) => (
+            <button
+              {...props}
+              className={classnames(
+                "w-full overflow-hidden rounded border transition-colors",
+                "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
+                value.month === date.month ? "text-gray-700" : "text-gray-400",
+                value.toPlainDate().equals(date)
+                  ? "border-blue-600 bg-blue-100"
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
+            >
+              {date.day}
+            </button>
+          )}
         />
-        <footer className="flex gap-2 mt-2">
-          <select
-            className="border border-gray-300 ml-auto px-1 py-0.5 rounded w-min"
+        <footer className="mx-auto flex w-min gap-2">
+          <Select
+            className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
             onChange={({ target: { value } }) =>
               onChangeSelectedValue({ hour: Number(value) })
             }
@@ -91,9 +97,9 @@ export function DateTimePicker({
                 {`${hour}`.padStart(2, "0")}
               </option>
             ))}
-          </select>
-          <select
-            className="border border-gray-300 mr-auto px-1 py-0.5 rounded w-min"
+          </Select>
+          <Select
+            className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
             onChange={({ target: { value } }) =>
               onChangeSelectedValue({ minute: Number(value) })
             }
@@ -105,7 +111,7 @@ export function DateTimePicker({
                 {`${minute * 5}`.padStart(2, "0")}
               </option>
             ))}
-          </select>
+          </Select>
         </footer>
       </section>
     </div>

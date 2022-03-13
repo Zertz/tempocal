@@ -2,6 +2,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import classnames from "classnames";
 import * as React from "react";
 import { Calendar, Locale, useTempocal } from "../../lib";
+import { Select } from "../Select";
 
 export function DateInput({
   dateFormatter,
@@ -40,7 +41,7 @@ export function DateInput({
   return (
     <div className="relative">
       <input
-        className="px-1 rounded"
+        className="rounded px-1"
         onClick={() => setOpen((isOpen) => !isOpen)}
         readOnly
         title={formattedDate}
@@ -57,13 +58,13 @@ export function DateInput({
           value={value}
           calendarProps={() => ({
             className:
-              "gap-1 bg-gray-100 border border-gray-300 p-2 rounded shadow text-center w-72",
+              "gap-1 bg-white border border-gray-300 p-2 rounded shadow text-center w-72",
           })}
-          headerProps={() => ({ className: "flex gap-2" })}
+          headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
           renderHeader={() => (
             <>
-              <select
-                className="border border-gray-300 ml-auto px-1 py-0.5 rounded w-min"
+              <Select
+                className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
                 onChange={({ target: { value } }) =>
                   onChangeSelectedValue({ month: Number(value) })
                 }
@@ -75,9 +76,9 @@ export function DateInput({
                     {longName}
                   </option>
                 ))}
-              </select>
-              <select
-                className="border border-gray-300 mr-auto px-1 py-0.5 rounded w-min"
+              </Select>
+              <Select
+                className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
                 onChange={({ target: { value } }) =>
                   onChangeSelectedValue({ year: Number(value) })
                 }
@@ -89,18 +90,24 @@ export function DateInput({
                     {year - 10 + value.year}
                   </option>
                 ))}
-              </select>
+              </Select>
             </>
           )}
           weekdayProps={() => ({ className: "font-medium" })}
-          dayProps={(date) => ({
-            className: classnames(
-              "border overflow-hidden rounded transition-colors w-full",
-              value.equals(date)
-                ? "bg-blue-100 border-blue-600"
-                : "hover:bg-gray-100 border-gray-300"
-            ),
-          })}
+          renderDay={(date, props) => (
+            <button
+              {...props}
+              className={classnames(
+                "w-full rounded border text-gray-700 transition-colors",
+                value.equals(date)
+                  ? "border-blue-600 bg-blue-100"
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
+              type="button"
+            >
+              {date.day}
+            </button>
+          )}
         />
       </div>
     </div>

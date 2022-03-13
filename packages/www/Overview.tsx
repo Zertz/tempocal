@@ -5,21 +5,21 @@ export function Overview() {
   return (
     <>
       <div>
-        <div className="flex items-end justify-between border-b border-solid border-gray-400 mb-4 pb-2">
-          <h2 className="font-bold text-4xl">Features</h2>
+        <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
+          <h2 className="text-4xl font-bold">Features</h2>
         </div>
         <ul className="space-y-2">
           <li>
             🕰 Built on{" "}
             <a
-              className="hover:text-gray-300 underline"
+              className="underline hover:text-gray-300"
               href="https://github.com/tc39/proposal-temporal"
             >
               Temporal API
             </a>{" "}
             (stage 3) and{" "}
             <a
-              className="hover:text-gray-300 underline"
+              className="underline hover:text-gray-300"
               href="https://github.com/js-temporal/temporal-polyfill"
             >
               temporal-polyfill
@@ -28,7 +28,7 @@ export function Overview() {
           <li>
             🤝 Works great with{" "}
             <a
-              className="hover:text-gray-300 underline"
+              className="underline hover:text-gray-300"
               href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl"
             >
               Intl API
@@ -38,19 +38,19 @@ export function Overview() {
         </ul>
       </div>
       <div>
-        <div className="flex items-end justify-between border-b border-solid border-gray-400 mb-4 pb-2">
-          <h2 className="font-bold text-4xl">Getting started</h2>
+        <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
+          <h2 className="text-4xl font-bold">Getting started</h2>
         </div>
         <CodeBlock>npm install @tempocal/react</CodeBlock>
       </div>
       <div>
-        <div className="flex items-end justify-between border-b border-solid border-gray-400 mb-4 pb-2">
-          <h2 className="font-bold text-4xl">See also</h2>
+        <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
+          <h2 className="text-4xl font-bold">See also</h2>
         </div>
         <ul className="space-y-2">
           <li>
             <a
-              className="hover:text-gray-300 underline"
+              className="underline hover:text-gray-300"
               href="https://react-headless-tabs.pierluc.io/"
             >
               react-headless-tabs

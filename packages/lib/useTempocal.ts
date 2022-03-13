@@ -101,13 +101,19 @@ export function useTempocal<Mode extends "date" | "datetime">({
         return;
       }
 
-      if (minValue && minValue.since(nextCalendarValue).days > 0) {
+      if (
+        minValue &&
+        Temporal.PlainDate.compare(nextCalendarValue, minValue) < 0
+      ) {
         setCalendarValue(minValue);
 
         return;
       }
 
-      if (maxValue && maxValue.until(nextCalendarValue).days > 0) {
+      if (
+        maxValue &&
+        Temporal.PlainDate.compare(nextCalendarValue, maxValue) > 0
+      ) {
         setCalendarValue(maxValue);
 
         return;
@@ -167,6 +173,13 @@ export function useTempocal<Mode extends "date" | "datetime">({
   );
 
   return {
+    calendarProps: {
+      locale,
+      maxValue,
+      minValue,
+      onChange: onChangeSelectedValue,
+      value: calendarValue,
+    },
     calendarValue,
     months,
     onChangeCalendarValue,

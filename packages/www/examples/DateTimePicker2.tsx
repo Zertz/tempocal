@@ -37,7 +37,7 @@ export function DateTimePicker2({
   return (
     <div className="flex flex-col gap-4">
       <p>{formattedDateTime}</p>
-      <section className="grid grid-rows-[min-content,1fr] grid-cols-[1fr,min-content] gap-2 border border-gray-300 overflow-hidden p-2 rounded w-96 h-[16rem]">
+      <section className="grid w-96 grid-cols-[1fr,min-content] grid-rows-[min-content,1fr] items-start gap-2 overflow-hidden rounded border border-gray-300 p-2">
         <header className="flex items-center gap-2 font-bold">
           <button
             className="mr-auto"
@@ -66,27 +66,32 @@ export function DateTimePicker2({
             className: "row-start-2 col-start-1 gap-1 text-center",
           })}
           weekdayProps={() => ({ className: "font-medium" })}
-          dayProps={(date) => ({
-            className: classnames(
-              "border overflow-hidden rounded transition-colors w-full",
-              "disabled:opacity-75 disabled:pointer-events-none disabled:text-red-400",
-              value.month === date.month ? "text-gray-700" : "text-gray-400",
-              value.toPlainDate().equals(date)
-                ? "bg-blue-100 border-blue-600"
-                : "hover:bg-gray-100 border-gray-300"
-            ),
-          })}
+          renderDay={(date, props) => (
+            <button
+              {...props}
+              className={classnames(
+                "w-full overflow-hidden rounded border transition-colors",
+                "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
+                value.month === date.month ? "text-gray-700" : "text-gray-400",
+                value.toPlainDate().equals(date)
+                  ? "border-blue-600 bg-blue-100"
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
+            >
+              {date.day}
+            </button>
+          )}
         />
-        <footer className="flex gap-2 row-start-1 row-span-2 col-start-2">
+        <footer className="col-start-2 row-span-2 row-start-1 flex h-60 gap-2">
           <ul
-            className="border border-gray-300 ml-auto overflow-auto px-1 py-0.5 rounded w-12"
+            className="ml-auto w-12 overflow-auto rounded border border-gray-300 px-1 py-0.5"
             title="Hours"
           >
             {[...Array(24)].map((_, hour) => (
               <li
                 key={hour}
-                className={classnames("border px-0.5 rounded", {
-                  "bg-blue-100 border-blue-600": value.hour === hour,
+                className={classnames("rounded border px-0.5", {
+                  "border-blue-600 bg-blue-100": value.hour === hour,
                 })}
               >
                 <button
@@ -99,7 +104,7 @@ export function DateTimePicker2({
             ))}
           </ul>
           <ul
-            className="border border-gray-300 mr-auto overflow-auto px-1 py-0.5 rounded w-12"
+            className="mr-auto w-12 overflow-auto rounded border border-gray-300 px-1 py-0.5"
             title="Minutes"
           >
             {[...Array(60 / 5)]
@@ -107,8 +112,8 @@ export function DateTimePicker2({
               .map((minute) => (
                 <li
                   key={minute}
-                  className={classnames("border px-0.5 rounded", {
-                    "bg-blue-100 border-blue-600": value.minute === minute,
+                  className={classnames("rounded border px-0.5", {
+                    "border-blue-600 bg-blue-100": value.minute === minute,
                   })}
                 >
                   <button

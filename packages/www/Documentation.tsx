@@ -5,20 +5,20 @@ export function Documentation() {
   return (
     <>
       <div>
-        <div className="flex items-end justify-between border-b border-solid border-gray-400 mb-4 pb-2">
-          <h2 className="font-bold text-4xl">API</h2>
+        <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
+          <h2 className="text-4xl font-bold">API</h2>
         </div>
-        <div className="divide-y divide-solid divide-gray-400 space-y-8">
+        <div className="space-y-8 divide-y divide-solid divide-gray-400">
           <div className="space-y-2">
             <CodeBlock>{`import { Calendar, useTempocal } from "@tempocal/react"`}</CodeBlock>
           </div>
         </div>
       </div>
       <div>
-        <div className="flex items-end justify-between border-b border-solid border-gray-400 mb-4 pb-2">
-          <h2 className="font-bold text-4xl">useTempocal</h2>
+        <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
+          <h2 className="text-4xl font-bold">useTempocal</h2>
         </div>
-        <div className="divide-y divide-solid divide-gray-400 space-y-8">
+        <div className="space-y-8 divide-y divide-solid divide-gray-400">
           <div className="space-y-2">
             <CodeBlock>{`const {
   calendarValue,
@@ -37,14 +37,14 @@ export function Documentation() {
   value: Temporal.PlainDate | Temporal.PlainDateTime;
 });`}</CodeBlock>
           </div>
-          <div className="pt-8 space-y-2">
+          <div className="space-y-2 pt-8">
             <CodeBlock>{"calendarValue: Temporal.PlainDate"}</CodeBlock>
             <p>
               Represents the date that should be visible. Typically passed to
               the <Code>Calendar</Code> component's <Code>value</Code> prop.
             </p>
           </div>
-          <div className="pt-8 space-y-2">
+          <div className="space-y-2 pt-8">
             <CodeBlock>
               {
                 "onChangeCalendarValue: (params?: Temporal.PlainDate | Temporal.PlainDateLike) => void"
@@ -57,7 +57,7 @@ export function Documentation() {
               <Code>calendarValue</Code> will be set to now.
             </p>
           </div>
-          <div className="pt-8 space-y-2">
+          <div className="space-y-2 pt-8">
             <CodeBlock>
               {
                 "onChangeSelectedValue: (params: Temporal.PlainDate | Temporal.PlainDateLike | Temporal.PlainDateTime | Temporal.PlainDateTimeLike) => void"
@@ -68,15 +68,15 @@ export function Documentation() {
               the <Code>Calendar</Code> component's <Code>onChange</Code> prop.
             </p>
           </div>
-          <div className="pt-8 space-y-2">
+          <div className="space-y-2 pt-8">
             <CodeBlock>{`months: { month: number; longName: string; shortName: string; narrowName: string; }[]`}</CodeBlock>
             <p>Months in the specified locale, in order.</p>
           </div>
-          <div className="pt-8 space-y-2">
+          <div className="space-y-2 pt-8">
             <CodeBlock>{`weekdays: { weekday: number; longName: string; shortName: string; narrowName: string; }[]`}</CodeBlock>
             <p>Weekdays in the specified locale, in order.</p>
           </div>
-          <div className="pt-8 space-y-2">
+          <div className="space-y-2 pt-8">
             <CodeBlock>{`years: number[]`}</CodeBlock>
             <p>
               Contains the years between <Code>minValue</Code> and{" "}
@@ -87,10 +87,10 @@ export function Documentation() {
         </div>
       </div>
       <div>
-        <div className="flex items-end justify-between border-b border-solid border-gray-400 mb-4 pb-2">
-          <h2 className="font-bold text-4xl">Calendar</h2>
+        <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
+          <h2 className="text-4xl font-bold">Calendar</h2>
         </div>
-        <div className="divide-y divide-solid divide-gray-400 space-y-8">
+        <div className="space-y-8 divide-y divide-solid divide-gray-400">
           <div className="space-y-2">
             <CodeBlock>{`<Calendar locale="en-US" onChange={onChangeSelectedValue} value={calendarValue} />`}</CodeBlock>
             <p>

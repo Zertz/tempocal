@@ -2,7 +2,7 @@ import * as React from "react";
 
 export function CodeBlock({ children }: { children: string }) {
   return (
-    <pre className="bg-gray-800 overflow-x-auto p-2 rounded">
+    <pre className="overflow-x-auto rounded bg-gray-800 p-2">
       <code>{children}</code>
     </pre>
   );
@@ -10,6 +10,6 @@ export function CodeBlock({ children }: { children: string }) {
 
 export function Code({ children }: { children: string }) {
   return (
-    <code className="inline bg-gray-800 px-1 py-0.5 rounded">{children}</code>
+    <code className="inline rounded bg-gray-800 px-1 py-0.5">{children}</code>
   );
 }

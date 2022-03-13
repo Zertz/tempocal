@@ -9,6 +9,8 @@ import {
 
 type MonthProps = {
   locale: Locale;
+  maxValue?: Temporal.PlainDate | undefined;
+  minValue?: Temporal.PlainDate | undefined;
   rollover?: boolean;
   value: Value;
   onChange: (params: Temporal.PlainDate | Temporal.PlainDateLike) => void;
@@ -44,10 +46,13 @@ type MonthProps = {
   dayProps?: (
     date: Temporal.PlainDate
   ) => React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
+    React.ButtonHTMLAttributes<HTMLLIElement>,
+    HTMLLIElement
   >;
-  renderDay?: (date: Temporal.PlainDate) => React.ReactNode;
+  renderDay?: (
+    date: Temporal.PlainDate,
+    props: { disabled: boolean; onClick: () => void }
+  ) => React.ReactNode;
   footerProps?: (
     date: Temporal.PlainDate
   ) => Omit<
@@ -59,6 +64,8 @@ type MonthProps = {
 
 export function Calendar({
   locale,
+  maxValue,
+  minValue,
   monthsBefore = 0,
   monthsAfter = 0,
   rollover,
@@ -77,12 +84,19 @@ export function Calendar({
   monthsBefore?: number;
   monthsAfter?: number;
 }) {
+  const months = React.useMemo(
+    () => [...Array(monthsBefore + 1 + monthsAfter)],
+    [monthsAfter, monthsBefore]
+  );
+
   return (
     <>
-      {[...Array(monthsBefore + 1 + monthsAfter)].map((_, month) => (
+      {months.map((_, month) => (
         <Month
           key={month}
           locale={locale}
+          maxValue={maxValue}
+          minValue={minValue}
           rollover={rollover}
           value={value.add({ months: month - monthsBefore })}
           onChange={onChange}
@@ -103,6 +117,8 @@ export function Calendar({
 
 function Month({
   locale,
+  maxValue,
+  minValue,
   rollover = false,
   value,
   onChange,
@@ -119,6 +135,14 @@ function Month({
   const { start, end } = useCalendarMonthDateRange(value, rollover);
   const monthStartDate = useMonthStartDate(value);
   const weekdays = useWeekdays(locale, value.daysInWeek);
+
+  const days = React.useMemo(
+    () =>
+      [...Array(start.until(end).days + 1)].map((_, day) =>
+        start.add({ days: day })
+      ),
+    [end, start]
+  );
 
   return (
     <ul
@@ -143,21 +167,21 @@ function Month({
           {renderWeekday ? renderWeekday(weekday) : weekday.shortName}
         </li>
       ))}
-      {[...Array(start.until(end).days + 1)].map((_, day) => {
-        const date = start.add({ days: day });
-
-        return (
-          <Day
-            key={date.dayOfYear}
-            date={date}
-            day={day}
-            onChange={onChange}
-            dayProps={dayProps}
-            renderDay={renderDay}
-            rollover={rollover}
-          />
-        );
-      })}
+      {days.map((date, day) => (
+        <Day
+          key={date.dayOfYear}
+          date={date}
+          day={day}
+          disabled={
+            (!!minValue && Temporal.PlainDate.compare(date, minValue) < 0) ||
+            (!!maxValue && Temporal.PlainDate.compare(date, maxValue) > 0)
+          }
+          onChange={onChange}
+          dayProps={dayProps}
+          renderDay={renderDay}
+          rollover={rollover}
+        />
+      ))}
       {renderFooter && (
         <li
           {...footerProps?.(monthStartDate)}
@@ -175,6 +199,7 @@ function Month({
 function Day({
   date,
   day,
+  disabled,
   onChange,
   dayProps,
   renderDay,
@@ -182,9 +207,28 @@ function Day({
 }: Pick<MonthProps, "onChange" | "dayProps" | "renderDay" | "rollover"> & {
   date: Temporal.PlainDate;
   day: number;
+  disabled: boolean;
 }) {
+  const props = React.useMemo(
+    () => ({
+      disabled,
+      onClick() {
+        const params: Temporal.PlainDateLike = {
+          year: date.year,
+          month: date.month,
+          monthCode: date.monthCode,
+          day: date.day,
+        };
+
+        onChange(params);
+      },
+    }),
+    [date.day, date.month, date.monthCode, date.year, disabled, onChange]
+  );
+
   return (
     <li
+      {...dayProps?.(date)}
       style={
         !rollover && day === 0
           ? {
@@ -193,22 +237,7 @@ function Day({
           : undefined
       }
     >
-      <button
-        onClick={() => {
-          const params: Temporal.PlainDateLike = {
-            year: date.year,
-            month: date.month,
-            monthCode: date.monthCode,
-            day: date.day,
-          };
-
-          onChange(params);
-        }}
-        type="button"
-        {...dayProps?.(date)}
-      >
-        {renderDay ? renderDay(date) : date.day}
-      </button>
+      {renderDay ? renderDay(date, props) : date.day}
     </li>
   );
 }

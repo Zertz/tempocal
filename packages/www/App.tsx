@@ -5,6 +5,7 @@ import { Locale } from "../lib";
 import { Documentation } from "./Documentation";
 import { Examples } from "./Examples";
 import { Overview } from "./Overview";
+import { Select } from "./Select";
 
 const baseClassName =
   "inline-flex items-center border-b-2 cursor-pointer mr-8 px-2 py-4 font-medium text-sm whitespace-nowrap focus:outline-none focus:border-gray-300 focus:text-gray-400";
@@ -40,20 +41,20 @@ export function App() {
   }, [selectedTab]);
 
   return (
-    <div className="flex flex-col bg-gray-700 min-h-screen overflow-x-hidden text-gray-200 w-full">
-      <main className="max-w-4xl mx-auto p-2 w-full">
+    <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-gray-700 text-gray-200">
+      <main className="mx-auto w-full max-w-4xl p-2">
         <div className="pb-8 text-center">
-          <h1 className="font-extrabold mb-2 text-4xl sm:text-6xl md:text-7xl">
+          <h1 className="mb-2 text-4xl font-extrabold sm:text-6xl md:text-7xl">
             Tempocal
           </h1>
           <a
-            className="font-light hover:text-gray-300 text-xl transition-colors underline"
+            className="text-xl font-light underline transition-colors hover:text-gray-300"
             href="https://github.com/Zertz/tempocal"
           >
             Contribute on GitHub
           </a>
         </div>
-        <nav className="flex items-center border-b border-gray-400 overflow-x-auto">
+        <nav className="flex items-center overflow-x-auto border-b border-gray-400">
           <button
             className={`${baseClassName} ${
               selectedTab === "overview" ? activeClassName : inactiveClassName
@@ -81,8 +82,7 @@ export function App() {
             Examples
           </button>
           <div className="ml-auto" hidden={selectedTab !== "examples"}>
-            <select
-              className="border border-gray-300 px-1 py-0.5 rounded w-min"
+            <Select
               onChange={({ target: { value } }) => setLocale(value)}
               title="Locale"
               value={locale}
@@ -92,23 +92,23 @@ export function App() {
               <option value="fr-CA">fr-CA</option>
               <option value="pt-BR">pt-BR</option>
               <option value="uk-UA">uk-UA</option>
-            </select>
+            </Select>
           </div>
         </nav>
         <TabPanel
-          className="py-6 space-y-12"
+          className="space-y-12 py-6"
           hidden={selectedTab !== "overview"}
         >
           <Overview />
         </TabPanel>
         <TabPanel
-          className="py-6 space-y-12"
+          className="space-y-12 py-6"
           hidden={selectedTab !== "documentation"}
         >
           <Documentation />
         </TabPanel>
         <TabPanel
-          className="py-6 space-y-12"
+          className="space-y-12 py-6"
           hidden={selectedTab !== "examples"}
         >
           <Examples locale={locale} />

@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom/extend-expect";
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import * as React from "react";
 import { Basic } from "../packages/www/examples/Basic";
 
@@ -16,8 +16,5 @@ describe("Basic", () => {
     );
 
     expect(getByText("November 25, 2021")).toBeTruthy();
-
-    fireEvent.click(getByText("27"));
-    expect(getByText("November 27, 2021")).toBeTruthy();
   });
 });

@@ -66,7 +66,7 @@ export function DateRangePicker({
       <p>
         {formattedDates[0]} - {formattedDates[1]}
       </p>
-      <div className="flex gap-4 border border-gray-300 p-2 pt-0.5 rounded w-min">
+      <div className="flex w-min gap-4 rounded border border-gray-300 p-2 pt-0.5">
         <Calendar
           locale={locale}
           monthsAfter={1}
@@ -78,15 +78,20 @@ export function DateRangePicker({
           headerProps={() => ({ className: "font-bold" })}
           renderHeader={(date) => months[date.month - 1].longName}
           weekdayProps={() => ({ className: "font-medium" })}
-          dayProps={(date) => ({
-            className: classnames(
-              "border overflow-hidden rounded text-gray-700 transition-colors w-full",
-              Temporal.PlainDate.compare(values[0], date) <= 0 &&
-                Temporal.PlainDate.compare(values[1], date) >= 0
-                ? "bg-blue-100 border-blue-600"
-                : "hover:bg-gray-100 border-gray-300"
-            ),
-          })}
+          renderDay={(date, props) => (
+            <button
+              {...props}
+              className={classnames(
+                "w-full overflow-hidden rounded border text-gray-700 transition-colors",
+                Temporal.PlainDate.compare(values[0], date) <= 0 &&
+                  Temporal.PlainDate.compare(values[1], date) >= 0
+                  ? "border-blue-600 bg-blue-100"
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
+            >
+              {date.day}
+            </button>
+          )}
         />
       </div>
     </div>

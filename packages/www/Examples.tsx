@@ -39,7 +39,7 @@ export function Examples({ locale }: { locale: Locale }) {
         title="DatePicker"
         url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DatePicker.tsx"
       >
-        <DatePicker dateFormatter={dateFormatter} locale={locale} />
+        <DatePicker />
       </Example>
       <Example
         title="DateTimePicker"
@@ -77,16 +77,16 @@ function Example({
 }) {
   return (
     <div>
-      <div className="flex items-end justify-between border-b border-solid border-gray-400 mb-4 pb-2">
-        <h2 className="font-bold text-4xl text-gray-200">{title}</h2>
+      <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
+        <h2 className="text-4xl font-bold text-gray-200">{title}</h2>
         <a
-          className="font-light hover:text-gray-300 text-sm transition-colors underline"
+          className="text-sm font-light underline transition-colors hover:text-gray-300"
           href={url}
         >
           View source
         </a>
       </div>
-      <div className="flex flex-col items-start bg-gray-200 p-2 rounded text-gray-700">
+      <div className="flex flex-col items-start rounded bg-gray-200 p-2 text-gray-700">
         {children}
       </div>
     </div>
