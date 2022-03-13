@@ -5,7 +5,6 @@ import { DateInput } from "./examples/DateInput";
 import { DatePicker } from "./examples/DatePicker";
 import { DateRangePicker } from "./examples/DateRangePicker";
 import { DateTimePicker } from "./examples/DateTimePicker";
-import { DateTimePicker2 } from "./examples/DateTimePicker2";
 
 export function Examples({ locale }: { locale: Locale }) {
   const { dateFormatter, dateTimeFormatter } = React.useMemo(
@@ -46,15 +45,6 @@ export function Examples({ locale }: { locale: Locale }) {
         url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateTimePicker.tsx"
       >
         <DateTimePicker dateTimeFormatter={dateTimeFormatter} locale={locale} />
-      </Example>
-      <Example
-        title="DateTimePicker2"
-        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateTimePicker2.tsx"
-      >
-        <DateTimePicker2
-          dateTimeFormatter={dateTimeFormatter}
-          locale={locale}
-        />
       </Example>
       <Example
         title="DateRangePicker"
