@@ -21,6 +21,7 @@ export function Documentation() {
         <div className="space-y-8 divide-y divide-solid divide-gray-400">
           <div className="space-y-2">
             <CodeBlock>{`const {
+  calendarProps,
   calendarValue,
   onChangeCalendarValue,
   onChangeSelectedValue,
@@ -36,6 +37,13 @@ export function Documentation() {
   setValue: (value: Temporal.PlainDate | Temporal.PlainDateTime) => void;
   value: Temporal.PlainDate | Temporal.PlainDateTime;
 });`}</CodeBlock>
+          </div>
+          <div className="space-y-2 pt-8">
+            <CodeBlock>{"calendarProps: ..."}</CodeBlock>
+            <p>
+              For convenience, can be spread into the <Code>Calendar</Code>{" "}
+              component's props.
+            </p>
           </div>
           <div className="space-y-2 pt-8">
             <CodeBlock>{"calendarValue: Temporal.PlainDate"}</CodeBlock>
