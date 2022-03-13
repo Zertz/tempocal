@@ -21,12 +21,13 @@ export function DateInput({
     })
   );
 
-  const { months, onChangeSelectedValue } = useTempocal({
-    locale,
-    mode: "date",
-    setValue,
-    value,
-  });
+  const { calendarProps, calendarValue, months, onChangeCalendarValue } =
+    useTempocal({
+      locale,
+      mode: "date",
+      setValue,
+      value,
+    });
 
   const formattedDate = React.useMemo(() => {
     return dateFormatter.format(
@@ -52,10 +53,8 @@ export function DateInput({
       />
       <div className="absolute top-7 left-0" hidden={!isOpen}>
         <Calendar
-          locale={locale}
-          onChange={onChangeSelectedValue}
+          {...calendarProps}
           rollover
-          value={value}
           calendarProps={() => ({
             className:
               "gap-1 bg-white border border-gray-300 p-2 rounded shadow text-center w-72",
@@ -66,10 +65,10 @@ export function DateInput({
               <Select
                 className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
                 onChange={({ target: { value } }) =>
-                  onChangeSelectedValue({ month: Number(value) })
+                  onChangeCalendarValue({ month: Number(value) })
                 }
                 title="Month"
-                value={value.month}
+                value={calendarValue.month}
               >
                 {months.map(({ month, longName }) => (
                   <option key={longName} value={month}>
@@ -80,10 +79,10 @@ export function DateInput({
               <Select
                 className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
                 onChange={({ target: { value } }) =>
-                  onChangeSelectedValue({ year: Number(value) })
+                  onChangeCalendarValue({ year: Number(value) })
                 }
                 title="Year"
-                value={value.year}
+                value={calendarValue.year}
               >
                 {[...Array(20)].map((_, year) => (
                   <option key={year} value={year - 10 + value.year}>

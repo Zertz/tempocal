@@ -22,7 +22,13 @@ export function DateTimePicker({
     })
   );
 
-  const { months, onChangeSelectedValue } = useTempocal({
+  const {
+    calendarProps,
+    calendarValue,
+    months,
+    onChangeCalendarValue,
+    onChangeSelectedValue,
+  } = useTempocal({
     locale,
     mode: "datetime",
     setValue,
@@ -42,16 +48,20 @@ export function DateTimePicker({
         <header className="flex items-center gap-2 font-bold">
           <button
             className="mr-auto"
-            onClick={() => onChangeSelectedValue(value.subtract({ months: 1 }))}
+            onClick={() =>
+              onChangeCalendarValue(calendarValue.subtract({ months: 1 }))
+            }
             title="Previous month"
             type="button"
           >
             &larr;
           </button>
-          {months[value.month - 1].longName}
+          {months[calendarValue.month - 1].longName}
           <button
             className="ml-auto"
-            onClick={() => onChangeSelectedValue(value.add({ months: 1 }))}
+            onClick={() =>
+              onChangeCalendarValue(calendarValue.add({ months: 1 }))
+            }
             title="Next month"
             type="button"
           >
@@ -59,10 +69,8 @@ export function DateTimePicker({
           </button>
         </header>
         <Calendar
-          locale={locale}
-          onChange={onChangeSelectedValue}
+          {...calendarProps}
           rollover
-          value={value}
           calendarProps={() => ({
             className: "gap-1 text-center",
           })}
@@ -72,8 +80,6 @@ export function DateTimePicker({
               {...props}
               className={classnames(
                 "w-full overflow-hidden rounded border transition-colors",
-                "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
-                value.month === date.month ? "text-gray-700" : "text-gray-400",
                 value.toPlainDate().equals(date)
                   ? "border-blue-600 bg-blue-100"
                   : "border-gray-300 hover:bg-gray-100"

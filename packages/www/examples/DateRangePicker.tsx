@@ -36,7 +36,7 @@ export function DateRangePicker({
     [setValues]
   );
 
-  const { months, onChangeSelectedValue } = useTempocal({
+  const { calendarProps, months } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -68,9 +68,8 @@ export function DateRangePicker({
       </p>
       <div className="flex w-min gap-4 rounded border border-gray-300 p-2 pt-0.5">
         <Calendar
-          locale={locale}
+          {...calendarProps}
           monthsAfter={1}
-          onChange={onChangeSelectedValue}
           value={values[0]}
           calendarProps={() => ({
             className: "gap-1 text-center w-72",

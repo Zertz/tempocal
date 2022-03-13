@@ -17,7 +17,7 @@ export function Basic({
     })
   );
 
-  const { onChangeSelectedValue } = useTempocal({
+  const { calendarProps } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -33,12 +33,7 @@ export function Basic({
   return (
     <div className="flex flex-col gap-4">
       <p>{formattedDate}</p>
-      <Calendar
-        locale={locale}
-        onChange={onChangeSelectedValue}
-        value={value}
-        calendarProps={() => ({ className: "w-72" })}
-      />
+      <Calendar {...calendarProps} />
     </div>
   );
 }
