@@ -91,7 +91,7 @@ export function App() {
               <option value="es-ES">es-ES</option>
               <option value="fr-CA">fr-CA</option>
               <option value="pt-BR">pt-BR</option>
-              <option value="ru-RU">ru-RU</option>
+              <option value="ru-RU">uk-UA</option>
             </select>
           </div>
         </nav>
