@@ -28,13 +28,13 @@ export function getCalendarMonthDateRange(value: Value, rollover: boolean) {
 
   return {
     start: [0, start.daysInWeek].includes(start.dayOfWeek)
-      ? start
+      ? start.subtract({ days: start.daysInWeek })
       : start.subtract({ days: start.dayOfWeek }),
     end: end.add({
       days:
         end.dayOfWeek === end.daysInWeek
           ? end.daysInWeek - 1
-          : end.daysInWeek - end.dayOfWeek - 1,
+          : end.daysInWeek - end.dayOfWeek - 1 || end.daysInWeek,
     }),
   };
 }
