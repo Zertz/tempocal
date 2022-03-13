@@ -26,16 +26,22 @@ export function DatePicker() {
     setRollover,
   } = useProps();
 
-  const { calendarProps, calendarValue, months, onChangeCalendarValue, years } =
-    useTempocal({
-      clampCalendarValue,
-      locale,
-      maxValue,
-      minValue,
-      mode: "date",
-      setValue,
-      value,
-    });
+  const {
+    calendarProps,
+    calendarValue,
+    months,
+    onChangeCalendarValue,
+    onChangeSelectedValue,
+    years,
+  } = useTempocal({
+    clampCalendarValue,
+    locale,
+    maxValue,
+    minValue,
+    mode: "date",
+    setValue,
+    value,
+  });
 
   const dateFormatter = React.useMemo(() => {
     return new Intl.DateTimeFormat(locale, {
@@ -115,9 +121,8 @@ export function DatePicker() {
           renderWeekday={({ weekday, narrowName }) =>
             weekday === 2 ? "😭" : narrowName
           }
-          renderDay={(date, { disabled, ...props }) => (
+          renderDay={({ date, disabled, plainDateLike }) => (
             <button
-              {...props}
               className={classnames(
                 "w-full rounded border text-gray-700 transition-colors",
                 "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
@@ -126,6 +131,8 @@ export function DatePicker() {
                   : "border-gray-300 hover:bg-gray-100"
               )}
               disabled={disabled || date.dayOfWeek === 1}
+              onClick={() => onChangeSelectedValue(plainDateLike)}
+              type="button"
             >
               {getDayContent(date)}
             </button>

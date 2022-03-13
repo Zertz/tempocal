@@ -36,7 +36,7 @@ export function DateRangePicker({
     [setValues]
   );
 
-  const { calendarProps, months } = useTempocal({
+  const { calendarProps, months, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -77,9 +77,8 @@ export function DateRangePicker({
           headerProps={() => ({ className: "font-bold" })}
           renderHeader={(date) => months[date.month - 1].longName}
           weekdayProps={() => ({ className: "font-medium" })}
-          renderDay={(date, props) => (
+          renderDay={({ date, disabled, plainDateLike }) => (
             <button
-              {...props}
               className={classnames(
                 "w-full overflow-hidden rounded border text-gray-700 transition-colors",
                 Temporal.PlainDate.compare(values[0], date) <= 0 &&
@@ -87,6 +86,9 @@ export function DateRangePicker({
                   ? "border-blue-600 bg-blue-100"
                   : "border-gray-300 hover:bg-gray-100"
               )}
+              disabled={disabled}
+              onClick={() => onChangeSelectedValue(plainDateLike)}
+              type="button"
             >
               {date.day}
             </button>

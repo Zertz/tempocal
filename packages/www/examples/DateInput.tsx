@@ -21,13 +21,18 @@ export function DateInput({
     })
   );
 
-  const { calendarProps, calendarValue, months, onChangeCalendarValue } =
-    useTempocal({
-      locale,
-      mode: "date",
-      setValue,
-      value,
-    });
+  const {
+    calendarProps,
+    calendarValue,
+    months,
+    onChangeCalendarValue,
+    onChangeSelectedValue,
+  } = useTempocal({
+    locale,
+    mode: "date",
+    setValue,
+    value,
+  });
 
   const formattedDate = React.useMemo(() => {
     return dateFormatter.format(
@@ -93,15 +98,16 @@ export function DateInput({
             </>
           )}
           weekdayProps={() => ({ className: "font-medium" })}
-          renderDay={(date, props) => (
+          renderDay={({ date, disabled, plainDateLike }) => (
             <button
-              {...props}
               className={classnames(
                 "w-full rounded border text-gray-700 transition-colors",
                 value.equals(date)
                   ? "border-blue-600 bg-blue-100"
                   : "border-gray-300 hover:bg-gray-100"
               )}
+              disabled={disabled}
+              onClick={() => onChangeSelectedValue(plainDateLike)}
               type="button"
             >
               {date.day}

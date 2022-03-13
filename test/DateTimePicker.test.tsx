@@ -22,9 +22,13 @@ describe("DateTimePicker", () => {
     expect(getByText("November 27, 2021 at 8:30 AM")).toBeTruthy();
 
     fireEvent.click(getByTitle("Previous month"));
-    expect(getByText("October 27, 2021 at 8:30 AM")).toBeTruthy();
+    expect(getByText("November 27, 2021 at 8:30 AM")).toBeTruthy();
+    fireEvent.click(getByText("24"));
+    expect(getByText("October 24, 2021 at 8:30 AM")).toBeTruthy();
 
     fireEvent.click(getByTitle("Next month"));
+    expect(getByText("October 24, 2021 at 8:30 AM")).toBeTruthy();
+    fireEvent.click(getByText("27"));
     expect(getByText("November 27, 2021 at 8:30 AM")).toBeTruthy();
 
     fireEvent.change(getByTitle("Hours"), { target: { value: 18 } });

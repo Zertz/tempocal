@@ -177,7 +177,6 @@ export function useTempocal<Mode extends "date" | "datetime">({
       locale,
       maxValue,
       minValue,
-      onChange: onChangeSelectedValue,
       value: calendarValue,
     },
     calendarValue,

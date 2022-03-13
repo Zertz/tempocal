@@ -75,15 +75,17 @@ export function DateTimePicker({
             className: "gap-1 text-center",
           })}
           weekdayProps={() => ({ className: "font-medium" })}
-          renderDay={(date, props) => (
+          renderDay={({ date, disabled, plainDateLike }) => (
             <button
-              {...props}
               className={classnames(
                 "w-full overflow-hidden rounded border transition-colors",
                 value.toPlainDate().equals(date)
                   ? "border-blue-600 bg-blue-100"
                   : "border-gray-300 hover:bg-gray-100"
               )}
+              disabled={disabled}
+              onClick={() => onChangeSelectedValue(plainDateLike)}
+              type="button"
             >
               {date.day}
             </button>
