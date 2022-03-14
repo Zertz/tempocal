@@ -3,18 +3,9 @@ import { fireEvent, render } from "@testing-library/react";
 import * as React from "react";
 import { DateTimePicker } from "../packages/www/examples/DateTimePicker";
 
-const locale = "en-US";
-
-const dateTimeFormatter = new Intl.DateTimeFormat(locale, {
-  dateStyle: "long",
-  timeStyle: "short",
-});
-
 describe("DateTimePicker", () => {
   it("renders without crashing", () => {
-    const { getByText, getByTitle } = render(
-      <DateTimePicker dateTimeFormatter={dateTimeFormatter} locale={locale} />
-    );
+    const { getByText, getByTitle } = render(<DateTimePicker />);
 
     expect(getByText("November 25, 2021 at 8:30 AM")).toBeTruthy();
 

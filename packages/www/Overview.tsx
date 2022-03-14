@@ -34,7 +34,13 @@ export function Overview() {
               Intl API
             </a>
           </li>
-          <li>🤓 Available as ESM and CJS</li>
+          <li>🚛 Bring your own DOM!</li>
+          <li>
+            ✨ Calendars, date pickers (with or without time), date range,
+            anything goes!
+          </li>
+          <li>🤹‍♂️ Well suited for complex use cases!</li>
+          <li>🤓 Available as ESM and CJS!</li>
         </ul>
       </div>
       <div>

@@ -74,79 +74,77 @@ export function DatePicker() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4">
-      <p>{formattedDate}</p>
-      <div className="flex items-start gap-4">
-        <Calendar
-          {...calendarProps}
-          rollover={rollover}
-          calendarProps={() => ({
-            className:
-              "gap-1 border border-gray-300 p-2 rounded text-center w-72",
-          })}
-          headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
-          renderHeader={() => (
-            <>
-              <Select
-                className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
-                onChange={({ target: { value } }) =>
-                  onChangeCalendarValue({ month: Number(value) })
-                }
-                title="Month"
-                value={calendarValue.month}
-              >
-                {months.map(({ month, longName, available }) => (
-                  <option key={longName} disabled={!available} value={month}>
-                    {longName}
-                  </option>
-                ))}
-              </Select>
-              <Select
-                className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
-                onChange={({ target: { value } }) =>
-                  onChangeCalendarValue({ year: Number(value) })
-                }
-                title="Year"
-                value={calendarValue.year}
-              >
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </Select>
-            </>
-          )}
-          weekdayProps={() => ({ className: "font-medium" })}
-          renderWeekday={({ weekday, narrowName }) =>
-            weekday === 2 ? "😭" : narrowName
-          }
-          renderDay={({ date, disabled, plainDateLike }) => (
-            <button
-              className={classnames(
-                "w-full rounded border text-gray-700 transition-colors",
-                "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
-                value.equals(date)
-                  ? "border-blue-600 bg-blue-100"
-                  : "border-gray-300 hover:bg-gray-100"
-              )}
-              disabled={disabled || date.dayOfWeek === 1}
-              onClick={() => onChangeSelectedValue(plainDateLike)}
-              type="button"
+    <div className="flex items-start gap-4">
+      <Calendar
+        {...calendarProps}
+        rollover={rollover}
+        calendarProps={() => ({
+          className:
+            "flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center w-72",
+        })}
+        headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
+        renderHeader={() => (
+          <>
+            <Select
+              className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
+              onChange={({ target: { value } }) =>
+                onChangeCalendarValue({ month: Number(value) })
+              }
+              title="Month"
+              value={calendarValue.month}
             >
-              {getDayContent(date)}
-            </button>
-          )}
-        />
-        <Props
-          clampCalendarValue={clampCalendarValue}
-          setClampCalendarValue={setClampCalendarValue}
-          locale={locale}
-          setLocale={setLocale}
-          rollover={rollover}
-          setRollover={setRollover}
-        />
-      </div>
+              {months.map(({ month, longName, available }) => (
+                <option key={longName} disabled={!available} value={month}>
+                  {longName}
+                </option>
+              ))}
+            </Select>
+            <Select
+              className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
+              onChange={({ target: { value } }) =>
+                onChangeCalendarValue({ year: Number(value) })
+              }
+              title="Year"
+              value={calendarValue.year}
+            >
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </Select>
+          </>
+        )}
+        weekdayProps={() => ({ className: "font-medium" })}
+        renderWeekday={({ weekday, narrowName }) =>
+          weekday === 2 ? "😭" : narrowName
+        }
+        renderDay={({ date, disabled, plainDateLike }) => (
+          <button
+            className={classnames(
+              "w-full rounded border text-gray-700 transition-colors",
+              "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
+              value.equals(date)
+                ? "border-blue-600 bg-blue-100"
+                : "border-gray-300 hover:bg-gray-100"
+            )}
+            disabled={disabled || date.dayOfWeek === 1}
+            onClick={() => onChangeSelectedValue(plainDateLike)}
+            type="button"
+          >
+            {getDayContent(date)}
+          </button>
+        )}
+      />
+      <Props
+        clampCalendarValue={clampCalendarValue}
+        setClampCalendarValue={setClampCalendarValue}
+        locale={locale}
+        setLocale={setLocale}
+        rollover={rollover}
+        setRollover={setRollover}
+        formattedDate={formattedDate}
+      />
     </div>
   );
 }

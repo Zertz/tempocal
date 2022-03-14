@@ -1,16 +1,12 @@
 import { Temporal } from "@js-temporal/polyfill";
 import classnames from "classnames";
 import * as React from "react";
-import { Calendar, Locale, useTempocal } from "../../lib";
+import { Calendar, useTempocal } from "../../lib";
 import { Select } from "../Select";
 
-export function DateInput({
-  dateFormatter,
-  locale,
-}: {
-  dateFormatter: Intl.DateTimeFormat;
-  locale: Locale;
-}) {
+const locale = "en-US";
+
+export function DateInput() {
   const [isOpen, setOpen] = React.useState(false);
 
   const [value, setValue] = React.useState(
@@ -34,18 +30,20 @@ export function DateInput({
     value,
   });
 
+  const dateFormatter = React.useMemo(() => {
+    return new Intl.DateTimeFormat(locale, {
+      dateStyle: "long",
+    });
+  }, []);
+
   const formattedDate = React.useMemo(() => {
     return dateFormatter.format(
       new Date(value.year, value.month - 1, value.day)
     );
   }, [dateFormatter, value]);
 
-  React.useEffect(() => {
-    setOpen(false);
-  }, [value]);
-
   return (
-    <div className="relative">
+    <div className="relative flex items-start gap-4">
       <input
         className="rounded px-1"
         onClick={() => setOpen((isOpen) => !isOpen)}
@@ -56,13 +54,12 @@ export function DateInput({
           .toString()
           .padStart(2, "0")}-${value.day.toString().padStart(2, "0")}`}
       />
-      <div className="absolute top-7 left-0" hidden={!isOpen}>
+      <div className="absolute top-9 left-0" hidden={!isOpen}>
         <Calendar
           {...calendarProps}
-          rollover
           calendarProps={() => ({
             className:
-              "gap-1 bg-white border border-gray-300 p-2 rounded shadow text-center w-72",
+              "bg-white flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center w-72",
           })}
           headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
           renderHeader={() => (
@@ -98,7 +95,7 @@ export function DateInput({
             </>
           )}
           weekdayProps={() => ({ className: "font-medium" })}
-          renderDay={({ date, disabled, plainDateLike }) => (
+          renderDay={({ date, plainDateLike }) => (
             <button
               className={classnames(
                 "w-full rounded border text-gray-700 transition-colors",
@@ -106,7 +103,6 @@ export function DateInput({
                   ? "border-blue-600 bg-blue-100"
                   : "border-gray-300 hover:bg-gray-100"
               )}
-              disabled={disabled}
               onClick={() => onChangeSelectedValue(plainDateLike)}
               type="button"
             >
@@ -115,6 +111,11 @@ export function DateInput({
           )}
         />
       </div>
+      <p className="text-sm text-gray-700">
+        This example uses a simple toggle to show and hide the calendar when the
+        input is clicked. You are free to use whichever fancy library you have
+        already installed!
+      </p>
     </div>
   );
 }

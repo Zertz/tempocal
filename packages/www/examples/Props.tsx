@@ -25,10 +25,22 @@ export function Props({
   setLocale,
   rollover,
   setRollover,
-}: ReturnType<typeof useProps>) {
+  formattedDate,
+}: ReturnType<typeof useProps> & { formattedDate: string }) {
   return (
-    <fieldset className="flex flex-col gap-4">
+    <fieldset className="flex flex-col gap-2">
       <legend className="sr-only">Props</legend>
+      <p className="text-sm text-gray-700">
+        Building on the previous example, this one adds a bunch of fancy
+        features: month and year selectors, min and max dates, disabled days are
+        red, Monday's are 😭 and disabled, and December 25th is 🎄.
+      </p>
+      <div>
+        <span className="block text-sm font-medium text-gray-700">
+          Selected date
+        </span>
+        <span className="mt-1 text-sm text-gray-700">{formattedDate}</span>
+      </div>
       <Select
         id="select-locale"
         label="Locale"

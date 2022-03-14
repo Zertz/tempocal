@@ -1,11 +1,9 @@
 import { toTemporalInstant } from "@js-temporal/polyfill";
 import * as React from "react";
 import { TabPanel, useTabs } from "react-headless-tabs";
-import { Locale } from "../lib";
 import { Documentation } from "./Documentation";
 import { Examples } from "./Examples";
 import { Overview } from "./Overview";
-import { Select } from "./Select";
 
 const baseClassName =
   "inline-flex items-center border-b-2 cursor-pointer mr-8 px-2 py-4 font-medium text-sm whitespace-nowrap focus:outline-none focus:border-gray-300 focus:text-gray-400";
@@ -17,8 +15,6 @@ const inactiveClassName =
 Date.prototype.toTemporalInstant = toTemporalInstant;
 
 export function App() {
-  const [locale, setLocale] = React.useState<Locale>("en-US");
-
   const defaultTab = React.useMemo(() => {
     if (typeof window === "undefined" || !window.location.hash) {
       return;
@@ -81,19 +77,6 @@ export function App() {
           >
             Examples
           </button>
-          <div className="ml-auto" hidden={selectedTab !== "examples"}>
-            <Select
-              onChange={({ target: { value } }) => setLocale(value)}
-              title="Locale"
-              value={locale}
-            >
-              <option value="en-US">en-US</option>
-              <option value="es-ES">es-ES</option>
-              <option value="fr-CA">fr-CA</option>
-              <option value="pt-BR">pt-BR</option>
-              <option value="uk-UA">uk-UA</option>
-            </Select>
-          </div>
         </nav>
         <TabPanel
           className="space-y-12 py-6"
@@ -111,7 +94,7 @@ export function App() {
           className="space-y-12 py-6"
           hidden={selectedTab !== "examples"}
         >
-          <Examples locale={locale} />
+          <Examples />
         </TabPanel>
       </main>
     </div>

@@ -1,17 +1,13 @@
 import { Temporal } from "@js-temporal/polyfill";
 import classnames from "classnames";
 import * as React from "react";
-import { Calendar, Locale, useTempocal } from "../../lib";
+import { Calendar, useTempocal } from "../../lib";
 
 type DateRange = [Temporal.PlainDate, Temporal.PlainDate];
 
-export function DateRangePicker({
-  dateFormatter,
-  locale,
-}: {
-  dateFormatter: Intl.DateTimeFormat;
-  locale: Locale;
-}) {
+const locale = "en-US";
+
+export function DateRangePicker() {
   const [values, setValues] = React.useState<DateRange>([
     Temporal.PlainDate.from({
       year: 2021,
@@ -43,6 +39,12 @@ export function DateRangePicker({
     value: values[0],
   });
 
+  const dateFormatter = React.useMemo(() => {
+    return new Intl.DateTimeFormat(locale, {
+      dateStyle: "long",
+    });
+  }, []);
+
   const formattedDates = React.useMemo(() => {
     return [
       dateFormatter.format(
@@ -55,18 +57,8 @@ export function DateRangePicker({
   }, [dateFormatter, values]);
 
   return (
-    <div className="flex flex-col gap-4">
-      <p>
-        🚜 🚧{" "}
-        <em>
-          While Tempocal can be used to select a date range, the example needs
-          some love for the user experience to be adequate.
-        </em>
-      </p>
-      <p>
-        {formattedDates[0]} - {formattedDates[1]}
-      </p>
-      <div className="flex w-min gap-4 rounded border border-gray-300 p-2 pt-0.5">
+    <div className="flex items-start gap-4">
+      <div className="flex w-min flex-col gap-4 rounded border border-gray-300 p-2 pt-0.5">
         <Calendar
           {...calendarProps}
           monthsAfter={1}
@@ -94,6 +86,21 @@ export function DateRangePicker({
             </button>
           )}
         />
+      </div>
+      <div className="flex flex-col gap-2 text-sm text-gray-700">
+        <p>
+          🚜 🚧{" "}
+          <em>
+            While Tempocal can be used to select a date range, the example needs
+            some love for the user experience to be adequate.
+          </em>
+        </p>
+        <div>
+          <span className="block font-medium">Selected date</span>
+          <span className="mt-1">
+            {formattedDates[0]} - {formattedDates[1]}
+          </span>
+        </div>
       </div>
     </div>
   );

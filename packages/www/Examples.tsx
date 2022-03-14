@@ -1,38 +1,18 @@
 import * as React from "react";
-import { Locale } from "../lib";
 import { Basic } from "./examples/Basic";
 import { DateInput } from "./examples/DateInput";
 import { DatePicker } from "./examples/DatePicker";
 import { DateRangePicker } from "./examples/DateRangePicker";
 import { DateTimePicker } from "./examples/DateTimePicker";
 
-export function Examples({ locale }: { locale: Locale }) {
-  const { dateFormatter, dateTimeFormatter } = React.useMemo(
-    () => ({
-      dateFormatter: new Intl.DateTimeFormat(locale, {
-        dateStyle: "long",
-      }),
-      dateTimeFormatter: new Intl.DateTimeFormat(locale, {
-        dateStyle: "long",
-        timeStyle: "short",
-      }),
-    }),
-    [locale]
-  );
-
+export function Examples() {
   return (
     <>
       <Example
         title="Basic"
         url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/Basic.tsx"
       >
-        <Basic dateFormatter={dateFormatter} locale={locale} />
-      </Example>
-      <Example
-        title="DateInput"
-        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateInput.tsx"
-      >
-        <DateInput dateFormatter={dateFormatter} locale={locale} />
+        <Basic />
       </Example>
       <Example
         title="DatePicker"
@@ -41,16 +21,22 @@ export function Examples({ locale }: { locale: Locale }) {
         <DatePicker />
       </Example>
       <Example
+        title="DateInput"
+        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateInput.tsx"
+      >
+        <DateInput />
+      </Example>
+      <Example
         title="DateTimePicker"
         url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateTimePicker.tsx"
       >
-        <DateTimePicker dateTimeFormatter={dateTimeFormatter} locale={locale} />
+        <DateTimePicker />
       </Example>
       <Example
         title="DateRangePicker"
         url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateRangePicker.tsx"
       >
-        <DateRangePicker dateFormatter={dateFormatter} locale={locale} />
+        <DateRangePicker />
       </Example>
     </>
   );

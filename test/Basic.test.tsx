@@ -3,18 +3,16 @@ import { render } from "@testing-library/react";
 import * as React from "react";
 import { Basic } from "../packages/www/examples/Basic";
 
-const locale = "en-US";
-
-const dateFormatter = new Intl.DateTimeFormat(locale, {
-  dateStyle: "long",
-});
-
 describe("Basic", () => {
   it("renders without crashing", () => {
-    const { getByText } = render(
-      <Basic dateFormatter={dateFormatter} locale={locale} />
-    );
+    const { getByText } = render(<Basic />);
 
-    expect(getByText("November 25, 2021")).toBeTruthy();
+    expect(getByText("Sun")).toBeTruthy();
+    expect(getByText("Mon")).toBeTruthy();
+    expect(getByText("Tue")).toBeTruthy();
+    expect(getByText("Wed")).toBeTruthy();
+    expect(getByText("Thu")).toBeTruthy();
+    expect(getByText("Fri")).toBeTruthy();
+    expect(getByText("Sat")).toBeTruthy();
   });
 });

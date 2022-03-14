@@ -24,7 +24,7 @@ export function Select({
       </label>
       <select
         {...props}
-        className="mt-1 block w-min rounded-md border-gray-300 py-2 pl-3 pr-10 text-base text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+        className="mt-1 block w-min rounded-md border-gray-300 py-1.5 pl-3 pr-10 text-sm text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
       />
     </div>
   );

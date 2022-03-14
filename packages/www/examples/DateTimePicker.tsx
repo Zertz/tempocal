@@ -1,16 +1,12 @@
 import { Temporal } from "@js-temporal/polyfill";
 import classnames from "classnames";
 import * as React from "react";
-import { Calendar, Locale, useTempocal } from "../../lib";
+import { Calendar, useTempocal } from "../../lib";
 import { Select } from "../Select";
 
-export function DateTimePicker({
-  dateTimeFormatter,
-  locale,
-}: {
-  dateTimeFormatter: Intl.DateTimeFormat;
-  locale: Locale;
-}) {
+const locale = "en-US";
+
+export function DateTimePicker() {
   const [value, setValue] = React.useState(
     Temporal.PlainDateTime.from({
       year: 2021,
@@ -35,6 +31,13 @@ export function DateTimePicker({
     value,
   });
 
+  const dateTimeFormatter = React.useMemo(() => {
+    return new Intl.DateTimeFormat(locale, {
+      dateStyle: "long",
+      timeStyle: "short",
+    });
+  }, []);
+
   const formattedDateTime = React.useMemo(() => {
     return dateTimeFormatter.format(
       new Date(value.year, value.month - 1, value.day, value.hour, value.minute)
@@ -42,8 +45,7 @@ export function DateTimePicker({
   }, [dateTimeFormatter, value]);
 
   return (
-    <div className="flex flex-col gap-4">
-      <p>{formattedDateTime}</p>
+    <div className="flex items-start gap-4">
       <section className="w-72 rounded border border-gray-300 p-2">
         <header className="flex items-center gap-2 font-bold">
           <button
@@ -122,6 +124,12 @@ export function DateTimePicker({
           </Select>
         </footer>
       </section>
+      <div className="flex flex-col gap-2 text-sm text-gray-700">
+        <div>
+          <span className="block font-medium">Selected date</span>
+          <span className="mt-1">{formattedDateTime}</span>
+        </div>
+      </div>
     </div>
   );
 }
