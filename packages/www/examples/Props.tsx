@@ -1,5 +1,5 @@
+import { Locale } from "@tempocal/react";
 import * as React from "react";
-import { Locale } from "../../lib";
 import { Code } from "../Code";
 import { Select } from "../Select";
 
