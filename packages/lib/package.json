@@ -3,17 +3,38 @@
   "version": "0.7.0",
   "repository": "https://github.com/Zertz/tempocal",
   "homepage": "https://tempocal.pierluc.io/",
-  "source": "index.ts",
-  "main": "dist/main.js",
-  "module": "dist/module.js",
-  "types": "dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/tempocal-react.umd.js",
+  "module": "./dist/tempocal-react.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/tempocal-react.es.js",
+      "require": "./dist/tempocal-react.umd.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "coverage": "vitest run --coverage",
+    "1dev": "vite",
+    "1preview": "vite preview",
+    "test": "vitest"
+  },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.0"
   },
-  "peerDependencies": {
-    "react": ">=16.8"
+  "devDependencies": {
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "@vitejs/plugin-react": "^1.2.0",
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6",
+    "vitest": "^0.7.6"
   },
-  "files": [
-    "dist"
-  ]
+  "peerDependencies": {
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
+  }
 }

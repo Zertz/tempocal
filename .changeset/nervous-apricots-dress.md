@@ -1,5 +1,5 @@
 ---
-"@tempocal/react": patch
+"@tempocal/react": minor
 ---
 
 Replace yarn with pnpm
