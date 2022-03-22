@@ -18,8 +18,6 @@
   "scripts": {
     "build": "tsc && vite build",
     "coverage": "vitest run --coverage",
-    "1dev": "vite",
-    "1preview": "vite preview",
     "test": "vitest"
   },
   "dependencies": {

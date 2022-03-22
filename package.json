@@ -11,7 +11,8 @@
     "ci:publish": "pnpm publish -r",
     "ci:version": "pnpm changeset version && pnpm install",
     "dev": "turbo run dev",
-    "lint": "eslint . --ext ts,tsx"
+    "lint": "eslint . --ext ts,tsx",
+    "test": "turbo run test"
   },
   "devDependencies": {
     "@changesets/cli": "^2.21.1",
