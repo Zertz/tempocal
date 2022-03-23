@@ -1,5 +1,11 @@
 # @tempocal/react
 
+## 0.8.1
+
+### Patch Changes
+
+- c6d3696: avoid publishing www
+
 ## 0.8.0
 
 ### Minor Changes
