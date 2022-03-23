@@ -37,9 +37,8 @@ importers:
       tsup: ^5.12.1
       vite: ^2.8.6
       vitest: ^0.7.6
-    dependencies:
-      '@js-temporal/polyfill': 0.4.0
     devDependencies:
+      '@js-temporal/polyfill': 0.4.0
       '@types/react': 17.0.40
       '@types/react-dom': 17.0.13
       '@vitejs/plugin-react': 1.2.0
@@ -596,7 +595,6 @@ packages:
     dependencies:
       jsbi: 4.2.0
       tslib: 2.3.1
-    dev: false
 
   /@manypkg/find-root/1.1.0:
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -2502,7 +2500,6 @@ packages:
 
   /jsbi/4.2.0:
     resolution: {integrity: sha512-JzhwPkH7Ra8O1b5uHmWxl6N8ZumqGvMXgpKcsq0/iWlnB+KkzbekCIcLl3hu3sFGTLNXAuXIqY4STtE0ZfT1zA==}
-    dev: false
 
   /jsdom/19.0.0:
     resolution: {integrity: sha512-RYAyjCbxy/vri/CfnjUWJQQtZ3LKlLnDqj+9XLNnJPgEGeirZs3hllKR20re8LUZ6o1b1X4Jat+Qd26zmP41+A==}
@@ -3696,7 +3693,6 @@ packages:
 
   /tslib/2.3.1:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
-    dev: false
 
   /tsup/5.12.1_typescript@4.6.2:
     resolution: {integrity: sha512-vI7E4T6+6n5guQ9UKUOkQmzd1n4V9abGK71lbnzJMLJspbkNby5zlwWvgvHafLdYCb1WXpjFuqqmNLjBA0Wz3g==}

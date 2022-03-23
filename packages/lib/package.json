@@ -19,10 +19,9 @@
     "build": "tsup tempocal-react.ts --dts --format esm,cjs --minify --sourcemap",
     "test": "vitest"
   },
-  "dependencies": {
-    "@js-temporal/polyfill": "^0.4.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@js-temporal/polyfill": "^0.4.0",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
     "@vitejs/plugin-react": "^1.2.0",
@@ -33,6 +32,7 @@
     "vitest": "^0.7.6"
   },
   "peerDependencies": {
+    "@js-temporal/polyfill": "^0.4.0",
     "react": ">=16.8",
     "react-dom": ">=16.8"
   }
