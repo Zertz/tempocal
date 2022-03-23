@@ -6,18 +6,17 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/tempocal-react.umd.js",
-  "module": "./dist/tempocal-react.es.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/tempocal-react.js",
+  "module": "./dist/tempocal-react.mjs",
+  "types": "./dist/tempocal-react.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/tempocal-react.es.js",
-      "require": "./dist/tempocal-react.umd.js"
+      "import": "./dist/tempocal-react.mjs",
+      "require": "./dist/tempocal-react.js"
     }
   },
   "scripts": {
-    "build": "tsc && vite build",
-    "coverage": "vitest run --coverage",
+    "build": "tsup tempocal-react.ts --dts --format esm,cjs --minify --sourcemap",
     "test": "vitest"
   },
   "dependencies": {
@@ -27,7 +26,9 @@
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
     "@vitejs/plugin-react": "^1.2.0",
-    "typescript": "^4.6.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "tsup": "^5.12.1",
     "vite": "^2.8.6",
     "vitest": "^0.7.6"
   },

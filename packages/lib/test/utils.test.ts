@@ -4,7 +4,7 @@ import {
   getCalendarMonthDateRange,
   getMonthEndDate,
   getMonthStartDate,
-} from "../utils";
+} from "../tempocal-react";
 
 test("getMonthStartDate", () => {
   const date = getMonthStartDate(
@@ -46,7 +46,7 @@ test("getMonthEndDate", () => {
   ).toBeTruthy();
 });
 
-test("getCalendarMonthDateRange (without rollover", () => {
+test("getCalendarMonthDateRange (without rollover)", () => {
   const { start, end } = getCalendarMonthDateRange(
     Temporal.PlainDate.from({
       year: 2022,

@@ -1,10 +1,9 @@
-import "@testing-library/jest-dom/extend-expect";
 import { fireEvent, render } from "@testing-library/react";
-import * as React from "react";
-import { Basic } from "../examples/Basic";
-import { DateInput } from "../examples/DateInput";
-import { DatePicker } from "../examples/DatePicker";
-import { DateTimePicker } from "../examples/DateTimePicker";
+import { expect, test } from "vitest";
+import { Basic } from "../components/examples/Basic";
+import { DateInput } from "../components/examples/DateInput";
+import { DatePicker } from "../components/examples/DatePicker";
+import { DateTimePicker } from "../components/examples/DateTimePicker";
 
 test("Basic renders without crashing", () => {
   const { getByText } = render(<Basic />);
@@ -18,7 +17,7 @@ test("Basic renders without crashing", () => {
   expect(getByText("Sat")).toBeTruthy();
 });
 
-it("DateInput renders without crashing", () => {
+test("DateInput renders without crashing", () => {
   const { getByText, getByTitle } = render(<DateInput />);
 
   fireEvent.click(getByTitle("November 25, 2021"));
@@ -26,7 +25,7 @@ it("DateInput renders without crashing", () => {
   expect(getByTitle("November 27, 2021")).toBeTruthy();
 });
 
-it("DatePicker renders without crashing", () => {
+test("DatePicker renders without crashing", () => {
   const { getByText, getByTitle } = render(<DatePicker />);
 
   expect(getByText("November 25, 2021")).toBeTruthy();
@@ -44,7 +43,7 @@ it("DatePicker renders without crashing", () => {
   expect(getByText("February 25, 2022")).toBeTruthy();
 });
 
-it("DateTimePicker renders without crashing", () => {
+test("DateTimePicker renders without crashing", () => {
   const { getByText, getByTitle } = render(<DateTimePicker />);
 
   expect(getByText("November 25, 2021 at 8:30 AM")).toBeTruthy();
