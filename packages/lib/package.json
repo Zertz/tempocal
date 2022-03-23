@@ -17,6 +17,7 @@
   },
   "scripts": {
     "build": "tsup tempocal-react.ts --dts --format esm,cjs --minify --sourcemap",
+    "ci:publish": "pnpm publish",
     "test": "vitest"
   },
   "dependencies": {},
