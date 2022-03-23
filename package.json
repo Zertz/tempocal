@@ -9,7 +9,7 @@
   "scripts": {
     "build": "turbo run build",
     "ci:publish": "pnpm publish -r",
-    "ci:version": "pnpm changeset version && pnpm install",
+    "ci:version": "pnpm changeset version",
     "dev": "turbo run dev",
     "lint": "eslint . --ext ts,tsx",
     "test": "turbo run test"
