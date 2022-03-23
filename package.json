@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "turbo run build",
-    "ci:publish": "pnpm publish -r",
+    "ci:publish": "turbo run ci:publish",
     "ci:version": "pnpm changeset version",
     "dev": "turbo run dev",
     "lint": "eslint . --ext ts,tsx",

@@ -6,6 +6,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "ci:publish": {
+      "dependsOn": []
+    },
     "test": {
       "dependsOn": []
     },
