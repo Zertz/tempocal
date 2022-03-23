@@ -18,9 +18,6 @@ jobs:
           node-version: "16"
           cache: "pnpm"
       - run: pnpm install
-      - run: pnpm lint
-      - run: pnpm build
-      - run: pnpm test
       - name: Publish to npm
         id: changesets
         uses: changesets/action@v1
