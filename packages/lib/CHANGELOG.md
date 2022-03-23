@@ -1,5 +1,11 @@
 # @tempocal/react
 
+## 0.8.2
+
+### Patch Changes
+
+- 0b86d88: build before publish
+
 ## 0.8.1
 
 ### Patch Changes
