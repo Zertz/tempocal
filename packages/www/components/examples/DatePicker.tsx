@@ -1,7 +1,7 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { Calendar, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
+import { Calendar, useTempocal } from "../../../lib";
 import { Select } from "../Select";
 import { Props, useProps } from "./Props";
 
