@@ -1,5 +1,11 @@
 # @tempocal/react
 
+## 0.8.3
+
+### Patch Changes
+
+- 9cfb9ac: Fix dev workflow
+
 ## 0.8.2
 
 ### Patch Changes
