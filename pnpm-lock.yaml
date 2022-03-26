@@ -40,7 +40,7 @@ importers:
       vite: 2.8.6
       vitest: 0.7.6
 
-  packages/lib:
+  packages/react:
     specifiers:
       '@js-temporal/polyfill': ^0.4.0
       '@tempocal/core': workspace:*
@@ -88,7 +88,7 @@ importers:
       vitest: ^0.7.6
     dependencies:
       '@js-temporal/polyfill': 0.4.0
-      '@tempocal/react': link:../lib
+      '@tempocal/react': link:../react
       classnames: 2.3.1
       next: 12.1.0_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
