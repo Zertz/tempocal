@@ -1,26 +1,9 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { getMonths, getYears } from "@tempocal/core";
 import * as React from "react";
-import { Locale, Value } from "./types";
-import {
-  getCalendarMonthDateRange,
-  getMonths,
-  getMonthStartDate,
-  getWeekdays,
-  getYears,
-} from "./utils";
+import { Locale } from "./types";
 
-export function useCalendarMonthDateRange(value: Value, rollover: boolean) {
-  return React.useMemo(
-    () => getCalendarMonthDateRange(value, rollover),
-    [rollover, value]
-  );
-}
-
-export function useMonthStartDate(value: Value) {
-  return React.useMemo(() => getMonthStartDate(value), [value]);
-}
-
-export function useMonths(
+function useMonths(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   referenceValue: Temporal.PlainDate,
   minValue?: Temporal.PlainDate,
@@ -32,17 +15,7 @@ export function useMonths(
   );
 }
 
-export function useWeekdays(
-  locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  daysInWeek: number
-) {
-  return React.useMemo(
-    () => getWeekdays(locale, daysInWeek),
-    [daysInWeek, locale]
-  );
-}
-
-export function useYears(
+function useYears(
   minValue: Temporal.PlainDate | undefined,
   maxValue: Temporal.PlainDate | undefined
 ) {
@@ -90,7 +63,6 @@ export function useTempocal<Mode extends "date" | "datetime">({
   });
 
   const months = useMonths(locale, calendarValue, minValue, maxValue);
-  const weekdays = useWeekdays(locale, calendarValue.daysInWeek);
   const years = useYears(minValue, maxValue);
 
   const updateCalendarValue = React.useCallback(
@@ -183,7 +155,6 @@ export function useTempocal<Mode extends "date" | "datetime">({
     months,
     onChangeCalendarValue,
     onChangeSelectedValue,
-    weekdays,
     years,
   };
 }

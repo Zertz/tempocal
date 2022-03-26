@@ -4,7 +4,7 @@ import {
   getCalendarMonthDateRange,
   getMonthEndDate,
   getMonthStartDate,
-} from "../tempocal-react";
+} from "../tempocal-core";
 
 test("getMonthStartDate", () => {
   const date = getMonthStartDate(

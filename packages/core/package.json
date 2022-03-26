@@ -1,0 +1,35 @@
+{
+  "name": "@tempocal/core",
+  "version": "0.8.3",
+  "repository": "https://github.com/Zertz/tempocal",
+  "homepage": "https://tempocal.pierluc.io/",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/tempocal-core.js",
+  "module": "./dist/tempocal-core.mjs",
+  "types": "./dist/tempocal-core.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/tempocal-core.mjs",
+      "require": "./dist/tempocal-core.js"
+    }
+  },
+  "scripts": {
+    "build": "rimraf dist && tsup tempocal-core.ts --dts --format esm,cjs --minify --sourcemap",
+    "ci:publish": "pnpm publish",
+    "dev": "rimraf dist && tsup tempocal-core.ts --format esm --watch",
+    "test": "vitest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@js-temporal/polyfill": "^0.4.0",
+    "rimraf": "^3.0.2",
+    "tsup": "^5.12.1",
+    "vite": "^2.8.6",
+    "vitest": "^0.7.6"
+  },
+  "peerDependencies": {
+    "@js-temporal/polyfill": "^0.4.0"
+  }
+}

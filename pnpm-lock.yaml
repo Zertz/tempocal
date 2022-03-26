@@ -26,9 +26,24 @@ importers:
       turbo: 1.1.6
       typescript: 4.6.2
 
+  packages/core:
+    specifiers:
+      '@js-temporal/polyfill': ^0.4.0
+      rimraf: ^3.0.2
+      tsup: ^5.12.1
+      vite: ^2.8.6
+      vitest: ^0.7.6
+    devDependencies:
+      '@js-temporal/polyfill': 0.4.0
+      rimraf: 3.0.2
+      tsup: 5.12.1_typescript@4.6.2
+      vite: 2.8.6
+      vitest: 0.7.6
+
   packages/lib:
     specifiers:
       '@js-temporal/polyfill': ^0.4.0
+      '@tempocal/core': workspace:*
       '@types/react': ^17.0.40
       '@types/react-dom': ^17.0.13
       '@vitejs/plugin-react': ^1.2.0
@@ -38,6 +53,8 @@ importers:
       tsup: ^5.12.1
       vite: ^2.8.6
       vitest: ^0.7.6
+    dependencies:
+      '@tempocal/core': link:../core
     devDependencies:
       '@js-temporal/polyfill': 0.4.0
       '@types/react': 17.0.40

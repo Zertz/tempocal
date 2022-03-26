@@ -21,7 +21,9 @@
     "dev": "rimraf dist && tsup tempocal-react.ts --format esm --watch",
     "test": "vitest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@tempocal/core": "workspace:*"
+  },
   "devDependencies": {
     "@js-temporal/polyfill": "^0.4.0",
     "@types/react": "^17.0.40",
