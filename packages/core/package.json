@@ -17,7 +17,6 @@
   },
   "scripts": {
     "build": "tsup tempocal-core.ts --dts --format esm,cjs --minify --sourcemap",
-    "ci:publish": "pnpm publish",
     "dev": "tsup tempocal-core.ts --dts --format esm --watch",
     "test": "vitest"
   },
