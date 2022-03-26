@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "isolatedModules": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2021",
+    "baseUrl": ".",
+    "paths": {
+      "@tempocal/*": ["packages/*"]
+    }
+  },
+  "exclude": ["dist", "node_modules"]
+}
