@@ -16,15 +16,14 @@
     }
   },
   "scripts": {
-    "build": "rimraf dist && tsup tempocal-core.ts --dts --format esm,cjs --minify --sourcemap",
+    "build": "tsup tempocal-core.ts --dts --format esm,cjs --minify --sourcemap",
     "ci:publish": "pnpm publish",
-    "dev": "rimraf dist && tsup tempocal-core.ts --format esm --watch",
+    "dev": "tsup tempocal-core.ts --dts --format esm --watch",
     "test": "vitest"
   },
   "dependencies": {},
   "devDependencies": {
     "@js-temporal/polyfill": "^0.4.0",
-    "rimraf": "^3.0.2",
     "tsup": "^5.12.1",
     "vite": "^2.8.6",
     "vitest": "^0.7.6"
