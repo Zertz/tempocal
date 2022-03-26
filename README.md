@@ -20,5 +20,5 @@
 **npm**
 
 ```
-npm install @tempocal/react
+npm install @tempocal/react @js-temporal/polyfill
 ```

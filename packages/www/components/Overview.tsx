@@ -46,7 +46,7 @@ export function Overview() {
         <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
           <h2 className="text-4xl font-bold">Getting started</h2>
         </div>
-        <CodeBlock>npm install @tempocal/react</CodeBlock>
+        <CodeBlock>npm install @tempocal/react @js-temporal/polyfill</CodeBlock>
       </div>
       <div>
         <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
