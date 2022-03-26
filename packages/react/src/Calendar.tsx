@@ -5,7 +5,9 @@ import {
   getWeekdays,
 } from "@tempocal/core";
 import * as React from "react";
-import { Locale, Value } from "./types";
+import { Locale } from "./useTempocal";
+
+type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 
 type MonthProps = {
   locale: Locale;

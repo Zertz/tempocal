@@ -1,5 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { Value } from "./types";
+
+type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 
 export function getFirstDayOfWeek(value: Value) {
   let firstDayOfWeek: Value | undefined = undefined;

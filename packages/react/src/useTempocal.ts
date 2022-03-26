@@ -1,7 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { getMonths, getYears } from "@tempocal/core";
 import * as React from "react";
-import { Locale } from "./types";
 
 function useMonths(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
@@ -36,6 +35,11 @@ type ChangeValue<Mode> = Mode extends "date"
   : Mode extends "datetime"
   ? Temporal.PlainDateTime | Temporal.PlainDateTimeLike
   : never;
+
+export type Locale = Exclude<
+  Parameters<typeof Intl.DateTimeFormat>[0],
+  undefined
+>;
 
 export function useTempocal<Mode extends "date" | "datetime">({
   clampCalendarValue,
