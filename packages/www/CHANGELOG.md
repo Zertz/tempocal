@@ -1,5 +1,16 @@
 # @tempocal/www
 
+## 1.1.0
+
+### Minor Changes
+
+- 38507e8: Rename lib to react and split utils into core
+
+### Patch Changes
+
+- Updated dependencies [38507e8]
+  - @tempocal/react@0.9.0
+
 ## 1.0.1
 
 ### Patch Changes

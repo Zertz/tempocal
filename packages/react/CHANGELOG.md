@@ -1,5 +1,16 @@
 # @tempocal/react
 
+## 0.9.0
+
+### Minor Changes
+
+- 38507e8: Rename lib to react and split utils into core
+
+### Patch Changes
+
+- Updated dependencies [38507e8]
+  - @tempocal/core@0.9.0
+
 ## 0.8.3
 
 ### Patch Changes
