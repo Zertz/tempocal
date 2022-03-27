@@ -1,14 +1,14 @@
 {
   "name": "tempocal",
   "version": "0.1.0",
-  "description": "Highly flexible building blocks to build calendars with Temporal API",
+  "description": "Highly flexible building blocks to craft calendars with Temporal API",
   "repository": "https://github.com/Zertz/tempocal",
   "homepage": "https://tempocal.pierluc.io/",
   "author": "Pier-Luc Gendreau",
   "license": "MIT",
   "scripts": {
     "build": "turbo run build",
-    "ci:publish": "turbo run ci:publish && pnpm changeset tag",
+    "ci:publish": "pnpm publish --filter=\\!www --recursive && pnpm changeset tag",
     "ci:version": "pnpm changeset version",
     "dev": "turbo run dev",
     "lint": "eslint . --ext ts,tsx",

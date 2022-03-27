@@ -1,11 +1,13 @@
 import { Temporal } from "@js-temporal/polyfill";
-import * as React from "react";
-import { Locale, Value } from "./types";
 import {
-  useCalendarMonthDateRange,
-  useMonthStartDate,
-  useWeekdays,
-} from "./useTempocal";
+  getCalendarMonthDateRange,
+  getMonthStartDate,
+  getWeekdays,
+} from "@tempocal/core";
+import * as React from "react";
+import { Locale } from "./useTempocal";
+
+type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 
 type MonthProps = {
   locale: Locale;
@@ -61,6 +63,27 @@ type MonthProps = {
   >;
   renderFooter?: (date: Temporal.PlainDate) => React.ReactNode;
 };
+
+function useCalendarMonthDateRange(value: Value, rollover: boolean) {
+  return React.useMemo(
+    () => getCalendarMonthDateRange(value, rollover),
+    [rollover, value]
+  );
+}
+
+function useMonthStartDate(value: Value) {
+  return React.useMemo(() => getMonthStartDate(value), [value]);
+}
+
+function useWeekdays(
+  locale: Parameters<typeof Intl.DateTimeFormat>[0],
+  daysInWeek: number
+) {
+  return React.useMemo(
+    () => getWeekdays(locale, daysInWeek),
+    [daysInWeek, locale]
+  );
+}
 
 export function Calendar({
   locale,
