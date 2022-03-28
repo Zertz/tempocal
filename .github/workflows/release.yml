@@ -28,9 +28,9 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: pnpm ci:version
+          version: pnpm changeset version
           commit: "ci: update version and publish"
-          publish: pnpm ci:publish
+          publish: pnpm publish --access public --filter=\\!www --recursive && pnpm changeset tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
