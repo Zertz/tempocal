@@ -10,31 +10,31 @@ export function Examples() {
     <>
       <Example
         title="Basic"
-        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/Basic.tsx"
+        url="https://github.com/Zertz/tempocal/blob/main/packages/www/components/examples/Basic.tsx"
       >
         <Basic />
       </Example>
       <Example
         title="DatePicker"
-        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DatePicker.tsx"
+        url="https://github.com/Zertz/tempocal/blob/main/packages/www/components/examples/DatePicker.tsx"
       >
         <DatePicker />
       </Example>
       <Example
         title="DateInput"
-        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateInput.tsx"
+        url="https://github.com/Zertz/tempocal/blob/main/packages/www/components/examples/DateInput.tsx"
       >
         <DateInput />
       </Example>
       <Example
         title="DateTimePicker"
-        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateTimePicker.tsx"
+        url="https://github.com/Zertz/tempocal/blob/main/packages/www/components/examples/DateTimePicker.tsx"
       >
         <DateTimePicker />
       </Example>
       <Example
         title="DateRangePicker"
-        url="https://github.com/Zertz/tempocal/blob/main/packages/www/examples/DateRangePicker.tsx"
+        url="https://github.com/Zertz/tempocal/blob/main/packages/www/components/examples/DateRangePicker.tsx"
       >
         <DateRangePicker />
       </Example>
