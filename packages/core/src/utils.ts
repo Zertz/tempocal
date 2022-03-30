@@ -71,7 +71,7 @@ export function getMonths(
     longName: string;
     shortName: string;
     narrowName: string;
-    available: boolean;
+    disabled: boolean;
   }[] = [];
 
   for (let i = 0; i < referenceValue.monthsInYear; i += 1) {
@@ -79,12 +79,12 @@ export function getMonths(
     const date = new Date(value.toString());
 
     const isBeforeMinValue =
-      minValue &&
+      !!minValue &&
       (value.year < minValue.year ||
         (value.year === minValue.year && value.month < minValue.month));
 
     const isAfterMaxValue =
-      maxValue &&
+      !!maxValue &&
       (value.year > maxValue.year ||
         (value.year === maxValue.year && value.month > maxValue.month));
 
@@ -93,7 +93,7 @@ export function getMonths(
       longName: longMonthFormatter.format(date),
       shortName: shortMonthFormatter.format(date),
       narrowName: narrowMonthFormatter.format(date),
-      available: !isBeforeMinValue && !isAfterMaxValue,
+      disabled: isBeforeMinValue || isAfterMaxValue,
     });
   }
 
