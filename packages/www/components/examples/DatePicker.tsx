@@ -93,8 +93,8 @@ export function DatePicker() {
               title="Month"
               value={calendarValue.month}
             >
-              {months.map(({ month, longName, available }) => (
-                <option key={longName} disabled={!available} value={month}>
+              {months.map(({ disabled, month, longName }) => (
+                <option key={longName} disabled={disabled} value={month}>
                   {longName}
                 </option>
               ))}
