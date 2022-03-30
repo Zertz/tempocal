@@ -1,5 +1,13 @@
 # @tempocal/www
 
+## 1.1.2
+
+### Patch Changes
+
+- 4b58cad: Improve DateRangePicker example
+- Updated dependencies [64a4976]
+  - @tempocal/react@0.9.2
+
 ## 1.1.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.10.0
+
+### Minor Changes
+
+- 7e0e21a: Rename month.available to month.disabled
+
 ## 0.9.1
 
 ### Patch Changes
