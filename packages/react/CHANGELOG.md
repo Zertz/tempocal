@@ -1,5 +1,13 @@
 # @tempocal/react
 
+## 0.9.2
+
+### Patch Changes
+
+- 64a4976: Prevent monthsBefore and monthsAfter from going below zero
+- Updated dependencies [7e0e21a]
+  - @tempocal/core@0.10.0
+
 ## 0.9.1
 
 ### Patch Changes
