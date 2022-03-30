@@ -1,11 +1,15 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { Calendar, useTempocal } from "@tempocal/react";
+import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
+import { Code } from "../Code";
 import { Select } from "../Select";
-import { Props, useProps } from "./Props";
 
 export function DatePicker() {
+  const [clampCalendarValue, setClampCalendarValue] = React.useState(true);
+  const [locale, setLocale] = React.useState<Locale>("en-US");
+  const [rollover, setRollover] = React.useState(true);
+
   const [value, setValue] = React.useState(
     Temporal.PlainDate.from({
       year: 2021,
@@ -14,17 +18,8 @@ export function DatePicker() {
     })
   );
 
-  const [maxValue] = React.useState(value.add({ years: 2 }));
   const [minValue] = React.useState(value.subtract({ years: 2 }));
-
-  const {
-    clampCalendarValue,
-    setClampCalendarValue,
-    locale,
-    setLocale,
-    rollover,
-    setRollover,
-  } = useProps();
+  const [maxValue] = React.useState(value.add({ years: 2 }));
 
   const {
     calendarProps,
@@ -136,15 +131,83 @@ export function DatePicker() {
           </button>
         )}
       />
-      <Props
-        clampCalendarValue={clampCalendarValue}
-        setClampCalendarValue={setClampCalendarValue}
-        locale={locale}
-        setLocale={setLocale}
-        rollover={rollover}
-        setRollover={setRollover}
-        formattedDate={formattedDate}
-      />
+      <fieldset className="flex flex-col gap-2">
+        <legend className="sr-only">Props</legend>
+        <p className="text-sm text-gray-700">
+          Building on the previous example, this one adds a bunch of fancy
+          features: month and year selectors, min and max dates, disabled days
+          are red, Monday's are 😭 and disabled, and December 25th is 🎄.
+        </p>
+        <div>
+          <span className="block text-sm font-medium text-gray-700">
+            Selected date
+          </span>
+          <span className="mt-1 text-sm text-gray-700">{formattedDate}</span>
+        </div>
+        <Select
+          id="select-locale"
+          label="Locale"
+          onChange={({ target: { value } }) => setLocale(value)}
+          title="Locale"
+          value={locale}
+        >
+          <option value="en-US">en-US</option>
+          <option value="es-ES">es-ES</option>
+          <option value="fr-CA">fr-CA</option>
+          <option value="pt-BR">pt-BR</option>
+          <option value="uk-UA">uk-UA</option>
+        </Select>
+        <div className="relative flex items-start">
+          <div className="flex h-5 items-center">
+            <input
+              aria-describedby="clampCalendarValue-description"
+              checked={clampCalendarValue}
+              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              id="clampCalendarValue"
+              name="clampCalendarValue"
+              onChange={() =>
+                setClampCalendarValue(
+                  (clampCalendarValue) => !clampCalendarValue
+                )
+              }
+              type="checkbox"
+            />
+          </div>
+          <div className="ml-3 text-sm">
+            <label
+              htmlFor="clampCalendarValue"
+              className="font-medium text-gray-700"
+            >
+              clampCalendarValue
+            </label>
+            <p id="clampCalendarValue-description" className="text-gray-500">
+              When <Code>minValue</Code> and/or <Code>maxValue</Code> are set,
+              automatically keep <Code>calendarValue</Code> within those values.
+            </p>
+          </div>
+        </div>
+        <div className="relative flex items-start">
+          <div className="flex h-5 items-center">
+            <input
+              aria-describedby="rollover-description"
+              checked={rollover}
+              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              id="rollover"
+              name="rollover"
+              onChange={() => setRollover((rollover) => !rollover)}
+              type="checkbox"
+            />
+          </div>
+          <div className="ml-3 text-sm">
+            <label htmlFor="rollover" className="font-medium text-gray-700">
+              rollover
+            </label>
+            <p id="rollover-description" className="text-gray-500">
+              Fill the calendar with days from the previous and next months.
+            </p>
+          </div>
+        </div>
+      </fieldset>
     </div>
   );
 }
