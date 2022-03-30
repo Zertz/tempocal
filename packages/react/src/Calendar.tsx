@@ -89,8 +89,6 @@ export function Calendar({
   locale,
   maxValue,
   minValue,
-  monthsBefore = 0,
-  monthsAfter = 0,
   rollover,
   value,
   calendarProps,
@@ -102,10 +100,19 @@ export function Calendar({
   renderDay,
   footerProps,
   renderFooter,
+  ...rest
 }: MonthProps & {
   monthsBefore?: number;
   monthsAfter?: number;
 }) {
+  const { monthsBefore, monthsAfter } = React.useMemo(
+    () => ({
+      monthsBefore: Math.max(0, rest.monthsBefore || 0),
+      monthsAfter: Math.max(0, rest.monthsAfter || 0),
+    }),
+    [rest.monthsAfter, rest.monthsBefore]
+  );
+
   const months = React.useMemo(
     () => [...Array(monthsBefore + 1 + monthsAfter)],
     [monthsAfter, monthsBefore]
