@@ -2,6 +2,8 @@ import { Temporal } from "@js-temporal/polyfill";
 import { Calendar, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
+import { Input } from "../Input";
+import { Select } from "../Select";
 
 type DateRange =
   | [undefined, undefined]
@@ -11,18 +13,21 @@ type DateRange =
 const locale = "en-US";
 
 export function DateRangePicker() {
+  const [monthsBefore, setMonthsBefore] = React.useState(0);
+  const [monthsAfter, setMonthsAfter] = React.useState(1);
+
   const [values, setValues] = React.useState<DateRange>([
-    Temporal.PlainDate.from({
-      year: 2021,
-      month: 11,
-      day: 25,
-    }),
-    Temporal.PlainDate.from({
-      year: 2021,
-      month: 12,
-      day: 25,
-    }),
+    Temporal.Now.plainDate("iso8601").subtract({ days: 3 }),
+    Temporal.Now.plainDate("iso8601").add({ days: 3 }),
   ]);
+
+  const [minValue] = React.useState(
+    Temporal.Now.plainDate("iso8601").subtract({ years: 2 })
+  );
+
+  const [maxValue] = React.useState(
+    Temporal.Now.plainDate("iso8601").add({ years: 2 })
+  );
 
   const [hoverValue, setHoveredValue] = React.useState<Temporal.PlainDate>();
 
@@ -36,8 +41,18 @@ export function DateRangePicker() {
     });
   }, []);
 
-  const { calendarProps, months, onChangeSelectedValue } = useTempocal({
+  const {
+    calendarProps,
+    calendarValue,
+    months,
+    onChangeCalendarValue,
+    onChangeSelectedValue,
+    years,
+  } = useTempocal({
+    clampCalendarValue: true,
     locale,
+    maxValue,
+    minValue,
     mode: "date",
     setValue,
     value: values[0],
@@ -66,15 +81,77 @@ export function DateRangePicker() {
 
   return (
     <div className="flex items-start gap-4">
-      <div className="flex w-min flex-col gap-4 rounded border border-gray-300 p-2 pt-0.5">
+      <div className="flex flex-wrap gap-4 w-min">
         <Calendar
           {...calendarProps}
-          monthsAfter={1}
+          monthsBefore={monthsBefore}
+          monthsAfter={monthsAfter}
           calendarProps={() => ({
             className: "gap-1 text-center w-72",
           })}
-          headerProps={() => ({ className: "font-bold" })}
-          renderHeader={(date) => months[date.month - 1].longName}
+          headerProps={(date) => ({
+            className: classnames("flex gap-2 font-bold w-min", {
+              "mx-auto": date.month !== calendarValue.month,
+            }),
+          })}
+          renderHeader={(date) => {
+            if (date.month !== calendarValue.month) {
+              return months[date.month - 1].longName;
+            }
+
+            return (
+              <>
+                <button
+                  className="mr-auto"
+                  onClick={() =>
+                    onChangeCalendarValue(calendarValue.subtract({ months: 1 }))
+                  }
+                  title="Previous month"
+                  type="button"
+                >
+                  &larr;
+                </button>
+                <Select
+                  className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
+                  onChange={({ target: { value } }) =>
+                    onChangeCalendarValue({ month: Number(value) })
+                  }
+                  title="Month"
+                  value={calendarValue.month}
+                >
+                  {months.map(({ disabled, month, longName }) => (
+                    <option key={longName} disabled={disabled} value={month}>
+                      {longName}
+                    </option>
+                  ))}
+                </Select>
+                <Select
+                  className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
+                  onChange={({ target: { value } }) =>
+                    onChangeCalendarValue({ year: Number(value) })
+                  }
+                  title="Year"
+                  value={calendarValue.year}
+                >
+                  {years.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </Select>
+                <button
+                  className="ml-auto"
+                  onClick={() =>
+                    onChangeCalendarValue(calendarValue.add({ months: 1 }))
+                  }
+                  title="Next month"
+                  type="button"
+                >
+                  &rarr;
+                </button>
+              </>
+            );
+          }}
           weekdayProps={() => ({ className: "font-medium" })}
           renderDay={({ date, disabled, plainDateLike }) => {
             const isRangeSelected =
@@ -98,7 +175,8 @@ export function DateRangePicker() {
             return (
               <button
                 className={classnames(
-                  "w-full overflow-hidden rounded border text-gray-700 transition-colors",
+                  "w-full rounded border text-gray-700 transition-colors",
+                  "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
                   isRangeSelected || isSelected
                     ? "border-blue-600 bg-blue-100"
                     : isRangeHovered
@@ -116,18 +194,40 @@ export function DateRangePicker() {
           }}
         />
       </div>
-      <div className="flex flex-col gap-2 text-sm text-gray-700">
-        <p>
-          🚧 Although this example is still a work in progress, it shows one of
-          the many ways a date range picker can work.
+      <fieldset className="flex flex-col gap-2">
+        <legend className="sr-only">Props</legend>
+        <p className="text-sm text-gray-700">
+          This example shows one of the many ways a date range picker can work.
         </p>
         <div>
-          <span className="block font-medium">Selected date range</span>
-          <span className="mt-1">
+          <span className="block text-sm font-medium text-gray-700">
+            Selected date range
+          </span>
+          <span className="mt-1 text-sm text-gray-700">
             {formattedDates[0]} - {formattedDates[1]}
           </span>
         </div>
-      </div>
+        <Input
+          hint="Number of months to show before the primary calendar"
+          id="monthsBefore"
+          label="Months before"
+          min={0}
+          name="monthsBefore"
+          onChange={({ target: { value } }) => setMonthsBefore(Number(value))}
+          type="number"
+          value={monthsBefore}
+        />
+        <Input
+          hint="Number of months to show after the primary calendar"
+          id="monthsAfter"
+          label="Months after"
+          min={0}
+          name="monthsAfter"
+          onChange={({ target: { value } }) => setMonthsAfter(Number(value))}
+          type="number"
+          value={monthsAfter}
+        />
+      </fieldset>
     </div>
   );
 }
