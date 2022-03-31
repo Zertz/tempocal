@@ -31,12 +31,12 @@ importers:
       '@js-temporal/polyfill': ^0.4.0
       tsup: ^5.12.1
       vite: ^2.9.0
-      vitest: ^0.7.13
+      vitest: ^0.8.1
     devDependencies:
       '@js-temporal/polyfill': 0.4.0
       tsup: 5.12.1_typescript@4.6.3
       vite: 2.9.0
-      vitest: 0.7.13
+      vitest: 0.8.1
 
   packages/react:
     specifiers:
@@ -45,11 +45,11 @@ importers:
       '@types/react': ^17.0.43
       '@types/react-dom': ^17.0.14
       '@vitejs/plugin-react': ^1.3.0
-      react: ^17.0.2
-      react-dom: ^17.0.2
+      react: ^18.0.0
+      react-dom: ^18.0.0
       tsup: ^5.12.1
       vite: ^2.9.0
-      vitest: ^0.7.13
+      vitest: ^0.8.1
     dependencies:
       '@tempocal/core': link:../core
     devDependencies:
@@ -57,11 +57,11 @@ importers:
       '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
       '@vitejs/plugin-react': 1.3.0
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
       tsup: 5.12.1_typescript@4.6.3
       vite: 2.9.0
-      vitest: 0.7.13
+      vitest: 0.8.1
 
   packages/www:
     specifiers:
@@ -76,31 +76,31 @@ importers:
       jsdom: ^19.0.0
       next: ^12.1.3
       postcss: ^8.4.12
-      react: ^17.0.2
-      react-dom: ^17.0.2
+      react: ^18.0.0
+      react-dom: ^18.0.0
       react-headless-tabs: ^4.0.2
       tailwindcss: ^3.0.23
       vite: ^2.9.0
-      vitest: ^0.7.13
+      vitest: ^0.8.1
     dependencies:
       '@js-temporal/polyfill': 0.4.0
       '@tempocal/react': link:../react
       classnames: 2.3.1
-      next: 12.1.3_react-dom@17.0.2+react@17.0.2
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      react-headless-tabs: 4.0.2_react@17.0.2
+      next: 12.1.3_react-dom@18.0.0+react@18.0.0
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+      react-headless-tabs: 4.0.2_react@18.0.0
     devDependencies:
       '@tailwindcss/forms': 0.5.0_tailwindcss@3.0.23
       '@testing-library/jest-dom': 5.16.3
-      '@testing-library/react': 12.1.4_react-dom@17.0.2+react@17.0.2
+      '@testing-library/react': 12.1.4_react-dom@18.0.0+react@18.0.0
       '@vitejs/plugin-react': 1.3.0
       autoprefixer: 10.4.4_postcss@8.4.12
       jsdom: 19.0.0
       postcss: 8.4.12
       tailwindcss: 3.0.23_autoprefixer@10.4.4
       vite: 2.9.0
-      vitest: 0.7.13_jsdom@19.0.0
+      vitest: 0.8.1_jsdom@19.0.0
 
 packages:
 
@@ -815,7 +815,7 @@ packages:
       redent: 3.0.0
     dev: true
 
-  /@testing-library/react/12.1.4_react-dom@17.0.2+react@17.0.2:
+  /@testing-library/react/12.1.4_react-dom@18.0.0+react@18.0.0:
     resolution: {integrity: sha512-jiPKOm7vyUw311Hn/HlNQ9P8/lHNtArAx0PisXyFixDDvfl8DbD6EUdbshK5eqauvBSvzZd19itqQ9j3nferJA==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -825,8 +825,8 @@ packages:
       '@babel/runtime': 7.17.8
       '@testing-library/dom': 8.12.0
       '@types/react-dom': 17.0.14
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
     dev: true
 
   /@tootallnate/once/2.0.0:
@@ -2825,7 +2825,7 @@ packages:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
     dev: true
 
-  /next/12.1.3_react-dom@17.0.2+react@17.0.2:
+  /next/12.1.3_react-dom@18.0.0+react@18.0.0:
     resolution: {integrity: sha512-SPNEyB21AwewquHOk9BR1rOJ4I/kI8zTAhpBkjFHpUd1CFrQ+fK6HLH8zGG/8pHhA3hX+pLfWtwE3PAJ0Y9hyg==}
     engines: {node: '>=12.22.0'}
     hasBin: true
@@ -2846,9 +2846,9 @@ packages:
       '@next/env': 12.1.3
       caniuse-lite: 1.0.30001322
       postcss: 8.4.5
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      styled-jsx: 5.0.1_react@17.0.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+      styled-jsx: 5.0.1_react@18.0.0
     optionalDependencies:
       '@next/swc-android-arm-eabi': 12.1.3
       '@next/swc-android-arm64': 12.1.3
@@ -2904,6 +2904,7 @@ packages:
   /object-assign/4.1.1:
     resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /object-hash/2.2.0:
     resolution: {integrity: sha512-gScRMn0bS5fH+IuwyIFgnh9zBdo4DV+6GhygmWM9HyNJSgS0hScp1f5vjtm7oIIOiT9trXrShAkLFSc2IqKNgw==}
@@ -3235,22 +3236,21 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /react-dom/17.0.2_react@17.0.2:
-    resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
+  /react-dom/18.0.0_react@18.0.0:
+    resolution: {integrity: sha512-XqX7uzmFo0pUceWFCt7Gff6IyIMzFUn7QMZrbrQfGxtaxXZIcGQzoNpRLE3fQLnS4XzLLPMZX2T9TRcSrasicw==}
     peerDependencies:
-      react: 17.0.2
+      react: ^18.0.0
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
-      react: 17.0.2
-      scheduler: 0.20.2
+      react: 18.0.0
+      scheduler: 0.21.0
 
-  /react-headless-tabs/4.0.2_react@17.0.2:
+  /react-headless-tabs/4.0.2_react@18.0.0:
     resolution: {integrity: sha512-1B0nc/HE+333NyvqiXrt4wzFNqj6yn5r/tH9e6MpZVb7KzsMq82oUGILTsgBG18PmxAGil+9TkvofEqVwdk5MQ==}
     peerDependencies:
       react: '>=16.8'
     dependencies:
-      react: 17.0.2
+      react: 18.0.0
     dev: false
 
   /react-is/17.0.2:
@@ -3262,12 +3262,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react/17.0.2:
-    resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
+  /react/18.0.0:
+    resolution: {integrity: sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
 
   /read-pkg-up/7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==}
@@ -3391,11 +3390,10 @@ packages:
       xmlchars: 2.2.0
     dev: true
 
-  /scheduler/0.20.2:
-    resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
+  /scheduler/0.21.0:
+    resolution: {integrity: sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==}
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
 
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
@@ -3568,7 +3566,7 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /styled-jsx/5.0.1_react@17.0.2:
+  /styled-jsx/5.0.1_react@18.0.0:
     resolution: {integrity: sha512-+PIZ/6Uk40mphiQJJI1202b+/dYeTVd9ZnMPR80pgiWbjIwvN2zIp4r9et0BgqBuShh48I0gttPlAXA7WVvBxw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -3581,7 +3579,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
-      react: 17.0.2
+      react: 18.0.0
     dev: false
 
   /sucrase/3.20.3:
@@ -4004,9 +4002,9 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.7.13:
-    resolution: {integrity: sha512-UCHeJEOK+qCBa/e4UtkCfv0wIZ125T4Nf2R0J/46v/Wnv6bt9zGfAyKAI6siYFhvLvg20MgDIreROtVgedHFWw==}
-    engines: {node: '>=v14.19.1'}
+  /vitest/0.8.1:
+    resolution: {integrity: sha512-8HUyc9io1UInZTUKJWTgPG5fMEqd86IlMCjn2CEjGjli55M7iUJiiMwns9W21wKs6DMrRs2lu89X6rbfVvF53A==}
+    engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
       '@vitest/ui': '*'
@@ -4036,9 +4034,9 @@ packages:
       - stylus
     dev: true
 
-  /vitest/0.7.13_jsdom@19.0.0:
-    resolution: {integrity: sha512-UCHeJEOK+qCBa/e4UtkCfv0wIZ125T4Nf2R0J/46v/Wnv6bt9zGfAyKAI6siYFhvLvg20MgDIreROtVgedHFWw==}
-    engines: {node: '>=v14.19.1'}
+  /vitest/0.8.1_jsdom@19.0.0:
+    resolution: {integrity: sha512-8HUyc9io1UInZTUKJWTgPG5fMEqd86IlMCjn2CEjGjli55M7iUJiiMwns9W21wKs6DMrRs2lu89X6rbfVvF53A==}
+    engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
       '@vitest/ui': '*'
