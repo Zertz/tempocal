@@ -44,9 +44,11 @@ type MonthProps = {
     shortName: string;
     narrowName: string;
   }) => React.ReactNode;
-  dayProps?: (
-    date: Temporal.PlainDate
-  ) => React.DetailedHTMLProps<
+  dayProps?: (props: {
+    date: Temporal.PlainDate;
+    disabled: boolean;
+    plainDateLike: Temporal.PlainDateLike;
+  }) => React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLLIElement>,
     HTMLLIElement
   >;
@@ -251,7 +253,7 @@ function Day({
 
   return (
     <li
-      {...dayProps?.(date)}
+      {...dayProps?.(props)}
       style={
         !rollover && day === 0
           ? {
