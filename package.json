@@ -8,6 +8,8 @@
   "license": "MIT",
   "scripts": {
     "build": "turbo run build",
+    "ci:publish": "pnpm publish --access public --filter=\\!www --recursive && pnpm changeset tag",
+    "ci:version": "pnpm changeset version",
     "dev": "turbo run dev",
     "lint": "eslint . --ext ts,tsx",
     "test": "turbo run test"
