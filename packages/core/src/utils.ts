@@ -76,7 +76,7 @@ export function getMonths(
 
   for (let i = 0; i < referenceValue.monthsInYear; i += 1) {
     const value = referenceValue.with({ month: i + 1 });
-    const date = new Date(value.toString());
+    const date = new Date(value.year, value.month - 1, value.day, 0, 0, 0, 0);
 
     const isBeforeMinValue =
       !!minValue &&
