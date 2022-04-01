@@ -1,14 +1,9 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { Calendar, useTempocal } from "@tempocal/react";
+import { Calendar, DateRange, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { Input } from "../Input";
 import { Select } from "../Select";
-
-type DateRange =
-  | [undefined, undefined]
-  | [Temporal.PlainDate, undefined]
-  | [Temporal.PlainDate, Temporal.PlainDate];
 
 const locale = "en-US";
 
@@ -31,16 +26,6 @@ export function DateRangePicker() {
 
   const [hoverValue, setHoveredValue] = React.useState<Temporal.PlainDate>();
 
-  const setValue = React.useCallback((value: Temporal.PlainDate) => {
-    setValues(([value1, value2]) => {
-      if (value1 && !value2) {
-        return [value1, value].sort(Temporal.PlainDate.compare) as DateRange;
-      }
-
-      return [value, undefined] as DateRange;
-    });
-  }, []);
-
   const {
     calendarProps,
     calendarValue,
@@ -53,9 +38,9 @@ export function DateRangePicker() {
     locale,
     maxValue,
     minValue,
-    mode: "date",
-    setValue,
-    value: values[0],
+    mode: "daterange",
+    setValue: setValues,
+    value: values,
   });
 
   const dateFormatter = React.useMemo(() => {

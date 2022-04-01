@@ -24,15 +24,33 @@ function useYears(
   );
 }
 
+export type DateRange =
+  | [undefined, undefined]
+  | [Temporal.PlainDate, undefined]
+  | [Temporal.PlainDate, Temporal.PlainDate];
+
+export type DateTimeRange =
+  | [undefined, undefined]
+  | [Temporal.PlainDateTime, undefined]
+  | [Temporal.PlainDateTime, Temporal.PlainDateTime];
+
 type RequiredValue<Mode> = Mode extends "date"
   ? Temporal.PlainDate
+  : Mode extends "daterange"
+  ? DateRange
   : Mode extends "datetime"
   ? Temporal.PlainDateTime
+  : Mode extends "datetimerange"
+  ? DateTimeRange
   : never;
 
 type ChangeValue<Mode> = Mode extends "date"
   ? Temporal.PlainDate | Temporal.PlainDateLike
+  : Mode extends "daterange"
+  ? Temporal.PlainDate | Temporal.PlainDateLike
   : Mode extends "datetime"
+  ? Temporal.PlainDateTime | Temporal.PlainDateTimeLike
+  : Mode extends "datetimerange"
   ? Temporal.PlainDateTime | Temporal.PlainDateTimeLike
   : never;
 
@@ -41,7 +59,9 @@ export type Locale = Exclude<
   undefined
 >;
 
-export function useTempocal<Mode extends "date" | "datetime">({
+export function useTempocal<
+  Mode extends "date" | "daterange" | "datetime" | "datetimerange"
+>({
   clampCalendarValue,
   locale,
   maxValue,
@@ -59,11 +79,15 @@ export function useTempocal<Mode extends "date" | "datetime">({
   value: RequiredValue<Mode> | undefined;
 }) {
   const [calendarValue, setCalendarValue] = React.useState(() => {
-    if (value) {
-      return Temporal.PlainDate.from(value);
+    if (!value || (Array.isArray(value) && !value[0])) {
+      return Temporal.Now.plainDate("iso8601");
     }
 
-    return Temporal.Now.plainDate("iso8601");
+    if (Array.isArray(value)) {
+      return Temporal.PlainDate.from(value[0]);
+    }
+
+    return Temporal.PlainDate.from(value);
   });
 
   const months = useMonths(locale, calendarValue, minValue, maxValue);
@@ -121,29 +145,43 @@ export function useTempocal<Mode extends "date" | "datetime">({
 
   const onChangeSelectedValue = React.useCallback(
     (params: ChangeValue<Mode>) => {
-      if (
-        params instanceof Temporal.PlainDate ||
-        params instanceof Temporal.PlainDateTime
-      ) {
-        // @ts-expect-error Help.
-        setValue(params);
+      const nextValue = (() => {
+        if (
+          params instanceof Temporal.PlainDate ||
+          params instanceof Temporal.PlainDateTime
+        ) {
+          return params;
+        }
 
-        return;
-      }
+        if (Array.isArray(value) && value[0]) {
+          return value[0].with(params);
+        }
 
-      if (value) {
-        // @ts-expect-error Help.
-        setValue(value.with(params));
+        if (!Array.isArray(value) && value) {
+          return value.with(params);
+        }
 
-        return;
-      }
-
-      setValue(
-        // @ts-expect-error Help.
-        mode === "date"
+        return mode === "date"
           ? Temporal.Now.plainDate("iso8601").with(params)
-          : Temporal.Now.plainDateTime("iso8601").with(params)
-      );
+          : Temporal.Now.plainDateTime("iso8601").with(params);
+      })();
+
+      if (Array.isArray(value)) {
+        if (value[0] && !value[1]) {
+          setValue(
+            // @ts-expect-error Help.
+            [value[0], nextValue].sort(Temporal.PlainDate.compare) as DateRange
+          );
+        } else {
+          // @ts-expect-error Help.
+          setValue([nextValue, undefined] as DateRange);
+        }
+
+        return;
+      }
+
+      // @ts-expect-error Help.
+      setValue(value ? value.with(nextValue) : nextValue);
     },
     [mode, setValue, value]
   );
