@@ -1,5 +1,12 @@
 # @tempocal/core
 
+## 0.10.1
+
+### Patch Changes
+
+- 86e47b1: Update dependencies
+- bf6528f: fix: create date from values instead of parsing
+
 ## 0.10.0
 
 ### Minor Changes
