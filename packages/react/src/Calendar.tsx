@@ -30,7 +30,7 @@ type MonthProps = {
   >;
   renderHeader?: (date: Temporal.PlainDate) => React.ReactNode;
   weekdayProps?: (props: {
-    weekday: number;
+    dayOfWeek: number;
     longName: string;
     shortName: string;
     narrowName: string;
@@ -39,7 +39,7 @@ type MonthProps = {
     HTMLLIElement
   >;
   renderWeekday?: (props: {
-    weekday: number;
+    dayOfWeek: number;
     longName: string;
     shortName: string;
     narrowName: string;
@@ -192,7 +192,7 @@ function Month({
         </li>
       )}
       {weekdays.map((weekday) => (
-        <li key={weekday.weekday} {...weekdayProps?.(weekday)}>
+        <li key={weekday.dayOfWeek} {...weekdayProps?.(weekday)}>
           {renderWeekday ? renderWeekday(weekday) : weekday.shortName}
         </li>
       ))}

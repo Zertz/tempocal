@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
-import { getMonths } from "../tempocal-core";
+import { getMonths } from "../src/getMonths";
 
 test("getMonths", () => {
   const months = getMonths(

@@ -1,50 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
-import {
-  getCalendarMonthDateRange,
-  getMonthEndDate,
-  getMonthStartDate,
-} from "../tempocal-core";
-
-test("getMonthStartDate", () => {
-  const date = getMonthStartDate(
-    Temporal.PlainDate.from({
-      year: 2022,
-      month: 3,
-      day: 7,
-    })
-  );
-
-  expect(
-    date.equals(
-      Temporal.PlainDate.from({
-        year: 2022,
-        month: 3,
-        day: 1,
-      })
-    )
-  ).toBeTruthy();
-});
-
-test("getMonthEndDate", () => {
-  const date = getMonthEndDate(
-    Temporal.PlainDate.from({
-      year: 2022,
-      month: 3,
-      day: 7,
-    })
-  );
-
-  expect(
-    date.equals(
-      Temporal.PlainDate.from({
-        year: 2022,
-        month: 3,
-        day: 31,
-      })
-    )
-  ).toBeTruthy();
-});
+import { getCalendarMonthDateRange } from "../src/getCalendarMonthDateRange";
 
 test("getCalendarMonthDateRange (without rollover)", () => {
   const { start, end } = getCalendarMonthDateRange(
