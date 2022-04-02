@@ -181,7 +181,7 @@ export function useTempocal<
       }
 
       // @ts-expect-error Help.
-      setValue(value ? value.with(nextValue) : nextValue);
+      setValue(nextValue);
     },
     [mode, setValue, value]
   );
