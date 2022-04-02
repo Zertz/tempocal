@@ -1,5 +1,14 @@
 # @tempocal/www
 
+## 1.1.3
+
+### Patch Changes
+
+- 86e47b1: Update dependencies
+- Updated dependencies [ef76393]
+- Updated dependencies [86e47b1]
+  - @tempocal/react@0.10.0
+
 ## 1.1.2
 
 ### Patch Changes
