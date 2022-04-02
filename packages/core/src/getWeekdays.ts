@@ -3,9 +3,12 @@ import { getFirstDayOfWeek } from "./getFirstDayOfWeek";
 
 export function getWeekdays(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  daysInWeek: number
+  startOfWeek?: number
 ) {
-  const firstDayOfWeek = getFirstDayOfWeek(Temporal.Now.plainDate("iso8601"));
+  const firstDayOfWeek = getFirstDayOfWeek(
+    Temporal.Now.plainDate("iso8601"),
+    startOfWeek
+  );
 
   const longWeekdayFormatter = new Intl.DateTimeFormat(locale, {
     weekday: "long",
@@ -26,7 +29,7 @@ export function getWeekdays(
     narrowName: string;
   }[] = [];
 
-  for (let i = 0; i < daysInWeek; i += 1) {
+  for (let i = 0; i < firstDayOfWeek.daysInWeek; i += 1) {
     const value = firstDayOfWeek.add({ days: i });
     const date = new Date(value.year, value.month - 1, value.day, 0, 0, 0, 0);
 
