@@ -1,8 +1,8 @@
 import { expect, test } from "vitest";
 import { getWeekdays } from "../src/getWeekdays";
 
-test("getWeekdays (startOfWeek = default)", () => {
-  const weekdays = getWeekdays("en-US");
+test("getWeekdays (startOfWeek = 7)", () => {
+  const weekdays = getWeekdays("en-US", 7);
 
   expect(weekdays.map(({ dayOfWeek }) => dayOfWeek)).toEqual([
     7, 1, 2, 3, 4, 5, 6,

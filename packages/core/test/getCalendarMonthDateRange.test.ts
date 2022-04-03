@@ -9,7 +9,8 @@ test("getCalendarMonthDateRange (without rollover)", () => {
       month: 3,
       day: 7,
     }),
-    false
+    false,
+    7
   );
 
   expect(
@@ -40,7 +41,8 @@ test("getCalendarMonthDateRange (with rollover)", () => {
       month: 7,
       day: 7,
     }),
-    true
+    true,
+    7
   );
 
   expect(
