@@ -14,6 +14,7 @@ type MonthProps = {
   maxValue?: Temporal.PlainDate | undefined;
   minValue?: Temporal.PlainDate | undefined;
   rollover?: boolean;
+  startOfWeek?: number;
   value: Value;
   calendarProps?: () => Omit<
     React.DetailedHTMLProps<
@@ -66,10 +67,14 @@ type MonthProps = {
   renderFooter?: (date: Temporal.PlainDate) => React.ReactNode;
 };
 
-function useCalendarMonthDateRange(value: Value, rollover: boolean) {
+function useCalendarMonthDateRange(
+  value: Value,
+  rollover: boolean,
+  startOfWeek: number
+) {
   return React.useMemo(
-    () => getCalendarMonthDateRange(value, rollover),
-    [rollover, value]
+    () => getCalendarMonthDateRange(value, rollover, startOfWeek),
+    [rollover, startOfWeek, value]
   );
 }
 
@@ -79,11 +84,11 @@ function useMonthStartDate(value: Value) {
 
 function useWeekdays(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  daysInWeek: number
+  startOfWeek: number
 ) {
   return React.useMemo(
-    () => getWeekdays(locale, daysInWeek),
-    [daysInWeek, locale]
+    () => getWeekdays(locale, startOfWeek),
+    [locale, startOfWeek]
   );
 }
 
@@ -92,6 +97,7 @@ export function Calendar({
   maxValue,
   minValue,
   rollover,
+  startOfWeek,
   value,
   calendarProps,
   headerProps,
@@ -129,6 +135,7 @@ export function Calendar({
           maxValue={maxValue}
           minValue={minValue}
           rollover={rollover}
+          startOfWeek={startOfWeek}
           value={value.add({ months: month - monthsBefore })}
           calendarProps={calendarProps}
           headerProps={headerProps}
@@ -150,6 +157,7 @@ function Month({
   maxValue,
   minValue,
   rollover = false,
+  startOfWeek = 7,
   value,
   calendarProps,
   headerProps,
@@ -161,9 +169,14 @@ function Month({
   footerProps,
   renderFooter,
 }: MonthProps) {
-  const { start, end } = useCalendarMonthDateRange(value, rollover);
+  const { start, end } = useCalendarMonthDateRange(
+    value,
+    rollover,
+    startOfWeek
+  );
+
   const monthStartDate = useMonthStartDate(value);
-  const weekdays = useWeekdays(locale, value.daysInWeek);
+  const weekdays = useWeekdays(locale, startOfWeek);
 
   const days = React.useMemo(
     () =>
@@ -208,6 +221,7 @@ function Month({
           dayProps={dayProps}
           renderDay={renderDay}
           rollover={rollover}
+          startOfWeek={startOfWeek}
         />
       ))}
       {renderFooter && (
@@ -230,11 +244,14 @@ function Day({
   disabled,
   dayProps,
   renderDay,
-  rollover = false,
-}: Pick<MonthProps, "dayProps" | "renderDay" | "rollover"> & {
+  rollover,
+  startOfWeek,
+}: Pick<MonthProps, "dayProps" | "renderDay"> & {
   date: Temporal.PlainDate;
   day: number;
   disabled: boolean;
+  rollover: boolean;
+  startOfWeek: number;
 }) {
   const props = React.useMemo(() => {
     const plainDateLike: Temporal.PlainDateLike = {
@@ -257,7 +274,10 @@ function Day({
       style={
         !rollover && day === 0
           ? {
-              gridColumnStart: date.dayOfWeek === 7 ? 1 : date.dayOfWeek + 1,
+              gridColumnStart:
+                startOfWeek > date.dayOfWeek
+                  ? date.daysInWeek - (startOfWeek - date.dayOfWeek) + 1
+                  : Math.abs(startOfWeek - date.dayOfWeek) + 1,
             }
           : undefined
       }

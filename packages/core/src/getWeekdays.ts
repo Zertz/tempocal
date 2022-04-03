@@ -3,7 +3,7 @@ import { getFirstDayOfWeek } from "./getFirstDayOfWeek";
 
 export function getWeekdays(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  startOfWeek?: number
+  startOfWeek: number
 ) {
   const firstDayOfWeek = getFirstDayOfWeek(
     Temporal.Now.plainDate("iso8601"),

@@ -2,10 +2,7 @@ import { Temporal } from "@js-temporal/polyfill";
 
 type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 
-export function getFirstDayOfWeek(
-  value: Value,
-  startOfWeek = value.daysInWeek
-) {
+export function getFirstDayOfWeek(value: Value, startOfWeek: number) {
   let firstDayOfWeek: Value | undefined = undefined;
 
   do {

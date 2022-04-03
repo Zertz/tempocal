@@ -4,7 +4,11 @@ import { getMonthStartDate } from "./getMonthStartDate";
 
 type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 
-export function getCalendarMonthDateRange(value: Value, rollover: boolean) {
+export function getCalendarMonthDateRange(
+  value: Value,
+  rollover: boolean,
+  startOfWeek: number
+) {
   const start = getMonthStartDate(value);
   const end = getMonthEndDate(value);
 
@@ -16,15 +20,17 @@ export function getCalendarMonthDateRange(value: Value, rollover: boolean) {
   }
 
   return {
-    start:
-      start.dayOfWeek === start.daysInWeek
-        ? start.subtract({ days: start.daysInWeek })
-        : start.subtract({ days: start.dayOfWeek }),
+    start: start.subtract({
+      days:
+        start.dayOfWeek > startOfWeek
+          ? start.dayOfWeek - startOfWeek
+          : start.daysInWeek - Math.abs(start.dayOfWeek - startOfWeek),
+    }),
     end: end.add({
       days:
-        end.dayOfWeek === end.daysInWeek
-          ? end.daysInWeek - 1
-          : end.daysInWeek - end.dayOfWeek - 1 || end.daysInWeek,
+        startOfWeek > end.dayOfWeek
+          ? Math.abs(end.dayOfWeek - startOfWeek) - 1 || end.daysInWeek
+          : end.daysInWeek - Math.abs(end.dayOfWeek - startOfWeek) - 1,
     }),
   };
 }

@@ -3,12 +3,14 @@ import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { Code } from "../Code";
+import { Input } from "../Input";
 import { Select } from "../Select";
 
 export function DatePicker() {
   const [clampCalendarValue, setClampCalendarValue] = React.useState(true);
   const [locale, setLocale] = React.useState<Locale>("en-US");
   const [rollover, setRollover] = React.useState(true);
+  const [startOfWeek, setStartOfWeek] = React.useState(7);
 
   const [value, setValue] = React.useState(
     Temporal.PlainDate.from({
@@ -73,6 +75,7 @@ export function DatePicker() {
       <Calendar
         {...calendarProps}
         rollover={rollover}
+        startOfWeek={startOfWeek}
         calendarProps={() => ({
           className:
             "flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center w-72",
@@ -207,6 +210,17 @@ export function DatePicker() {
             </p>
           </div>
         </div>
+        <Input
+          hint="Monday = 1 and Sunday = 7"
+          id="startOfWeek"
+          label="Start of week"
+          max={7}
+          min={1}
+          name="startOfWeek"
+          onChange={({ target: { value } }) => setStartOfWeek(Number(value))}
+          type="number"
+          value={startOfWeek}
+        />
       </fieldset>
     </div>
   );
