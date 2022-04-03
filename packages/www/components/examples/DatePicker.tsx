@@ -111,8 +111,8 @@ export function DatePicker() {
           </>
         )}
         weekdayProps={() => ({ className: "font-medium" })}
-        renderWeekday={({ weekday, narrowName }) =>
-          weekday === 2 ? "😭" : narrowName
+        renderWeekday={({ dayOfWeek, narrowName }) =>
+          dayOfWeek === 1 ? "😭" : narrowName
         }
         renderDay={({ date, disabled, plainDateLike }) => (
           <button

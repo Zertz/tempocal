@@ -80,7 +80,7 @@ export function Documentation() {
             <p>Months in the specified locale, in order.</p>
           </div>
           <div className="space-y-2 pt-8">
-            <CodeBlock>{`weekdays: { weekday: number; longName: string; shortName: string; narrowName: string; }[]`}</CodeBlock>
+            <CodeBlock>{`weekdays: { dayOfWeek: number; longName: string; shortName: string; narrowName: string; }[]`}</CodeBlock>
             <p>Weekdays in the specified locale, in order.</p>
           </div>
           <div className="space-y-2 pt-8">
