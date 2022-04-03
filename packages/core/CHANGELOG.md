@@ -1,5 +1,17 @@
 # @tempocal/core
 
+## 0.11.0
+
+### Minor Changes
+
+- 2b89aaa: Add some support for custom start of week day
+- 7412ce0: Add support for custom start of week
+- 2b89aaa: Split core utils, add tests, rename weekday -> dayOfWeek
+
+### Patch Changes
+
+- d8d505e: Upgrade dependencies
+
 ## 0.10.1
 
 ### Patch Changes

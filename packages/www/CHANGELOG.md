@@ -1,5 +1,22 @@
 # @tempocal/www
 
+## 1.2.0
+
+### Minor Changes
+
+- d8d505e: Add support for date range
+- 7412ce0: Add support for custom start of week
+
+### Patch Changes
+
+- d8d505e: Upgrade dependencies
+- 2b89aaa: Split core utils, add tests, rename weekday -> dayOfWeek
+- Updated dependencies [d8d505e]
+- Updated dependencies [7412ce0]
+- Updated dependencies [d8d505e]
+- Updated dependencies [2b89aaa]
+  - @tempocal/react@0.11.0
+
 ## 1.1.3
 
 ### Patch Changes
