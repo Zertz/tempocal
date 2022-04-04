@@ -40,13 +40,16 @@ export default function Main() {
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📅</text></svg>"
           rel="icon"
         />
-        <title>Tempocal</title>
+        <title>
+          @tempocal/react · Highly flexible building blocks to craft calendars
+          with Temporal API
+        </title>
       </Head>
       <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-gray-700 text-gray-200">
         <main className="mx-auto w-full max-w-4xl p-2">
           <div className="pb-8 text-center">
             <h1 className="mb-2 text-4xl font-extrabold sm:text-6xl md:text-7xl">
-              Tempocal
+              @tempocal/react
             </h1>
             <a
               className="text-xl font-light underline transition-colors hover:text-gray-300"

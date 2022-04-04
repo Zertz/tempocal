@@ -1,15 +1,15 @@
-import { CodeBlock } from "./Code";
+import { Code, CodeBlock } from "./Code";
 
 export function Overview() {
   return (
     <>
       <div>
         <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
-          <h2 className="text-4xl font-bold">Features</h2>
+          <h2 className="text-4xl font-bold">Highlights</h2>
         </div>
         <ul className="space-y-2">
           <li>
-            🕰 Built on{" "}
+            🕰 Built with{" "}
             <a
               className="underline hover:text-gray-300"
               href="https://github.com/tc39/proposal-temporal"
@@ -25,7 +25,7 @@ export function Overview() {
             </a>
           </li>
           <li>
-            🤝 Works great with{" "}
+            🤝 Localizable with{" "}
             <a
               className="underline hover:text-gray-300"
               href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl"
@@ -44,9 +44,58 @@ export function Overview() {
       </div>
       <div>
         <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
+          <h2 className="text-4xl font-bold">Features</h2>
+        </div>
+        <ul className="list-inside list-disc space-y-2">
+          <li>
+            <Code>useTempocal</Code> hook handles the intricacies of managing
+            Temporal values for controlling a calendar. It can pick a:
+            <ul className="list-inside list-disc mt-2 pl-6 space-y-2">
+              <li>Date</li>
+              <li>Date range</li>
+              <li>Date and time</li>
+              <li>Date and time range</li>
+            </ul>
+          </li>
+          <li>
+            <Code>Calendar</Code> component covers the basics and render props
+            open up near infinite customizability. It can optionally:
+            <ul className="list-inside list-disc mt-2 pl-6 space-y-2">
+              <li>Fill calendar with days from surrounding months</li>
+              <li>Display multiple months</li>
+              <li>Minimum and maximum dates</li>
+              <li>Custom start of week day</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div className="space-y-4">
+        <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
           <h2 className="text-4xl font-bold">Getting started</h2>
         </div>
         <CodeBlock>npm install @tempocal/react @js-temporal/polyfill</CodeBlock>
+        <CodeBlock>{`import { Temporal } from "@js-temporal/polyfill";
+import { Calendar, useTempocal } from "@tempocal/react";
+import * as React from "react";
+
+export function Example() {
+  const [value, setValue] = React.useState(
+    Temporal.PlainDate.from({
+      year: 2022,
+      month: 1,
+      day: 1,
+    })
+  );
+
+  const { calendarProps } = useTempocal({
+    locale: "en-US",
+    mode: "date",
+    setValue,
+    value,
+  });
+
+  return <Calendar {...calendarProps} />;
+}`}</CodeBlock>
       </div>
       <div>
         <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
