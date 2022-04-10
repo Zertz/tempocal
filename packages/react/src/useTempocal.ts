@@ -154,6 +154,10 @@ export function useTempocal<
   const onChangeSelectedValue = React.useCallback(
     (params: ChangeValue<Mode>) => {
       if (Array.isArray(params)) {
+        if (!["daterange", "datetimerange"].includes(mode)) {
+          return;
+        }
+
         if (!params[0] && !params[1]) {
           // @ts-expect-error Help.
           setValue(params);
