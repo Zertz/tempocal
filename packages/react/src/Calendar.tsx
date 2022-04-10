@@ -23,13 +23,13 @@ type MonthProps = {
     >,
     "style"
   >;
-  headerProps?: (
-    date: Temporal.PlainDate
-  ) => Omit<
+  headerProps?: (props: {
+    date: Temporal.PlainDate;
+  }) => Omit<
     React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>,
     "style"
   >;
-  renderHeader?: (date: Temporal.PlainDate) => React.ReactNode;
+  renderHeader?: (props: { date: Temporal.PlainDate }) => React.ReactNode;
   weekdayProps?: (props: {
     dayOfWeek: number;
     longName: string;
@@ -58,13 +58,13 @@ type MonthProps = {
     disabled: boolean;
     plainDateLike: Temporal.PlainDateLike;
   }) => React.ReactNode;
-  footerProps?: (
-    date: Temporal.PlainDate
-  ) => Omit<
+  footerProps?: (props: {
+    date: Temporal.PlainDate;
+  }) => Omit<
     React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>,
     "style"
   >;
-  renderFooter?: (date: Temporal.PlainDate) => React.ReactNode;
+  renderFooter?: (props: { date: Temporal.PlainDate }) => React.ReactNode;
 };
 
 function useCalendarMonthDateRange(
@@ -196,12 +196,12 @@ function Month({
     >
       {renderHeader && (
         <li
-          {...headerProps?.(monthStartDate)}
+          {...headerProps?.({ date: monthStartDate })}
           style={{
             gridColumn: `span ${value.daysInWeek} / span ${value.daysInWeek}`,
           }}
         >
-          {renderHeader(monthStartDate)}
+          {renderHeader({ date: monthStartDate })}
         </li>
       )}
       {weekdays.map((weekday) => (
@@ -226,12 +226,12 @@ function Month({
       ))}
       {renderFooter && (
         <li
-          {...footerProps?.(monthStartDate)}
+          {...footerProps?.({ date: monthStartDate })}
           style={{
             gridColumn: `span ${value.daysInWeek} / span ${value.daysInWeek}`,
           }}
         >
-          {renderFooter(monthStartDate)}
+          {renderFooter({ date: monthStartDate })}
         </li>
       )}
     </ul>
