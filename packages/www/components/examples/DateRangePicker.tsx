@@ -209,6 +209,15 @@ export function DateRangePicker() {
               >
                 Select year
               </button>
+              <button
+                className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+                onClick={() => {
+                  onChangeSelectedValue([undefined, undefined]);
+                }}
+                type="button"
+              >
+                Clear
+              </button>
             </>
           )}
         />

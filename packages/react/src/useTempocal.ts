@@ -51,6 +51,7 @@ type ChangeValue<Mode> = Mode extends "date"
       | Temporal.PlainDate
       | Temporal.PlainDateLike
       | [Temporal.PlainDate, Temporal.PlainDate]
+      | [undefined, undefined]
   : Mode extends "datetime"
   ? Temporal.PlainDateTime | Temporal.PlainDateTimeLike
   : Mode extends "datetimerange"
@@ -58,6 +59,7 @@ type ChangeValue<Mode> = Mode extends "date"
       | Temporal.PlainDateTime
       | Temporal.PlainDateTimeLike
       | [Temporal.PlainDateTime, Temporal.PlainDateTime]
+      | [undefined, undefined]
   : never;
 
 export type Locale = Exclude<
@@ -152,7 +154,10 @@ export function useTempocal<
   const onChangeSelectedValue = React.useCallback(
     (params: ChangeValue<Mode>) => {
       if (Array.isArray(params)) {
-        if (
+        if (!params[0] && !params[1]) {
+          // @ts-expect-error Help.
+          setValue(params);
+        } else if (
           params[0] instanceof Temporal.PlainDate &&
           params[1] instanceof Temporal.PlainDate &&
           mode === "daterange"
