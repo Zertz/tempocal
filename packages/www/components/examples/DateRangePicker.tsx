@@ -181,14 +181,14 @@ export function DateRangePicker() {
           footerProps={() => ({
             className: "flex gap-2 mx-auto",
           })}
-          renderFooter={() => (
+          renderFooter={(date) => (
             <>
               <button
                 className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
                 onClick={() => {
                   onChangeSelectedValue([
-                    getMonthStartDate(calendarValue),
-                    getMonthEndDate(calendarValue),
+                    getMonthStartDate(date),
+                    getMonthEndDate(date),
                   ]);
                 }}
                 type="button"
@@ -199,10 +199,8 @@ export function DateRangePicker() {
                 className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
                 onClick={() => {
                   onChangeSelectedValue([
-                    getMonthStartDate(calendarValue.with({ month: 1 })),
-                    getMonthEndDate(
-                      calendarValue.with({ month: calendarValue.monthsInYear })
-                    ),
+                    getMonthStartDate(date.with({ month: 1 })),
+                    getMonthEndDate(date.with({ month: date.monthsInYear })),
                   ]);
                 }}
                 type="button"
