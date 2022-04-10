@@ -75,12 +75,12 @@ export function DateRangePicker() {
           calendarProps={() => ({
             className: "gap-1 text-center w-72",
           })}
-          headerProps={(date) => ({
+          headerProps={({ date }) => ({
             className: classnames("flex gap-2 font-bold w-min", {
               "mx-auto": date.month !== calendarValue.month,
             }),
           })}
-          renderHeader={(date) => {
+          renderHeader={({ date }) => {
             if (date.month !== calendarValue.month) {
               return months[date.month - 1].longName;
             }
@@ -181,7 +181,7 @@ export function DateRangePicker() {
           footerProps={() => ({
             className: "flex gap-2 mx-auto",
           })}
-          renderFooter={(date) => (
+          renderFooter={({ date }) => (
             <>
               <button
                 className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
