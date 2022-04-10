@@ -1,4 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { getMonthEndDate, getMonthStartDate } from "@tempocal/core";
 import { Calendar, DateRange, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
@@ -9,7 +10,7 @@ const locale = "en-US";
 
 export function DateRangePicker() {
   const [monthsBefore, setMonthsBefore] = React.useState(0);
-  const [monthsAfter, setMonthsAfter] = React.useState(1);
+  const [monthsAfter, setMonthsAfter] = React.useState(0);
 
   const [values, setValues] = React.useState<DateRange>([
     Temporal.Now.plainDate("iso8601").subtract({ days: 3 }),
@@ -177,6 +178,39 @@ export function DateRangePicker() {
               </button>
             );
           }}
+          footerProps={() => ({
+            className: "flex gap-2 mx-auto",
+          })}
+          renderFooter={() => (
+            <>
+              <button
+                className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+                onClick={() => {
+                  onChangeSelectedValue([
+                    getMonthStartDate(calendarValue),
+                    getMonthEndDate(calendarValue),
+                  ]);
+                }}
+                type="button"
+              >
+                Select month
+              </button>
+              <button
+                className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+                onClick={() => {
+                  onChangeSelectedValue([
+                    getMonthStartDate(calendarValue.with({ month: 1 })),
+                    getMonthEndDate(
+                      calendarValue.with({ month: calendarValue.monthsInYear })
+                    ),
+                  ]);
+                }}
+                type="button"
+              >
+                Select year
+              </button>
+            </>
+          )}
         />
       </div>
       <fieldset className="flex flex-col gap-2">
