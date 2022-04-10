@@ -1,5 +1,20 @@
 # @tempocal/www
 
+## 1.3.0
+
+### Minor Changes
+
+- 1cb7764: Select both range values at once
+- 1cb7764: Clear selected date range
+
+### Patch Changes
+
+- 1cb7764: Update footer and header signature to match day and weekday
+- Updated dependencies [1cb7764]
+- Updated dependencies [1cb7764]
+- Updated dependencies [1cb7764]
+  - @tempocal/react@0.12.0
+
 ## 1.2.0
 
 ### Minor Changes
