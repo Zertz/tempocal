@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.12.0
+
+### Minor Changes
+
+- a5544cc: Add dateToTemporal and temporalToDate functions
+
 ## 0.11.0
 
 ### Minor Changes
