@@ -1,5 +1,12 @@
 # @tempocal/react
 
+## 0.12.1
+
+### Patch Changes
+
+- Updated dependencies [a5544cc]
+  - @tempocal/core@0.12.0
+
 ## 0.12.0
 
 ### Minor Changes
