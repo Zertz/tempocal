@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.12.1
+
+### Patch Changes
+
+- 7d5f301: Add missing exports for dateToTemporal and temporalToDate
+
 ## 0.12.0
 
 ### Minor Changes

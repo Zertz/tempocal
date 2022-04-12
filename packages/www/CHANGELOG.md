@@ -1,5 +1,11 @@
 # @tempocal/www
 
+## 1.3.2
+
+### Patch Changes
+
+- @tempocal/react@0.12.2
+
 ## 1.3.1
 
 ### Patch Changes
