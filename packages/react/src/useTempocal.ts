@@ -106,7 +106,7 @@ export function useTempocal<
       if (!clampCalendarValue) {
         setCalendarValue(nextCalendarValue);
 
-        return;
+        return nextCalendarValue;
       }
 
       if (
@@ -115,7 +115,7 @@ export function useTempocal<
       ) {
         setCalendarValue(minValue);
 
-        return;
+        return minValue;
       }
 
       if (
@@ -124,10 +124,12 @@ export function useTempocal<
       ) {
         setCalendarValue(maxValue);
 
-        return;
+        return maxValue;
       }
 
       setCalendarValue(nextCalendarValue);
+      
+      return nextCalendarValue;
     },
     [clampCalendarValue, maxValue, minValue]
   );
@@ -135,18 +137,14 @@ export function useTempocal<
   const onChangeCalendarValue = React.useCallback(
     (params?: Temporal.PlainDate | Temporal.PlainDateLike) => {
       if (!params) {
-        updateCalendarValue(Temporal.Now.plainDate("iso8601"));
-
-        return;
+        return updateCalendarValue(Temporal.Now.plainDate("iso8601"));
       }
 
       if (params instanceof Temporal.PlainDate) {
-        updateCalendarValue(params);
-
-        return;
+        return updateCalendarValue(params);
       }
 
-      updateCalendarValue(calendarValue.with(params));
+      return updateCalendarValue(calendarValue.with(params));
     },
     [calendarValue, updateCalendarValue]
   );
