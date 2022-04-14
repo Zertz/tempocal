@@ -67,7 +67,7 @@ export function DateRangePicker() {
 
   return (
     <div className="flex items-start gap-4">
-      <div className="flex flex-wrap bg-gray-100 text-gray-700 p-2 rounded">
+      <div className="flex flex-wrap gap-2 bg-gray-100 text-gray-700 p-2 rounded">
         <Calendar
           {...calendarProps}
           monthsBefore={monthsBefore}
