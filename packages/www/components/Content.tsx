@@ -1,11 +1,10 @@
-import type { AppProps } from "next/app";
 import { useState } from "react";
 import { DesktopSidebar } from "../components/DesktopSidebar";
 import { MobileHeader } from "../components/MobileHeader";
 import { MobileSidebar } from "../components/MobileSidebar";
-import "../tailwind.css";
+import { Overview } from "../components/Overview";
 
-export default function Tempocal({ Component, pageProps }: AppProps) {
+export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -20,7 +19,7 @@ export default function Tempocal({ Component, pageProps }: AppProps) {
         <div className="flex-1 relative z-0 flex overflow-hidden">
           <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             <div className="py-6 px-4 sm:px-6 lg:px-8 space-y-12 text-gray-200">
-              <Component {...pageProps} />
+              <Overview />
             </div>
           </main>
         </div>

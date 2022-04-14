@@ -67,28 +67,33 @@ export function DateRangePicker() {
 
   return (
     <div className="flex items-start gap-4">
-      <div className="flex flex-wrap gap-4 w-min">
+      <div className="flex flex-wrap bg-gray-100 text-gray-700 p-2 rounded">
         <Calendar
           {...calendarProps}
           monthsBefore={monthsBefore}
           monthsAfter={monthsAfter}
           calendarProps={() => ({
-            className: "gap-1 text-center w-72",
+            className:
+              "flex-shrink-0 gap-1 border border-gray-300 text-gray-700 p-2 rounded text-center w-72",
           })}
           headerProps={({ date }) => ({
-            className: classnames("flex gap-2 font-bold w-min", {
-              "mx-auto": date.month !== calendarValue.month,
+            className: classnames("flex gap-2 font-bold", {
+              "mx-auto":
+                date.year !== calendarValue.year ||
+                date.month !== calendarValue.month,
             }),
           })}
           renderHeader={({ date }) => {
-            if (date.month !== calendarValue.month) {
+            if (
+              date.year !== calendarValue.year ||
+              date.month !== calendarValue.month
+            ) {
               return months[date.month - 1].longName;
             }
 
             return (
               <>
                 <button
-                  className="mr-auto"
                   onClick={() =>
                     onChangeCalendarValue(calendarValue.subtract({ months: 1 }))
                   }
@@ -98,7 +103,7 @@ export function DateRangePicker() {
                   &larr;
                 </button>
                 <Select
-                  className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
+                  className="ml-auto"
                   onChange={({ target: { value } }) =>
                     onChangeCalendarValue({ month: Number(value) })
                   }
@@ -112,7 +117,7 @@ export function DateRangePicker() {
                   ))}
                 </Select>
                 <Select
-                  className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
+                  className="mr-auto"
                   onChange={({ target: { value } }) =>
                     onChangeCalendarValue({ year: Number(value) })
                   }
@@ -126,7 +131,6 @@ export function DateRangePicker() {
                   ))}
                 </Select>
                 <button
-                  className="ml-auto"
                   onClick={() =>
                     onChangeCalendarValue(calendarValue.add({ months: 1 }))
                   }
@@ -184,7 +188,7 @@ export function DateRangePicker() {
           renderFooter={({ date }) => (
             <>
               <button
-                className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+                className="text-sm w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
                 onClick={() => {
                   onChangeSelectedValue([
                     getMonthStartDate(date),
@@ -196,7 +200,7 @@ export function DateRangePicker() {
                 Select month
               </button>
               <button
-                className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+                className="text-sm w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
                 onClick={() => {
                   onChangeSelectedValue([
                     getMonthStartDate(date.with({ month: 1 })),
@@ -208,7 +212,7 @@ export function DateRangePicker() {
                 Select year
               </button>
               <button
-                className="w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+                className="text-sm w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
                 onClick={() => {
                   onChangeSelectedValue([undefined, undefined]);
                 }}
@@ -222,14 +226,12 @@ export function DateRangePicker() {
       </div>
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">Props</legend>
-        <p className="text-sm text-gray-700">
+        <p>
           This example shows one of the many ways a date range picker can work.
         </p>
         <div>
-          <span className="block text-sm font-medium text-gray-700">
-            Selected date range
-          </span>
-          <span className="mt-1 text-sm text-gray-700">
+          <span className="block text-sm font-medium">Selected date range</span>
+          <span className="mt-1 text-sm">
             {formattedDates[0]} - {formattedDates[1]}
           </span>
         </div>

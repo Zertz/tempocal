@@ -2,6 +2,7 @@ import classnames from "classnames";
 import * as React from "react";
 
 export function Select({
+  className,
   label,
   ...props
 }: React.DetailedHTMLProps<
@@ -13,7 +14,7 @@ export function Select({
     | { id?: string; label?: string; title: string }
   )) {
   return (
-    <div>
+    <div className={className}>
       <label
         className={classnames("block text-sm font-medium text-gray-700", {
           "sr-only": !label,

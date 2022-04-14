@@ -72,80 +72,78 @@ export function DatePicker() {
 
   return (
     <div className="flex items-start gap-4">
-      <Calendar
-        {...calendarProps}
-        rollover={rollover}
-        startOfWeek={startOfWeek}
-        calendarProps={() => ({
-          className:
-            "flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center w-72",
-        })}
-        headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
-        renderHeader={() => (
-          <>
-            <Select
-              className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
-              onChange={({ target: { value } }) =>
-                onChangeCalendarValue({ month: Number(value) })
-              }
-              title="Month"
-              value={calendarValue.month}
+      <div className="bg-gray-100 text-gray-700 p-2 rounded">
+        <Calendar
+          {...calendarProps}
+          rollover={rollover}
+          startOfWeek={startOfWeek}
+          calendarProps={() => ({
+            className:
+              "flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center w-72",
+          })}
+          headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
+          renderHeader={() => (
+            <>
+              <Select
+                onChange={({ target: { value } }) =>
+                  onChangeCalendarValue({ month: Number(value) })
+                }
+                title="Month"
+                value={calendarValue.month}
+              >
+                {months.map(({ disabled, month, longName }) => (
+                  <option key={longName} disabled={disabled} value={month}>
+                    {longName}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                onChange={({ target: { value } }) =>
+                  onChangeCalendarValue({ year: Number(value) })
+                }
+                title="Year"
+                value={calendarValue.year}
+              >
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </Select>
+            </>
+          )}
+          weekdayProps={() => ({ className: "font-medium" })}
+          renderWeekday={({ dayOfWeek, narrowName }) =>
+            dayOfWeek === 1 ? "😭" : narrowName
+          }
+          renderDay={({ date, disabled, plainDateLike }) => (
+            <button
+              className={classnames(
+                "w-full rounded border text-gray-700 transition-colors",
+                "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
+                value.equals(date)
+                  ? "border-blue-600 bg-blue-100"
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
+              disabled={disabled || date.dayOfWeek === 1}
+              onClick={() => onChangeSelectedValue(plainDateLike)}
+              type="button"
             >
-              {months.map(({ disabled, month, longName }) => (
-                <option key={longName} disabled={disabled} value={month}>
-                  {longName}
-                </option>
-              ))}
-            </Select>
-            <Select
-              className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
-              onChange={({ target: { value } }) =>
-                onChangeCalendarValue({ year: Number(value) })
-              }
-              title="Year"
-              value={calendarValue.year}
-            >
-              {years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </Select>
-          </>
-        )}
-        weekdayProps={() => ({ className: "font-medium" })}
-        renderWeekday={({ dayOfWeek, narrowName }) =>
-          dayOfWeek === 1 ? "😭" : narrowName
-        }
-        renderDay={({ date, disabled, plainDateLike }) => (
-          <button
-            className={classnames(
-              "w-full rounded border text-gray-700 transition-colors",
-              "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
-              value.equals(date)
-                ? "border-blue-600 bg-blue-100"
-                : "border-gray-300 hover:bg-gray-100"
-            )}
-            disabled={disabled || date.dayOfWeek === 1}
-            onClick={() => onChangeSelectedValue(plainDateLike)}
-            type="button"
-          >
-            {getDayContent(date)}
-          </button>
-        )}
-      />
+              {getDayContent(date)}
+            </button>
+          )}
+        />
+      </div>
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">Props</legend>
-        <p className="text-sm text-gray-700">
+        <p>
           Building on the previous example, this one adds a bunch of fancy
           features: month and year selectors, min and max dates, disabled days
           are red, Monday's are 😭 and disabled, and December 25th is 🎄.
         </p>
         <div>
-          <span className="block text-sm font-medium text-gray-700">
-            Selected date
-          </span>
-          <span className="mt-1 text-sm text-gray-700">{formattedDate}</span>
+          <span className="block text-sm font-medium">Selected date</span>
+          <span className="mt-1 text-sm">{formattedDate}</span>
         </div>
         <Select
           id="select-locale"
@@ -177,13 +175,10 @@ export function DatePicker() {
             />
           </div>
           <div className="ml-3 text-sm">
-            <label
-              htmlFor="clampCalendarValue"
-              className="font-medium text-gray-700"
-            >
+            <label htmlFor="clampCalendarValue" className="font-medium">
               clampCalendarValue
             </label>
-            <p id="clampCalendarValue-description" className="text-gray-500">
+            <p id="clampCalendarValue-description">
               When <Code>minValue</Code> and/or <Code>maxValue</Code> are set,
               automatically keep <Code>calendarValue</Code> within those values.
             </p>
@@ -202,10 +197,10 @@ export function DatePicker() {
             />
           </div>
           <div className="ml-3 text-sm">
-            <label htmlFor="rollover" className="font-medium text-gray-700">
+            <label htmlFor="rollover" className="font-medium">
               rollover
             </label>
-            <p id="rollover-description" className="text-gray-500">
+            <p id="rollover-description">
               Fill the calendar with days from the previous and next months.
             </p>
           </div>

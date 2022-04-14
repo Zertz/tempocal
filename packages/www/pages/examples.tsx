@@ -1,11 +1,11 @@
-import * as React from "react";
-import { Basic } from "./examples/Basic";
-import { DateInput } from "./examples/DateInput";
-import { DatePicker } from "./examples/DatePicker";
-import { DateRangePicker } from "./examples/DateRangePicker";
-import { DateTimePicker } from "./examples/DateTimePicker";
+import { useEffect, useState } from "react";
+import { Basic } from "../components/examples/Basic";
+import { DateInput } from "../components/examples/DateInput";
+import { DatePicker } from "../components/examples/DatePicker";
+import { DateRangePicker } from "../components/examples/DateRangePicker";
+import { DateTimePicker } from "../components/examples/DateTimePicker";
 
-export function Examples() {
+export default function ExamplesPage() {
   return (
     <>
       <Example
@@ -51,6 +51,12 @@ function Example({
   title: string;
   url: string;
 }) {
+  const [client, setClient] = useState(false);
+
+  useEffect(() => {
+    setClient(true);
+  }, []);
+
   return (
     <div>
       <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
@@ -62,8 +68,8 @@ function Example({
           View source
         </a>
       </div>
-      <div className="flex flex-col items-start rounded bg-gray-200 p-2 text-gray-700">
-        {children}
+      <div className="flex flex-col items-start">
+        {client ? children : null}
       </div>
     </div>
   );
