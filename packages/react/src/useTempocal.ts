@@ -128,7 +128,7 @@ export function useTempocal<
       }
 
       setCalendarValue(nextCalendarValue);
-      
+
       return nextCalendarValue;
     },
     [clampCalendarValue, maxValue, minValue]
@@ -153,7 +153,9 @@ export function useTempocal<
     (params: ChangeValue<Mode>) => {
       if (Array.isArray(params)) {
         if (!["daterange", "datetimerange"].includes(mode)) {
-          return;
+          throw new Error(
+            `Received an array in onChangeSelectedValue but mode is ${mode}`
+          );
         }
 
         if (!params[0] && !params[1]) {
@@ -173,9 +175,17 @@ export function useTempocal<
         ) {
           // @ts-expect-error Help.
           setValue(params);
+        } else {
+          throw new Error(
+            `Received an array of mixed values in onChangeSelectedValue but expected a pair of ${
+              mode === "daterange"
+                ? "Temporal.PlainDate"
+                : "Temporal.PlainDateTime"
+            }`
+          );
         }
 
-        return;
+        return params as DateRange;
       }
 
       const nextValue = (() => {
@@ -200,21 +210,22 @@ export function useTempocal<
       })();
 
       if (Array.isArray(value)) {
-        if (value[0] && !value[1]) {
-          setValue(
-            // @ts-expect-error Help.
-            [value[0], nextValue].sort(Temporal.PlainDate.compare) as DateRange
-          );
-        } else {
-          // @ts-expect-error Help.
-          setValue([nextValue, undefined] as DateRange);
-        }
+        const range = (
+          value[0] && !value[1]
+            ? [value[0], nextValue].sort(Temporal.PlainDate.compare)
+            : [nextValue, undefined]
+        ) as DateRange;
 
-        return;
+        // @ts-expect-error Help.
+        setValue(range);
+
+        return range;
       }
 
       // @ts-expect-error Help.
       setValue(nextValue);
+
+      return nextValue;
     },
     [mode, setValue, value]
   );
