@@ -42,9 +42,13 @@ importers:
     specifiers:
       '@js-temporal/polyfill': ^0.4.0
       '@tempocal/core': workspace:*
+      '@testing-library/jest-dom': ^5.16.3
+      '@testing-library/react': ^13.0.0
+      '@testing-library/react-hooks': ^8.0.0
       '@types/react': ^17.0.43
       '@types/react-dom': ^17.0.14
       '@vitejs/plugin-react': ^1.3.0
+      jsdom: ^19.0.0
       react: ^18.0.0
       react-dom: ^18.0.0
       tsup: ^5.12.3
@@ -54,14 +58,18 @@ importers:
       '@tempocal/core': link:../core
     devDependencies:
       '@js-temporal/polyfill': 0.4.0
+      '@testing-library/jest-dom': 5.16.3
+      '@testing-library/react': 13.0.0_react-dom@18.0.0+react@18.0.0
+      '@testing-library/react-hooks': 8.0.0_c13207e15fed56fc7b9b70ab319ad0ff
       '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
       '@vitejs/plugin-react': 1.3.0
+      jsdom: 19.0.0
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       tsup: 5.12.3_typescript@4.6.3
       vite: 2.9.1
-      vitest: 0.8.2
+      vitest: 0.8.2_jsdom@19.0.0
 
   packages/www:
     specifiers:
@@ -813,6 +821,29 @@ packages:
       dom-accessibility-api: 0.5.13
       lodash: 4.17.21
       redent: 3.0.0
+    dev: true
+
+  /@testing-library/react-hooks/8.0.0_c13207e15fed56fc7b9b70ab319ad0ff:
+    resolution: {integrity: sha512-uZqcgtcUUtw7Z9N32W13qQhVAD+Xki2hxbTR461MKax8T6Jr8nsUvZB+vcBTkzY2nFvsUet434CsgF0ncW2yFw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@types/react': ^16.9.0 || ^17.0.0
+      react: ^16.9.0 || ^17.0.0
+      react-dom: ^16.9.0 || ^17.0.0
+      react-test-renderer: ^16.9.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react-dom:
+        optional: true
+      react-test-renderer:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.17.8
+      '@types/react': 17.0.43
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+      react-error-boundary: 3.1.4_react@18.0.0
     dev: true
 
   /@testing-library/react/13.0.0_react-dom@18.0.0+react@18.0.0:
@@ -3244,6 +3275,16 @@ packages:
       loose-envify: 1.4.0
       react: 18.0.0
       scheduler: 0.21.0
+
+  /react-error-boundary/3.1.4_react@18.0.0:
+    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.17.8
+      react: 18.0.0
+    dev: true
 
   /react-headless-tabs/4.0.2_react@18.0.0:
     resolution: {integrity: sha512-1B0nc/HE+333NyvqiXrt4wzFNqj6yn5r/tH9e6MpZVb7KzsMq82oUGILTsgBG18PmxAGil+9TkvofEqVwdk5MQ==}
