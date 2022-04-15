@@ -29,12 +29,24 @@ test("useTempocal", () => {
   expect(result.current.calendarProps.minValue).toBeUndefined();
 
   expect(
-    result.current.calendarProps.value instanceof Temporal.PlainDate
+    result.current.calendarProps.value.equals(
+      Temporal.PlainDate.from({
+        year: 2022,
+        month: 4,
+        day: 15,
+      })
+    )
   ).toEqual(true);
 
-  expect(result.current.calendarValue instanceof Temporal.PlainDate).toEqual(
-    true
-  );
+  expect(
+    result.current.calendarValue.equals(
+      Temporal.PlainDate.from({
+        year: 2022,
+        month: 4,
+        day: 15,
+      })
+    )
+  ).toEqual(true);
 
   expect(result.current.months).toHaveLength(12);
   expect(result.current.years).deep.equal([]);
