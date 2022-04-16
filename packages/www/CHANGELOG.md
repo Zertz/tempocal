@@ -1,5 +1,24 @@
 # @tempocal/www
 
+## 1.4.0
+
+### Minor Changes
+
+- 397059a: Return hours and minutes based on min/max
+
+### Patch Changes
+
+- 92d882b: Replace Date constructors with temporalToDate
+- 749a691: Upgrade dependencies
+- Updated dependencies [df63b0f]
+- Updated dependencies [397059a]
+- Updated dependencies [b9b962c]
+- Updated dependencies [517d47e]
+- Updated dependencies [92d882b]
+- Updated dependencies [749a691]
+  - @tempocal/react@0.13.0
+  - @tempocal/core@0.13.0
+
 ## 1.3.2
 
 ### Patch Changes
