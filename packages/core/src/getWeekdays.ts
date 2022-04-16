@@ -1,5 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { getFirstDayOfWeek } from "./getFirstDayOfWeek";
+import { temporalToDate } from "./temporalToDate";
 
 export function getWeekdays(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
@@ -31,7 +32,7 @@ export function getWeekdays(
 
   for (let i = 0; i < firstDayOfWeek.daysInWeek; i += 1) {
     const value = firstDayOfWeek.add({ days: i });
-    const date = new Date(value.year, value.month - 1, value.day, 0, 0, 0, 0);
+    const date = temporalToDate(value);
 
     weekdays.push({
       dayOfWeek: value.dayOfWeek,

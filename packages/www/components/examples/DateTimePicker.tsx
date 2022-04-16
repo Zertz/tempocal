@@ -1,4 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { temporalToDate } from "@tempocal/core";
 import { Calendar, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
@@ -37,12 +38,6 @@ export function DateTimePicker() {
       timeStyle: "short",
     });
   }, []);
-
-  const formattedDateTime = React.useMemo(() => {
-    return dateTimeFormatter.format(
-      new Date(value.year, value.month - 1, value.day, value.hour, value.minute)
-    );
-  }, [dateTimeFormatter, value]);
 
   return (
     <div className="flex items-start gap-4">
@@ -127,7 +122,9 @@ export function DateTimePicker() {
       <div className="flex flex-col gap-2 text-sm text-gray-700">
         <div>
           <span className="block font-medium">Selected date</span>
-          <span className="mt-1">{formattedDateTime}</span>
+          <span className="mt-1">
+            {dateTimeFormatter.format(temporalToDate(value))}
+          </span>
         </div>
       </div>
     </div>
