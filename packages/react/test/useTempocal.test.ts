@@ -1,4 +1,4 @@
-import { Temporal } from "@tempocal/core/node_modules/@js-temporal/polyfill";
+import { Temporal } from "@js-temporal/polyfill";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { expect, test } from "vitest";
 import { useTempocal } from "../tempocal-react";
@@ -19,7 +19,7 @@ test("useTempocal", () => {
     })
   );
 
-  expect(Object.keys(result.current).length).toBe(6);
+  expect(Object.keys(result.current).length).toBe(8);
   expect(Object.keys(result.current.calendarProps).length).toBe(4);
 
   expect(result.current.calendarProps.locale).toBe("en-US");
@@ -46,8 +46,10 @@ test("useTempocal", () => {
     )
   ).toBe(true);
 
-  expect(result.current.months).toHaveLength(12);
   expect(result.current.years).deep.equal([]);
+  expect(result.current.months).toHaveLength(12);
+  expect(result.current.hours).toHaveLength(24);
+  expect(result.current.minutes).toHaveLength(60);
 
   // onChangeCalendarValue
   act(() => {

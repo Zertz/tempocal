@@ -1,28 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { getMonths, getYears } from "@tempocal/core";
+import { getHours, getMinutes, getMonths, getYears } from "@tempocal/core";
 import * as React from "react";
-
-function useMonths(
-  locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  referenceValue: Temporal.PlainDate,
-  minValue?: Temporal.PlainDate,
-  maxValue?: Temporal.PlainDate
-) {
-  return React.useMemo(
-    () => getMonths(locale, referenceValue, minValue, maxValue),
-    [locale, maxValue, minValue, referenceValue]
-  );
-}
-
-function useYears(
-  minValue: Temporal.PlainDate | undefined,
-  maxValue: Temporal.PlainDate | undefined
-) {
-  return React.useMemo(
-    () => getYears(minValue, maxValue),
-    [maxValue, minValue]
-  );
-}
 
 export type DateRange =
   | [undefined, undefined]
@@ -80,8 +58,8 @@ export function useTempocal<
 }: {
   clampCalendarValue?: boolean;
   locale: Locale;
-  maxValue?: Temporal.PlainDate;
-  minValue?: Temporal.PlainDate;
+  maxValue?: Temporal.PlainDate | Temporal.PlainDateTime;
+  minValue?: Temporal.PlainDate | Temporal.PlainDateTime;
   mode: Mode;
   setValue: (value: RequiredValue<Mode>) => void;
   value: RequiredValue<Mode> | undefined;
@@ -98,8 +76,57 @@ export function useTempocal<
     return Temporal.PlainDate.from(value);
   });
 
-  const months = useMonths(locale, calendarValue, minValue, maxValue);
-  const years = useYears(minValue, maxValue);
+  const years = React.useMemo(() => {
+    if (!minValue || !maxValue) {
+      return [];
+    }
+
+    return getYears(
+      minValue instanceof Temporal.PlainDateTime
+        ? minValue.toPlainDate()
+        : minValue,
+      maxValue instanceof Temporal.PlainDateTime
+        ? maxValue.toPlainDate()
+        : maxValue
+    );
+  }, [maxValue, minValue]);
+
+  const months = React.useMemo(() => {
+    return getMonths(
+      locale,
+      calendarValue,
+      minValue instanceof Temporal.PlainDateTime
+        ? minValue.toPlainDate()
+        : minValue,
+      maxValue instanceof Temporal.PlainDateTime
+        ? maxValue.toPlainDate()
+        : maxValue
+    );
+  }, [calendarValue, locale, maxValue, minValue]);
+
+  const hours = React.useMemo(() => {
+    if (
+      value instanceof Temporal.PlainDateTime &&
+      (!minValue || minValue instanceof Temporal.PlainDateTime) &&
+      (!maxValue || maxValue instanceof Temporal.PlainDateTime)
+    ) {
+      return getHours(value, minValue, maxValue);
+    }
+
+    return getHours();
+  }, [value, maxValue, minValue]);
+
+  const minutes = React.useMemo(() => {
+    if (
+      value instanceof Temporal.PlainDateTime &&
+      (!minValue || minValue instanceof Temporal.PlainDateTime) &&
+      (!maxValue || maxValue instanceof Temporal.PlainDateTime)
+    ) {
+      return getMinutes(value, minValue, maxValue);
+    }
+
+    return getMinutes();
+  }, [value, maxValue, minValue]);
 
   const updateCalendarValue = React.useCallback(
     (nextCalendarValue: Temporal.PlainDate) => {
@@ -113,18 +140,28 @@ export function useTempocal<
         minValue &&
         Temporal.PlainDate.compare(nextCalendarValue, minValue) < 0
       ) {
-        setCalendarValue(minValue);
+        const minPlainDateValue =
+          minValue instanceof Temporal.PlainDateTime
+            ? minValue.toPlainDate()
+            : minValue;
 
-        return minValue;
+        setCalendarValue(minPlainDateValue);
+
+        return minPlainDateValue;
       }
 
       if (
         maxValue &&
         Temporal.PlainDate.compare(nextCalendarValue, maxValue) > 0
       ) {
-        setCalendarValue(maxValue);
+        const maxPlainDateValue =
+          maxValue instanceof Temporal.PlainDateTime
+            ? maxValue.toPlainDate()
+            : maxValue;
 
-        return maxValue;
+        setCalendarValue(maxPlainDateValue);
+
+        return maxPlainDateValue;
       }
 
       setCalendarValue(nextCalendarValue);
@@ -233,14 +270,22 @@ export function useTempocal<
   return {
     calendarProps: {
       locale,
-      maxValue,
-      minValue,
+      maxValue:
+        maxValue instanceof Temporal.PlainDateTime
+          ? maxValue.toPlainDate()
+          : maxValue,
+      minValue:
+        minValue instanceof Temporal.PlainDateTime
+          ? minValue.toPlainDate()
+          : minValue,
       value: calendarValue,
     },
     calendarValue,
+    years,
     months,
+    hours,
+    minutes,
     onChangeCalendarValue,
     onChangeSelectedValue,
-    years,
   };
 }
