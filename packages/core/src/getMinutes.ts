@@ -10,26 +10,67 @@ export function getMinutes(
     disabled: boolean;
   }[] = [];
 
+  const isBeforeMinValue = (minute: number) => {
+    if (!value || !minValue) {
+      return false;
+    }
+
+    if (Temporal.PlainDate.compare(value, minValue) < 0) {
+      return true;
+    }
+
+    if (
+      Temporal.PlainDateTime.compare(
+        value.with({
+          minute: 0,
+          second: 0,
+          millisecond: 0,
+          microsecond: 0,
+          nanosecond: 0,
+        }),
+        minValue
+      ) <= 0 &&
+      (value.hour < minValue.hour || minute < minValue.minute)
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const isAfterMinValue = (minute: number) => {
+    if (!value || !maxValue) {
+      return false;
+    }
+
+    if (Temporal.PlainDate.compare(value, maxValue) > 0) {
+      return true;
+    }
+
+    if (
+      Temporal.PlainDateTime.compare(
+        value.with({
+          hour: value.hour + 1,
+          minute: 0,
+          second: 0,
+          millisecond: 0,
+          microsecond: 0,
+          nanosecond: 0,
+        }),
+        maxValue
+      ) >= 0 &&
+      (value.hour > maxValue.hour || minute > maxValue.minute)
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
   for (let i = 0; i < 60; i += 1) {
-    const isBeforeMinValue =
-      !!value &&
-      !!minValue &&
-      (Temporal.PlainDate.compare(value, minValue) < 0 ||
-        (value.toPlainDate().equals(minValue.toPlainDate()) &&
-          value.hour < minValue.hour) ||
-        (value.hour === minValue.hour && i < minValue.minute));
-
-    const isAfterMaxValue =
-      !!value &&
-      !!maxValue &&
-      (Temporal.PlainDate.compare(value, maxValue) > 0 ||
-        (value.toPlainDate().equals(maxValue.toPlainDate()) &&
-          value.hour > maxValue.hour) ||
-        (value.hour === maxValue.hour && i > maxValue.minute));
-
     minutes.push({
       minute: i,
-      disabled: isBeforeMinValue || isAfterMaxValue,
+      disabled: isBeforeMinValue(i) || isAfterMinValue(i),
     });
   }
 
