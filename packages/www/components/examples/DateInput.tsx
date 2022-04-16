@@ -1,4 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { temporalToDate } from "@tempocal/core";
 import { Calendar, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
@@ -36,19 +37,13 @@ export function DateInput() {
     });
   }, []);
 
-  const formattedDate = React.useMemo(() => {
-    return dateFormatter.format(
-      new Date(value.year, value.month - 1, value.day)
-    );
-  }, [dateFormatter, value]);
-
   return (
     <div className="relative flex items-start gap-4">
       <input
         className="rounded px-1"
         onClick={() => setOpen((isOpen) => !isOpen)}
         readOnly
-        title={formattedDate}
+        title={dateFormatter.format(temporalToDate(value))}
         type="text"
         value={`${value.year.toString().padStart(4, "0")}-${value.month
           .toString()

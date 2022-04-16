@@ -1,4 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { temporalToDate } from "@tempocal/core";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
@@ -45,12 +46,6 @@ export function DatePicker() {
       dateStyle: "long",
     });
   }, [locale]);
-
-  const formattedDate = React.useMemo(() => {
-    return dateFormatter.format(
-      new Date(value.year, value.month - 1, value.day)
-    );
-  }, [dateFormatter, value]);
 
   const getDayContent = React.useCallback(({ year, month, day }) => {
     if (month === 12 && day === 25) {
@@ -145,7 +140,9 @@ export function DatePicker() {
           <span className="block text-sm font-medium text-gray-700">
             Selected date
           </span>
-          <span className="mt-1 text-sm text-gray-700">{formattedDate}</span>
+          <span className="mt-1 text-sm text-gray-700">
+            {dateFormatter.format(temporalToDate(value))}
+          </span>
         </div>
         <Select
           id="select-locale"

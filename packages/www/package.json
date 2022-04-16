@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.1",
+    "@tempocal/core": "workspace:*",
     "@tempocal/react": "workspace:*",
     "classnames": "^2.3.1",
     "next": "^12.1.5",
