@@ -24,7 +24,7 @@
     "@js-temporal/polyfill": "^0.4.1",
     "tsup": "^5.12.5",
     "vite": "^2.9.5",
-    "vitest": "^0.8.5"
+    "vitest": "^0.9.3"
   },
   "peerDependencies": {
     "@js-temporal/polyfill": ">=0.4.0"
