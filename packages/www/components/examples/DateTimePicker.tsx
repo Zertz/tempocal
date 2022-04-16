@@ -19,14 +19,21 @@ export function DateTimePicker() {
     })
   );
 
+  const [minValue] = React.useState(value.subtract({ years: 2 }));
+  const [maxValue] = React.useState(value.add({ years: 2 }));
+
   const {
     calendarProps,
     calendarValue,
     months,
+    hours,
+    minutes,
     onChangeCalendarValue,
     onChangeSelectedValue,
   } = useTempocal({
     locale,
+    maxValue,
+    minValue,
     mode: "datetime",
     setValue,
     value,
@@ -87,37 +94,44 @@ export function DateTimePicker() {
               {date.day}
             </button>
           )}
+          footerProps={() => ({
+            className: "mx-auto flex w-min gap-2",
+          })}
+          renderFooter={() => (
+            <>
+              <Select
+                className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
+                onChange={({ target: { value } }) =>
+                  onChangeSelectedValue({ hour: Number(value) })
+                }
+                title="Hours"
+                value={value.hour}
+              >
+                {hours.map(({ disabled, hour }) => (
+                  <option key={hour} disabled={disabled} value={hour}>
+                    {`${hour}`.padStart(2, "0")}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
+                onChange={({ target: { value } }) =>
+                  onChangeSelectedValue({ minute: Number(value) })
+                }
+                title="Minutes"
+                value={value.minute}
+              >
+                {minutes
+                  .filter(({ minute }) => minute % 5 === 0)
+                  .map(({ disabled, minute }) => (
+                    <option key={minute} disabled={disabled} value={minute}>
+                      {`${minute}`.padStart(2, "0")}
+                    </option>
+                  ))}
+              </Select>
+            </>
+          )}
         />
-        <footer className="mx-auto flex w-min gap-2">
-          <Select
-            className="ml-auto w-min rounded border border-gray-300 px-1 py-0.5"
-            onChange={({ target: { value } }) =>
-              onChangeSelectedValue({ hour: Number(value) })
-            }
-            title="Hours"
-            value={value.hour}
-          >
-            {[...Array(24)].map((_, hour) => (
-              <option key={hour} value={hour}>
-                {`${hour}`.padStart(2, "0")}
-              </option>
-            ))}
-          </Select>
-          <Select
-            className="mr-auto w-min rounded border border-gray-300 px-1 py-0.5"
-            onChange={({ target: { value } }) =>
-              onChangeSelectedValue({ minute: Number(value) })
-            }
-            title="Minutes"
-            value={value.minute}
-          >
-            {[...Array(60 / 5)].map((_, minute) => (
-              <option key={minute} value={minute * 5}>
-                {`${minute * 5}`.padStart(2, "0")}
-              </option>
-            ))}
-          </Select>
-        </footer>
       </section>
       <div className="flex flex-col gap-2 text-sm text-gray-700">
         <div>
