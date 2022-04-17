@@ -73,6 +73,8 @@ importers:
 
   packages/www:
     specifiers:
+      '@headlessui/react': insiders
+      '@heroicons/react': ^1.0.6
       '@js-temporal/polyfill': ^0.4.1
       '@tailwindcss/forms': ^0.5.0
       '@tempocal/core': workspace:*
@@ -92,6 +94,8 @@ importers:
       vite: ^2.9.5
       vitest: ^0.9.3
     dependencies:
+      '@headlessui/react': 0.0.0-insiders.b4a4e0b_react-dom@18.0.0+react@18.0.0
+      '@heroicons/react': 1.0.6_react@18.0.0
       '@js-temporal/polyfill': 0.4.1
       '@tempocal/core': link:../core
       '@tempocal/react': link:../react
@@ -579,6 +583,25 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@headlessui/react/0.0.0-insiders.b4a4e0b_react-dom@18.0.0+react@18.0.0:
+    resolution: {integrity: sha512-DQ81n7pLUtX4E1ki3uxiirJsJAEQlvXfI/pWoO2k+TFojXadbIhx4NLfFaCRskVbeItqdhtxOZrpBa6jTFBLAA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+    dev: false
+
+  /@heroicons/react/1.0.6_react@18.0.0:
+    resolution: {integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==}
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      react: 18.0.0
+    dev: false
 
   /@humanwhocodes/config-array/0.9.5:
     resolution: {integrity: sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw==}
