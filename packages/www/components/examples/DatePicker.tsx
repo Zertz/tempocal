@@ -47,23 +47,26 @@ export function DatePicker() {
     });
   }, [locale]);
 
-  const getDayContent = React.useCallback(({ year, month, day }) => {
-    if (month === 12 && day === 25) {
-      return "🎄";
-    }
+  const getDayContent = React.useCallback(
+    ({ year, month, day }: Temporal.PlainDate) => {
+      if (month === 12 && day === 25) {
+        return "🎄";
+      }
 
-    if (year === 2021 && month === 11 && day === 25) {
-      return "⭐️";
-    }
+      if (year === 2021 && month === 11 && day === 25) {
+        return "⭐️";
+      }
 
-    const now = Temporal.Now.plainDate("iso8601");
+      const now = Temporal.Now.plainDate("iso8601");
 
-    if (year === now.year && month === now.month && day === now.day) {
-      return "📅";
-    }
+      if (year === now.year && month === now.month && day === now.day) {
+        return "📅";
+      }
 
-    return day;
-  }, []);
+      return day;
+    },
+    []
+  );
 
   return (
     <div className="flex items-start gap-4">
