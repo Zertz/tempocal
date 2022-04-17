@@ -148,37 +148,19 @@ export function useTempocal<
         return nextCalendarValue;
       }
 
-      if (
-        minValue &&
-        Temporal.PlainDate.compare(nextCalendarValue, minValue) < 0
-      ) {
-        const minPlainDateValue =
-          minValue instanceof Temporal.PlainDateTime
-            ? minValue.toPlainDate()
-            : minValue;
+      const clampedValue = clamp(
+        nextCalendarValue,
+        minValue instanceof Temporal.PlainDateTime
+          ? minValue.toPlainDate()
+          : minValue,
+        maxValue instanceof Temporal.PlainDateTime
+          ? maxValue.toPlainDate()
+          : maxValue
+      );
 
-        setCalendarValue(minPlainDateValue);
+      setCalendarValue(clampedValue);
 
-        return minPlainDateValue;
-      }
-
-      if (
-        maxValue &&
-        Temporal.PlainDate.compare(nextCalendarValue, maxValue) > 0
-      ) {
-        const maxPlainDateValue =
-          maxValue instanceof Temporal.PlainDateTime
-            ? maxValue.toPlainDate()
-            : maxValue;
-
-        setCalendarValue(maxPlainDateValue);
-
-        return maxPlainDateValue;
-      }
-
-      setCalendarValue(nextCalendarValue);
-
-      return nextCalendarValue;
+      return clampedValue;
     },
     [clampCalendarValue, maxValue, minValue]
   );
