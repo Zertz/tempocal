@@ -17,5 +17,5 @@ test("dateToTemporal", () => {
         millisecond: 600,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 });

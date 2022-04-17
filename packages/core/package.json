@@ -1,6 +1,6 @@
 {
   "name": "@tempocal/core",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "repository": "https://github.com/Zertz/tempocal",
   "homepage": "https://tempocal.pierluc.io/",
   "files": [
@@ -21,10 +21,10 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@js-temporal/polyfill": "^0.4.0",
-    "tsup": "^5.12.3",
-    "vite": "^2.9.1",
-    "vitest": "^0.8.2"
+    "@js-temporal/polyfill": "^0.4.1",
+    "tsup": "^5.12.5",
+    "vite": "^2.9.5",
+    "vitest": "^0.9.3"
   },
   "peerDependencies": {
     "@js-temporal/polyfill": ">=0.4.0"

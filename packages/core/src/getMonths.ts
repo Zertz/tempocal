@@ -1,4 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { temporalToDate } from "./temporalToDate";
 
 export function getMonths(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
@@ -28,7 +29,7 @@ export function getMonths(
 
   for (let i = 0; i < referenceValue.monthsInYear; i += 1) {
     const value = referenceValue.with({ month: i + 1 });
-    const date = new Date(value.year, value.month - 1, value.day, 0, 0, 0, 0);
+    const date = temporalToDate(value);
 
     const isBeforeMinValue =
       !!minValue &&

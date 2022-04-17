@@ -19,5 +19,5 @@ test("getMonthStartDate", () => {
         day: 1,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 });

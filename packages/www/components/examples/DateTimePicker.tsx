@@ -1,12 +1,16 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { temporalToDate } from "@tempocal/core";
 import { Calendar, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
+import { Code } from "../Code";
 import { Select } from "../Select";
 
 const locale = "en-US";
 
 export function DateTimePicker() {
+  const [clampSelectedValue, setClampSelectedValue] = React.useState(true);
+
   const [value, setValue] = React.useState(
     Temporal.PlainDateTime.from({
       year: 2021,
@@ -18,14 +22,22 @@ export function DateTimePicker() {
     })
   );
 
+  const [minValue] = React.useState(value.subtract({ years: 2 }));
+  const [maxValue] = React.useState(value.add({ years: 2 }));
+
   const {
     calendarProps,
     calendarValue,
     months,
+    hours,
+    minutes,
     onChangeCalendarValue,
     onChangeSelectedValue,
   } = useTempocal({
+    clampSelectedValue,
     locale,
+    maxValue,
+    minValue,
     mode: "datetime",
     setValue,
     value,
@@ -37,12 +49,6 @@ export function DateTimePicker() {
       timeStyle: "short",
     });
   }, []);
-
-  const formattedDateTime = React.useMemo(() => {
-    return dateTimeFormatter.format(
-      new Date(value.year, value.month - 1, value.day, value.hour, value.minute)
-    );
-  }, [dateTimeFormatter, value]);
 
   return (
     <div className="flex items-start gap-4">
@@ -110,8 +116,8 @@ export function DateTimePicker() {
                 title="Hours"
                 value={value.hour}
               >
-                {[...Array(24)].map((_, hour) => (
-                  <option key={hour} value={hour}>
+                {hours.map(({ disabled, hour }) => (
+                  <option key={hour} disabled={disabled} value={hour}>
                     {`${hour}`.padStart(2, "0")}
                   </option>
                 ))}
@@ -123,22 +129,58 @@ export function DateTimePicker() {
                 title="Minutes"
                 value={value.minute}
               >
-                {[...Array(60 / 5)].map((_, minute) => (
-                  <option key={minute} value={minute * 5}>
-                    {`${minute * 5}`.padStart(2, "0")}
-                  </option>
-                ))}
+                {minutes
+                  .filter(({ minute }) => minute % 5 === 0)
+                  .map(({ disabled, minute }) => (
+                    <option key={minute} disabled={disabled} value={minute}>
+                      {`${minute}`.padStart(2, "0")}
+                    </option>
+                  ))}
               </Select>
             </>
           )}
         />
       </div>
-      <div className="flex flex-col gap-2 text-sm">
+      <fieldset className="flex flex-col gap-2">
+        <legend className="sr-only">Props</legend>
         <div>
-          <span className="block font-medium">Selected date</span>
-          <span className="mt-1">{formattedDateTime}</span>
+          <span className="block text-sm font-medium text-gray-700">
+            Selected date
+          </span>
+          <span className="mt-1 text-sm text-gray-700">
+            {dateTimeFormatter.format(temporalToDate(value))}
+          </span>
         </div>
-      </div>
+        <div className="relative flex items-start">
+          <div className="flex h-5 items-center">
+            <input
+              aria-describedby="clampSelectedValue-description"
+              checked={clampSelectedValue}
+              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              id="clampSelectedValue"
+              name="clampSelectedValue"
+              onChange={() =>
+                setClampSelectedValue(
+                  (clampSelectedValue) => !clampSelectedValue
+                )
+              }
+              type="checkbox"
+            />
+          </div>
+          <div className="ml-3 text-sm">
+            <label
+              htmlFor="clampSelectedValue"
+              className="font-medium text-gray-700"
+            >
+              clampSelectedValue
+            </label>
+            <p id="clampSelectedValue-description" className="text-gray-500">
+              When <Code>minValue</Code> and/or <Code>maxValue</Code> are set,
+              automatically keep <Code>value</Code> within those values.
+            </p>
+          </div>
+        </div>
+      </fieldset>
     </div>
   );
 }

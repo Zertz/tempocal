@@ -1,4 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { temporalToDate } from "@tempocal/core";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
@@ -46,29 +47,26 @@ export function DatePicker() {
     });
   }, [locale]);
 
-  const formattedDate = React.useMemo(() => {
-    return dateFormatter.format(
-      new Date(value.year, value.month - 1, value.day)
-    );
-  }, [dateFormatter, value]);
+  const getDayContent = React.useCallback(
+    ({ year, month, day }: Temporal.PlainDate) => {
+      if (month === 12 && day === 25) {
+        return "🎄";
+      }
 
-  const getDayContent = React.useCallback(({ year, month, day }) => {
-    if (month === 12 && day === 25) {
-      return "🎄";
-    }
+      if (year === 2021 && month === 11 && day === 25) {
+        return "⭐️";
+      }
 
-    if (year === 2021 && month === 11 && day === 25) {
-      return "⭐️";
-    }
+      const now = Temporal.Now.plainDate("iso8601");
 
-    const now = Temporal.Now.plainDate("iso8601");
+      if (year === now.year && month === now.month && day === now.day) {
+        return "📅";
+      }
 
-    if (year === now.year && month === now.month && day === now.day) {
-      return "📅";
-    }
-
-    return day;
-  }, []);
+      return day;
+    },
+    []
+  );
 
   return (
     <div className="flex items-start gap-4">
@@ -143,7 +141,9 @@ export function DatePicker() {
         </p>
         <div>
           <span className="block text-sm font-medium">Selected date</span>
-          <span className="mt-1 text-sm">{formattedDate}</span>
+          <span className="mt-1 text-sm">
+            {dateFormatter.format(temporalToDate(value))}
+          </span>
         </div>
         <Select
           id="select-locale"

@@ -1,5 +1,9 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { getMonthEndDate, getMonthStartDate } from "@tempocal/core";
+import {
+  getMonthEndDate,
+  getMonthStartDate,
+  temporalToDate,
+} from "@tempocal/core";
 import { Calendar, DateRange, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
@@ -49,21 +53,6 @@ export function DateRangePicker() {
       dateStyle: "long",
     });
   }, []);
-
-  const formattedDates = React.useMemo(() => {
-    return [
-      values[0]
-        ? dateFormatter.format(
-            new Date(values[0].year, values[0].month - 1, values[0].day)
-          )
-        : null,
-      values[1]
-        ? dateFormatter.format(
-            new Date(values[1].year, values[1].month - 1, values[1].day)
-          )
-        : null,
-    ];
-  }, [dateFormatter, values]);
 
   return (
     <div className="flex items-start gap-4">
@@ -232,7 +221,11 @@ export function DateRangePicker() {
         <div>
           <span className="block text-sm font-medium">Selected date range</span>
           <span className="mt-1 text-sm">
-            {formattedDates[0]} - {formattedDates[1]}
+            {`${
+              values[0] ? dateFormatter.format(temporalToDate(values[0])) : ""
+            } - ${
+              values[1] ? dateFormatter.format(temporalToDate(values[1])) : ""
+            }`}
           </span>
         </div>
         <Input

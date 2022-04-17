@@ -1,5 +1,18 @@
 # @tempocal/core
 
+## 0.13.0
+
+### Minor Changes
+
+- 517d47e: Add getHours and getMinutes to core
+
+### Patch Changes
+
+- 397059a: Return hours and minutes based on min/max
+- b9b962c: Fix getMinutes and add tests
+- 92d882b: Replace Date constructors with temporalToDate
+- 749a691: Upgrade dependencies
+
 ## 0.12.1
 
 ### Patch Changes

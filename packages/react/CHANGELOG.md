@@ -1,5 +1,22 @@
 # @tempocal/react
 
+## 0.13.0
+
+### Minor Changes
+
+- df63b0f: Return next value in onChange handlers
+- 397059a: Return hours and minutes based on min/max
+
+### Patch Changes
+
+- 749a691: Upgrade dependencies
+- Updated dependencies [397059a]
+- Updated dependencies [b9b962c]
+- Updated dependencies [517d47e]
+- Updated dependencies [92d882b]
+- Updated dependencies [749a691]
+  - @tempocal/core@0.13.0
+
 ## 0.12.2
 
 ### Patch Changes
