@@ -22,7 +22,7 @@ test("getFirstDayOfWeek (startOfWeek = 7)", () => {
         day: 27,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 });
 
 test("getFirstDayOfWeek (startOfWeek = 6)", () => {
@@ -45,5 +45,5 @@ test("getFirstDayOfWeek (startOfWeek = 6)", () => {
         day: 26,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 });

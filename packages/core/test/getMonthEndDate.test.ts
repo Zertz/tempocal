@@ -19,5 +19,5 @@ test("getMonthEndDate", () => {
         day: 31,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 });
