@@ -144,10 +144,8 @@ export function DateTimePicker() {
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">Props</legend>
         <div>
-          <span className="block text-sm font-medium text-gray-700">
-            Selected date
-          </span>
-          <span className="mt-1 text-sm text-gray-700">
+          <span className="block font-medium">Selected date</span>
+          <span className="mt-1">
             {dateTimeFormatter.format(temporalToDate(value))}
           </span>
         </div>

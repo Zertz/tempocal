@@ -219,8 +219,8 @@ export function DateRangePicker() {
           This example shows one of the many ways a date range picker can work.
         </p>
         <div>
-          <span className="block text-sm font-medium">Selected date range</span>
-          <span className="mt-1 text-sm">
+          <span className="block font-medium">Selected date range</span>
+          <span className="mt-1">
             {`${
               values[0] ? dateFormatter.format(temporalToDate(values[0])) : ""
             } - ${

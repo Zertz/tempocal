@@ -140,8 +140,8 @@ export function DatePicker() {
           are red, Monday's are 😭 and disabled, and December 25th is 🎄.
         </p>
         <div>
-          <span className="block text-sm font-medium">Selected date</span>
-          <span className="mt-1 text-sm">
+          <span className="block font-medium">Selected date</span>
+          <span className="mt-1">
             {dateFormatter.format(temporalToDate(value))}
           </span>
         </div>
