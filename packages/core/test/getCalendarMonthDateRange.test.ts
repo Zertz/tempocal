@@ -21,7 +21,7 @@ test("getCalendarMonthDateRange (without rollover)", () => {
         day: 1,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 
   expect(
     end.equals(
@@ -31,7 +31,7 @@ test("getCalendarMonthDateRange (without rollover)", () => {
         day: 31,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 });
 
 test("getCalendarMonthDateRange (with rollover)", () => {
@@ -53,7 +53,7 @@ test("getCalendarMonthDateRange (with rollover)", () => {
         day: 26,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 
   expect(
     end.equals(
@@ -63,5 +63,5 @@ test("getCalendarMonthDateRange (with rollover)", () => {
         day: 6,
       })
     )
-  ).toBeTruthy();
+  ).toBe(true);
 });

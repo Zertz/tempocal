@@ -1,3 +1,4 @@
+export * from "./src/clamp";
 export * from "./src/dateToTemporal";
 export * from "./src/getCalendarMonthDateRange";
 export * from "./src/getFirstDayOfWeek";

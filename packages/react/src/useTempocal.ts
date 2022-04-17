@@ -1,5 +1,11 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { getHours, getMinutes, getMonths, getYears } from "@tempocal/core";
+import {
+  clamp,
+  getHours,
+  getMinutes,
+  getMonths,
+  getYears,
+} from "@tempocal/core";
 import * as React from "react";
 
 export type DateRange =
@@ -49,6 +55,7 @@ export function useTempocal<
   Mode extends "date" | "daterange" | "datetime" | "datetimerange"
 >({
   clampCalendarValue,
+  clampSelectedValue,
   locale,
   maxValue,
   minValue,
@@ -57,6 +64,11 @@ export function useTempocal<
   value,
 }: {
   clampCalendarValue?: boolean;
+  clampSelectedValue?: Mode extends "date"
+    ? boolean
+    : Mode extends "datetime"
+    ? boolean
+    : never;
   locale: Locale;
   maxValue?: Temporal.PlainDate | Temporal.PlainDateTime;
   minValue?: Temporal.PlainDate | Temporal.PlainDateTime;
@@ -136,37 +148,19 @@ export function useTempocal<
         return nextCalendarValue;
       }
 
-      if (
-        minValue &&
-        Temporal.PlainDate.compare(nextCalendarValue, minValue) < 0
-      ) {
-        const minPlainDateValue =
-          minValue instanceof Temporal.PlainDateTime
-            ? minValue.toPlainDate()
-            : minValue;
+      const clampedValue = clamp(
+        nextCalendarValue,
+        minValue instanceof Temporal.PlainDateTime
+          ? minValue.toPlainDate()
+          : minValue,
+        maxValue instanceof Temporal.PlainDateTime
+          ? maxValue.toPlainDate()
+          : maxValue
+      );
 
-        setCalendarValue(minPlainDateValue);
+      setCalendarValue(clampedValue);
 
-        return minPlainDateValue;
-      }
-
-      if (
-        maxValue &&
-        Temporal.PlainDate.compare(nextCalendarValue, maxValue) > 0
-      ) {
-        const maxPlainDateValue =
-          maxValue instanceof Temporal.PlainDateTime
-            ? maxValue.toPlainDate()
-            : maxValue;
-
-        setCalendarValue(maxPlainDateValue);
-
-        return maxPlainDateValue;
-      }
-
-      setCalendarValue(nextCalendarValue);
-
-      return nextCalendarValue;
+      return clampedValue;
     },
     [clampCalendarValue, maxValue, minValue]
   );
@@ -186,8 +180,33 @@ export function useTempocal<
     [calendarValue, updateCalendarValue]
   );
 
+  const updateSelectedValue = React.useCallback(
+    (
+      nextSelectedValue:
+        | Temporal.PlainDate
+        | Temporal.PlainDateTime
+        | DateRange
+        | DateTimeRange
+    ) => {
+      if (!clampSelectedValue || Array.isArray(nextSelectedValue)) {
+        // @ts-expect-error Help.
+        setValue(nextSelectedValue);
+
+        return nextSelectedValue;
+      }
+
+      const clampedValue = clamp(nextSelectedValue, minValue, maxValue);
+
+      // @ts-expect-error Help.
+      setValue(clampedValue);
+
+      return clampedValue;
+    },
+    [clampSelectedValue, maxValue, minValue, setValue]
+  );
+
   const onChangeSelectedValue = React.useCallback(
-    (params: ChangeValue<Mode>) => {
+    (params: ChangeValue<Mode>): RequiredValue<Mode> => {
       if (Array.isArray(params)) {
         if (!["daterange", "datetimerange"].includes(mode)) {
           throw new Error(
@@ -222,7 +241,7 @@ export function useTempocal<
           );
         }
 
-        return params as DateRange;
+        return params as RequiredValue<Mode>;
       }
 
       const nextValue = (() => {
@@ -253,18 +272,12 @@ export function useTempocal<
             : [nextValue, undefined]
         ) as DateRange;
 
-        // @ts-expect-error Help.
-        setValue(range);
-
-        return range;
+        return updateSelectedValue(range) as RequiredValue<Mode>;
       }
 
-      // @ts-expect-error Help.
-      setValue(nextValue);
-
-      return nextValue;
+      return updateSelectedValue(nextValue) as RequiredValue<Mode>;
     },
-    [mode, setValue, value]
+    [mode, setValue, updateSelectedValue, value]
   );
 
   return {
