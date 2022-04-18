@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.14.0
+
+### Minor Changes
+
+- ef92ccb: Add clamp function to core
+
 ## 0.13.0
 
 ### Minor Changes

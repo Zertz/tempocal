@@ -1,5 +1,16 @@
 # @tempocal/react
 
+## 0.14.0
+
+### Minor Changes
+
+- ef92ccb: Add clampSelectedValue in date and datetime mode
+
+### Patch Changes
+
+- Updated dependencies [ef92ccb]
+  - @tempocal/core@0.14.0
+
 ## 0.13.0
 
 ### Minor Changes
