@@ -1,7 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { Calendar, useTempocal } from "@tempocal/react";
 import * as React from "react";
-import { Code } from "../Code";
 
 export function Basic() {
   const [value, setValue] = React.useState(
@@ -20,22 +19,13 @@ export function Basic() {
   });
 
   return (
-    <div className="flex items-start gap-4">
-      <div className="bg-gray-100 text-gray-700 p-2 rounded">
-        <Calendar
-          {...calendarProps}
-          calendarProps={() => ({
-            className:
-              "flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center w-72",
-          })}
-        />
-      </div>
-      <p>
-        Out of the box, <Code>Calendar</Code> is just a grid with weekdays and
-        days. While this example adds a tiny bit of styling with TailwindCSS to
-        make it slightly nicer to look at, the component is friendly to all
-        styling solutions that can use classes.
-      </p>
+    <div className="flex flex-col flex-shrink-0 gap-4 w-72">
+      <Calendar
+        {...calendarProps}
+        calendarProps={() => ({
+          className: "bg-gray-100 text-gray-700 gap-1 p-2 text-center",
+        })}
+      />
     </div>
   );
 }

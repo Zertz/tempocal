@@ -23,10 +23,12 @@ const documentation = [
   {
     section: "core",
     pages: [
+      "clamp",
       "dateToTemporal",
       "getCalendarMonthDateRange",
       "getFirstDayOfWeek",
       "getHours",
+      "getMinutes",
       "getMonthEndDate",
       "getMonths",
       "getMonthStartDate",
@@ -44,7 +46,7 @@ export function Sidebar() {
     <>
       <div className="flex flex-col pt-5 pb-4 overflow-y-auto">
         <div className="flex items-center flex-shrink-0 px-4">
-          <h1 className="text-gray-100 text-4xl font-extrabold">Tempocal</h1>
+          <h1 className="text-gray-200 text-4xl font-extrabold">Tempocal</h1>
         </div>
         <nav className="mt-5 flex-1" aria-label="Sidebar">
           <div className="px-2 space-y-1">

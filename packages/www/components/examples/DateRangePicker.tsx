@@ -12,6 +12,10 @@ import { Select } from "../Select";
 
 const locale = "en-US";
 
+const dateFormatter = new Intl.DateTimeFormat(locale, {
+  dateStyle: "long",
+});
+
 export function DateRangePicker() {
   const [monthsBefore, setMonthsBefore] = React.useState(0);
   const [monthsAfter, setMonthsAfter] = React.useState(0);
@@ -48,22 +52,15 @@ export function DateRangePicker() {
     value: values,
   });
 
-  const dateFormatter = React.useMemo(() => {
-    return new Intl.DateTimeFormat(locale, {
-      dateStyle: "long",
-    });
-  }, []);
-
   return (
-    <div className="flex items-start gap-4">
-      <div className="flex flex-wrap gap-2 bg-gray-100 text-gray-700 p-2 rounded">
+    <div className="flex flex-col flex-shrink-0 gap-4 w-72">
+      <div className="flex flex-wrap gap-2 bg-gray-100 text-gray-700 rounded">
         <Calendar
           {...calendarProps}
           monthsBefore={monthsBefore}
           monthsAfter={monthsAfter}
           calendarProps={() => ({
-            className:
-              "flex-shrink-0 gap-1 border border-gray-300 text-gray-700 p-2 rounded text-center w-72",
+            className: "bg-gray-100 text-gray-700 gap-1 p-2 text-center",
           })}
           headerProps={({ date }) => ({
             className: classnames("flex gap-2 font-bold", {
@@ -172,7 +169,7 @@ export function DateRangePicker() {
             );
           }}
           footerProps={() => ({
-            className: "flex gap-2 mx-auto",
+            className: "flex justify-between gap-2",
           })}
           renderFooter={({ date }) => (
             <>
@@ -215,9 +212,6 @@ export function DateRangePicker() {
       </div>
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">Props</legend>
-        <p>
-          This example shows one of the many ways a date range picker can work.
-        </p>
         <div>
           <span className="block font-medium">Selected date range</span>
           <span className="mt-1">

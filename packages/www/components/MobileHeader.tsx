@@ -9,7 +9,7 @@ export function MobileHeader({
     <div className="lg:hidden">
       <div className="flex items-center justify-between bg-gray-700 border-b border-gray-500 px-4 py-1.5">
         <div>
-          <h1 className="text-gray-100 text-4xl font-extrabold">Tempocal</h1>
+          <h1 className="text-gray-200 text-4xl font-extrabold">Tempocal</h1>
         </div>
         <div>
           <button

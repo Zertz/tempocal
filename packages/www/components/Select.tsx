@@ -16,7 +16,7 @@ export function Select({
   return (
     <div className={className}>
       <label
-        className={classnames("block text-sm font-medium text-gray-700", {
+        className={classnames("block text-sm font-medium", {
           "sr-only": !label,
         })}
         htmlFor={props.id}

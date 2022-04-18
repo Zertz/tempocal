@@ -7,6 +7,10 @@ import { Select } from "../Select";
 
 const locale = "en-US";
 
+const dateFormatter = new Intl.DateTimeFormat(locale, {
+  dateStyle: "long",
+});
+
 export function DateInput() {
   const [isOpen, setOpen] = React.useState(false);
 
@@ -31,89 +35,80 @@ export function DateInput() {
     value,
   });
 
-  const dateFormatter = React.useMemo(() => {
-    return new Intl.DateTimeFormat(locale, {
-      dateStyle: "long",
-    });
-  }, []);
-
   return (
-    <div className="flex items-start gap-4">
-      <div className="bg-gray-100 text-gray-700 p-2 rounded relative">
-        <input
-          className="border-gray-300 rounded px-1 w-72"
-          onClick={() => setOpen((isOpen) => !isOpen)}
-          readOnly
-          title={dateFormatter.format(temporalToDate(value))}
-          type="text"
-          value={`${value.year.toString().padStart(4, "0")}-${value.month
-            .toString()
-            .padStart(2, "0")}-${value.day.toString().padStart(2, "0")}`}
-        />
-        <div
-          className="bg-gray-100 text-gray-700 p-2 rounded shadow-xl absolute top-13 left-0 right-0"
-          hidden={!isOpen}
-        >
-          <Calendar
-            {...calendarProps}
-            calendarProps={() => ({
-              className:
-                "flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center",
-            })}
-            headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
-            renderHeader={() => (
-              <>
-                <Select
-                  onChange={({ target: { value } }) =>
-                    onChangeCalendarValue({ month: Number(value) })
-                  }
-                  title="Month"
-                  value={calendarValue.month}
-                >
-                  {months.map(({ month, longName }) => (
-                    <option key={longName} value={month}>
-                      {longName}
-                    </option>
-                  ))}
-                </Select>
-                <Select
-                  onChange={({ target: { value } }) =>
-                    onChangeCalendarValue({ year: Number(value) })
-                  }
-                  title="Year"
-                  value={calendarValue.year}
-                >
-                  {[...Array(20)].map((_, year) => (
-                    <option key={year} value={year - 10 + value.year}>
-                      {year - 10 + value.year}
-                    </option>
-                  ))}
-                </Select>
-              </>
-            )}
-            weekdayProps={() => ({ className: "font-medium" })}
-            renderDay={({ date, plainDateLike }) => (
-              <button
-                className={classnames(
-                  "w-full rounded border text-gray-700 transition-colors",
-                  value.equals(date)
-                    ? "border-blue-600 bg-blue-100"
-                    : "border-gray-300 hover:bg-gray-100"
-                )}
-                onClick={() => onChangeSelectedValue(plainDateLike)}
-                type="button"
+    <div className="flex flex-col flex-shrink-0 gap-4 p-2 rounded relative w-72 bg-gray-100 text-gray-700">
+      <input
+        className="border-gray-300 rounded px-1 w-full"
+        onClick={() => setOpen((isOpen) => !isOpen)}
+        readOnly
+        title={dateFormatter.format(temporalToDate(value))}
+        type="text"
+        value={`${value.year.toString().padStart(4, "0")}-${value.month
+          .toString()
+          .padStart(2, "0")}-${value.day.toString().padStart(2, "0")}`}
+      />
+      <div
+        className="bg-gray-100 text-gray-700 p-2 rounded shadow-xl absolute top-16 left-0 right-0"
+        hidden={!isOpen}
+      >
+        <Calendar
+          {...calendarProps}
+          calendarProps={() => ({
+            className:
+              "flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center",
+          })}
+          headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
+          renderHeader={() => (
+            <>
+              <Select
+                onChange={({ target: { value } }) =>
+                  onChangeCalendarValue({ month: Number(value) })
+                }
+                title="Month"
+                value={calendarValue.month}
               >
-                {date.day}
-              </button>
-            )}
-          />
-        </div>
+                {months.map(({ month, longName }) => (
+                  <option key={longName} value={month}>
+                    {longName}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                onChange={({ target: { value } }) =>
+                  onChangeCalendarValue({ year: Number(value) })
+                }
+                title="Year"
+                value={calendarValue.year}
+              >
+                {[...Array(20)].map((_, year) => (
+                  <option key={year} value={year - 10 + value.year}>
+                    {year - 10 + value.year}
+                  </option>
+                ))}
+              </Select>
+            </>
+          )}
+          weekdayProps={() => ({ className: "font-medium" })}
+          renderDay={({ date, plainDateLike }) => (
+            <button
+              className={classnames(
+                "w-full rounded border text-gray-700 transition-colors",
+                value.equals(date)
+                  ? "border-blue-600 bg-blue-100"
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
+              onClick={() => {
+                onChangeSelectedValue(plainDateLike);
+
+                setOpen(false);
+              }}
+              type="button"
+            >
+              {date.day}
+            </button>
+          )}
+        />
       </div>
-      <p>
-        This example uses a simple toggle to show and hide the calendar when the
-        input is clicked. You are free to use whichever fancy library you have
-        already installed!
-      </p>
     </div>
   );
 }

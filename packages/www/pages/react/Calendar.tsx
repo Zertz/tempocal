@@ -1,4 +1,4 @@
-import { CodeBlock } from "../../components/Code";
+import { Code, CodeBlock } from "../../components/Code";
 
 export default function DocumentationPage() {
   return (
@@ -10,17 +10,12 @@ export default function DocumentationPage() {
         <div className="space-y-2">
           <CodeBlock>{`import { Calendar } from "@tempocal/react";
 
-<Calendar {...calendarProps} onChange={onChangeSelectedValue} />`}</CodeBlock>
+<Calendar {...calendarProps} />`}</CodeBlock>
           <p>
-            Handles the basics of rendering a calendar, including displaying
-            weekdays and days, accounting for rollover days.
-          </p>
-          <p>
-            <em>
-              While use of this component is optional, it handles the few
-              universal calendar-y things and should cover the vast majority of
-              use cases.
-            </em>
+            <Code>Calendar</Code> is a grid with a header, weekdays, days, and a
+            footer. It handles the basics of rendering a calendar, like
+            accounting for rollover days and should be flexible enough cover the
+            vast majority of use cases.
           </p>
         </div>
       </div>
