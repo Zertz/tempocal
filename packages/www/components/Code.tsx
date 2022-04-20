@@ -1,8 +1,21 @@
+import classnames from "classnames";
+import Highlight, { defaultProps } from "prism-react-renderer";
+
 export function CodeBlock({ children }: { children: string }) {
   return (
-    <pre className="overflow-x-auto rounded bg-gray-800 p-2">
-      <code>{children}</code>
-    </pre>
+    <Highlight {...defaultProps} code={children} language="tsx">
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={classnames(className, "p-2")} style={style}>
+          {tokens.map((line, i) => (
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
   );
 }
 

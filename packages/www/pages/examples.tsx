@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { EmbedGitHub } from "../components/EmbedGitHub";
+import { CodeBlock } from "../components/Code";
 import { Basic } from "../components/examples/Basic";
 import { DateInput } from "../components/examples/DateInput";
 import { DatePicker } from "../components/examples/DatePicker";
 import { DateRangePicker } from "../components/examples/DateRangePicker";
 import { DateTimePicker } from "../components/examples/DateTimePicker";
+import { useGitHub } from "../hooks/useGitHub";
 
 export default function ExamplesPage() {
   const [client, setClient] = useState(false);
@@ -55,6 +56,12 @@ function Example({
   file: `/${string}`;
   title: string;
 }) {
+  const code = useGitHub({
+    repository: "Zertz/Tempocal",
+    branch: "docs-v2",
+    file,
+  });
+
   return (
     <div>
       <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
@@ -63,7 +70,7 @@ function Example({
       <div className="flex items-start gap-4">
         {children}
         <div className="w-full max-h-96 overflow-auto rounded text-sm">
-          <EmbedGitHub repository="Zertz/Tempocal" branch="main" file={file} />
+          <CodeBlock>{code || "Loading..."}</CodeBlock>
         </div>
       </div>
     </div>
