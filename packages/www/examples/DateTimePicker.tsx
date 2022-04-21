@@ -5,6 +5,7 @@ import classnames from "classnames";
 import * as React from "react";
 import { Code } from "../components/Code";
 import { Select } from "../components/Select";
+import { CalendarHeader } from "../recipes/CalendarHeader";
 
 const locale = "en-US";
 
@@ -33,6 +34,7 @@ export function DateTimePicker() {
   const {
     calendarProps,
     calendarValue,
+    years,
     months,
     hours,
     minutes,
@@ -54,35 +56,16 @@ export function DateTimePicker() {
         {...calendarProps}
         rollover
         calendarProps={() => ({
-          className: "bg-gray-100 text-gray-700 gap-1 p-2 text-center",
+          className: "bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center",
         })}
-        headerProps={() => ({
-          className: "flex items-center gap-2 font-bold",
-        })}
+        headerProps={() => ({ className: "flex items-center gap-2" })}
         renderHeader={() => (
-          <>
-            <button
-              className="mr-auto"
-              onClick={() =>
-                onChangeCalendarValue(calendarValue.subtract({ months: 1 }))
-              }
-              title="Previous month"
-              type="button"
-            >
-              &larr;
-            </button>
-            {months[calendarValue.month - 1].longName}
-            <button
-              className="ml-auto"
-              onClick={() =>
-                onChangeCalendarValue(calendarValue.add({ months: 1 }))
-              }
-              title="Next month"
-              type="button"
-            >
-              &rarr;
-            </button>
-          </>
+          <CalendarHeader
+            calendarValue={calendarValue}
+            months={months}
+            onChangeCalendarValue={onChangeCalendarValue}
+            years={years}
+          />
         )}
         weekdayProps={() => ({ className: "font-medium" })}
         renderDay={({ date, disabled, plainDateLike }) => (

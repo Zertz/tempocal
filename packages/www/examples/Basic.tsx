@@ -23,7 +23,7 @@ export function Basic() {
       <Calendar
         {...calendarProps}
         calendarProps={() => ({
-          className: "bg-gray-100 text-gray-700 gap-1 p-2 text-center",
+          className: "bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center",
         })}
       />
     </div>

@@ -8,7 +8,7 @@ import { Calendar, DateRange, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { Input } from "../components/Input";
-import { Select } from "../components/Select";
+import { CalendarHeader } from "../recipes/CalendarHeader";
 
 const locale = "en-US";
 
@@ -63,7 +63,7 @@ export function DateRangePicker() {
             className: "bg-gray-100 text-gray-700 gap-1 p-2 text-center",
           })}
           headerProps={({ date }) => ({
-            className: classnames("flex gap-2 font-bold", {
+            className: classnames("flex items-center gap-2", {
               "mx-auto":
                 date.year !== calendarValue.year ||
                 date.month !== calendarValue.month,
@@ -78,54 +78,12 @@ export function DateRangePicker() {
             }
 
             return (
-              <>
-                <button
-                  onClick={() =>
-                    onChangeCalendarValue(calendarValue.subtract({ months: 1 }))
-                  }
-                  title="Previous month"
-                  type="button"
-                >
-                  &larr;
-                </button>
-                <Select
-                  className="ml-auto"
-                  onChange={({ target: { value } }) =>
-                    onChangeCalendarValue({ month: Number(value) })
-                  }
-                  title="Month"
-                  value={calendarValue.month}
-                >
-                  {months.map(({ disabled, month, longName }) => (
-                    <option key={longName} disabled={disabled} value={month}>
-                      {longName}
-                    </option>
-                  ))}
-                </Select>
-                <Select
-                  className="mr-auto"
-                  onChange={({ target: { value } }) =>
-                    onChangeCalendarValue({ year: Number(value) })
-                  }
-                  title="Year"
-                  value={calendarValue.year}
-                >
-                  {years.map((year) => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-                </Select>
-                <button
-                  onClick={() =>
-                    onChangeCalendarValue(calendarValue.add({ months: 1 }))
-                  }
-                  title="Next month"
-                  type="button"
-                >
-                  &rarr;
-                </button>
-              </>
+              <CalendarHeader
+                calendarValue={calendarValue}
+                months={months}
+                onChangeCalendarValue={onChangeCalendarValue}
+                years={years}
+              />
             );
           }}
           weekdayProps={() => ({ className: "font-medium" })}

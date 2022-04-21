@@ -6,6 +6,7 @@ import * as React from "react";
 import { Code } from "../components/Code";
 import { Input } from "../components/Input";
 import { Select } from "../components/Select";
+import { CalendarHeader } from "../recipes/CalendarHeader";
 
 const getDayContent = ({ year, month, day }: Temporal.PlainDate) => {
   if (month === 12 && day === 25) {
@@ -72,38 +73,16 @@ export function DatePicker() {
         rollover={rollover}
         startOfWeek={startOfWeek}
         calendarProps={() => ({
-          className: "bg-gray-100 text-gray-700 gap-1 p-2 text-center",
+          className: "bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center",
         })}
-        headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
+        headerProps={() => ({ className: "flex items-center gap-2" })}
         renderHeader={() => (
-          <>
-            <Select
-              onChange={({ target: { value } }) =>
-                onChangeCalendarValue({ month: Number(value) })
-              }
-              title="Month"
-              value={calendarValue.month}
-            >
-              {months.map(({ disabled, month, longName }) => (
-                <option key={longName} disabled={disabled} value={month}>
-                  {longName}
-                </option>
-              ))}
-            </Select>
-            <Select
-              onChange={({ target: { value } }) =>
-                onChangeCalendarValue({ year: Number(value) })
-              }
-              title="Year"
-              value={calendarValue.year}
-            >
-              {years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </Select>
-          </>
+          <CalendarHeader
+            calendarValue={calendarValue}
+            months={months}
+            onChangeCalendarValue={onChangeCalendarValue}
+            years={years}
+          />
         )}
         weekdayProps={() => ({ className: "font-medium" })}
         renderWeekday={({ dayOfWeek, narrowName }) =>

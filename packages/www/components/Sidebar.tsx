@@ -21,6 +21,10 @@ const documentation = [
     ],
   },
   {
+    section: "recipes",
+    pages: ["CalendarHeader"],
+  },
+  {
     section: "react",
     pages: ["useTempocal", "Calendar"],
   },
@@ -87,7 +91,7 @@ export function Sidebar() {
               className="px-3 text-xs font-semibold text-gray-300 uppercase tracking-wider"
               id={`tempocal-${section}`}
             >
-              {["examples"].includes(section)
+              {["examples", "recipes"].includes(section)
                 ? section
                 : `@tempocal/${section}`}
             </h3>

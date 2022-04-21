@@ -3,7 +3,7 @@ import { temporalToDate } from "@tempocal/core";
 import { Calendar, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
-import { Select } from "../components/Select";
+import { CalendarHeader } from "../recipes/CalendarHeader";
 
 const locale = "en-US";
 
@@ -48,45 +48,23 @@ export function DateInput() {
           .padStart(2, "0")}-${value.day.toString().padStart(2, "0")}`}
       />
       <div
-        className="bg-gray-100 text-gray-700 p-2 rounded shadow-xl absolute top-16 left-0 right-0"
+        className="shadow-xl absolute top-16 left-0 right-0"
         hidden={!isOpen}
       >
         <Calendar
           {...calendarProps}
           calendarProps={() => ({
             className:
-              "flex-shrink-0 gap-1 border border-gray-300 p-2 rounded text-center",
+              "bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center",
           })}
-          headerProps={() => ({ className: "flex gap-2 mx-auto w-min" })}
+          headerProps={() => ({ className: "flex items-center gap-2" })}
           renderHeader={() => (
-            <>
-              <Select
-                onChange={({ target: { value } }) =>
-                  onChangeCalendarValue({ month: Number(value) })
-                }
-                title="Month"
-                value={calendarValue.month}
-              >
-                {months.map(({ month, longName }) => (
-                  <option key={longName} value={month}>
-                    {longName}
-                  </option>
-                ))}
-              </Select>
-              <Select
-                onChange={({ target: { value } }) =>
-                  onChangeCalendarValue({ year: Number(value) })
-                }
-                title="Year"
-                value={calendarValue.year}
-              >
-                {[...Array(20)].map((_, year) => (
-                  <option key={year} value={year - 10 + value.year}>
-                    {year - 10 + value.year}
-                  </option>
-                ))}
-              </Select>
-            </>
+            <CalendarHeader
+              calendarValue={calendarValue}
+              months={months}
+              onChangeCalendarValue={onChangeCalendarValue}
+              years={[...Array(20)].map((_, year) => year - 10 + value.year)}
+            />
           )}
           weekdayProps={() => ({ className: "font-medium" })}
           renderDay={({ date, plainDateLike }) => (
