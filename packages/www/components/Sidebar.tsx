@@ -1,4 +1,4 @@
-import { CalendarIcon, HomeIcon } from "@heroicons/react/outline";
+import { HomeIcon } from "@heroicons/react/outline";
 import classnames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,10 +7,19 @@ import { GitHubLogo } from "./GitHubLogo";
 
 const navigation = [
   { name: "Overview", href: "/", icon: HomeIcon, current: true },
-  { name: "Examples", href: "/examples", icon: CalendarIcon, current: false },
 ];
 
 const documentation = [
+  {
+    section: "examples",
+    pages: [
+      "Basic",
+      "DatePicker",
+      "DateInput",
+      "DateTimePicker",
+      "DateRangePicker",
+    ],
+  },
   {
     section: "react",
     pages: ["useTempocal", "Calendar"],
@@ -78,7 +87,9 @@ export function Sidebar() {
               className="px-3 text-xs font-semibold text-gray-300 uppercase tracking-wider"
               id={`tempocal-${section}`}
             >
-              {`@tempocal/${section}`}
+              {["examples"].includes(section)
+                ? section
+                : `@tempocal/${section}`}
             </h3>
             <div
               className="px-2 space-y-1 pb-4"
