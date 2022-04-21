@@ -3,8 +3,8 @@ import { temporalToDate } from "@tempocal/core";
 import { Calendar, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
-import { Code } from "../Code";
-import { Select } from "../Select";
+import { Code } from "../components/Code";
+import { Select } from "../components/Select";
 
 const locale = "en-US";
 

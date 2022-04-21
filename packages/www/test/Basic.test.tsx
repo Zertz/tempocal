@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { expect, test } from "vitest";
-import { Basic } from "../components/examples/Basic";
+import { Basic } from "../examples/Basic";
 
 test("Basic renders without crashing", () => {
   const { getByText } = render(<Basic />);

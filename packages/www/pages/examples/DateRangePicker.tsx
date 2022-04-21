@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Example } from "../../components/Example";
-import { DateRangePicker } from "../../components/examples/DateRangePicker";
+import { DateRangePicker } from "../../examples/DateRangePicker";
 
 export default function ExamplesPage() {
   const [client, setClient] = useState(false);

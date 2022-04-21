@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import { expect, test } from "vitest";
-import { DateInput } from "../components/examples/DateInput";
+import { DateInput } from "../examples/DateInput";
 
 test("DateInput renders without crashing", () => {
   const { getByText, getByTitle } = render(<DateInput />);

@@ -3,9 +3,9 @@ import { temporalToDate } from "@tempocal/core";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
-import { Code } from "../Code";
-import { Input } from "../Input";
-import { Select } from "../Select";
+import { Code } from "../components/Code";
+import { Input } from "../components/Input";
+import { Select } from "../components/Select";
 
 const getDayContent = ({ year, month, day }: Temporal.PlainDate) => {
   if (month === 12 && day === 25) {

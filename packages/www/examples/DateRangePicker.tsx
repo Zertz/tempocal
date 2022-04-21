@@ -7,8 +7,8 @@ import {
 import { Calendar, DateRange, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
-import { Input } from "../Input";
-import { Select } from "../Select";
+import { Input } from "../components/Input";
+import { Select } from "../components/Select";
 
 const locale = "en-US";
 

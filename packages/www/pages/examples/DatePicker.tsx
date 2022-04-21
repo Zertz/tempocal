@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Example } from "../../components/Example";
-import { DatePicker } from "../../components/examples/DatePicker";
+import { DatePicker } from "../../examples/DatePicker";
 
 export default function ExamplesPage() {
   const [client, setClient] = useState(false);

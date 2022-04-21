@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Example } from "../../components/Example";
-import { Basic } from "../../components/examples/Basic";
+import { Basic } from "../../examples/Basic";
 
 export default function ExamplesPage() {
   const [client, setClient] = useState(false);

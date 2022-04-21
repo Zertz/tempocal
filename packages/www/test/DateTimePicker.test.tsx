@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import { expect, test } from "vitest";
-import { DateTimePicker } from "../components/examples/DateTimePicker";
+import { DateTimePicker } from "../examples/DateTimePicker";
 
 test("DateTimePicker renders without crashing", () => {
   const { getByText, getByTitle } = render(<DateTimePicker />);

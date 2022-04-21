@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Example } from "../../components/Example";
-import { DateInput } from "../../components/examples/DateInput";
+import { DateInput } from "../../examples/DateInput";
 
 export default function ExamplesPage() {
   const [client, setClient] = useState(false);
