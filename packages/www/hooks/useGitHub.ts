@@ -9,10 +9,13 @@ export function useGitHub({
   branch: string;
   file: `/${string}`;
 }) {
-  const [raw, setRaw] = useState<string>();
+  const [rawContent, setRawContent] = useState<string>();
+
+  const contentUrl = `https://github.com/${repository}/blob/${branch}${file}`;
+  const rawContentUrl = `https://raw.githubusercontent.com/${repository}/${branch}${file}`;
 
   useEffect(() => {
-    fetch(`https://raw.githubusercontent.com/${repository}/${branch}${file}`)
+    fetch(rawContentUrl)
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -20,9 +23,15 @@ export function useGitHub({
 
         return response.text();
       })
-      .then((text) => setRaw(text.trim()))
-      .catch((e) => setRaw(`Error loading ${file}: ${e.message}`));
-  }, [branch, file, repository]);
+      .then((text) => setRawContent(text.trim()))
+      .catch((e) =>
+        setRawContent(`Error loading ${rawContentUrl}: ${e.message}`)
+      );
+  }, [rawContentUrl]);
 
-  return raw;
+  return {
+    contentUrl,
+    rawContent,
+    rawContentUrl,
+  };
 }

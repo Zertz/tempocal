@@ -56,7 +56,7 @@ function Example({
   file: `/${string}`;
   title: string;
 }) {
-  const code = useGitHub({
+  const { contentUrl, rawContent } = useGitHub({
     repository: "Zertz/Tempocal",
     branch: "docs-v2",
     file,
@@ -69,8 +69,8 @@ function Example({
       </div>
       <div className="flex items-start gap-4">
         {children}
-        <div className="w-full max-h-96 overflow-auto rounded text-sm">
-          <CodeBlock>{code || "Loading..."}</CodeBlock>
+        <div className="w-full h-96 overflow-auto rounded text-sm">
+          <CodeBlock href={contentUrl}>{rawContent || "Loading..."}</CodeBlock>
         </div>
       </div>
     </div>
