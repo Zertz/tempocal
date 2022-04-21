@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
 import { Example } from "../../components/Example";
 import { Basic } from "../../examples/Basic";
 
 export default function ExamplesPage() {
-  const [client, setClient] = useState(false);
-
-  useEffect(() => {
-    setClient(true);
-  }, []);
-
   return (
     <Example file="/packages/www/examples/Basic.tsx" title="Basic">
-      {client ? <Basic /> : null}
+      <Basic />
     </Example>
   );
 }

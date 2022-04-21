@@ -2,7 +2,7 @@ import { HomeIcon } from "@heroicons/react/outline";
 import classnames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
+import * as React from "react";
 import { GitHubLogo } from "./GitHubLogo";
 
 const navigation = [
@@ -86,7 +86,7 @@ export function Sidebar() {
       </div>
       <div className="flex-1 space-y-1 overflow-auto">
         {documentation.map(({ pages, section }) => (
-          <Fragment key={section}>
+          <React.Fragment key={section}>
             <h3
               className="px-3 text-xs font-semibold text-gray-300 uppercase tracking-wider"
               id={`tempocal-${section}`}
@@ -115,7 +115,7 @@ export function Sidebar() {
                 </Link>
               ))}
             </div>
-          </Fragment>
+          </React.Fragment>
         ))}
       </div>
       <div className="flex-shrink-0 flex border-t border-gray-500 p-4">

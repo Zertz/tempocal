@@ -12,20 +12,23 @@ export function CalendarHeader({
 >) {
   return (
     <>
+      {/* Left arrow to go to the previous month */}
       <button
-        onClick={() =>
-          onChangeCalendarValue(calendarValue.subtract({ months: 1 }))
-        }
+        disabled={months[calendarValue.month].disabled}
+        onClick={() => {
+          onChangeCalendarValue(calendarValue.subtract({ months: 1 }));
+        }}
         title="Previous month"
         type="button"
       >
         &larr;
       </button>
+      {/* Select to jump to a specific month */}
       <Select
         className="ml-auto"
-        onChange={({ target: { value } }) =>
-          onChangeCalendarValue({ month: Number(value) })
-        }
+        onChange={({ target: { value } }) => {
+          onChangeCalendarValue({ month: Number(value) });
+        }}
         title="Month"
         value={calendarValue.month}
       >
@@ -35,11 +38,12 @@ export function CalendarHeader({
           </option>
         ))}
       </Select>
+      {/* Select to jump to a specific year */}
       <Select
         className="mr-auto"
-        onChange={({ target: { value } }) =>
-          onChangeCalendarValue({ year: Number(value) })
-        }
+        onChange={({ target: { value } }) => {
+          onChangeCalendarValue({ year: Number(value) });
+        }}
         title="Year"
         value={calendarValue.year}
       >
@@ -49,8 +53,11 @@ export function CalendarHeader({
           </option>
         ))}
       </Select>
+      {/* Left arrow to go to the next month */}
       <button
-        onClick={() => onChangeCalendarValue(calendarValue.add({ months: 1 }))}
+        onClick={() => {
+          onChangeCalendarValue(calendarValue.add({ months: 1 }));
+        }}
         title="Next month"
         type="button"
       >

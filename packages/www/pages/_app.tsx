@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { createContext, useState } from "react";
+import * as React from "react";
 import { DesktopSidebar } from "../components/DesktopSidebar";
 import { MobileHeader } from "../components/MobileHeader";
 import { MobileSidebar } from "../components/MobileSidebar";
@@ -10,10 +10,10 @@ const codeContextValue = {
   branch: "docs-v2",
 };
 
-export const CodeContext = createContext(codeContextValue);
+export const CodeContext = React.createContext(codeContextValue);
 
 export default function Tempocal({ Component, pageProps }: AppProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   return (
     <div className="h-screen flex bg-gray-700">

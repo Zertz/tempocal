@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import * as React from "react";
 import { CodeContext } from "../pages/_app";
 
 export function useGitHub({ file }: { file: `/${string}` }) {
-  const { repository, branch } = useContext(CodeContext);
+  const { repository, branch } = React.useContext(CodeContext);
 
-  const [rawContent, setRawContent] = useState<string>();
+  const [rawContent, setRawContent] = React.useState<string>();
 
   const contentUrl = `https://github.com/${repository}/blob/${branch}${file}`;
   const rawContentUrl = `https://raw.githubusercontent.com/${repository}/${branch}${file}`;
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetch(rawContentUrl)
       .then((response) => {
         if (!response.ok) {

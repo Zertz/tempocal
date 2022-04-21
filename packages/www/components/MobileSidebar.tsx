@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import { Fragment } from "react";
+import * as React from "react";
 import { Sidebar } from "../components/Sidebar";
 
 export function MobileSidebar({
@@ -11,14 +11,14 @@ export function MobileSidebar({
   setSidebarOpen: (sidebarOpen: boolean) => void;
 }) {
   return (
-    <Transition.Root show={sidebarOpen} as={Fragment}>
+    <Transition.Root show={sidebarOpen} as={React.Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 flex z-40 lg:hidden"
         onClose={setSidebarOpen}
       >
         <Transition.Child
-          as={Fragment}
+          as={React.Fragment}
           enter="transition-opacity ease-linear duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -29,7 +29,7 @@ export function MobileSidebar({
           <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
         </Transition.Child>
         <Transition.Child
-          as={Fragment}
+          as={React.Fragment}
           enter="transition ease-in-out duration-300 transform"
           enterFrom="-translate-x-full"
           enterTo="translate-x-0"
@@ -39,7 +39,7 @@ export function MobileSidebar({
         >
           <div className="relative flex-1 flex flex-col max-w-xs w-full bg-gray-700 focus:outline-none">
             <Transition.Child
-              as={Fragment}
+              as={React.Fragment}
               enter="ease-in-out duration-300"
               enterFrom="opacity-0"
               enterTo="opacity-100"

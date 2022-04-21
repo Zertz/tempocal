@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useGitHub } from "../hooks/useGitHub";
 import { CodeBlock } from "./Code";
 
@@ -10,6 +11,12 @@ export function Example({
   file: `/${string}`;
   title: string;
 }) {
+  const [client, setClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setClient(true);
+  }, []);
+
   const { contentUrl, rawContent } = useGitHub({
     file,
   });
@@ -20,7 +27,7 @@ export function Example({
         <h2 className="text-4xl font-bold text-gray-200">{title}</h2>
       </div>
       <div className="flex items-start gap-4">
-        {children}
+        {client ? children : null}
         <div className="w-full overflow-auto rounded text-sm">
           <CodeBlock href={contentUrl}>{rawContent}</CodeBlock>
         </div>
