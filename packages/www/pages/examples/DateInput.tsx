@@ -10,10 +10,7 @@ export default function ExamplesPage() {
   }, []);
 
   return (
-    <Example
-      file="/packages/www/components/examples/DateInput.tsx"
-      title="DateInput"
-    >
+    <Example file="/packages/www/examples/DateInput.tsx" title="DateInput">
       {client ? <DateInput /> : null}
     </Example>
   );

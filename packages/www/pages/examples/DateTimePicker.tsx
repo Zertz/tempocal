@@ -11,7 +11,7 @@ export default function ExamplesPage() {
 
   return (
     <Example
-      file="/packages/www/components/examples/DateTimePicker.tsx"
+      file="/packages/www/examples/DateTimePicker.tsx"
       title="DateTimePicker"
     >
       {client ? <DateTimePicker /> : null}

@@ -10,7 +10,7 @@ export default function ExamplesPage() {
   }, []);
 
   return (
-    <Example file="/packages/www/components/examples/Basic.tsx" title="Basic">
+    <Example file="/packages/www/examples/Basic.tsx" title="Basic">
       {client ? <Basic /> : null}
     </Example>
   );

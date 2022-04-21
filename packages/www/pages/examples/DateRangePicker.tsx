@@ -11,7 +11,7 @@ export default function ExamplesPage() {
 
   return (
     <Example
-      file="/packages/www/components/examples/DateRangePicker.tsx"
+      file="/packages/www/examples/DateRangePicker.tsx"
       title="DateRangePicker"
     >
       {client ? <DateRangePicker /> : null}

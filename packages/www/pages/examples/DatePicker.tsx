@@ -10,10 +10,7 @@ export default function ExamplesPage() {
   }, []);
 
   return (
-    <Example
-      file="/packages/www/components/examples/DatePicker.tsx"
-      title="DatePicker"
-    >
+    <Example file="/packages/www/examples/DatePicker.tsx" title="DatePicker">
       {client ? <DatePicker /> : null}
     </Example>
   );
