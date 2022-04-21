@@ -57,8 +57,6 @@ function Example({
   title: string;
 }) {
   const { contentUrl, rawContent } = useGitHub({
-    repository: "Zertz/Tempocal",
-    branch: "docs-v2",
     file,
   });
 
@@ -70,7 +68,7 @@ function Example({
       <div className="flex items-start gap-4">
         {children}
         <div className="w-full h-96 overflow-auto rounded text-sm">
-          <CodeBlock href={contentUrl}>{rawContent || "Loading..."}</CodeBlock>
+          <CodeBlock href={contentUrl}>{rawContent}</CodeBlock>
         </div>
       </div>
     </div>

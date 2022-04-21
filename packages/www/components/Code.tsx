@@ -6,11 +6,11 @@ export function CodeBlock({
   children,
   href,
 }: {
-  children: string;
+  children: string | undefined;
   href?: string;
 }) {
   return (
-    <Highlight {...defaultProps} code={children} language="tsx">
+    <Highlight {...defaultProps} code={children || "Loading..."} language="tsx">
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={classnames(className, "p-2 relative")} style={style}>
           {href && (

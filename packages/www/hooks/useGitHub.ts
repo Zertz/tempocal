@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CodeContext } from "../pages/_app";
 
-export function useGitHub({
-  repository,
-  branch,
-  file,
-}: {
-  repository: `${string}/${string}`;
-  branch: string;
-  file: `/${string}`;
-}) {
+export function useGitHub({ file }: { file: `/${string}` }) {
+  const { repository, branch } = useContext(CodeContext);
+
   const [rawContent, setRawContent] = useState<string>();
 
   const contentUrl = `https://github.com/${repository}/blob/${branch}${file}`;
