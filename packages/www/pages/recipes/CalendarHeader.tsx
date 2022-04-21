@@ -5,6 +5,17 @@ import { Example } from "../../components/Example";
 import { CalendarHeader } from "../../recipes/CalendarHeader";
 
 export default function RecipesPage() {
+  return (
+    <Example
+      file="/packages/www/recipes/CalendarHeader.tsx"
+      title="CalendarHeader"
+    >
+      <Recipe />
+    </Example>
+  );
+}
+
+function Recipe() {
   const [value, setValue] = React.useState(Temporal.Now.plainDate("iso8601"));
 
   const [maxValue] = React.useState(value.add({ years: 3 }));
@@ -20,18 +31,13 @@ export default function RecipesPage() {
   });
 
   return (
-    <Example
-      file="/packages/www/recipes/CalendarHeader.tsx"
-      title="CalendarHeader"
-    >
-      <div className="flex items-center gap-2">
-        <CalendarHeader
-          calendarValue={calendarValue}
-          months={months}
-          onChangeCalendarValue={onChangeCalendarValue}
-          years={years}
-        />
-      </div>
-    </Example>
+    <div className="flex items-center gap-2">
+      <CalendarHeader
+        calendarValue={calendarValue}
+        months={months}
+        onChangeCalendarValue={onChangeCalendarValue}
+        years={years}
+      />
+    </div>
   );
 }
