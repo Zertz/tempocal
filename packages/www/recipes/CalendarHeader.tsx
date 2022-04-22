@@ -14,7 +14,11 @@ export function CalendarHeader({
     <>
       {/* Left arrow to go to the previous month */}
       <button
-        disabled={months[calendarValue.month].disabled}
+        className="disabled:opacity-50"
+        disabled={
+          months.find(({ month }) => month === calendarValue.month - 1)
+            ?.disabled
+        }
         onClick={() => {
           onChangeCalendarValue(calendarValue.subtract({ months: 1 }));
         }}
@@ -55,6 +59,11 @@ export function CalendarHeader({
       </Select>
       {/* Left arrow to go to the next month */}
       <button
+        className="disabled:opacity-50"
+        disabled={
+          months.find(({ month }) => month === calendarValue.month + 1)
+            ?.disabled
+        }
         onClick={() => {
           onChangeCalendarValue(calendarValue.add({ months: 1 }));
         }}
