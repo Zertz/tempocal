@@ -74,28 +74,6 @@ export default function OverviewPage() {
           <h2 className="text-4xl font-bold">Getting started</h2>
         </div>
         <CodeBlock>npm install @tempocal/react @js-temporal/polyfill</CodeBlock>
-        <CodeBlock>{`import { Temporal } from "@js-temporal/polyfill";
-import { Calendar, useTempocal } from "@tempocal/react";
-import * as React from "react";
-
-export function Example() {
-  const [value, setValue] = React.useState(
-    Temporal.PlainDate.from({
-      year: 2022,
-      month: 1,
-      day: 1,
-    })
-  );
-  
-  const { calendarProps } = useTempocal({
-    locale: "en-US",
-    mode: "date",
-    setValue,
-    value,
-  });
-  
-  return <Calendar {...calendarProps} />;
-}`}</CodeBlock>
       </div>
       <div>
         <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
