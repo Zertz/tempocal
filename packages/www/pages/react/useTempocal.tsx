@@ -13,17 +13,19 @@ export default function DocumentationPage() {
 const {
   calendarProps,
   calendarValue,
+  years,
+  months,
+  hours,
+  minutes,
   onChangeCalendarValue,
   onChangeSelectedValue,
-  months,
-  weekdays,
-  years,
 } = useTempocal({
   clampCalendarValue?: boolean;
+  clampSelectedValue?: boolean;
   locale: Locale;
-  maxValue?: Temporal.PlainDate;
-  minValue?: Temporal.PlainDate;
-  mode: "date" | "datetime";
+  maxValue?: Temporal.PlainDate | Temporal.PlainDateTime;
+  minValue?: Temporal.PlainDate | Temporal.PlainDateTime;
+  mode: "date" | "daterange" | "datetime" | "datetimerange";
   setValue: (value: Temporal.PlainDate | Temporal.PlainDateTime) => void;
   value: Temporal.PlainDate | Temporal.PlainDateTime;
 });`}</CodeBlock>
