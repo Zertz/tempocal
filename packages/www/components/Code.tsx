@@ -26,6 +26,13 @@ export function CodeBlock({
           )}
           {tokens.map((line, i) => (
             <div {...getLineProps({ line, key: i })}>
+              {href && (
+                <span className="mr-4 select-none text-gray-500">
+                  {(i + 1)
+                    .toString()
+                    .padStart(tokens.length.toString().length, "0")}
+                </span>
+              )}
               {line.map((token, key) => (
                 <span {...getTokenProps({ token, key })} />
               ))}
@@ -39,6 +46,6 @@ export function CodeBlock({
 
 export function Code({ children }: { children: string }) {
   return (
-    <code className="inline rounded bg-gray-800 px-1 py-0.5">{children}</code>
+    <code className="bg-[rgb(42,39,52)] inline rounded p-1.5">{children}</code>
   );
 }
