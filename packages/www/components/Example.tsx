@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useClient } from "../hooks/useClient";
 import { useGitHub } from "../hooks/useGitHub";
 import { CodeBlock } from "./Code";
 
@@ -11,11 +12,7 @@ export function Example({
   file: `/${string}`;
   title: string;
 }) {
-  const [client, setClient] = React.useState(false);
-
-  React.useEffect(() => {
-    setClient(true);
-  }, []);
+  const client = useClient();
 
   const { contentUrl, rawContent } = useGitHub({
     file,
