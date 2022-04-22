@@ -19,13 +19,12 @@ export function Basic() {
   });
 
   return (
-    <div className="flex flex-col flex-shrink-0 gap-4 w-72">
-      <Calendar
-        {...calendarProps}
-        calendarProps={() => ({
-          className: "bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center",
-        })}
-      />
-    </div>
+    <Calendar
+      {...calendarProps}
+      calendarProps={() => ({
+        className:
+          "flex-shrink-0 bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center w-72",
+      })}
+    />
   );
 }
