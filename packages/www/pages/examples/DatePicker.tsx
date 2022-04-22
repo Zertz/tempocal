@@ -1,3 +1,4 @@
+import { Locale } from "@tempocal/react";
 import * as React from "react";
 import { Code } from "../../components/Code";
 import { Example } from "../../components/Example";
