@@ -1,9 +1,13 @@
+import { InferGetStaticPropsType } from "next";
 import * as React from "react";
 import { Example } from "../../components/Example";
 import { Input } from "../../components/Input";
 import { DateRangePicker } from "../../examples/DateRangePicker";
+import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function ExamplesPage() {
+export default function ExamplesPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   const [monthsBefore, setMonthsBefore] = React.useState(0);
   const [monthsAfter, setMonthsAfter] = React.useState(0);
 
@@ -15,8 +19,8 @@ export default function ExamplesPage() {
           monthsBefore={monthsBefore}
         />
       }
-      file="/packages/www/examples/DateRangePicker.tsx"
       title="DateRangePicker"
+      {...props}
     >
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">Props</legend>
@@ -43,4 +47,10 @@ export default function ExamplesPage() {
       </fieldset>
     </Example>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: await fetchFromGitHub("/packages/www/examples/DateRangePicker.tsx"),
+  };
 }

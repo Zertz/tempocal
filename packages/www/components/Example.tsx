@@ -1,25 +1,21 @@
 import classnames from "classnames";
 import * as React from "react";
 import { useClient } from "../hooks/useClient";
-import { useGitHub } from "../hooks/useGitHub";
+import { fetchFromGitHub } from "../utils/fetchFromGitHub";
 import { CodeBlock } from "./Code";
 
 export function Example({
   children,
+  contentUrl,
   demo,
-  file,
+  rawContent,
   title,
 }: {
   children: React.ReactNode;
   demo: React.ReactNode;
-  file: `/${string}`;
   title: string;
-}) {
+} & Awaited<ReturnType<typeof fetchFromGitHub>>) {
   const client = useClient();
-
-  const { contentUrl, rawContent } = useGitHub({
-    file,
-  });
 
   return (
     <div

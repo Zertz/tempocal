@@ -1,14 +1,20 @@
+import { InferGetStaticPropsType } from "next";
 import { Example } from "../../components/Example";
 import { DateInput } from "../../examples/DateInput";
+import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function ExamplesPage() {
+export default function ExamplesPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   return (
-    <Example
-      demo={<DateInput />}
-      file="/packages/www/examples/DateInput.tsx"
-      title="DateInput"
-    >
+    <Example demo={<DateInput />} title="DateInput" {...props}>
       👀
     </Example>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: await fetchFromGitHub("/packages/www/examples/DateInput.tsx"),
+  };
 }

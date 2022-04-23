@@ -1,16 +1,20 @@
+import { InferGetStaticPropsType } from "next";
 import * as React from "react";
 import { Code } from "../../components/Code";
 import { Example } from "../../components/Example";
 import { DateTimePicker } from "../../examples/DateTimePicker";
+import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function ExamplesPage() {
+export default function ExamplesPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   const [clampSelectedValue, setClampSelectedValue] = React.useState(true);
 
   return (
     <Example
       demo={<DateTimePicker clampSelectedValue={clampSelectedValue} />}
-      file="/packages/www/examples/DateTimePicker.tsx"
       title="DateTimePicker"
+      {...props}
     >
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">Props</legend>
@@ -43,4 +47,10 @@ export default function ExamplesPage() {
       </fieldset>
     </Example>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: await fetchFromGitHub("/packages/www/examples/DateTimePicker.tsx"),
+  };
 }

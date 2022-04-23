@@ -1,12 +1,16 @@
 import { Locale } from "@tempocal/react";
+import { InferGetStaticPropsType } from "next";
 import * as React from "react";
 import { Code } from "../../components/Code";
 import { Example } from "../../components/Example";
 import { Input } from "../../components/Input";
 import { Select } from "../../components/Select";
 import { DatePicker } from "../../examples/DatePicker";
+import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function ExamplesPage() {
+export default function ExamplesPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   const [clampCalendarValue, setClampCalendarValue] = React.useState(true);
   const [locale, setLocale] = React.useState<Locale>("en-US");
   const [rollover, setRollover] = React.useState(true);
@@ -22,8 +26,8 @@ export default function ExamplesPage() {
           startOfWeek={startOfWeek}
         />
       }
-      file="/packages/www/examples/DatePicker.tsx"
       title="DatePicker"
+      {...props}
     >
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">Props</legend>
@@ -101,4 +105,10 @@ export default function ExamplesPage() {
       </fieldset>
     </Example>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: await fetchFromGitHub("/packages/www/examples/DatePicker.tsx"),
+  };
 }

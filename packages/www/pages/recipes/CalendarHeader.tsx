@@ -1,16 +1,16 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { useTempocal } from "@tempocal/react";
+import { InferGetStaticPropsType } from "next";
 import * as React from "react";
 import { Example } from "../../components/Example";
 import { CalendarHeader } from "../../recipes/CalendarHeader";
+import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function RecipesPage() {
+export default function RecipesPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   return (
-    <Example
-      demo={<Recipe />}
-      file="/packages/www/recipes/CalendarHeader.tsx"
-      title="CalendarHeader"
-    >
+    <Example demo={<Recipe />} title="CalendarHeader" {...props}>
       👀
     </Example>
   );
@@ -41,4 +41,10 @@ function Recipe() {
       />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: await fetchFromGitHub("/packages/www/recipes/CalendarHeader.tsx"),
+  };
 }
