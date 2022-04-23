@@ -49,6 +49,8 @@ export function CodeBlock({
 
 export function Code({ children }: { children: string }) {
   return (
-    <code className="bg-[rgb(42,39,52)] inline rounded p-1.5">{children}</code>
+    <code className="bg-[rgb(42,39,52)] inline rounded px-1.5 py-1">
+      {children}
+    </code>
   );
 }
