@@ -6,7 +6,7 @@ import { Example } from "../../components/Example";
 import { CalendarHeader } from "../../recipes/CalendarHeader";
 import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function RecipesPage(
+export default function CalendarHeaderPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (

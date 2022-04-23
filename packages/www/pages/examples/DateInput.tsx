@@ -3,7 +3,7 @@ import { Example } from "../../components/Example";
 import { DateInput } from "../../examples/DateInput";
 import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function ExamplesPage(
+export default function DateInputPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (

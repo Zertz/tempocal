@@ -3,7 +3,7 @@ import { Example } from "../../components/Example";
 import { Basic } from "../../examples/Basic";
 import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function ExamplesPage(
+export default function BasicPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (

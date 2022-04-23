@@ -1,6 +1,6 @@
 import { Code, CodeBlock } from "../../components/Code";
 
-export default function DocumentationPage() {
+export default function CalendarPage() {
   return (
     <div>
       <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">

@@ -2,7 +2,7 @@ import { LinkIcon } from "@heroicons/react/outline";
 import { Code, CodeBlock } from "../../components/Code";
 import ExternalLink from "../../components/ExternalLink";
 
-export default function DocumentationPage() {
+export default function UseTempocalPage() {
   return (
     <div>
       <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">

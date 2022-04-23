@@ -5,7 +5,7 @@ import { Example } from "../../components/Example";
 import { DateTimePicker } from "../../examples/DateTimePicker";
 import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function ExamplesPage(
+export default function DateTimePickerPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const [clampSelectedValue, setClampSelectedValue] = React.useState(true);
