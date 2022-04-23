@@ -13,13 +13,18 @@ export default function ExamplesPage() {
   const [startOfWeek, setStartOfWeek] = React.useState(7);
 
   return (
-    <Example file="/packages/www/examples/DatePicker.tsx" title="DatePicker">
-      <DatePicker
-        clampCalendarValue={clampCalendarValue}
-        locale={locale}
-        rollover={rollover}
-        startOfWeek={startOfWeek}
-      />
+    <Example
+      demo={
+        <DatePicker
+          clampCalendarValue={clampCalendarValue}
+          locale={locale}
+          rollover={rollover}
+          startOfWeek={startOfWeek}
+        />
+      }
+      file="/packages/www/examples/DatePicker.tsx"
+      title="DatePicker"
+    >
       <fieldset className="flex flex-col gap-2">
         <legend className="sr-only">Props</legend>
         <Select

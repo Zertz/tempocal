@@ -7,10 +7,11 @@ import { CalendarHeader } from "../../recipes/CalendarHeader";
 export default function RecipesPage() {
   return (
     <Example
+      demo={<Recipe />}
       file="/packages/www/recipes/CalendarHeader.tsx"
       title="CalendarHeader"
     >
-      <Recipe />
+      👀
     </Example>
   );
 }

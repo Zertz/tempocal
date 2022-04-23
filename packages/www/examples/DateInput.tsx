@@ -36,7 +36,7 @@ export function DateInput() {
   });
 
   return (
-    <div className="flex flex-col flex-shrink-0 gap-4 p-2 rounded relative w-72 bg-gray-100 text-gray-700">
+    <div className="flex flex-col flex-shrink-0 gap-4 relative w-72">
       <input
         className="border-gray-300 rounded px-1 w-full"
         onClick={() => setOpen((isOpen) => !isOpen)}
@@ -48,7 +48,7 @@ export function DateInput() {
           .padStart(2, "0")}-${value.day.toString().padStart(2, "0")}`}
       />
       <div
-        className="shadow-xl absolute top-16 left-0 right-0"
+        className="shadow-xl absolute top-14 left-0 right-0"
         hidden={!isOpen}
       >
         <Calendar

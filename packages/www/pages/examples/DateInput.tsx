@@ -3,8 +3,12 @@ import { DateInput } from "../../examples/DateInput";
 
 export default function ExamplesPage() {
   return (
-    <Example file="/packages/www/examples/DateInput.tsx" title="DateInput">
-      <DateInput />
+    <Example
+      demo={<DateInput />}
+      file="/packages/www/examples/DateInput.tsx"
+      title="DateInput"
+    >
+      👀
     </Example>
   );
 }

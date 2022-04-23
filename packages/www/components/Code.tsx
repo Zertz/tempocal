@@ -12,7 +12,10 @@ export function CodeBlock({
   return (
     <Highlight {...defaultProps} code={children || "Loading..."} language="tsx">
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={classnames(className, "p-2 relative")} style={style}>
+        <pre
+          className={classnames(className, "overflow-auto p-2 relative")}
+          style={style}
+        >
           {href && (
             <div className="flex gap-2 absolute top-2 right-2">
               <a

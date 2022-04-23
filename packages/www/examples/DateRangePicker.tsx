@@ -7,7 +7,6 @@ import {
 import { Calendar, DateRange, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
-import { Input } from "../components/Input";
 import { CalendarHeader } from "../recipes/CalendarHeader";
 
 const locale = "en-US";
@@ -16,10 +15,13 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
   dateStyle: "long",
 });
 
-export function DateRangePicker() {
-  const [monthsBefore, setMonthsBefore] = React.useState(0);
-  const [monthsAfter, setMonthsAfter] = React.useState(0);
-
+export function DateRangePicker({
+  monthsAfter,
+  monthsBefore,
+}: {
+  monthsAfter: number;
+  monthsBefore: number;
+}) {
   const [values, setValues] = React.useState<DateRange>([
     Temporal.Now.plainDate("iso8601").subtract({ days: 3 }),
     Temporal.Now.plainDate("iso8601").add({ days: 3 }),
@@ -53,154 +55,125 @@ export function DateRangePicker() {
   });
 
   return (
-    <div className="flex flex-col flex-shrink-0 gap-4 w-72">
-      <div className="flex flex-wrap gap-2 bg-gray-100 text-gray-700 rounded">
-        <Calendar
-          {...calendarProps}
-          monthsBefore={monthsBefore}
-          monthsAfter={monthsAfter}
-          calendarProps={() => ({
-            className: "bg-gray-100 text-gray-700 gap-1 p-2 text-center",
-          })}
-          headerProps={({ date }) => ({
-            className: classnames("flex items-center gap-2", {
-              "mx-auto":
-                date.year !== calendarValue.year ||
-                date.month !== calendarValue.month,
-            }),
-          })}
-          renderHeader={({ date }) => {
-            if (
+    <div className="flex flex-wrap gap-2">
+      <Calendar
+        {...calendarProps}
+        monthsBefore={monthsBefore}
+        monthsAfter={monthsAfter}
+        calendarProps={() => ({
+          className: "gap-1 text-center w-72",
+        })}
+        headerProps={({ date }) => ({
+          className: classnames("flex items-center gap-2", {
+            "mx-auto":
               date.year !== calendarValue.year ||
-              date.month !== calendarValue.month
-            ) {
-              return months[date.month - 1].longName;
-            }
+              date.month !== calendarValue.month,
+          }),
+        })}
+        renderHeader={({ date }) => {
+          if (
+            date.year !== calendarValue.year ||
+            date.month !== calendarValue.month
+          ) {
+            return months[date.month - 1].longName;
+          }
 
-            return (
-              <CalendarHeader
-                calendarValue={calendarValue}
-                months={months}
-                onChangeCalendarValue={onChangeCalendarValue}
-                years={years}
-              />
-            );
-          }}
-          weekdayProps={() => ({ className: "font-medium" })}
-          renderDay={({ date, disabled, plainDateLike }) => {
-            const isRangeSelected =
-              values[0] &&
-              values[1] &&
-              Temporal.PlainDate.compare(values[0], date) <= 0 &&
-              Temporal.PlainDate.compare(values[1], date) >= 0;
+          return (
+            <CalendarHeader
+              calendarValue={calendarValue}
+              months={months}
+              onChangeCalendarValue={onChangeCalendarValue}
+              years={years}
+            />
+          );
+        }}
+        weekdayProps={() => ({ className: "font-medium" })}
+        renderDay={({ date, disabled, plainDateLike }) => {
+          const isRangeSelected =
+            values[0] &&
+            values[1] &&
+            Temporal.PlainDate.compare(values[0], date) <= 0 &&
+            Temporal.PlainDate.compare(values[1], date) >= 0;
 
-            const isSelected =
-              values[0] && !values[1] && values[0].equals(date);
+          const isSelected = values[0] && !values[1] && values[0].equals(date);
 
-            const isRangeHovered =
-              values[0] &&
-              !values[1] &&
-              hoverValue &&
-              ((Temporal.PlainDate.compare(values[0], date) <= 0 &&
-                Temporal.PlainDate.compare(hoverValue, date) >= 0) ||
-                (Temporal.PlainDate.compare(hoverValue, date) <= 0 &&
-                  Temporal.PlainDate.compare(values[0], date) >= 0));
+          const isRangeHovered =
+            values[0] &&
+            !values[1] &&
+            hoverValue &&
+            ((Temporal.PlainDate.compare(values[0], date) <= 0 &&
+              Temporal.PlainDate.compare(hoverValue, date) >= 0) ||
+              (Temporal.PlainDate.compare(hoverValue, date) <= 0 &&
+                Temporal.PlainDate.compare(values[0], date) >= 0));
 
-            return (
-              <button
-                className={classnames(
-                  "w-full rounded border text-gray-700 transition-colors",
-                  "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
-                  isRangeSelected || isSelected
-                    ? "border-blue-600 bg-blue-100"
-                    : isRangeHovered
-                    ? "border-blue-300 bg-blue-50"
-                    : "border-gray-300 hover:bg-gray-100"
-                )}
-                disabled={disabled}
-                onClick={() => onChangeSelectedValue(plainDateLike)}
-                onMouseOver={() => setHoveredValue(date)}
-                type="button"
-              >
-                {date.day}
-              </button>
-            );
-          }}
-          footerProps={() => ({
-            className: "flex justify-between gap-2",
-          })}
-          renderFooter={({ date }) => (
-            <>
-              <button
-                className="text-sm w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
-                onClick={() => {
-                  onChangeSelectedValue([
-                    getMonthStartDate(date),
-                    getMonthEndDate(date),
-                  ]);
-                }}
-                type="button"
-              >
-                Select month
-              </button>
-              <button
-                className="text-sm w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
-                onClick={() => {
-                  onChangeSelectedValue([
-                    getMonthStartDate(date.with({ month: 1 })),
-                    getMonthEndDate(date.with({ month: date.monthsInYear })),
-                  ]);
-                }}
-                type="button"
-              >
-                Select year
-              </button>
-              <button
-                className="text-sm w-min border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
-                onClick={() => {
-                  onChangeSelectedValue([undefined, undefined]);
-                }}
-                type="button"
-              >
-                Clear
-              </button>
-            </>
-          )}
-        />
-      </div>
-      <fieldset className="flex flex-col gap-2">
-        <legend className="sr-only">Props</legend>
-        <div>
-          <span className="block font-medium">Selected date range</span>
-          <span className="mt-1">
-            {`${
-              values[0] ? dateFormatter.format(temporalToDate(values[0])) : ""
-            } - ${
-              values[1] ? dateFormatter.format(temporalToDate(values[1])) : ""
-            }`}
-          </span>
-        </div>
-        <Input
-          hint="Number of months to show before the primary calendar"
-          id="monthsBefore"
-          label="Months before"
-          min={0}
-          name="monthsBefore"
-          onChange={({ target: { value } }) => setMonthsBefore(Number(value))}
-          type="number"
-          value={monthsBefore}
-        />
-        <Input
-          hint="Number of months to show after the primary calendar"
-          id="monthsAfter"
-          label="Months after"
-          min={0}
-          name="monthsAfter"
-          onChange={({ target: { value } }) => setMonthsAfter(Number(value))}
-          type="number"
-          value={monthsAfter}
-        />
-      </fieldset>
+          return (
+            <button
+              className={classnames(
+                "w-full rounded border text-gray-700 transition-colors",
+                "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
+                isRangeSelected || isSelected
+                  ? "border-blue-600 bg-blue-100"
+                  : isRangeHovered
+                  ? "border-blue-300 bg-blue-50"
+                  : "border-gray-300 hover:bg-gray-100"
+              )}
+              disabled={disabled}
+              onClick={() => onChangeSelectedValue(plainDateLike)}
+              onMouseOver={() => setHoveredValue(date)}
+              type="button"
+            >
+              {date.day}
+            </button>
+          );
+        }}
+        footerProps={() => ({
+          className: "grid grid-rows-2 auto-cols-auto gap-2",
+        })}
+        renderFooter={({ date }) => (
+          <>
+            <button
+              className="text-sm border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+              onClick={() => {
+                onChangeSelectedValue([
+                  getMonthStartDate(date),
+                  getMonthEndDate(date),
+                ]);
+              }}
+              type="button"
+            >
+              Select month
+            </button>
+            <button
+              className="text-sm border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+              onClick={() => {
+                onChangeSelectedValue([
+                  getMonthStartDate(date.with({ month: 1 })),
+                  getMonthEndDate(date.with({ month: date.monthsInYear })),
+                ]);
+              }}
+              type="button"
+            >
+              Select year
+            </button>
+            <button
+              className="text-sm border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
+              onClick={() => {
+                onChangeSelectedValue([undefined, undefined]);
+              }}
+              type="button"
+            >
+              Clear
+            </button>
+            <span className="row-start-2 col-span-3 text-sm">
+              {`Selected date range: ${
+                values[0] ? dateFormatter.format(temporalToDate(values[0])) : ""
+              } - ${
+                values[1] ? dateFormatter.format(temporalToDate(values[1])) : ""
+              }`}
+            </span>
+          </>
+        )}
+      />
     </div>
   );
 }

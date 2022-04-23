@@ -22,8 +22,7 @@ export function Basic() {
     <Calendar
       {...calendarProps}
       calendarProps={() => ({
-        className:
-          "flex-shrink-0 bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center w-72",
+        className: "gap-1 text-center w-72",
       })}
     />
   );
