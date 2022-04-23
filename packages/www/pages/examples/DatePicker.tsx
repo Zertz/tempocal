@@ -1,7 +1,7 @@
 import { Locale } from "@tempocal/react";
 import { InferGetStaticPropsType } from "next";
 import * as React from "react";
-import { Code } from "../../components/Code";
+import { Checkbox } from "../../components/Checkbox";
 import { Example } from "../../components/Example";
 import { Input } from "../../components/Input";
 import { Select } from "../../components/Select";
@@ -44,53 +44,24 @@ export default function ExamplesPage(
           <option value="pt-BR">pt-BR</option>
           <option value="uk-UA">uk-UA</option>
         </Select>
-        <div className="relative flex items-start">
-          <div className="flex h-5 items-center">
-            <input
-              aria-describedby="clampCalendarValue-description"
-              checked={clampCalendarValue}
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="clampCalendarValue"
-              name="clampCalendarValue"
-              onChange={() =>
-                setClampCalendarValue(
-                  (clampCalendarValue) => !clampCalendarValue
-                )
-              }
-              type="checkbox"
-            />
-          </div>
-          <div className="ml-3 text-sm">
-            <label htmlFor="clampCalendarValue" className="font-medium">
-              clampCalendarValue
-            </label>
-            <p id="clampCalendarValue-description">
-              When <Code>minValue</Code> and/or <Code>maxValue</Code> are set,
-              automatically keep <Code>calendarValue</Code> within those values.
-            </p>
-          </div>
-        </div>
-        <div className="relative flex items-start">
-          <div className="flex h-5 items-center">
-            <input
-              aria-describedby="rollover-description"
-              checked={rollover}
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="rollover"
-              name="rollover"
-              onChange={() => setRollover((rollover) => !rollover)}
-              type="checkbox"
-            />
-          </div>
-          <div className="ml-3 text-sm">
-            <label htmlFor="rollover" className="font-medium">
-              rollover
-            </label>
-            <p id="rollover-description">
-              Fill the calendar with days from the previous and next months.
-            </p>
-          </div>
-        </div>
+        <Checkbox
+          checked={clampCalendarValue}
+          hint="When minValue and/or maxValue are set, automatically keep the calendar value within those values."
+          id="clampCalendarValue"
+          label="clampCalendarValue"
+          name="clampCalendarValue"
+          onChange={() => {
+            setClampCalendarValue((clampCalendarValue) => !clampCalendarValue);
+          }}
+        />
+        <Checkbox
+          checked={rollover}
+          hint="Fill month grid with days from the previous and next months."
+          id="rollover"
+          label="rollover"
+          name="rollover"
+          onChange={() => setRollover((rollover) => !rollover)}
+        />
         <Input
           hint="Monday = 1 and Sunday = 7"
           id="startOfWeek"
