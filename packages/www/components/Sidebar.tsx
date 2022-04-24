@@ -22,7 +22,7 @@ const documentation = [
   },
   {
     section: "recipes",
-    pages: ["CalendarHeader", "DateInterop"],
+    pages: ["CalendarHeader"],
   },
   {
     section: "react",

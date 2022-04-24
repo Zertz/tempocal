@@ -10,7 +10,11 @@ export default function DocumentationPage() {
         <div className="space-y-2">
           <CodeBlock>{`import { dateToTemporal } from "@tempocal/core";
 
-dateToTemporal(...)`}</CodeBlock>
+const date = new Date(1918, 6, 18, 15, 30, 45, 600);
+
+const plainDateTime = dateToTemporal(date); // Temporal.PlainDateTime<1918-07-18 15:30:45.600>
+
+plainDateTime.toPlainDate(); // Temporal.PlainDate<1918-07-18>`}</CodeBlock>
           <p></p>
         </div>
       </div>
