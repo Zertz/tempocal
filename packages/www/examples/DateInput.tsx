@@ -24,7 +24,6 @@ export function DateInput() {
 
   const {
     calendarProps,
-    calendarValue,
     months,
     onChangeCalendarValue,
     onChangeSelectedValue,
@@ -60,7 +59,7 @@ export function DateInput() {
           headerProps={() => ({ className: "flex items-center gap-2" })}
           renderHeader={() => (
             <CalendarHeader
-              calendarValue={calendarValue}
+              calendarProps={calendarProps}
               months={months}
               onChangeCalendarValue={onChangeCalendarValue}
               years={[...Array(20)].map((_, year) => year - 10 + value.year)}

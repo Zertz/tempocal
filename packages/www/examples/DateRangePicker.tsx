@@ -39,7 +39,6 @@ export function DateRangePicker({
 
   const {
     calendarProps,
-    calendarValue,
     months,
     onChangeCalendarValue,
     onChangeSelectedValue,
@@ -66,21 +65,21 @@ export function DateRangePicker({
         headerProps={({ date }) => ({
           className: classnames("flex items-center gap-2", {
             "mx-auto":
-              date.year !== calendarValue.year ||
-              date.month !== calendarValue.month,
+              date.year !== calendarProps.value.year ||
+              date.month !== calendarProps.value.month,
           }),
         })}
         renderHeader={({ date }) => {
           if (
-            date.year !== calendarValue.year ||
-            date.month !== calendarValue.month
+            date.year !== calendarProps.value.year ||
+            date.month !== calendarProps.value.month
           ) {
             return months[date.month - 1].longName;
           }
 
           return (
             <CalendarHeader
-              calendarValue={calendarValue}
+              calendarProps={calendarProps}
               months={months}
               onChangeCalendarValue={onChangeCalendarValue}
               years={years}

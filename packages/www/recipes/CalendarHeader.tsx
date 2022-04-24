@@ -2,13 +2,13 @@ import { useTempocal } from "@tempocal/react";
 import { Select } from "../components/Select";
 
 export function CalendarHeader({
-  calendarValue,
+  calendarProps,
   months,
   onChangeCalendarValue,
   years,
 }: Pick<
   ReturnType<typeof useTempocal>,
-  "calendarValue" | "months" | "onChangeCalendarValue" | "years"
+  "calendarProps" | "months" | "onChangeCalendarValue" | "years"
 >) {
   return (
     <>
@@ -16,11 +16,11 @@ export function CalendarHeader({
       <button
         className="disabled:opacity-50"
         disabled={
-          months.find(({ month }) => month === calendarValue.month - 1)
+          months.find(({ month }) => month === calendarProps.value.month - 1)
             ?.disabled
         }
         onClick={() => {
-          onChangeCalendarValue(calendarValue.subtract({ months: 1 }));
+          onChangeCalendarValue(calendarProps.value.subtract({ months: 1 }));
         }}
         title="Previous month"
         type="button"
@@ -34,7 +34,7 @@ export function CalendarHeader({
           onChangeCalendarValue({ month: Number(value) });
         }}
         title="Month"
-        value={calendarValue.month}
+        value={calendarProps.value.month}
       >
         {months.map(({ disabled, month, longName }) => (
           <option key={longName} disabled={disabled} value={month}>
@@ -49,7 +49,7 @@ export function CalendarHeader({
           onChangeCalendarValue({ year: Number(value) });
         }}
         title="Year"
-        value={calendarValue.year}
+        value={calendarProps.value.year}
       >
         {years.map((year) => (
           <option key={year} value={year}>
@@ -61,11 +61,11 @@ export function CalendarHeader({
       <button
         className="disabled:opacity-50"
         disabled={
-          months.find(({ month }) => month === calendarValue.month + 1)
+          months.find(({ month }) => month === calendarProps.value.month + 1)
             ?.disabled
         }
         onClick={() => {
-          onChangeCalendarValue(calendarValue.add({ months: 1 }));
+          onChangeCalendarValue(calendarProps.value.add({ months: 1 }));
         }}
         title="Next month"
         type="button"

@@ -34,7 +34,6 @@ export function DateTimePicker({
 
   const {
     calendarProps,
-    calendarValue,
     years,
     months,
     hours,
@@ -61,7 +60,7 @@ export function DateTimePicker({
       headerProps={() => ({ className: "flex items-center gap-2" })}
       renderHeader={() => (
         <CalendarHeader
-          calendarValue={calendarValue}
+          calendarProps={calendarProps}
           months={months}
           onChangeCalendarValue={onChangeCalendarValue}
           years={years}

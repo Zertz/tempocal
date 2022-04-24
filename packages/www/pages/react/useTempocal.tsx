@@ -13,7 +13,6 @@ export default function UseTempocalPage() {
 
 const {
   calendarProps,
-  calendarValue,
   years,
   months,
   hours,
@@ -147,19 +146,16 @@ value: DateTimeRange`}</CodeBlock>
             </AnchorHeader>
             <p>
               Provided for convenience, to be spread into the{" "}
-              <Code>Calendar</Code> component's props.
+              <Code>Calendar</Code> component's props. <Code>value</Code>{" "}
+              represents the year and month that should be shown by the
+              calendar.
             </p>
-            <CodeBlock>{"<Calendar {...calendarProps} />"}</CodeBlock>
-          </div>
-          <div className="space-y-2">
-            <AnchorHeader id="returns-calendarValue">
-              calendarValue
-            </AnchorHeader>
-            <CodeBlock>{"calendarValue: Temporal.PlainDate"}</CodeBlock>
-            <p>
-              Represents the date that should be visible. Typically passed to
-              the <Code>Calendar</Code> component's <Code>value</Code> prop.
-            </p>
+            <CodeBlock>{`calendarProps: {
+  locale: Locale;
+  maxValue: Temporal.PlainDate;
+  minValue: Temporal.PlainDate;
+  value: Temporal.PlainDate;
+}`}</CodeBlock>
           </div>
           <div className="space-y-2">
             <AnchorHeader id="returns-onChangeCalendarValue">
@@ -169,7 +165,7 @@ value: DateTimeRange`}</CodeBlock>
               Fully or partially updates the visible date. Typically used to
               navigate the calendar using, for example, month and year
               selectors. If <Code>params</Code> is falsy,{" "}
-              <Code>calendarValue</Code> will be set to now.
+              <Code>calendarProps.value</Code> will be set to now.
             </p>
             <CodeBlock>
               {`onChangeCalendarValue: (params?: Temporal.PlainDate | Temporal.PlainDateLike) => Temporal.PlainDate`}

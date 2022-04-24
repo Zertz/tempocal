@@ -22,7 +22,8 @@ function Recipe() {
   const [maxValue] = React.useState(value.add({ years: 3 }));
   const [minValue] = React.useState(value.subtract({ years: 3 }));
 
-  const { calendarValue, months, years, onChangeCalendarValue } = useTempocal({
+  const { calendarProps, months, years, onChangeCalendarValue } = useTempocal({
+    clampCalendarValue: true,
     locale: "en-US",
     maxValue,
     minValue,
@@ -34,7 +35,7 @@ function Recipe() {
   return (
     <div className="flex items-center gap-2">
       <CalendarHeader
-        calendarValue={calendarValue}
+        calendarProps={calendarProps}
         months={months}
         onChangeCalendarValue={onChangeCalendarValue}
         years={years}
