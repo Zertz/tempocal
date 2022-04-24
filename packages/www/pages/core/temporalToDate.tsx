@@ -28,7 +28,7 @@ const plainDate = Temporal.PlainDate.from({
   day: 18,
 });
 
-const dateOnly = temporalToDate(plainDateTime); // Date<1918-07-18 00:00:00>`}</CodeBlock>
+const dateOnly = temporalToDate(plainDate); // Date<1918-07-18 00:00:00>`}</CodeBlock>
         </div>
       </div>
     </div>
