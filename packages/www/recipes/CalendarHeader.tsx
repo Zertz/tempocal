@@ -1,6 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { useTempocal } from "@tempocal/react";
-import { Select } from "../components/Select";
 
 export function CalendarHeader({
   calendarProps,
@@ -13,7 +12,7 @@ export function CalendarHeader({
 >) {
   return (
     <>
-      {/* Left arrow to go to the previous month */}
+      {/* Go to the previous month */}
       <button
         className="disabled:opacity-50"
         disabled={
@@ -31,8 +30,8 @@ export function CalendarHeader({
       >
         &larr;
       </button>
-      {/* Select to jump to a specific month */}
-      <Select
+      {/* Jump to a specific month */}
+      <select
         className="ml-auto"
         onChange={({ target: { value } }) => {
           onChangeCalendarValue({ month: Number(value) });
@@ -45,9 +44,9 @@ export function CalendarHeader({
             {longName}
           </option>
         ))}
-      </Select>
-      {/* Select to jump to a specific year */}
-      <Select
+      </select>
+      {/* Jump to a specific year */}
+      <select
         className="mr-auto"
         onChange={({ target: { value } }) => {
           onChangeCalendarValue({ year: Number(value) });
@@ -60,8 +59,8 @@ export function CalendarHeader({
             {year}
           </option>
         ))}
-      </Select>
-      {/* Left arrow to go to the next month */}
+      </select>
+      {/* Go to the next month */}
       <button
         className="disabled:opacity-50"
         disabled={

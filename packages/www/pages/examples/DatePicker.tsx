@@ -35,7 +35,6 @@ export default function DatePickerPage(
           id="select-locale"
           label="Locale"
           onChange={({ target: { value } }) => setLocale(value)}
-          title="Locale"
           value={locale}
         >
           <option value="en-US">en-US</option>

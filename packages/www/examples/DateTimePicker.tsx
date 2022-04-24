@@ -3,7 +3,6 @@ import { temporalToDate } from "@tempocal/core";
 import { Calendar, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
-import { Select } from "../components/Select";
 import { CalendarHeader } from "../recipes/CalendarHeader";
 
 const locale = "en-US";
@@ -83,15 +82,15 @@ export function DateTimePicker({
         </button>
       )}
       footerProps={() => ({
-        className: "mx-auto grid grid-rows-2 grid-cols-2 gap-2",
+        className: "mt-1 mx-auto grid grid-rows-2 grid-cols-2 gap-2",
       })}
       renderFooter={() => (
         <>
-          <Select
+          <select
             className="ml-auto"
-            onChange={({ target: { value } }) =>
-              onChangeSelectedValue({ hour: Number(value) })
-            }
+            onChange={({ target: { value } }) => {
+              onChangeSelectedValue({ hour: Number(value) });
+            }}
             title="Hours"
             value={value.hour}
           >
@@ -100,11 +99,11 @@ export function DateTimePicker({
                 {`${hour}`.padStart(2, "0")}
               </option>
             ))}
-          </Select>
-          <Select
-            onChange={({ target: { value } }) =>
-              onChangeSelectedValue({ minute: Number(value) })
-            }
+          </select>
+          <select
+            onChange={({ target: { value } }) => {
+              onChangeSelectedValue({ minute: Number(value) });
+            }}
             title="Minutes"
             value={value.minute}
           >
@@ -115,7 +114,7 @@ export function DateTimePicker({
                   {`${minute}`.padStart(2, "0")}
                 </option>
               ))}
-          </Select>
+          </select>
           <span className="row-start-2 col-span-2 text-sm">
             {`Selected date and time: ${dateTimeFormatter.format(
               temporalToDate(value)
