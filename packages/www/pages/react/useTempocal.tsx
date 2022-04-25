@@ -9,6 +9,10 @@ export default function UseTempocalPage() {
         <h2 className="text-4xl font-bold">useTempocal</h2>
       </div>
       <div className="space-y-4">
+        <p>
+          This hooks handles the intricacies of managing a calendar's state,
+          accounting for different modes as well as minimum and maximum values.
+        </p>
         <CodeBlock>{`import { useTempocal } from "@tempocal/react";
 
 const {
