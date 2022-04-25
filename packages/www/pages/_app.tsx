@@ -5,13 +5,6 @@ import { MobileHeader } from "../components/MobileHeader";
 import { MobileSidebar } from "../components/MobileSidebar";
 import "../tailwind.css";
 
-const codeContextValue = {
-  repository: "Zertz/Tempocal",
-  branch: "docs-v2",
-};
-
-export const CodeContext = React.createContext(codeContextValue);
-
 export default function Tempocal({ Component, pageProps }: AppProps) {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
@@ -27,9 +20,7 @@ export default function Tempocal({ Component, pageProps }: AppProps) {
         <div className="flex-1 relative z-0 flex overflow-hidden">
           <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             <div className="py-6 px-4 sm:px-6 lg:px-8 space-y-12 text-gray-200">
-              <CodeContext.Provider value={codeContextValue}>
-                <Component {...pageProps} />
-              </CodeContext.Provider>
+              <Component {...pageProps} />
             </div>
           </main>
         </div>
