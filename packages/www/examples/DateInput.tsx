@@ -35,9 +35,9 @@ export function DateInput() {
   });
 
   return (
-    <div className="flex flex-col flex-shrink-0 gap-4 relative w-72">
+    <div className="flex flex-col flex-shrink-0 gap-4 relative">
       <input
-        className="border-gray-300 rounded px-1 w-full"
+        className="border-gray-300 rounded px-1 w-72"
         onClick={() => setOpen((isOpen) => !isOpen)}
         readOnly
         title={dateFormatter.format(temporalToDate(value))}
@@ -47,7 +47,7 @@ export function DateInput() {
           .padStart(2, "0")}-${value.day.toString().padStart(2, "0")}`}
       />
       <div
-        className="shadow-xl absolute top-14 left-0 right-0"
+        className="shadow-xl absolute top-14 left-0 right-0 z-10"
         hidden={!isOpen}
       >
         <Calendar
