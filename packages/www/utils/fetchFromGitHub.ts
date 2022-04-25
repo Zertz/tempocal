@@ -1,5 +1,5 @@
 const repository = "Zertz/Tempocal";
-const branch = "docs-v2";
+const branch = "main";
 
 export async function fetchFromGitHub(file: `/${string}`) {
   const contentUrl = `https://github.com/${repository}/blob/${branch}${file}`;
