@@ -49,9 +49,12 @@ type MonthProps = {
     date: Temporal.PlainDate;
     disabled: boolean;
     plainDateLike: Temporal.PlainDateLike;
-  }) => React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLLIElement>,
-    HTMLLIElement
+  }) => Omit<
+    React.DetailedHTMLProps<
+      React.ButtonHTMLAttributes<HTMLLIElement>,
+      HTMLLIElement
+    >,
+    "style"
   >;
   renderDay?: (props: {
     date: Temporal.PlainDate;
@@ -67,35 +70,12 @@ type MonthProps = {
   renderFooter?: (props: { date: Temporal.PlainDate }) => React.ReactNode;
 };
 
-function useCalendarMonthDateRange(
-  value: Value,
-  rollover: boolean,
-  startOfWeek: number
-) {
-  return React.useMemo(
-    () => getCalendarMonthDateRange(value, rollover, startOfWeek),
-    [rollover, startOfWeek, value]
-  );
-}
-
-function useMonthStartDate(value: Value) {
-  return React.useMemo(() => getMonthStartDate(value), [value]);
-}
-
-function useWeekdays(
-  locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  startOfWeek: number
-) {
-  return React.useMemo(
-    () => getWeekdays(locale, startOfWeek),
-    [locale, startOfWeek]
-  );
-}
-
 export function Calendar({
   locale,
   maxValue,
   minValue,
+  monthsAfter = 0,
+  monthsBefore = 0,
   rollover,
   startOfWeek,
   value,
@@ -108,21 +88,12 @@ export function Calendar({
   renderDay,
   footerProps,
   renderFooter,
-  ...rest
 }: MonthProps & {
   monthsBefore?: number;
   monthsAfter?: number;
 }) {
-  const { monthsBefore, monthsAfter } = React.useMemo(
-    () => ({
-      monthsBefore: Math.max(0, rest.monthsBefore || 0),
-      monthsAfter: Math.max(0, rest.monthsAfter || 0),
-    }),
-    [rest.monthsAfter, rest.monthsBefore]
-  );
-
   const months = React.useMemo(
-    () => [...Array(monthsBefore + 1 + monthsAfter)],
+    () => [...Array(Math.max(0, monthsBefore) + 1 + Math.max(0, monthsAfter))],
     [monthsAfter, monthsBefore]
   );
 
@@ -169,14 +140,17 @@ function Month({
   footerProps,
   renderFooter,
 }: MonthProps) {
-  const { start, end } = useCalendarMonthDateRange(
-    value,
-    rollover,
-    startOfWeek
+  const { start, end } = React.useMemo(
+    () => getCalendarMonthDateRange(value, rollover, startOfWeek),
+    [rollover, startOfWeek, value]
   );
 
-  const monthStartDate = useMonthStartDate(value);
-  const weekdays = useWeekdays(locale, startOfWeek);
+  const monthStartDate = React.useMemo(() => getMonthStartDate(value), [value]);
+
+  const weekdays = React.useMemo(
+    () => getWeekdays(locale, startOfWeek),
+    [locale, startOfWeek]
+  );
 
   const days = React.useMemo(
     () =>
