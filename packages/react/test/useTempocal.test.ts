@@ -19,7 +19,7 @@ test("useTempocal", () => {
     })
   );
 
-  expect(Object.keys(result.current).length).toBe(8);
+  expect(Object.keys(result.current).length).toBe(7);
   expect(Object.keys(result.current.calendarProps).length).toBe(4);
 
   expect(result.current.calendarProps.locale).toBe("en-US");
