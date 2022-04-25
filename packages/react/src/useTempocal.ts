@@ -293,7 +293,6 @@ export function useTempocal<
           : minValue,
       value: calendarValue,
     },
-    calendarValue,
     years,
     months,
     hours,

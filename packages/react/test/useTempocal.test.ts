@@ -37,7 +37,7 @@ test("useTempocal", () => {
   ).toBe(true);
 
   expect(
-    result.current.calendarValue.equals(
+    result.current.calendarProps.value.equals(
       Temporal.PlainDate.from({
         year: 2022,
         month: 4,
@@ -70,7 +70,7 @@ test("useTempocal", () => {
   });
 
   expect(
-    result.current.calendarValue.equals(
+    result.current.calendarProps.value.equals(
       Temporal.PlainDate.from({
         year: 2023,
         month: 7,
