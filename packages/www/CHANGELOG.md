@@ -1,5 +1,14 @@
 # @tempocal/www
 
+## 1.5.1
+
+### Patch Changes
+
+- c7aa330: Fix DateInput example size and z-index
+- c7aa330: Upgrade dependencies
+- Updated dependencies [819e6eb]
+  - @tempocal/react@0.15.0
+
 ## 1.5.0
 
 ### Minor Changes
