@@ -36,16 +36,6 @@ test("useTempocal", () => {
     )
   ).toBe(true);
 
-  expect(
-    result.current.calendarProps.value.equals(
-      Temporal.PlainDate.from({
-        year: 2022,
-        month: 4,
-        day: 15,
-      })
-    )
-  ).toBe(true);
-
   expect(result.current.years).deep.equal([]);
   expect(result.current.months).toHaveLength(12);
   expect(result.current.hours).toHaveLength(24);
