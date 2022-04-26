@@ -1,15 +1,11 @@
-import { Temporal } from "@js-temporal/polyfill";
-import { Calendar, useTempocal } from "@tempocal/react";
-import * as React from "react";
+import { Calendar, useTempocal, useTemporalState } from "@tempocal/react";
 
 export function Basic() {
-  const [value, setValue] = React.useState(
-    Temporal.PlainDate.from({
-      year: 2021,
-      month: 11,
-      day: 25,
-    })
-  );
+  const [value, setValue] = useTemporalState("date", {
+    year: 2021,
+    month: 11,
+    day: 25,
+  });
 
   const { calendarProps } = useTempocal({
     locale: "en-US",
