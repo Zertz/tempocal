@@ -1,5 +1,11 @@
 # @tempocal/react
 
+## 0.15.0
+
+### Minor Changes
+
+- 819e6eb: Remove calendarValue from useTempocal, use calendarProps.value instead
+
 ## 0.14.0
 
 ### Minor Changes
