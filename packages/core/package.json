@@ -22,9 +22,9 @@
   },
   "devDependencies": {
     "@js-temporal/polyfill": "^0.4.1",
-    "tsup": "^5.12.8",
-    "vite": "^2.9.9",
-    "vitest": "^0.12.6"
+    "tsup": "^5.12.9",
+    "vite": "^2.9.12",
+    "vitest": "^0.12.10"
   },
   "peerDependencies": {
     "@js-temporal/polyfill": ">=0.4.0"
