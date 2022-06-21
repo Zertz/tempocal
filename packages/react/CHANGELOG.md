@@ -1,5 +1,13 @@
 # @tempocal/react
 
+## 0.15.2
+
+### Patch Changes
+
+- 470d632: Upgrade dependencies
+- Updated dependencies [470d632]
+  - @tempocal/core@0.14.2
+
 ## 0.15.1
 
 ### Patch Changes

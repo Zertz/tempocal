@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.14.2
+
+### Patch Changes
+
+- 470d632: Upgrade dependencies
+
 ## 0.14.1
 
 ### Patch Changes
