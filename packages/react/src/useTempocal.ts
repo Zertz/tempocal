@@ -8,6 +8,8 @@ import {
 } from "@tempocal/core";
 import * as React from "react";
 
+export type ClampMode = "always" | "value-change" | "never";
+
 export type DateRange =
   | [undefined, undefined]
   | [Temporal.PlainDate, undefined]
@@ -65,9 +67,9 @@ export function useTempocal<
 }: {
   clampCalendarValue?: boolean;
   clampSelectedValue?: Mode extends "date"
-    ? boolean
+    ? ClampMode
     : Mode extends "datetime"
-    ? boolean
+    ? ClampMode
     : never;
   locale: Locale;
   maxValue?: Temporal.PlainDate | Temporal.PlainDateTime;
@@ -188,7 +190,11 @@ export function useTempocal<
         | DateRange
         | DateTimeRange
     ) => {
-      if (!clampSelectedValue || Array.isArray(nextSelectedValue)) {
+      if (
+        !clampSelectedValue ||
+        clampSelectedValue === "never" ||
+        Array.isArray(nextSelectedValue)
+      ) {
         // @ts-expect-error Help.
         setValue(nextSelectedValue);
 
@@ -279,6 +285,38 @@ export function useTempocal<
     },
     [mode, setValue, updateSelectedValue, value]
   );
+
+  const previousClampSelectedValue = React.useRef(clampSelectedValue);
+  const previousMaxValue = React.useRef(maxValue);
+  const previousMinValue = React.useRef(minValue);
+
+  React.useEffect(() => {
+    if (!clampSelectedValue || !value) {
+      return;
+    }
+
+    if (!maxValue && !minValue) {
+      return;
+    }
+
+    if (clampSelectedValue !== "always") {
+      return;
+    }
+
+    if (
+      clampSelectedValue !== previousClampSelectedValue.current ||
+      maxValue !== previousMaxValue.current ||
+      minValue !== previousMinValue.current
+    ) {
+      updateSelectedValue(value);
+    }
+  });
+
+  React.useEffect(() => {
+    previousClampSelectedValue.current = clampSelectedValue;
+    previousMaxValue.current = maxValue;
+    previousMinValue.current = minValue;
+  });
 
   return {
     calendarProps: {
