@@ -1,5 +1,19 @@
 # @tempocal/www
 
+## 1.6.0
+
+### Minor Changes
+
+- ef4f822: Optionally clamp selected value when min and/or max change
+
+### Patch Changes
+
+- b4cc016: Upgrade dependencies
+- Updated dependencies [ef4f822]
+- Updated dependencies [b4cc016]
+  - @tempocal/react@0.16.0
+  - @tempocal/core@0.14.3
+
 ## 1.5.3
 
 ### Patch Changes
