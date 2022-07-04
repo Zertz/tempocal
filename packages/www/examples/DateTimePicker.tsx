@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { temporalToDate } from "@tempocal/core";
-import { Calendar, useTempocal } from "@tempocal/react";
+import { Calendar, ClampMode, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { CalendarHeader } from "../recipes/CalendarHeader";
@@ -15,7 +15,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat(locale, {
 export function DateTimePicker({
   clampSelectedValue,
 }: {
-  clampSelectedValue: boolean;
+  clampSelectedValue: ClampMode;
 }) {
   const [value, setValue] = React.useState(
     Temporal.PlainDateTime.from({
