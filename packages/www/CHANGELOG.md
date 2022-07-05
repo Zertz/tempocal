@@ -1,5 +1,46 @@
 # @tempocal/www
 
+## 1.6.0
+
+### Minor Changes
+
+- ef4f822: Optionally clamp selected value when min and/or max change
+
+### Patch Changes
+
+- b4cc016: Upgrade dependencies
+- Updated dependencies [ef4f822]
+- Updated dependencies [b4cc016]
+  - @tempocal/react@0.16.0
+  - @tempocal/core@0.14.3
+
+## 1.5.3
+
+### Patch Changes
+
+- 470d632: Upgrade dependencies
+- Updated dependencies [470d632]
+  - @tempocal/core@0.14.2
+  - @tempocal/react@0.15.2
+
+## 1.5.2
+
+### Patch Changes
+
+- 5e6e52f: Upgrade dependencies
+- Updated dependencies [5e6e52f]
+  - @tempocal/core@0.14.1
+  - @tempocal/react@0.15.1
+
+## 1.5.1
+
+### Patch Changes
+
+- c7aa330: Fix DateInput example size and z-index
+- c7aa330: Upgrade dependencies
+- Updated dependencies [819e6eb]
+  - @tempocal/react@0.15.0
+
 ## 1.5.0
 
 ### Minor Changes

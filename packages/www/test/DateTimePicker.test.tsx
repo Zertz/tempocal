@@ -4,7 +4,7 @@ import { DateTimePicker } from "../examples/DateTimePicker";
 
 test("DateTimePicker renders without crashing", () => {
   const { getByText, getByTitle } = render(
-    <DateTimePicker clampSelectedValue />
+    <DateTimePicker clampSelectedValue="always" />
   );
 
   expect(

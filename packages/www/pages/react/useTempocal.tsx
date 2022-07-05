@@ -25,7 +25,7 @@ const {
   onChangeSelectedValue,
 } = useTempocal({
   clampCalendarValue?: boolean;
-  clampSelectedValue?: boolean;
+  clampSelectedValue?: "always" | "value-change" | "never";
   locale: Locale;
   maxValue?: Temporal.PlainDate | Temporal.PlainDateTime;
   minValue?: Temporal.PlainDate | Temporal.PlainDateTime;
@@ -68,7 +68,7 @@ const {
               automatically select 8 AM instead to keep the time within the
               minimum.
             </p>
-            <CodeBlock>{`clampSelectedValue?: boolean`}</CodeBlock>
+            <CodeBlock>{`clampSelectedValue?: "always" | "value-change" | "never"`}</CodeBlock>
           </div>
           <div className="space-y-2">
             <AnchorHeader id="options-locale">locale</AnchorHeader>

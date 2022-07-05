@@ -1,5 +1,10 @@
 import { temporalToDate } from "@tempocal/core";
-import { Calendar, useTempocal, useTemporalState } from "@tempocal/react";
+import {
+  Calendar,
+  ClampMode,
+  useTempocal,
+  useTemporalState,
+} from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { CalendarHeader } from "../recipes/CalendarHeader";
@@ -14,7 +19,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat(locale, {
 export function DateTimePicker({
   clampSelectedValue,
 }: {
-  clampSelectedValue: boolean;
+  clampSelectedValue: ClampMode;
 }) {
   const [value, setValue] = useTemporalState("datetime", {
     year: 2021,

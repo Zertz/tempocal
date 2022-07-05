@@ -1,5 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { useTempocal } from "../tempocal-react";
 

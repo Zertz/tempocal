@@ -1,5 +1,39 @@
 # @tempocal/react
 
+## 0.16.0
+
+### Minor Changes
+
+- ef4f822: Optionally clamp selected value when min and/or max change
+
+### Patch Changes
+
+- b4cc016: Upgrade dependencies
+- Updated dependencies [b4cc016]
+  - @tempocal/core@0.14.3
+
+## 0.15.2
+
+### Patch Changes
+
+- 470d632: Upgrade dependencies
+- Updated dependencies [470d632]
+  - @tempocal/core@0.14.2
+
+## 0.15.1
+
+### Patch Changes
+
+- 5e6e52f: Upgrade dependencies
+- Updated dependencies [5e6e52f]
+  - @tempocal/core@0.14.1
+
+## 0.15.0
+
+### Minor Changes
+
+- 819e6eb: Remove calendarValue from useTempocal, use calendarProps.value instead
+
 ## 0.14.0
 
 ### Minor Changes
