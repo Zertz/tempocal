@@ -7,29 +7,29 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@headlessui/react": "^1.6.5",
-    "@heroicons/react": "^1.0.6",
-    "@js-temporal/polyfill": "^0.4.1",
+    "@headlessui/react": "^1.7.2",
+    "@heroicons/react": "^2.0.11",
+    "@js-temporal/polyfill": "^0.4.2",
     "@tempocal/core": "workspace:*",
     "@tempocal/react": "workspace:*",
-    "classnames": "^2.3.1",
-    "next": "^12.2.0",
+    "classnames": "^2.3.2",
+    "next": "^12.3.1",
     "prism-react-renderer": "^1.3.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.2",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@types/react": "^18.0.14",
-    "@types/react-dom": "^18.0.5",
-    "@vitejs/plugin-react": "^1.3.2",
-    "autoprefixer": "^10.4.7",
+    "@tailwindcss/forms": "^0.5.3",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@types/react": "^18.0.20",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.1.0",
+    "autoprefixer": "^10.4.11",
     "jsdom": "^20.0.0",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.4",
-    "vite": "^2.9.13",
-    "vitest": "^0.17.0"
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.1.3",
+    "vitest": "^0.23.4"
   }
 }

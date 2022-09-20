@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from "@heroicons/react/outline";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
 export default function ExternalLink({
   children,
@@ -14,7 +14,7 @@ export default function ExternalLink({
       rel="noopener noreferrer"
     >
       {children}
-      <ExternalLinkIcon className="w-4 h-4" />
+      <ArrowTopRightOnSquareIcon className="w-4 h-4" />
     </a>
   );
 }

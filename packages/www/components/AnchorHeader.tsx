@@ -1,4 +1,4 @@
-import { LinkIcon } from "@heroicons/react/outline";
+import { LinkIcon } from "@heroicons/react/24/outline";
 
 export function AnchorHeader({
   children,

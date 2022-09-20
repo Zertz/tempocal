@@ -1,4 +1,4 @@
-import { HomeIcon } from "@heroicons/react/outline";
+import { HomeIcon } from "@heroicons/react/24/outline";
 import classnames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
