@@ -1,6 +1,10 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { temporalToDate } from "@tempocal/core";
-import { Calendar, ClampMode, useTempocal } from "@tempocal/react";
+import {
+  Calendar,
+  ClampMode,
+  useTempocal,
+  useTemporalState,
+} from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { CalendarHeader } from "../recipes/CalendarHeader";
@@ -17,16 +21,14 @@ export function DateTimePicker({
 }: {
   clampSelectedValue: ClampMode;
 }) {
-  const [value, setValue] = React.useState(
-    Temporal.PlainDateTime.from({
-      year: 2021,
-      month: 11,
-      day: 25,
-      hour: 8,
-      minute: 30,
-      second: 0,
-    })
-  );
+  const [value, setValue] = useTemporalState("datetime", {
+    year: 2021,
+    month: 11,
+    day: 25,
+    hour: 8,
+    minute: 30,
+    second: 0,
+  });
 
   const [minValue] = React.useState(value.subtract({ years: 2 }));
   const [maxValue] = React.useState(value.add({ years: 2 }));
