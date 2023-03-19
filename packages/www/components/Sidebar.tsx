@@ -1,4 +1,4 @@
-import { HomeIcon } from "@heroicons/react/outline";
+import { HomeIcon } from "@heroicons/react/24/outline";
 import classnames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -59,26 +59,26 @@ export function Sidebar() {
         <nav className="mt-5 flex-1" aria-label="Sidebar">
           <div className="px-2 space-y-1">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <a
+              <Link
+                key={item.name}
+                className={classnames(
+                  "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                  pathname === item.href
+                    ? "bg-gray-200 text-gray-700"
+                    : "text-gray-200 hover:bg-gray-200 hover:text-gray-700"
+                )}
+                href={item.href}
+              >
+                <item.icon
                   className={classnames(
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
                     pathname === item.href
-                      ? "bg-gray-200 text-gray-700"
-                      : "text-gray-200 hover:bg-gray-200 hover:text-gray-700"
+                      ? "text-gray-600"
+                      : "text-gray-300 group-hover:text-gray-600",
+                    "mr-3 h-6 w-6"
                   )}
-                >
-                  <item.icon
-                    className={classnames(
-                      pathname === item.href
-                        ? "text-gray-600"
-                        : "text-gray-300 group-hover:text-gray-600",
-                      "mr-3 h-6 w-6"
-                    )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </a>
+                  aria-hidden="true"
+                />
+                {item.name}
               </Link>
             ))}
           </div>
@@ -101,17 +101,17 @@ export function Sidebar() {
               aria-labelledby={`tempocal-${section}`}
             >
               {pages.map((page) => (
-                <Link key={`/${section}/${page}`} href={`/${section}/${page}`}>
-                  <a
-                    className={classnames(
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
-                      pathname === `/${section}/${page}`
-                        ? "bg-gray-200 text-gray-700"
-                        : "text-gray-200 hover:bg-gray-200 hover:text-gray-700"
-                    )}
-                  >
-                    <span className="truncate">{page}</span>
-                  </a>
+                <Link
+                  key={`/${section}/${page}`}
+                  className={classnames(
+                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md",
+                    pathname === `/${section}/${page}`
+                      ? "bg-gray-200 text-gray-700"
+                      : "text-gray-200 hover:bg-gray-200 hover:text-gray-700"
+                  )}
+                  href={`/${section}/${page}`}
+                >
+                  <span className="truncate">{page}</span>
                 </Link>
               ))}
             </div>
