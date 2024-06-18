@@ -48,10 +48,7 @@ type ChangeValue<Mode> = Mode extends "date"
       | [undefined, undefined]
   : never;
 
-export type Locale = Exclude<
-  Parameters<typeof Intl.DateTimeFormat>[0],
-  undefined
->;
+export type Locale = string;
 
 export function useTempocal<
   Mode extends "date" | "daterange" | "datetime" | "datetimerange"
