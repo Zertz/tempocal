@@ -1,5 +1,6 @@
 import { InferGetStaticPropsType } from "next";
 import * as React from "react";
+import { Checkbox } from "../../components/Checkbox";
 import { Example } from "../../components/Example";
 import { Input } from "../../components/Input";
 import { DateRangePicker } from "../../examples/DateRangePicker";
@@ -11,12 +12,16 @@ export default function DateRangePickerPage(
   const [monthsBefore, setMonthsBefore] = React.useState(0);
   const [monthsAfter, setMonthsAfter] = React.useState(0);
 
+  const [normalizeRenderedWeeks, setNormalizeRenderedWeeks] =
+    React.useState(true);
+
   return (
     <Example
       demo={
         <DateRangePicker
           monthsAfter={monthsAfter}
           monthsBefore={monthsBefore}
+          normalizeRenderedWeeks={normalizeRenderedWeeks}
         />
       }
       title="DateRangePicker"
@@ -43,6 +48,18 @@ export default function DateRangePickerPage(
           onChange={({ target: { value } }) => setMonthsAfter(Number(value))}
           type="number"
           value={monthsAfter}
+        />
+        <Checkbox
+          checked={normalizeRenderedWeeks}
+          hint="Always render the calendar with the same number of weeks, as if it were a paper calendar."
+          id="normalizeRenderedWeeks"
+          label="normalizeRenderedWeeks"
+          name="normalizeRenderedWeeks"
+          onChange={() => {
+            setNormalizeRenderedWeeks(
+              (normalizeRenderedWeeks) => !normalizeRenderedWeeks
+            );
+          }}
         />
       </fieldset>
     </Example>
