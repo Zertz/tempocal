@@ -24,6 +24,7 @@ return (
     {...calendarProps}
     monthsAfter={number}
     monthsBefore={number}
+    monthsFixedGrid={boolean}
     rollover={boolean}
     startOfWeek={number}
     calendarProps={() => React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>}
@@ -52,6 +53,19 @@ return (
             <p>Number of months to display before the primary calendar.</p>
             <CodeBlock>{`monthsBefore?: number`}</CodeBlock>
             <em className="block">Defaults to 0</em>
+          </div>
+          <div className="space-y-2">
+            <AnchorHeader id="props-monthsFixedGrid">
+              monthsFixedGrid
+            </AnchorHeader>
+            <p>
+              Always render months on the same grid, as if it were a paper
+              calendar. Useful to avoid content shifting and to align multiple
+              months with <Code>monthsAfter</Code> and <Code>monthsBefore</Code>
+              .
+            </p>
+            <CodeBlock>{`monthsFixedGrid?: boolean`}</CodeBlock>
+            <em className="block">Defaults to false</em>
           </div>
           <div className="space-y-2">
             <AnchorHeader id="props-rollover">rollover</AnchorHeader>

@@ -14,7 +14,7 @@ type MonthProps = {
   locale: Locale;
   maxValue?: Temporal.PlainDate | undefined;
   minValue?: Temporal.PlainDate | undefined;
-  normalizeRenderedWeeks?: boolean;
+  monthsFixedGrid?: boolean;
   rollover?: boolean;
   startOfWeek?: number;
   value: Value;
@@ -78,7 +78,7 @@ export function Calendar({
   minValue,
   monthsAfter = 0,
   monthsBefore = 0,
-  normalizeRenderedWeeks,
+  monthsFixedGrid,
   rollover,
   startOfWeek,
   value,
@@ -108,7 +108,7 @@ export function Calendar({
           locale={locale}
           maxValue={maxValue}
           minValue={minValue}
-          normalizeRenderedWeeks={normalizeRenderedWeeks}
+          monthsFixedGrid={monthsFixedGrid}
           rollover={rollover}
           startOfWeek={startOfWeek}
           value={value.add({ months: month - monthsBefore })}
@@ -131,7 +131,7 @@ function Month({
   locale,
   maxValue,
   minValue,
-  normalizeRenderedWeeks = false,
+  monthsFixedGrid = false,
   rollover = false,
   startOfWeek = 7,
   value,
@@ -174,7 +174,7 @@ function Month({
         : Math.abs(startOfWeek - firstDay.dayOfWeek) + 1
       : undefined;
 
-  const daysToPadAfter = normalizeRenderedWeeks
+  const daysToPadAfter = monthsFixedGrid
     ? start.daysInWeek * 6 - start.daysInMonth - (gridColumnStart || 0) + 1
     : 0;
 

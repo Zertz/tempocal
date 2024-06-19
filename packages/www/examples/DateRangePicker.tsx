@@ -18,11 +18,11 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
 export function DateRangePicker({
   monthsAfter,
   monthsBefore,
-  normalizeRenderedWeeks,
+  monthsFixedGrid,
 }: {
   monthsAfter: number;
   monthsBefore: number;
-  normalizeRenderedWeeks: boolean;
+  monthsFixedGrid: boolean;
 }) {
   const [values, setValues] = React.useState<DateRange>([
     Temporal.Now.plainDate("iso8601").subtract({ days: 3 }),
@@ -61,7 +61,7 @@ export function DateRangePicker({
         {...calendarProps}
         monthsBefore={monthsBefore}
         monthsAfter={monthsAfter}
-        normalizeRenderedWeeks={normalizeRenderedWeeks}
+        monthsFixedGrid={monthsFixedGrid}
         calendarProps={() => ({
           className: "gap-1 text-center w-72",
         })}

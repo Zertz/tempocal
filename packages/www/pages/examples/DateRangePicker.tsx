@@ -12,8 +12,7 @@ export default function DateRangePickerPage(
   const [monthsBefore, setMonthsBefore] = React.useState(0);
   const [monthsAfter, setMonthsAfter] = React.useState(0);
 
-  const [normalizeRenderedWeeks, setNormalizeRenderedWeeks] =
-    React.useState(true);
+  const [monthsFixedGrid, setMonthsFixedGrid] = React.useState(true);
 
   return (
     <Example
@@ -21,7 +20,7 @@ export default function DateRangePickerPage(
         <DateRangePicker
           monthsAfter={monthsAfter}
           monthsBefore={monthsBefore}
-          normalizeRenderedWeeks={normalizeRenderedWeeks}
+          monthsFixedGrid={monthsFixedGrid}
         />
       }
       title="DateRangePicker"
@@ -50,15 +49,13 @@ export default function DateRangePickerPage(
           value={monthsAfter}
         />
         <Checkbox
-          checked={normalizeRenderedWeeks}
-          hint="Always render the calendar with the same number of weeks, as if it were a paper calendar."
-          id="normalizeRenderedWeeks"
-          label="normalizeRenderedWeeks"
-          name="normalizeRenderedWeeks"
+          checked={monthsFixedGrid}
+          hint="Always render months on the same grid, as if it were a paper calendar"
+          id="monthsFixedGrid"
+          label="monthsFixedGrid"
+          name="monthsFixedGrid"
           onChange={() => {
-            setNormalizeRenderedWeeks(
-              (normalizeRenderedWeeks) => !normalizeRenderedWeeks
-            );
+            setMonthsFixedGrid((monthsFixedGrid) => !monthsFixedGrid);
           }}
         />
       </fieldset>
