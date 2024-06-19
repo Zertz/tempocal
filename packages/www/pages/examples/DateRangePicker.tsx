@@ -1,5 +1,6 @@
 import { InferGetStaticPropsType } from "next";
 import * as React from "react";
+import { Checkbox } from "../../components/Checkbox";
 import { Example } from "../../components/Example";
 import { Input } from "../../components/Input";
 import { DateRangePicker } from "../../examples/DateRangePicker";
@@ -11,12 +12,15 @@ export default function DateRangePickerPage(
   const [monthsBefore, setMonthsBefore] = React.useState(0);
   const [monthsAfter, setMonthsAfter] = React.useState(0);
 
+  const [monthsFixedGrid, setMonthsFixedGrid] = React.useState(true);
+
   return (
     <Example
       demo={
         <DateRangePicker
           monthsAfter={monthsAfter}
           monthsBefore={monthsBefore}
+          monthsFixedGrid={monthsFixedGrid}
         />
       }
       title="DateRangePicker"
@@ -43,6 +47,16 @@ export default function DateRangePickerPage(
           onChange={({ target: { value } }) => setMonthsAfter(Number(value))}
           type="number"
           value={monthsAfter}
+        />
+        <Checkbox
+          checked={monthsFixedGrid}
+          hint="Always render months on the same grid, as if it were a paper calendar"
+          id="monthsFixedGrid"
+          label="monthsFixedGrid"
+          name="monthsFixedGrid"
+          onChange={() => {
+            setMonthsFixedGrid((monthsFixedGrid) => !monthsFixedGrid);
+          }}
         />
       </fieldset>
     </Example>

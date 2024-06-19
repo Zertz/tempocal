@@ -5,6 +5,7 @@ import {
   getWeekdays,
 } from "@tempocal/core";
 import * as React from "react";
+import { CSSProperties } from "react";
 import { Locale } from "./useTempocal";
 
 type Value = Temporal.PlainDate | Temporal.PlainDateTime;
@@ -13,6 +14,7 @@ type MonthProps = {
   locale: Locale;
   maxValue?: Temporal.PlainDate | undefined;
   minValue?: Temporal.PlainDate | undefined;
+  monthsFixedGrid?: boolean;
   rollover?: boolean;
   startOfWeek?: number;
   value: Value;
@@ -76,6 +78,7 @@ export function Calendar({
   minValue,
   monthsAfter = 0,
   monthsBefore = 0,
+  monthsFixedGrid,
   rollover,
   startOfWeek,
   value,
@@ -105,6 +108,7 @@ export function Calendar({
           locale={locale}
           maxValue={maxValue}
           minValue={minValue}
+          monthsFixedGrid={monthsFixedGrid}
           rollover={rollover}
           startOfWeek={startOfWeek}
           value={value.add({ months: month - monthsBefore })}
@@ -127,6 +131,7 @@ function Month({
   locale,
   maxValue,
   minValue,
+  monthsFixedGrid = false,
   rollover = false,
   startOfWeek = 7,
   value,
@@ -160,6 +165,19 @@ function Month({
     [end, start]
   );
 
+  const firstDay = days.at(0);
+
+  const gridColumnStart =
+    !rollover && firstDay
+      ? startOfWeek > firstDay.dayOfWeek
+        ? firstDay.daysInWeek - (startOfWeek - firstDay.dayOfWeek) + 1
+        : Math.abs(startOfWeek - firstDay.dayOfWeek) + 1
+      : undefined;
+
+  const daysToPadAfter = monthsFixedGrid
+    ? start.daysInWeek * 6 - start.daysInMonth - (gridColumnStart || 0) + 1
+    : 0;
+
   return (
     <ul
       {...calendarProps?.()}
@@ -187,17 +205,38 @@ function Month({
         <Day
           key={date.dayOfYear}
           date={date}
-          day={day}
           disabled={
             (!!minValue && Temporal.PlainDate.compare(date, minValue) < 0) ||
             (!!maxValue && Temporal.PlainDate.compare(date, maxValue) > 0)
           }
           dayProps={dayProps}
+          style={day === 0 ? { gridColumnStart } : undefined}
           renderDay={renderDay}
-          rollover={rollover}
-          startOfWeek={startOfWeek}
         />
       ))}
+      {daysToPadAfter > 0 && firstDay && (
+        <>
+          {[...Array(Math.floor(daysToPadAfter / firstDay.daysInWeek))].map(
+            (_, index) => (
+              <Day
+                key={index}
+                date={firstDay}
+                disabled
+                dayProps={dayProps}
+                style={{
+                  gridColumn: `span ${Math.min(
+                    daysToPadAfter,
+                    firstDay.daysInWeek
+                  )}`,
+                  opacity: daysToPadAfter,
+                  visibility: "hidden",
+                }}
+                renderDay={renderDay}
+              />
+            )
+          )}
+        </>
+      )}
       {renderFooter && (
         <li
           {...footerProps?.({ date: monthStartDate })}
@@ -214,18 +253,14 @@ function Month({
 
 function Day({
   date,
-  day,
   disabled,
   dayProps,
   renderDay,
-  rollover,
-  startOfWeek,
+  style,
 }: Pick<MonthProps, "dayProps" | "renderDay"> & {
   date: Temporal.PlainDate;
-  day: number;
   disabled: boolean;
-  rollover: boolean;
-  startOfWeek: number;
+  style: CSSProperties | undefined;
 }) {
   const props = React.useMemo(() => {
     const plainDateLike: Temporal.PlainDateLike = {
@@ -243,19 +278,7 @@ function Day({
   }, [date, disabled]);
 
   return (
-    <li
-      {...dayProps?.(props)}
-      style={
-        !rollover && day === 0
-          ? {
-              gridColumnStart:
-                startOfWeek > date.dayOfWeek
-                  ? date.daysInWeek - (startOfWeek - date.dayOfWeek) + 1
-                  : Math.abs(startOfWeek - date.dayOfWeek) + 1,
-            }
-          : undefined
-      }
-    >
+    <li {...dayProps?.(props)} style={style}>
       {renderDay ? renderDay(props) : date.day}
     </li>
   );
