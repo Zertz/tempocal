@@ -1,5 +1,19 @@
 # @tempocal/www
 
+## 1.7.0
+
+### Minor Changes
+
+- a3cbf9b: Add monthsFixedGrid to render months like a paper calendar
+
+### Patch Changes
+
+- f979bb3: Upgrade dependencies
+- Updated dependencies [f979bb3]
+- Updated dependencies [a3cbf9b]
+  - @tempocal/core@0.14.5
+  - @tempocal/react@0.17.0
+
 ## 1.6.1
 
 ### Patch Changes
