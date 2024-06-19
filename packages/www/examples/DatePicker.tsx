@@ -1,6 +1,11 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { temporalToDate } from "@tempocal/core";
-import { Calendar, Locale, useTempocal } from "@tempocal/react";
+import {
+  Calendar,
+  Locale,
+  useTempocal,
+  useTemporalState,
+} from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { CalendarHeader } from "../recipes/CalendarHeader";
@@ -34,13 +39,11 @@ export function DatePicker({
   rollover: boolean;
   startOfWeek: number;
 }) {
-  const [value, setValue] = React.useState(
-    Temporal.PlainDate.from({
-      year: 2021,
-      month: 11,
-      day: 25,
-    })
-  );
+  const [value, setValue] = useTemporalState("date", {
+    year: 2021,
+    month: 11,
+    day: 25,
+  });
 
   const [minValue] = React.useState(value.subtract({ years: 2 }));
   const [maxValue] = React.useState(value.add({ years: 2 }));

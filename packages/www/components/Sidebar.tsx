@@ -26,7 +26,7 @@ const documentation = [
   },
   {
     section: "react",
-    pages: ["useTempocal", "Calendar"],
+    pages: ["useTemporalState", "useTempocal", "Calendar"],
   },
   {
     section: "core",
