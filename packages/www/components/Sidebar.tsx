@@ -26,7 +26,7 @@ const documentation = [
   },
   {
     section: "react",
-    pages: ["useTempocal", "Calendar"],
+    pages: ["useTempocal", "useTempocalRange", "Calendar"],
   },
   {
     section: "core",
@@ -40,6 +40,7 @@ const documentation = [
       "getMonthEndDate",
       "getMonths",
       "getMonthStartDate",
+      "getNow",
       "getWeekdays",
       "getYears",
       "temporalToDate",

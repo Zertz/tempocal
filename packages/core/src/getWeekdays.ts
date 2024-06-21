@@ -1,15 +1,9 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { getFirstDayOfWeek } from "./getFirstDayOfWeek";
+import { getNow } from "./getNow";
 import { temporalToDate } from "./temporalToDate";
 
-export function getWeekdays(
-  locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  startOfWeek: number
-) {
-  const firstDayOfWeek = getFirstDayOfWeek(
-    Temporal.Now.plainDate("iso8601"),
-    startOfWeek
-  );
+export function getWeekdays(locale: Intl.LocalesArgument, startOfWeek: number) {
+  const firstDayOfWeek = getFirstDayOfWeek(getNow(), startOfWeek);
 
   const longWeekdayFormatter = new Intl.DateTimeFormat(locale, {
     weekday: "long",

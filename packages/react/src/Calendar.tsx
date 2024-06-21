@@ -5,8 +5,7 @@ import {
   getWeekdays,
 } from "@tempocal/core";
 import * as React from "react";
-import { CSSProperties } from "react";
-import { Locale } from "./useTempocal";
+import { Locale } from "./types";
 
 type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 
@@ -260,7 +259,7 @@ function Day({
 }: Pick<MonthProps, "dayProps" | "renderDay"> & {
   date: Temporal.PlainDate;
   disabled: boolean;
-  style: CSSProperties | undefined;
+  style: React.CSSProperties | undefined;
 }) {
   const props = React.useMemo(() => {
     const plainDateLike: Temporal.PlainDateLike = {

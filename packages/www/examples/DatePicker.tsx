@@ -1,5 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { temporalToDate } from "@tempocal/core";
+import { getNow, temporalToDate } from "@tempocal/core";
 import { Calendar, Locale, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
@@ -14,7 +14,7 @@ const getDayContent = ({ year, month, day }: Temporal.PlainDate) => {
     return "⭐️";
   }
 
-  const now = Temporal.Now.plainDate("iso8601");
+  const now = getNow();
 
   if (year === now.year && month === now.month && day === now.day) {
     return "📅";
