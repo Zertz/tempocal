@@ -52,8 +52,14 @@ export default function OverviewPage() {
             Temporal values for controlling a calendar. It can pick a:
             <ul className="list-inside list-disc mt-2 pl-6 space-y-2">
               <li>Date</li>
-              <li>Date range</li>
               <li>Date and time</li>
+            </ul>
+          </li>
+          <li>
+            <Code>useTempocalRange</Code> hook handles the intricacies of
+            managing Temporal values for controlling a calendar. It can pick a:
+            <ul className="list-inside list-disc mt-2 pl-6 space-y-2">
+              <li>Date range</li>
               <li>Date and time range</li>
             </ul>
           </li>

@@ -94,7 +94,7 @@ export function DateTimePicker({
             title="Hours"
             value={value.hour}
           >
-            {hours.map(({ disabled, hour }) => (
+            {hours?.map(({ disabled, hour }) => (
               <option key={hour} disabled={disabled} value={hour}>
                 {`${hour}`.padStart(2, "0")}
               </option>
@@ -108,7 +108,7 @@ export function DateTimePicker({
             value={value.minute}
           >
             {minutes
-              .filter(({ minute }) => minute % 5 === 0)
+              ?.filter(({ minute }) => minute % 5 === 0)
               .map(({ disabled, minute }) => (
                 <option key={minute} disabled={disabled} value={minute}>
                   {`${minute}`.padStart(2, "0")}

@@ -2,11 +2,11 @@ import { AnchorHeader } from "../../components/AnchorHeader";
 import { Code, CodeBlock } from "../../components/Code";
 import ExternalLink from "../../components/ExternalLink";
 
-export default function UseTempocalPage() {
+export default function UseTempocalRangePage() {
   return (
     <div>
       <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
-        <h2 className="text-4xl font-bold">useTempocal</h2>
+        <h2 className="text-4xl font-bold">useTempocalRange</h2>
       </div>
       <div className="space-y-4">
         <p>
@@ -29,9 +29,9 @@ const {
   locale: Locale;
   maxValue?: Temporal.PlainDate | Temporal.PlainDateTime;
   minValue?: Temporal.PlainDate | Temporal.PlainDateTime;
-  mode: "date" | "datetime";
-  setValue: (value: Temporal.PlainDate | Temporal.PlainDateTime) => void;
-  value: Temporal.PlainDate | Temporal.PlainDateTime;
+  mode: "daterange" | "datetimerange";
+  setValue: (value: DateRange | DateTimeRange) => void;
+  value: DateRange | DateTimeRange;
 });`}</CodeBlock>
         <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
           <h3 className="text-3xl font-bold">Options</h3>

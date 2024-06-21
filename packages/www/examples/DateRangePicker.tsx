@@ -4,7 +4,7 @@ import {
   getMonthStartDate,
   temporalToDate,
 } from "@tempocal/core";
-import { Calendar, DateRange, useTempocal } from "@tempocal/react";
+import { Calendar, DateRange, useTempocalRange } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { CalendarHeader } from "../recipes/CalendarHeader";
@@ -24,10 +24,10 @@ export function DateRangePicker({
   monthsBefore: number;
   monthsFixedGrid: boolean;
 }) {
-  const [values, setValues] = React.useState<DateRange>([
-    Temporal.Now.plainDate("iso8601").subtract({ days: 3 }),
-    Temporal.Now.plainDate("iso8601").add({ days: 3 }),
-  ]);
+  const [values, setValues] = React.useState<DateRange>({
+    start: Temporal.Now.plainDate("iso8601").subtract({ days: 3 }),
+    end: Temporal.Now.plainDate("iso8601").add({ days: 3 }),
+  });
 
   const [minValue] = React.useState(
     Temporal.Now.plainDate("iso8601").subtract({ years: 2 })
@@ -45,7 +45,7 @@ export function DateRangePicker({
     onChangeCalendarValue,
     onChangeSelectedValue,
     years,
-  } = useTempocal({
+  } = useTempocalRange({
     clampCalendarValue: true,
     locale,
     maxValue,
@@ -92,21 +92,22 @@ export function DateRangePicker({
         weekdayProps={() => ({ className: "font-medium" })}
         renderDay={({ date, disabled, plainDateLike }) => {
           const isRangeSelected =
-            values[0] &&
-            values[1] &&
-            Temporal.PlainDate.compare(values[0], date) <= 0 &&
-            Temporal.PlainDate.compare(values[1], date) >= 0;
+            values.start &&
+            values.end &&
+            Temporal.PlainDate.compare(values.start, date) <= 0 &&
+            Temporal.PlainDate.compare(values.end, date) >= 0;
 
-          const isSelected = values[0] && !values[1] && values[0].equals(date);
+          const isSelected =
+            values.start && !values.end && values.start.equals(date);
 
           const isRangeHovered =
-            values[0] &&
-            !values[1] &&
+            values.start &&
+            !values.end &&
             hoverValue &&
-            ((Temporal.PlainDate.compare(values[0], date) <= 0 &&
+            ((Temporal.PlainDate.compare(values.start, date) <= 0 &&
               Temporal.PlainDate.compare(hoverValue, date) >= 0) ||
               (Temporal.PlainDate.compare(hoverValue, date) <= 0 &&
-                Temporal.PlainDate.compare(values[0], date) >= 0));
+                Temporal.PlainDate.compare(values.start, date) >= 0));
 
           return (
             <button
@@ -136,10 +137,10 @@ export function DateRangePicker({
             <button
               className="text-sm border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
               onClick={() => {
-                onChangeSelectedValue([
-                  getMonthStartDate(date),
-                  getMonthEndDate(date),
-                ]);
+                onChangeSelectedValue({
+                  start: getMonthStartDate(date),
+                  end: getMonthEndDate(date),
+                });
               }}
               type="button"
             >
@@ -148,10 +149,10 @@ export function DateRangePicker({
             <button
               className="text-sm border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
               onClick={() => {
-                onChangeSelectedValue([
-                  getMonthStartDate(date.with({ month: 1 })),
-                  getMonthEndDate(date.with({ month: date.monthsInYear })),
-                ]);
+                onChangeSelectedValue({
+                  start: getMonthStartDate(date.with({ month: 1 })),
+                  end: getMonthEndDate(date.with({ month: date.monthsInYear })),
+                });
               }}
               type="button"
             >
@@ -160,7 +161,10 @@ export function DateRangePicker({
             <button
               className="text-sm border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
               onClick={() => {
-                onChangeSelectedValue([undefined, undefined]);
+                onChangeSelectedValue({
+                  start: undefined,
+                  end: undefined,
+                });
               }}
               type="button"
             >
@@ -168,9 +172,13 @@ export function DateRangePicker({
             </button>
             <span className="row-start-2 col-span-3 text-sm">
               {`Selected date range: ${
-                values[0] ? dateFormatter.format(temporalToDate(values[0])) : ""
+                values.start
+                  ? dateFormatter.format(temporalToDate(values.start))
+                  : ""
               } - ${
-                values[1] ? dateFormatter.format(temporalToDate(values[1])) : ""
+                values.end
+                  ? dateFormatter.format(temporalToDate(values.end))
+                  : ""
               }`}
             </span>
           </>

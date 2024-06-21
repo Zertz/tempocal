@@ -4,57 +4,16 @@ import {
   getHours,
   getMinutes,
   getMonths,
+  getNow,
   getYears,
 } from "@tempocal/core";
-import * as React from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ClampMode, Locale } from "./types";
+import { useCalendarValue } from "./useCalendarValue";
 
-export type ClampMode = "always" | "value-change" | "never";
-
-export type DateRange =
-  | [undefined, undefined]
-  | [Temporal.PlainDate, undefined]
-  | [Temporal.PlainDate, Temporal.PlainDate];
-
-export type DateTimeRange =
-  | [undefined, undefined]
-  | [Temporal.PlainDateTime, undefined]
-  | [Temporal.PlainDateTime, Temporal.PlainDateTime];
-
-type RequiredValue<Mode> = Mode extends "date"
-  ? Temporal.PlainDate
-  : Mode extends "daterange"
-  ? DateRange
-  : Mode extends "datetime"
-  ? Temporal.PlainDateTime
-  : Mode extends "datetimerange"
-  ? DateTimeRange
-  : never;
-
-type ChangeValue<Mode> = Mode extends "date"
-  ? Temporal.PlainDate | Temporal.PlainDateLike
-  : Mode extends "daterange"
-  ?
-      | Temporal.PlainDate
-      | Temporal.PlainDateLike
-      | [Temporal.PlainDate, Temporal.PlainDate]
-      | [undefined, undefined]
-  : Mode extends "datetime"
-  ? Temporal.PlainDateTime | Temporal.PlainDateTimeLike
-  : Mode extends "datetimerange"
-  ?
-      | Temporal.PlainDateTime
-      | Temporal.PlainDateTimeLike
-      | [Temporal.PlainDateTime, Temporal.PlainDateTime]
-      | [undefined, undefined]
-  : never;
-
-export type Locale = string;
-
-export function useTempocal<
-  Mode extends "date" | "daterange" | "datetime" | "datetimerange"
->({
-  clampCalendarValue,
-  clampSelectedValue,
+export function useTempocal({
+  clampCalendarValue = false,
+  clampSelectedValue = "never",
   locale,
   maxValue,
   minValue,
@@ -63,232 +22,142 @@ export function useTempocal<
   value,
 }: {
   clampCalendarValue?: boolean;
-  clampSelectedValue?: Mode extends "date"
-    ? ClampMode
-    : Mode extends "datetime"
-    ? ClampMode
-    : never;
+  clampSelectedValue?: ClampMode;
   locale: Locale;
-  maxValue?: Temporal.PlainDate | Temporal.PlainDateTime;
-  minValue?: Temporal.PlainDate | Temporal.PlainDateTime;
-  mode: Mode;
-  setValue: (value: RequiredValue<Mode>) => void;
-  value: RequiredValue<Mode> | undefined;
-}) {
-  const [calendarValue, setCalendarValue] = React.useState(() => {
-    if (!value || (Array.isArray(value) && !value[0])) {
-      return Temporal.Now.plainDate("iso8601");
+} & (
+  | {
+      mode: "date";
+      maxValue?: Temporal.PlainDate;
+      minValue?: Temporal.PlainDate;
+      setValue: (value: Temporal.PlainDate) => void;
+      value: Temporal.PlainDate | undefined;
+    }
+  | {
+      mode: "datetime";
+      maxValue?: Temporal.PlainDateTime;
+      minValue?: Temporal.PlainDateTime;
+      setValue: (value: Temporal.PlainDateTime) => void;
+      value: Temporal.PlainDateTime | undefined;
+    }
+)) {
+  const [calendarValue, setCalendarValue] = useState(() => {
+    if (!value) {
+      return getNow().toPlainDate();
     }
 
-    if (Array.isArray(value)) {
-      return Temporal.PlainDate.from(value[0]);
-    }
-
-    return Temporal.PlainDate.from(value);
+    return value instanceof Temporal.PlainDate ? value : value.toPlainDate();
   });
 
-  const years = React.useMemo(() => {
+  const years = useMemo(() => {
     if (!minValue || !maxValue) {
-      return [];
+      return;
     }
 
-    return getYears(
-      minValue instanceof Temporal.PlainDateTime
-        ? minValue.toPlainDate()
-        : minValue,
-      maxValue instanceof Temporal.PlainDateTime
-        ? maxValue.toPlainDate()
-        : maxValue
-    );
+    return getYears(minValue, maxValue);
   }, [maxValue, minValue]);
 
-  const months = React.useMemo(() => {
-    return getMonths(
-      locale,
-      calendarValue,
-      minValue instanceof Temporal.PlainDateTime
-        ? minValue.toPlainDate()
-        : minValue,
-      maxValue instanceof Temporal.PlainDateTime
-        ? maxValue.toPlainDate()
-        : maxValue
-    );
-  }, [calendarValue, locale, maxValue, minValue]);
-
-  const hours = React.useMemo(() => {
-    if (
-      value instanceof Temporal.PlainDateTime &&
-      (!minValue || minValue instanceof Temporal.PlainDateTime) &&
-      (!maxValue || maxValue instanceof Temporal.PlainDateTime)
-    ) {
-      return getHours(value, minValue, maxValue);
-    }
-
-    return getHours();
-  }, [value, maxValue, minValue]);
-
-  const minutes = React.useMemo(() => {
-    if (
-      value instanceof Temporal.PlainDateTime &&
-      (!minValue || minValue instanceof Temporal.PlainDateTime) &&
-      (!maxValue || maxValue instanceof Temporal.PlainDateTime)
-    ) {
-      return getMinutes(value, minValue, maxValue);
-    }
-
-    return getMinutes();
-  }, [value, maxValue, minValue]);
-
-  const updateCalendarValue = React.useCallback(
-    (nextCalendarValue: Temporal.PlainDate) => {
-      if (!clampCalendarValue) {
-        setCalendarValue(nextCalendarValue);
-
-        return nextCalendarValue;
-      }
-
-      const clampedValue = clamp(
-        nextCalendarValue,
-        minValue instanceof Temporal.PlainDateTime
-          ? minValue.toPlainDate()
-          : minValue,
-        maxValue instanceof Temporal.PlainDateTime
-          ? maxValue.toPlainDate()
-          : maxValue
-      );
-
-      setCalendarValue(clampedValue);
-
-      return clampedValue;
-    },
-    [clampCalendarValue, maxValue, minValue]
+  const months = useMemo(
+    () => getMonths(locale, minValue, maxValue),
+    [locale, maxValue, minValue]
   );
 
-  const onChangeCalendarValue = React.useCallback(
-    (params?: Temporal.PlainDate | Temporal.PlainDateLike) => {
-      if (!params) {
-        return updateCalendarValue(Temporal.Now.plainDate("iso8601"));
-      }
+  const hours = useMemo(() => {
+    if (mode !== "datetime") {
+      return;
+    }
 
-      if (params instanceof Temporal.PlainDate) {
-        return updateCalendarValue(params);
-      }
+    return getHours(value, minValue, maxValue);
+  }, [maxValue, minValue, mode, value]);
 
-      return updateCalendarValue(calendarValue.with(params));
+  const minutes = useMemo(() => {
+    if (mode !== "datetime") {
+      return;
+    }
+
+    return getMinutes(value, minValue, maxValue);
+  }, [maxValue, minValue, mode, value]);
+
+  const { onChangeCalendarValue } = useCalendarValue({
+    clampCalendarValue,
+    maxValue,
+    minValue,
+    setCalendarValue,
+    calendarValue,
+  });
+
+  const updateSelectedValue = useCallback(
+    (nextSelectedValue: Temporal.PlainDate | Temporal.PlainDateTime) => {
+      if (nextSelectedValue instanceof Temporal.PlainDate) {
+        if (mode !== "date") {
+          throw new Error(
+            `Received a Temporal.PlainDate but expected a Temporal.PlainDateTime in updateSelectedValue`
+          );
+        }
+
+        if (clampSelectedValue === "never") {
+          setValue(nextSelectedValue);
+
+          return nextSelectedValue;
+        }
+
+        const clampedValue = clamp(nextSelectedValue, minValue, maxValue);
+
+        setValue(clampedValue);
+
+        return clampedValue;
+      } else if (nextSelectedValue instanceof Temporal.PlainDateTime) {
+        if (mode !== "datetime") {
+          throw new Error(
+            `Received a Temporal.PlainDateTime but expected a Temporal.PlainDate in updateSelectedValue`
+          );
+        }
+
+        if (clampSelectedValue === "never") {
+          setValue(nextSelectedValue);
+
+          return nextSelectedValue;
+        }
+
+        const clampedValue = clamp(nextSelectedValue, minValue, maxValue);
+
+        setValue(clampedValue);
+
+        return clampedValue;
+      }
     },
-    [calendarValue, updateCalendarValue]
+    [clampSelectedValue, maxValue, minValue, mode, setValue]
   );
 
-  const updateSelectedValue = React.useCallback(
+  const onChangeSelectedValue = useCallback(
     (
-      nextSelectedValue:
+      params:
         | Temporal.PlainDate
+        | Temporal.PlainDateLike
         | Temporal.PlainDateTime
-        | DateRange
-        | DateTimeRange
+        | Temporal.PlainDateTimeLike
     ) => {
-      if (
-        !clampSelectedValue ||
-        clampSelectedValue === "never" ||
-        Array.isArray(nextSelectedValue)
-      ) {
-        // @ts-expect-error Help.
-        setValue(nextSelectedValue);
-
-        return nextSelectedValue;
-      }
-
-      const clampedValue = clamp(nextSelectedValue, minValue, maxValue);
-
-      // @ts-expect-error Help.
-      setValue(clampedValue);
-
-      return clampedValue;
-    },
-    [clampSelectedValue, maxValue, minValue, setValue]
-  );
-
-  const onChangeSelectedValue = React.useCallback(
-    (params: ChangeValue<Mode>): RequiredValue<Mode> => {
-      if (Array.isArray(params)) {
-        if (!["daterange", "datetimerange"].includes(mode)) {
-          throw new Error(
-            `Received an array in onChangeSelectedValue but mode is ${mode}`
-          );
-        }
-
-        if (!params[0] && !params[1]) {
-          // @ts-expect-error Help.
-          setValue(params);
-        } else if (
-          params[0] instanceof Temporal.PlainDate &&
-          params[1] instanceof Temporal.PlainDate &&
-          mode === "daterange"
-        ) {
-          // @ts-expect-error Help.
-          setValue(params);
-        } else if (
-          params[0] instanceof Temporal.PlainDateTime &&
-          params[1] instanceof Temporal.PlainDateTime &&
-          mode === "datetimerange"
-        ) {
-          // @ts-expect-error Help.
-          setValue(params);
-        } else {
-          throw new Error(
-            `Received an array of mixed values in onChangeSelectedValue but expected a pair of ${
-              mode === "daterange"
-                ? "Temporal.PlainDate"
-                : "Temporal.PlainDateTime"
-            }`
-          );
-        }
-
-        return params as RequiredValue<Mode>;
-      }
-
       const nextValue = (() => {
-        if (
-          params instanceof Temporal.PlainDate ||
-          params instanceof Temporal.PlainDateTime
-        ) {
+        if (params instanceof Temporal.PlainDate) {
           return params;
         }
 
-        if (Array.isArray(value) && value[0]) {
-          return value[0].with(params);
-        }
-
-        if (!Array.isArray(value) && value) {
+        if (value) {
           return value.with(params);
         }
 
-        return mode === "date"
-          ? Temporal.Now.plainDate("iso8601").with(params)
-          : Temporal.Now.plainDateTime("iso8601").with(params);
+        return getNow().toPlainDate().with(params);
       })();
 
-      if (Array.isArray(value)) {
-        const range = (
-          value[0] && !value[1]
-            ? [value[0], nextValue].sort(Temporal.PlainDate.compare)
-            : [nextValue, undefined]
-        ) as DateRange;
-
-        return updateSelectedValue(range) as RequiredValue<Mode>;
-      }
-
-      return updateSelectedValue(nextValue) as RequiredValue<Mode>;
+      return updateSelectedValue(nextValue);
     },
-    [mode, setValue, updateSelectedValue, value]
+    [updateSelectedValue, value]
   );
 
-  const previousClampSelectedValue = React.useRef(clampSelectedValue);
-  const previousMaxValue = React.useRef(maxValue);
-  const previousMinValue = React.useRef(minValue);
+  const previousMaxValue = useRef(maxValue);
+  const previousMinValue = useRef(minValue);
 
-  React.useEffect(() => {
-    if (!clampSelectedValue || !value) {
+  useEffect(() => {
+    if (!value) {
       return;
     }
 
@@ -301,16 +170,14 @@ export function useTempocal<
     }
 
     if (
-      clampSelectedValue !== previousClampSelectedValue.current ||
       maxValue !== previousMaxValue.current ||
       minValue !== previousMinValue.current
     ) {
       updateSelectedValue(value);
     }
-  });
+  }, [clampSelectedValue, maxValue, minValue, updateSelectedValue, value]);
 
-  React.useEffect(() => {
-    previousClampSelectedValue.current = clampSelectedValue;
+  useEffect(() => {
     previousMaxValue.current = maxValue;
     previousMinValue.current = minValue;
   });

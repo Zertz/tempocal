@@ -1,11 +1,13 @@
 import { Temporal } from "@js-temporal/polyfill";
+import { getNow } from "./getNow";
 import { temporalToDate } from "./temporalToDate";
 
+const referenceValue = getNow();
+
 export function getMonths(
-  locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  referenceValue: Temporal.PlainDate,
-  minValue?: Temporal.PlainDate,
-  maxValue?: Temporal.PlainDate
+  locale: Intl.LocalesArgument,
+  minValue?: Temporal.PlainDate | Temporal.PlainDateTime,
+  maxValue?: Temporal.PlainDate | Temporal.PlainDateTime
 ) {
   const longMonthFormatter = new Intl.DateTimeFormat(locale, {
     month: "long",
