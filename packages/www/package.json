@@ -1,6 +1,6 @@
 {
   "name": "@tempocal/www",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "scripts": {
     "build": "next build && next export --outdir dist",
     "dev": "next",

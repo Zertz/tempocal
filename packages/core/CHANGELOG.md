@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.15.0
+
+### Minor Changes
+
+- cead79d: Upgrade @js-temporal/polyfill
+
 ## 0.14.5
 
 ### Patch Changes

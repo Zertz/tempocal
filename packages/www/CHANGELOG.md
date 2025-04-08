@@ -1,5 +1,17 @@
 # @tempocal/www
 
+## 1.8.0
+
+### Minor Changes
+
+- cead79d: Upgrade @js-temporal/polyfill
+
+### Patch Changes
+
+- Updated dependencies [cead79d]
+  - @tempocal/react@0.18.0
+  - @tempocal/core@0.15.0
+
 ## 1.7.0
 
 ### Minor Changes
