@@ -9,7 +9,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
-    "@js-temporal/polyfill": "^0.4.3",
+    "@js-temporal/polyfill": "^0.5.1",
     "@tempocal/core": "workspace:*",
     "@tempocal/react": "workspace:*",
     "classnames": "^2.3.2",

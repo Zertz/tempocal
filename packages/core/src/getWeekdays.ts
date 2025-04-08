@@ -7,7 +7,7 @@ export function getWeekdays(
   startOfWeek: number
 ) {
   const firstDayOfWeek = getFirstDayOfWeek(
-    Temporal.Now.plainDate("iso8601"),
+    Temporal.Now.plainDateISO(),
     startOfWeek
   );
 

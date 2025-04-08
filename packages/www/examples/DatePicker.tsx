@@ -14,7 +14,7 @@ const getDayContent = ({ year, month, day }: Temporal.PlainDate) => {
     return "⭐️";
   }
 
-  const now = Temporal.Now.plainDate("iso8601");
+  const now = Temporal.Now.plainDateISO();
 
   if (year === now.year && month === now.month && day === now.day) {
     return "📅";

@@ -25,16 +25,16 @@ export function DateRangePicker({
   monthsFixedGrid: boolean;
 }) {
   const [values, setValues] = React.useState<DateRange>([
-    Temporal.Now.plainDate("iso8601").subtract({ days: 3 }),
-    Temporal.Now.plainDate("iso8601").add({ days: 3 }),
+    Temporal.Now.plainDateISO().subtract({ days: 3 }),
+    Temporal.Now.plainDateISO().add({ days: 3 }),
   ]);
 
   const [minValue] = React.useState(
-    Temporal.Now.plainDate("iso8601").subtract({ years: 2 })
+    Temporal.Now.plainDateISO().subtract({ years: 2 })
   );
 
   const [maxValue] = React.useState(
-    Temporal.Now.plainDate("iso8601").add({ years: 2 })
+    Temporal.Now.plainDateISO().add({ years: 2 })
   );
 
   const [hoverValue, setHoveredValue] = React.useState<Temporal.PlainDate>();

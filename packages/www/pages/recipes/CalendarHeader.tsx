@@ -17,7 +17,7 @@ export default function CalendarHeaderPage(
 }
 
 function Recipe() {
-  const [value, setValue] = React.useState(Temporal.Now.plainDate("iso8601"));
+  const [value, setValue] = React.useState(Temporal.Now.plainDateISO());
 
   const [maxValue] = React.useState(value.add({ years: 3 }));
   const [minValue] = React.useState(value.subtract({ years: 3 }));
