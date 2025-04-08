@@ -77,7 +77,7 @@ export function useTempocal<
 }) {
   const [calendarValue, setCalendarValue] = React.useState(() => {
     if (!value || (Array.isArray(value) && !value[0])) {
-      return Temporal.Now.plainDate("iso8601");
+      return Temporal.Now.plainDateISO();
     }
 
     if (Array.isArray(value)) {
@@ -167,7 +167,7 @@ export function useTempocal<
   const onChangeCalendarValue = React.useCallback(
     (params?: Temporal.PlainDate | Temporal.PlainDateLike) => {
       if (!params) {
-        return updateCalendarValue(Temporal.Now.plainDate("iso8601"));
+        return updateCalendarValue(Temporal.Now.plainDateISO());
       }
 
       if (params instanceof Temporal.PlainDate) {
@@ -264,8 +264,8 @@ export function useTempocal<
         }
 
         return mode === "date"
-          ? Temporal.Now.plainDate("iso8601").with(params)
-          : Temporal.Now.plainDateTime("iso8601").with(params);
+          ? Temporal.Now.plainDateISO().with(params)
+          : Temporal.Now.plainDateTimeISO().with(params);
       })();
 
       if (Array.isArray(value)) {
