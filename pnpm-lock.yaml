@@ -42,8 +42,8 @@ importers:
   packages/core:
     devDependencies:
       '@js-temporal/polyfill':
-        specifier: ^0.4.3
-        version: 0.4.4
+        specifier: ^0.5.1
+        version: 0.5.1
       tsup:
         specifier: ^6.7.0
         version: 6.7.0(postcss@8.4.38)(typescript@5.4.5)
@@ -61,8 +61,8 @@ importers:
         version: link:../core
     devDependencies:
       '@js-temporal/polyfill':
-        specifier: ^0.4.3
-        version: 0.4.4
+        specifier: ^0.5.1
+        version: 0.5.1
       '@testing-library/jest-dom':
         specifier: ^5.16.5
         version: 5.17.0
@@ -106,8 +106,8 @@ importers:
         specifier: ^2.0.16
         version: 2.1.4(react@18.3.1)
       '@js-temporal/polyfill':
-        specifier: ^0.4.3
-        version: 0.4.4
+        specifier: ^0.5.1
+        version: 0.5.1
       '@tempocal/core':
         specifier: workspace:*
         version: link:../core
@@ -683,8 +683,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@js-temporal/polyfill@0.4.4':
-    resolution: {integrity: sha512-2X6bvghJ/JAoZO52lbgyAPFj8uCflhTo2g7nkFzEQdXd/D8rEeD4HtmTEpmtGCva260fcd66YNXBOYdnmHqSOg==}
+  '@js-temporal/polyfill@0.5.1':
+    resolution: {integrity: sha512-hloP58zRVCRSpgDxmqCWJNlizAlUgJFqG2ypq79DCvyv9tHjRYMDOcPFjzfl/A1/YxDvRCZz8wvZvmapQnKwFQ==}
     engines: {node: '>=12'}
 
   '@manypkg/find-root@1.1.0':
@@ -3719,10 +3719,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@js-temporal/polyfill@0.4.4':
+  '@js-temporal/polyfill@0.5.1':
     dependencies:
       jsbi: 4.3.0
-      tslib: 2.6.3
 
   '@manypkg/find-root@1.1.0':
     dependencies:
