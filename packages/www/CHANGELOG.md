@@ -1,5 +1,11 @@
 # @tempocal/www
 
+## 1.9.0
+
+### Minor Changes
+
+- 0149da2: Upgrade to Next.js 16, React 19, and companion dependency updates
+
 ## 1.8.0
 
 ### Minor Changes
