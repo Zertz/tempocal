@@ -1,6 +1,10 @@
-import { Dialog, Transition } from "@headlessui/react";
+import {
+  Dialog,
+  DialogBackdrop,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import * as React from "react";
 import { Sidebar } from "../components/Sidebar";
 
 export function MobileSidebar({
@@ -11,14 +15,13 @@ export function MobileSidebar({
   setSidebarOpen: (sidebarOpen: boolean) => void;
 }) {
   return (
-    <Transition.Root show={sidebarOpen} as={React.Fragment}>
+    <Transition show={sidebarOpen}>
       <Dialog
         as="div"
         className="fixed inset-0 flex z-40 lg:hidden"
         onClose={setSidebarOpen}
       >
-        <Transition.Child
-          as={React.Fragment}
+        <TransitionChild
           enter="transition-opacity ease-linear duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -26,10 +29,9 @@ export function MobileSidebar({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
-        </Transition.Child>
-        <Transition.Child
-          as={React.Fragment}
+          <DialogBackdrop className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+        </TransitionChild>
+        <TransitionChild
           enter="transition ease-in-out duration-300 transform"
           enterFrom="-translate-x-full"
           enterTo="translate-x-0"
@@ -38,8 +40,7 @@ export function MobileSidebar({
           leaveTo="-translate-x-full"
         >
           <div className="relative flex-1 flex flex-col max-w-xs w-full bg-gray-700 focus:outline-none">
-            <Transition.Child
-              as={React.Fragment}
+            <TransitionChild
               enter="ease-in-out duration-300"
               enterFrom="opacity-0"
               enterTo="opacity-100"
@@ -60,14 +61,14 @@ export function MobileSidebar({
                   />
                 </button>
               </div>
-            </Transition.Child>
+            </TransitionChild>
             <Sidebar />
           </div>
-        </Transition.Child>
+        </TransitionChild>
         <div className="flex-shrink-0 w-14" aria-hidden="true">
           {/* Force sidebar to shrink to fit close icon */}
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 }

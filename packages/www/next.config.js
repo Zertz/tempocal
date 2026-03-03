@@ -2,8 +2,8 @@
  * @type {import('next').NextConfig}
  */
 module.exports = {
-  experimental: {
-    externalDir: true,
-  },
+  output: "export",
+  distDir: "dist",
+  transpilePackages: ["@tempocal/core", "@tempocal/react"],
   reactStrictMode: true,
 };
