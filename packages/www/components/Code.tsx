@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import Highlight, { defaultProps } from "prism-react-renderer";
+import { Highlight, themes } from "prism-react-renderer";
 import { GitHubLogo } from "./GitHubLogo";
 
 export function CodeBlock({
@@ -10,7 +10,11 @@ export function CodeBlock({
   href?: string;
 }) {
   return (
-    <Highlight {...defaultProps} code={children || "Loading..."} language="tsx">
+    <Highlight
+      theme={themes.duotoneDark}
+      code={children || "Loading..."}
+      language="tsx"
+    >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
           className={classnames(
