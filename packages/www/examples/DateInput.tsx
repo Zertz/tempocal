@@ -1,6 +1,5 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { temporalToDate } from "@tempocal/core";
-import { Calendar, useTempocal } from "@tempocal/react";
+import { Calendar, useTempocal, useTemporalState } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
 import { CalendarHeader } from "../recipes/CalendarHeader";
@@ -14,13 +13,11 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
 export function DateInput() {
   const [isOpen, setOpen] = React.useState(false);
 
-  const [value, setValue] = React.useState(
-    Temporal.PlainDate.from({
-      year: 2021,
-      month: 11,
-      day: 25,
-    })
-  );
+  const [value, setValue] = useTemporalState("date", {
+    year: 2021,
+    month: 11,
+    day: 25,
+  });
 
   const {
     calendarProps,
