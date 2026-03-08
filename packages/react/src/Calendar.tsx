@@ -6,7 +6,7 @@ import {
 } from "@tempocal/core";
 import * as React from "react";
 import { CSSProperties } from "react";
-import { Locale } from "./useTempocal";
+import { DateRange, DateTimeRange, Locale } from "./useTempocal";
 
 type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 
@@ -47,9 +47,13 @@ type MonthProps = {
     shortName: string;
     narrowName: string;
   }) => React.ReactNode;
+  hoverValue?: Temporal.PlainDate | Temporal.PlainDateTime;
+  rangeValue?: DateRange | DateTimeRange;
   dayProps?: (props: {
     date: Temporal.PlainDate;
     disabled: boolean;
+    isRangeHovered: boolean;
+    isRangeSelected: boolean;
     plainDateLike: Temporal.PlainDateLike;
   }) => Omit<
     React.DetailedHTMLProps<
@@ -61,6 +65,8 @@ type MonthProps = {
   renderDay?: (props: {
     date: Temporal.PlainDate;
     disabled: boolean;
+    isRangeHovered: boolean;
+    isRangeSelected: boolean;
     plainDateLike: Temporal.PlainDateLike;
   }) => React.ReactNode;
   footerProps?: (props: {
@@ -84,6 +90,8 @@ export function Calendar({
   value,
   calendarProps,
   headerProps,
+  hoverValue,
+  rangeValue,
   renderHeader,
   weekdayProps,
   renderWeekday,
@@ -114,6 +122,8 @@ export function Calendar({
           value={value.add({ months: month - monthsBefore })}
           calendarProps={calendarProps}
           headerProps={headerProps}
+          hoverValue={hoverValue}
+          rangeValue={rangeValue}
           renderHeader={renderHeader}
           weekdayProps={weekdayProps}
           renderWeekday={renderWeekday}
@@ -137,6 +147,8 @@ function Month({
   value,
   calendarProps,
   headerProps,
+  hoverValue,
+  rangeValue,
   renderHeader,
   weekdayProps,
   renderWeekday,
@@ -210,6 +222,8 @@ function Month({
             (!!maxValue && Temporal.PlainDate.compare(date, maxValue) > 0)
           }
           dayProps={dayProps}
+          hoverValue={hoverValue}
+          rangeValue={rangeValue}
           style={day === 0 ? { gridColumnStart } : undefined}
           renderDay={renderDay}
         />
@@ -255,9 +269,11 @@ function Day({
   date,
   disabled,
   dayProps,
+  hoverValue,
+  rangeValue,
   renderDay,
   style,
-}: Pick<MonthProps, "dayProps" | "renderDay"> & {
+}: Pick<MonthProps, "dayProps" | "hoverValue" | "rangeValue" | "renderDay"> & {
   date: Temporal.PlainDate;
   disabled: boolean;
   style: CSSProperties | undefined;
@@ -270,12 +286,44 @@ function Day({
       day: date.day,
     };
 
+    const rangeStart =
+      rangeValue?.[0] instanceof Temporal.PlainDateTime
+        ? rangeValue[0].toPlainDate()
+        : rangeValue?.[0];
+
+    const rangeEnd =
+      rangeValue?.[1] instanceof Temporal.PlainDateTime
+        ? rangeValue[1].toPlainDate()
+        : rangeValue?.[1];
+
+    const hoverDate =
+      hoverValue instanceof Temporal.PlainDateTime
+        ? hoverValue.toPlainDate()
+        : hoverValue;
+
+    const isRangeSelected =
+      !!rangeStart &&
+      !!rangeEnd &&
+      Temporal.PlainDate.compare(rangeStart, date) <= 0 &&
+      Temporal.PlainDate.compare(rangeEnd, date) >= 0;
+
+    const isRangeHovered =
+      !!rangeStart &&
+      !rangeEnd &&
+      !!hoverDate &&
+      ((Temporal.PlainDate.compare(rangeStart, date) <= 0 &&
+        Temporal.PlainDate.compare(hoverDate, date) >= 0) ||
+        (Temporal.PlainDate.compare(hoverDate, date) <= 0 &&
+          Temporal.PlainDate.compare(rangeStart, date) >= 0));
+
     return {
       date,
       disabled,
+      isRangeHovered,
+      isRangeSelected,
       plainDateLike,
     };
-  }, [date, disabled]);
+  }, [date, disabled, hoverValue, rangeValue]);
 
   return (
     <li {...dayProps?.(props)} style={style}>

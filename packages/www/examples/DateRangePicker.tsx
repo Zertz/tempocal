@@ -62,6 +62,8 @@ export function DateRangePicker({
         monthsBefore={monthsBefore}
         monthsAfter={monthsAfter}
         monthsFixedGrid={monthsFixedGrid}
+        hoverValue={hoverValue}
+        rangeValue={values}
         calendarProps={() => ({
           className: "gap-1 text-center w-72",
         })}
@@ -90,23 +92,8 @@ export function DateRangePicker({
           );
         }}
         weekdayProps={() => ({ className: "font-medium" })}
-        renderDay={({ date, disabled, plainDateLike }) => {
-          const isRangeSelected =
-            values[0] &&
-            values[1] &&
-            Temporal.PlainDate.compare(values[0], date) <= 0 &&
-            Temporal.PlainDate.compare(values[1], date) >= 0;
-
+        renderDay={({ date, disabled, isRangeHovered, isRangeSelected, plainDateLike }) => {
           const isSelected = values[0] && !values[1] && values[0].equals(date);
-
-          const isRangeHovered =
-            values[0] &&
-            !values[1] &&
-            hoverValue &&
-            ((Temporal.PlainDate.compare(values[0], date) <= 0 &&
-              Temporal.PlainDate.compare(hoverValue, date) >= 0) ||
-              (Temporal.PlainDate.compare(hoverValue, date) <= 0 &&
-                Temporal.PlainDate.compare(values[0], date) >= 0));
 
           return (
             <button
