@@ -39,27 +39,22 @@ export function DatePicker({
       year: 2021,
       month: 11,
       day: 25,
-    })
+    }),
   );
 
   const [minValue] = React.useState(value.subtract({ years: 2 }));
   const [maxValue] = React.useState(value.add({ years: 2 }));
 
-  const {
-    calendarProps,
-    months,
-    onChangeCalendarValue,
-    onChangeSelectedValue,
-    years,
-  } = useTempocal({
-    clampCalendarValue,
-    locale,
-    maxValue,
-    minValue,
-    mode: "date",
-    setValue,
-    value,
-  });
+  const { calendarProps, months, onChangeCalendarValue, onChangeSelectedValue, years } =
+    useTempocal({
+      clampCalendarValue,
+      locale,
+      maxValue,
+      minValue,
+      mode: "date",
+      setValue,
+      value,
+    });
 
   const dateFormatter = React.useMemo(() => {
     return new Intl.DateTimeFormat(locale, {
@@ -85,9 +80,7 @@ export function DatePicker({
         />
       )}
       weekdayProps={() => ({ className: "font-medium" })}
-      renderWeekday={({ dayOfWeek, narrowName }) =>
-        dayOfWeek === 1 ? "😭" : narrowName
-      }
+      renderWeekday={({ dayOfWeek, narrowName }) => (dayOfWeek === 1 ? "😭" : narrowName)}
       renderDay={({ date, disabled, plainDateLike }) => (
         <button
           className={classnames(
@@ -95,7 +88,7 @@ export function DatePicker({
             "disabled:pointer-events-none disabled:text-red-400 disabled:opacity-75",
             value.equals(date)
               ? "border-blue-600 bg-blue-100"
-              : "border-gray-300 hover:bg-gray-100"
+              : "border-gray-300 hover:bg-gray-100",
           )}
           disabled={disabled || date.dayOfWeek === 1}
           onClick={() => onChangeSelectedValue(plainDateLike)}
@@ -107,9 +100,7 @@ export function DatePicker({
       footerProps={() => ({
         className: "text-sm",
       })}
-      renderFooter={() =>
-        `Selected date: ${dateFormatter.format(temporalToDate(value))}`
-      }
+      renderFooter={() => `Selected date: ${dateFormatter.format(temporalToDate(value))}`}
     />
   );
 }

@@ -1,9 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import {
-  getMonthEndDate,
-  getMonthStartDate,
-  temporalToDate,
-} from "@tempocal/core";
+import { getMonthEndDate, getMonthStartDate, temporalToDate } from "@tempocal/core";
 import { Calendar, DateRange, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";
@@ -29,31 +25,22 @@ export function DateRangePicker({
     Temporal.Now.plainDateISO().add({ days: 3 }),
   ]);
 
-  const [minValue] = React.useState(
-    Temporal.Now.plainDateISO().subtract({ years: 2 })
-  );
+  const [minValue] = React.useState(Temporal.Now.plainDateISO().subtract({ years: 2 }));
 
-  const [maxValue] = React.useState(
-    Temporal.Now.plainDateISO().add({ years: 2 })
-  );
+  const [maxValue] = React.useState(Temporal.Now.plainDateISO().add({ years: 2 }));
 
   const [hoverValue, setHoveredValue] = React.useState<Temporal.PlainDate>();
 
-  const {
-    calendarProps,
-    months,
-    onChangeCalendarValue,
-    onChangeSelectedValue,
-    years,
-  } = useTempocal({
-    clampCalendarValue: true,
-    locale,
-    maxValue,
-    minValue,
-    mode: "daterange",
-    setValue: setValues,
-    value: values,
-  });
+  const { calendarProps, months, onChangeCalendarValue, onChangeSelectedValue, years } =
+    useTempocal({
+      clampCalendarValue: true,
+      locale,
+      maxValue,
+      minValue,
+      mode: "daterange",
+      setValue: setValues,
+      value: values,
+    });
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -68,15 +55,11 @@ export function DateRangePicker({
         headerProps={({ date }) => ({
           className: classnames("flex items-center gap-2", {
             "mx-auto":
-              date.year !== calendarProps.value.year ||
-              date.month !== calendarProps.value.month,
+              date.year !== calendarProps.value.year || date.month !== calendarProps.value.month,
           }),
         })}
         renderHeader={({ date }) => {
-          if (
-            date.year !== calendarProps.value.year ||
-            date.month !== calendarProps.value.month
-          ) {
+          if (date.year !== calendarProps.value.year || date.month !== calendarProps.value.month) {
             return months[date.month - 1].longName;
           }
 
@@ -116,8 +99,8 @@ export function DateRangePicker({
                 isRangeSelected || isSelected
                   ? "border-blue-600 bg-blue-100"
                   : isRangeHovered
-                  ? "border-blue-300 bg-blue-50"
-                  : "border-gray-300 hover:bg-gray-100"
+                    ? "border-blue-300 bg-blue-50"
+                    : "border-gray-300 hover:bg-gray-100",
               )}
               disabled={disabled}
               onClick={() => onChangeSelectedValue(plainDateLike)}
@@ -136,10 +119,7 @@ export function DateRangePicker({
             <button
               className="text-sm border-gray-300 whitespace-nowrap px-2 py-1 bg-white hover:bg-gray-50 rounded border text-gray-700 transition-colors"
               onClick={() => {
-                onChangeSelectedValue([
-                  getMonthStartDate(date),
-                  getMonthEndDate(date),
-                ]);
+                onChangeSelectedValue([getMonthStartDate(date), getMonthEndDate(date)]);
               }}
               type="button"
             >
@@ -169,9 +149,7 @@ export function DateRangePicker({
             <span className="row-start-2 col-span-3 text-sm">
               {`Selected date range: ${
                 values[0] ? dateFormatter.format(temporalToDate(values[0])) : ""
-              } - ${
-                values[1] ? dateFormatter.format(temporalToDate(values[1])) : ""
-              }`}
+              } - ${values[1] ? dateFormatter.format(temporalToDate(values[1])) : ""}`}
             </span>
           </>
         )}

@@ -5,7 +5,7 @@ export function getMonths(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
   referenceValue: Temporal.PlainDate,
   minValue?: Temporal.PlainDate,
-  maxValue?: Temporal.PlainDate
+  maxValue?: Temporal.PlainDate,
 ) {
   const longMonthFormatter = new Intl.DateTimeFormat(locale, {
     month: "long",

@@ -16,7 +16,7 @@ test("useTempocal", () => {
       mode: "date",
       setValue: (v: Temporal.PlainDate) => (value = v),
       value,
-    })
+    }),
   );
 
   expect(Object.keys(result.current).length).toBe(7);
@@ -32,8 +32,8 @@ test("useTempocal", () => {
         year: 2022,
         month: 4,
         day: 15,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 
   expect(
@@ -42,8 +42,8 @@ test("useTempocal", () => {
         year: 2022,
         month: 4,
         day: 15,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 
   expect(result.current.years).deep.equal([]);
@@ -64,8 +64,8 @@ test("useTempocal", () => {
           year: 2023,
           month: 7,
           day: 15,
-        })
-      )
+        }),
+      ),
     ).toBe(true);
   });
 
@@ -75,8 +75,8 @@ test("useTempocal", () => {
         year: 2023,
         month: 7,
         day: 15,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 
   // onChangeSelectedValue
@@ -94,8 +94,8 @@ test("useTempocal", () => {
             year: 2021,
             month: 1,
             day: 1,
-          })
-        )
+          }),
+        ),
     ).toBe(true);
   });
 
@@ -105,7 +105,7 @@ test("useTempocal", () => {
         year: 2021,
         month: 1,
         day: 1,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });

@@ -19,15 +19,10 @@ export function DateInput() {
       year: 2021,
       month: 11,
       day: 25,
-    })
+    }),
   );
 
-  const {
-    calendarProps,
-    months,
-    onChangeCalendarValue,
-    onChangeSelectedValue,
-  } = useTempocal({
+  const { calendarProps, months, onChangeCalendarValue, onChangeSelectedValue } = useTempocal({
     locale,
     mode: "date",
     setValue,
@@ -46,15 +41,11 @@ export function DateInput() {
           .toString()
           .padStart(2, "0")}-${value.day.toString().padStart(2, "0")}`}
       />
-      <div
-        className="shadow-xl absolute top-14 left-0 right-0 z-10"
-        hidden={!isOpen}
-      >
+      <div className="shadow-xl absolute top-14 left-0 right-0 z-10" hidden={!isOpen}>
         <Calendar
           {...calendarProps}
           calendarProps={() => ({
-            className:
-              "bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center",
+            className: "bg-gray-100 text-gray-700 gap-1 p-2 rounded text-center",
           })}
           headerProps={() => ({ className: "flex items-center gap-2" })}
           renderHeader={() => (
@@ -72,7 +63,7 @@ export function DateInput() {
                 "w-full rounded border text-gray-700 transition-colors",
                 value.equals(date)
                   ? "border-blue-600 bg-blue-100"
-                  : "border-gray-300 hover:bg-gray-100"
+                  : "border-gray-300 hover:bg-gray-100",
               )}
               onClick={() => {
                 onChangeSelectedValue(plainDateLike);

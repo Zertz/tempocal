@@ -1,11 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import {
-  clamp,
-  getHours,
-  getMinutes,
-  getMonths,
-  getYears,
-} from "@tempocal/core";
+import { clamp, getHours, getMinutes, getMonths, getYears } from "@tempocal/core";
 import * as React from "react";
 
 export type ClampMode = "always" | "value-change" | "never";
@@ -23,36 +17,34 @@ export type DateTimeRange =
 type RequiredValue<Mode> = Mode extends "date"
   ? Temporal.PlainDate
   : Mode extends "daterange"
-  ? DateRange
-  : Mode extends "datetime"
-  ? Temporal.PlainDateTime
-  : Mode extends "datetimerange"
-  ? DateTimeRange
-  : never;
+    ? DateRange
+    : Mode extends "datetime"
+      ? Temporal.PlainDateTime
+      : Mode extends "datetimerange"
+        ? DateTimeRange
+        : never;
 
 type ChangeValue<Mode> = Mode extends "date"
   ? Temporal.PlainDate | Temporal.PlainDateLike
   : Mode extends "daterange"
-  ?
-      | Temporal.PlainDate
-      | Temporal.PlainDateLike
-      | [Temporal.PlainDate, Temporal.PlainDate]
-      | [undefined, undefined]
-  : Mode extends "datetime"
-  ? Temporal.PlainDateTime | Temporal.PlainDateTimeLike
-  : Mode extends "datetimerange"
-  ?
-      | Temporal.PlainDateTime
-      | Temporal.PlainDateTimeLike
-      | [Temporal.PlainDateTime, Temporal.PlainDateTime]
-      | [undefined, undefined]
-  : never;
+    ?
+        | Temporal.PlainDate
+        | Temporal.PlainDateLike
+        | [Temporal.PlainDate, Temporal.PlainDate]
+        | [undefined, undefined]
+    : Mode extends "datetime"
+      ? Temporal.PlainDateTime | Temporal.PlainDateTimeLike
+      : Mode extends "datetimerange"
+        ?
+            | Temporal.PlainDateTime
+            | Temporal.PlainDateTimeLike
+            | [Temporal.PlainDateTime, Temporal.PlainDateTime]
+            | [undefined, undefined]
+        : never;
 
 export type Locale = string;
 
-export function useTempocal<
-  Mode extends "date" | "daterange" | "datetime" | "datetimerange"
->({
+export function useTempocal<Mode extends "date" | "daterange" | "datetime" | "datetimerange">({
   clampCalendarValue,
   clampSelectedValue,
   locale,
@@ -66,8 +58,8 @@ export function useTempocal<
   clampSelectedValue?: Mode extends "date"
     ? ClampMode
     : Mode extends "datetime"
-    ? ClampMode
-    : never;
+      ? ClampMode
+      : never;
   locale: Locale;
   maxValue?: Temporal.PlainDate | Temporal.PlainDateTime;
   minValue?: Temporal.PlainDate | Temporal.PlainDateTime;
@@ -93,12 +85,8 @@ export function useTempocal<
     }
 
     return getYears(
-      minValue instanceof Temporal.PlainDateTime
-        ? minValue.toPlainDate()
-        : minValue,
-      maxValue instanceof Temporal.PlainDateTime
-        ? maxValue.toPlainDate()
-        : maxValue
+      minValue instanceof Temporal.PlainDateTime ? minValue.toPlainDate() : minValue,
+      maxValue instanceof Temporal.PlainDateTime ? maxValue.toPlainDate() : maxValue,
     );
   }, [maxValue, minValue]);
 
@@ -106,12 +94,8 @@ export function useTempocal<
     return getMonths(
       locale,
       calendarValue,
-      minValue instanceof Temporal.PlainDateTime
-        ? minValue.toPlainDate()
-        : minValue,
-      maxValue instanceof Temporal.PlainDateTime
-        ? maxValue.toPlainDate()
-        : maxValue
+      minValue instanceof Temporal.PlainDateTime ? minValue.toPlainDate() : minValue,
+      maxValue instanceof Temporal.PlainDateTime ? maxValue.toPlainDate() : maxValue,
     );
   }, [calendarValue, locale, maxValue, minValue]);
 
@@ -149,19 +133,15 @@ export function useTempocal<
 
       const clampedValue = clamp(
         nextCalendarValue,
-        minValue instanceof Temporal.PlainDateTime
-          ? minValue.toPlainDate()
-          : minValue,
-        maxValue instanceof Temporal.PlainDateTime
-          ? maxValue.toPlainDate()
-          : maxValue
+        minValue instanceof Temporal.PlainDateTime ? minValue.toPlainDate() : minValue,
+        maxValue instanceof Temporal.PlainDateTime ? maxValue.toPlainDate() : maxValue,
       );
 
       setCalendarValue(clampedValue);
 
       return clampedValue;
     },
-    [clampCalendarValue, maxValue, minValue]
+    [clampCalendarValue, maxValue, minValue],
   );
 
   const onChangeCalendarValue = React.useCallback(
@@ -176,16 +156,12 @@ export function useTempocal<
 
       return updateCalendarValue(calendarValue.with(params));
     },
-    [calendarValue, updateCalendarValue]
+    [calendarValue, updateCalendarValue],
   );
 
   const updateSelectedValue = React.useCallback(
     (
-      nextSelectedValue:
-        | Temporal.PlainDate
-        | Temporal.PlainDateTime
-        | DateRange
-        | DateTimeRange
+      nextSelectedValue: Temporal.PlainDate | Temporal.PlainDateTime | DateRange | DateTimeRange,
     ) => {
       if (
         !clampSelectedValue ||
@@ -205,16 +181,14 @@ export function useTempocal<
 
       return clampedValue;
     },
-    [clampSelectedValue, maxValue, minValue, setValue]
+    [clampSelectedValue, maxValue, minValue, setValue],
   );
 
   const onChangeSelectedValue = React.useCallback(
     (params: ChangeValue<Mode>): RequiredValue<Mode> => {
       if (Array.isArray(params)) {
         if (!["daterange", "datetimerange"].includes(mode)) {
-          throw new Error(
-            `Received an array in onChangeSelectedValue but mode is ${mode}`
-          );
+          throw new Error(`Received an array in onChangeSelectedValue but mode is ${mode}`);
         }
 
         if (!params[0] && !params[1]) {
@@ -237,10 +211,8 @@ export function useTempocal<
         } else {
           throw new Error(
             `Received an array of mixed values in onChangeSelectedValue but expected a pair of ${
-              mode === "daterange"
-                ? "Temporal.PlainDate"
-                : "Temporal.PlainDateTime"
-            }`
+              mode === "daterange" ? "Temporal.PlainDate" : "Temporal.PlainDateTime"
+            }`,
           );
         }
 
@@ -248,10 +220,7 @@ export function useTempocal<
       }
 
       const nextValue = (() => {
-        if (
-          params instanceof Temporal.PlainDate ||
-          params instanceof Temporal.PlainDateTime
-        ) {
+        if (params instanceof Temporal.PlainDate || params instanceof Temporal.PlainDateTime) {
           return params;
         }
 
@@ -280,7 +249,7 @@ export function useTempocal<
 
       return updateSelectedValue(nextValue) as RequiredValue<Mode>;
     },
-    [mode, setValue, updateSelectedValue, value]
+    [mode, setValue, updateSelectedValue, value],
   );
 
   const previousClampSelectedValue = React.useRef(clampSelectedValue);
@@ -318,14 +287,8 @@ export function useTempocal<
   return {
     calendarProps: {
       locale,
-      maxValue:
-        maxValue instanceof Temporal.PlainDateTime
-          ? maxValue.toPlainDate()
-          : maxValue,
-      minValue:
-        minValue instanceof Temporal.PlainDateTime
-          ? minValue.toPlainDate()
-          : minValue,
+      maxValue: maxValue instanceof Temporal.PlainDateTime ? maxValue.toPlainDate() : maxValue,
+      minValue: minValue instanceof Temporal.PlainDateTime ? minValue.toPlainDate() : minValue,
       value: calendarValue,
     },
     years,

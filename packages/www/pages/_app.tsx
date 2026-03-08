@@ -10,10 +10,7 @@ export default function Tempocal({ Component, pageProps }: AppProps) {
 
   return (
     <div className="h-screen flex bg-gray-700">
-      <MobileSidebar
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-      />
+      <MobileSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <DesktopSidebar />
       <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
         <MobileHeader setSidebarOpen={setSidebarOpen} />

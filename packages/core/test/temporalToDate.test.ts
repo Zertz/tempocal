@@ -8,7 +8,7 @@ test("temporalToDate (PlainDate)", () => {
       year: 2022,
       month: 3,
       day: 31,
-    })
+    }),
   );
 
   expect(date.getFullYear()).toEqual(2022);
@@ -30,7 +30,7 @@ test("temporalToDate (PlainDateTime)", () => {
       minute: 30,
       second: 45,
       millisecond: 600,
-    })
+    }),
   );
 
   expect(date.getFullYear()).toEqual(2022);

@@ -1,0 +1,7 @@
+{
+  "plugins": ["react", "typescript"],
+  "env": {
+    "browser": true,
+    "es2022": true
+  }
+}

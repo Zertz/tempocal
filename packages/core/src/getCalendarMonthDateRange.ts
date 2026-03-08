@@ -4,11 +4,7 @@ import { getMonthStartDate } from "./getMonthStartDate";
 
 type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 
-export function getCalendarMonthDateRange(
-  value: Value,
-  rollover: boolean,
-  startOfWeek: number
-) {
+export function getCalendarMonthDateRange(value: Value, rollover: boolean, startOfWeek: number) {
   const start = getMonthStartDate(value);
   const end = getMonthEndDate(value);
 

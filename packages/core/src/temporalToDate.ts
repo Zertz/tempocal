@@ -14,6 +14,6 @@ export function temporalToDate(value: Value) {
     value.hour,
     value.minute,
     value.second,
-    value.millisecond
+    value.millisecond,
   );
 }

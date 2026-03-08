@@ -1,9 +1,4 @@
-import {
-  Dialog,
-  DialogBackdrop,
-  Transition,
-  TransitionChild,
-} from "@headlessui/react";
+import { Dialog, DialogBackdrop, Transition, TransitionChild } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Sidebar } from "../components/Sidebar";
 
@@ -16,11 +11,7 @@ export function MobileSidebar({
 }) {
   return (
     <Transition show={sidebarOpen}>
-      <Dialog
-        as="div"
-        className="fixed inset-0 flex z-40 lg:hidden"
-        onClose={setSidebarOpen}
-      >
+      <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setSidebarOpen}>
         <TransitionChild
           enter="transition-opacity ease-linear duration-300"
           enterFrom="opacity-0"
@@ -55,10 +46,7 @@ export function MobileSidebar({
                   onClick={() => setSidebarOpen(false)}
                 >
                   <span className="sr-only">Close sidebar</span>
-                  <XMarkIcon
-                    className="h-6 w-6 text-white"
-                    aria-hidden="true"
-                  />
+                  <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
                 </button>
               </div>
             </TransitionChild>

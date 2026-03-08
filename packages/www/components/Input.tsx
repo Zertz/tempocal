@@ -4,10 +4,11 @@ export function Input({
   hint,
   label,
   ...props
-}: React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
-> & { hint?: string; id: string; label: string }) {
+}: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+  hint?: string;
+  id: string;
+  label: string;
+}) {
   return (
     <div>
       <label className="block text-sm font-medium" htmlFor={props.id}>

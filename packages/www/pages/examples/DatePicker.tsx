@@ -8,9 +8,7 @@ import { Select } from "../../components/Select";
 import { DatePicker } from "../../examples/DatePicker";
 import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function DatePickerPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) {
+export default function DatePickerPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   const [clampCalendarValue, setClampCalendarValue] = React.useState(true);
   const [locale, setLocale] = React.useState<Locale>("en-US");
   const [rollover, setRollover] = React.useState(true);

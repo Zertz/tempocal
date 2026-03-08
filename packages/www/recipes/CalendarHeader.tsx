@@ -17,10 +17,7 @@ export function CalendarHeader({
         className="disabled:opacity-50"
         disabled={
           calendarProps.minValue &&
-          Temporal.PlainYearMonth.compare(
-            calendarProps.value,
-            calendarProps.minValue
-          ) <= 0
+          Temporal.PlainYearMonth.compare(calendarProps.value, calendarProps.minValue) <= 0
         }
         onClick={() => {
           onChangeCalendarValue(calendarProps.value.subtract({ months: 1 }));
@@ -65,10 +62,7 @@ export function CalendarHeader({
         className="disabled:opacity-50"
         disabled={
           calendarProps.maxValue &&
-          Temporal.PlainYearMonth.compare(
-            calendarProps.value,
-            calendarProps.maxValue
-          ) >= 0
+          Temporal.PlainYearMonth.compare(calendarProps.value, calendarProps.maxValue) >= 0
         }
         onClick={() => {
           onChangeCalendarValue(calendarProps.value.add({ months: 1 }));

@@ -6,11 +6,8 @@ import { Example } from "../../components/Example";
 import { DateTimePicker } from "../../examples/DateTimePicker";
 import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function DateTimePickerPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) {
-  const [clampSelectedValue, setClampSelectedValue] =
-    React.useState<ClampMode>("always");
+export default function DateTimePickerPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [clampSelectedValue, setClampSelectedValue] = React.useState<ClampMode>("always");
 
   return (
     <Example
@@ -28,7 +25,7 @@ export default function DateTimePickerPage(
           name="clampSelectedValue"
           onChange={() => {
             setClampSelectedValue((clampSelectedValue) =>
-              clampSelectedValue === "always" ? "never" : "always"
+              clampSelectedValue === "always" ? "never" : "always",
             );
           }}
         />

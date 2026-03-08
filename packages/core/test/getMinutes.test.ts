@@ -26,7 +26,7 @@ test("getMinutes (year before, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -50,7 +50,7 @@ test("getMinutes (month before, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -74,7 +74,7 @@ test("getMinutes (day before, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -98,7 +98,7 @@ test("getMinutes (hour before, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -122,7 +122,7 @@ test("getMinutes (same hour, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -151,7 +151,7 @@ test("getMinutes (hour after, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -175,7 +175,7 @@ test("getMinutes (day after, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -199,7 +199,7 @@ test("getMinutes (month after, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -223,7 +223,7 @@ test("getMinutes (year after, with min)", () => {
       day: 2,
       hour: 2,
       minute: 15,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -248,7 +248,7 @@ test("getMinutes (year before, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -273,7 +273,7 @@ test("getMinutes (month before, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -298,7 +298,7 @@ test("getMinutes (day before, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -323,7 +323,7 @@ test("getMinutes (hour before, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -348,7 +348,7 @@ test("getMinutes (same hour, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -378,7 +378,7 @@ test("getMinutes (hour after, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -403,7 +403,7 @@ test("getMinutes (day after, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -428,7 +428,7 @@ test("getMinutes (month after, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -453,7 +453,7 @@ test("getMinutes (year after, with max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -484,7 +484,7 @@ test("getMinutes (year before, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -515,7 +515,7 @@ test("getMinutes (month before, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -546,7 +546,7 @@ test("getMinutes (day before, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -577,7 +577,7 @@ test("getMinutes (hour before, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -608,7 +608,7 @@ test("getMinutes (same hour, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -644,7 +644,7 @@ test("getMinutes (hour after, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -675,7 +675,7 @@ test("getMinutes (day after, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -706,7 +706,7 @@ test("getMinutes (month after, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {
@@ -737,7 +737,7 @@ test("getMinutes (year after, with min and max)", () => {
       day: 2,
       hour: 2,
       minute: 45,
-    })
+    }),
   );
 
   for (let i = 0; i < 60; i += 1) {

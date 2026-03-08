@@ -11,18 +11,14 @@
     "ci:publish": "pnpm publish --access public --filter=\\!www --recursive && pnpm changeset tag",
     "ci:version": "pnpm changeset version",
     "dev": "turbo run dev",
-    "lint": "eslint . --ext ts,tsx",
+    "format": "oxfmt --write .",
+    "lint": "oxlint .",
     "test": "turbo run test"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^8.10.0",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.2.8",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0",
     "turbo": "^2.5.0",
     "typescript": "^5.8.3"
   },

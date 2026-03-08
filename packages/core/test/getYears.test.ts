@@ -13,7 +13,7 @@ test("getYears", () => {
       year: 2024,
       month: 4,
       day: 1,
-    })
+    }),
   );
 
   expect(years).toEqual([2020, 2021, 2022, 2023, 2024]);

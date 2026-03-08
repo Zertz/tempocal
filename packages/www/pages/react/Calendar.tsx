@@ -9,11 +9,10 @@ export default function CalendarPage() {
       </div>
       <div className="space-y-4">
         <p>
-          This component renders a grid with a header, weekdays, days, and a
-          footer that handles the basics of rendering a calendar, accounting for
-          start of week day and rollover days. Everything is entirely
-          customizable and should be flexible enough cover the vast majority of
-          use cases.
+          This component renders a grid with a header, weekdays, days, and a footer that handles the
+          basics of rendering a calendar, accounting for start of week day and rollover days.
+          Everything is entirely customizable and should be flexible enough cover the vast majority
+          of use cases.
         </p>
         <CodeBlock>{`import { Calendar } from "@tempocal/react";
 
@@ -55,14 +54,11 @@ return (
             <em className="block">Defaults to 0</em>
           </div>
           <div className="space-y-2">
-            <AnchorHeader id="props-monthsFixedGrid">
-              monthsFixedGrid
-            </AnchorHeader>
+            <AnchorHeader id="props-monthsFixedGrid">monthsFixedGrid</AnchorHeader>
             <p>
-              Always render months on the same grid, as if it were a paper
-              calendar. Useful to avoid content shifting and to align multiple
-              months with <Code>monthsAfter</Code> and <Code>monthsBefore</Code>
-              .
+              Always render months on the same grid, as if it were a paper calendar. Useful to avoid
+              content shifting and to align multiple months with <Code>monthsAfter</Code> and{" "}
+              <Code>monthsBefore</Code>.
             </p>
             <CodeBlock>{`monthsFixedGrid?: boolean`}</CodeBlock>
             <em className="block">Defaults to false</em>
@@ -82,18 +78,16 @@ return (
           <div className="space-y-2">
             <AnchorHeader id="props-calendarProps">calendarProps</AnchorHeader>
             <p>
-              Function that returns an object with any and all props a{" "}
-              <Code>{`<ul>`}</Code> element accepts. This is the element that
-              wraps the entire calendar.
+              Function that returns an object with any and all props a <Code>{`<ul>`}</Code> element
+              accepts. This is the element that wraps the entire calendar.
             </p>
             <CodeBlock>{`calendarProps?: () => React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>`}</CodeBlock>
           </div>
           <div className="space-y-2">
             <AnchorHeader id="props-headerProps">headerProps</AnchorHeader>
             <p>
-              Function that returns an object with any and all props a{" "}
-              <Code>{`<li>`}</Code> element accepts. This is the element that
-              wraps the calendar's header.
+              Function that returns an object with any and all props a <Code>{`<li>`}</Code> element
+              accepts. This is the element that wraps the calendar's header.
             </p>
             <CodeBlock>{`headerProps?: ({
   date: Temporal.PlainDate;
@@ -101,10 +95,7 @@ return (
           </div>
           <div className="space-y-2">
             <AnchorHeader id="props-renderHeader">renderHeader</AnchorHeader>
-            <p>
-              Function that returns a React element to render inside the
-              calendar's header.
-            </p>
+            <p>Function that returns a React element to render inside the calendar's header.</p>
             <CodeBlock>{`renderHeader?: ({
   date: Temporal.PlainDate;
 }) => React.ReactNode`}</CodeBlock>
@@ -112,9 +103,8 @@ return (
           <div className="space-y-2">
             <AnchorHeader id="props-weekdayProps">weekdayProps</AnchorHeader>
             <p>
-              Function that returns an object with any and all props a{" "}
-              <Code>{`<li>`}</Code> element accepts. These are the elements that
-              wrap each day of the week.
+              Function that returns an object with any and all props a <Code>{`<li>`}</Code> element
+              accepts. These are the elements that wrap each day of the week.
             </p>
             <CodeBlock>{`weekdayProps?: ({
   dayOfWeek: number;
@@ -125,10 +115,7 @@ return (
           </div>
           <div className="space-y-2">
             <AnchorHeader id="props-renderWeekday">renderWeekday</AnchorHeader>
-            <p>
-              Function that returns a React element to render as the day of
-              week.
-            </p>
+            <p>Function that returns a React element to render as the day of week.</p>
             <CodeBlock>{`renderWeekday?: ({
   dayOfWeek: number;
   longName: string;
@@ -142,9 +129,8 @@ return (
           <div className="space-y-2">
             <AnchorHeader id="props-dayProps">dayProps</AnchorHeader>
             <p>
-              Function that returns an object with any and all props a{" "}
-              <Code>{`<li>`}</Code> element accepts. These are the elements that
-              wrap each day of the month.
+              Function that returns an object with any and all props a <Code>{`<li>`}</Code> element
+              accepts. These are the elements that wrap each day of the month.
             </p>
             <CodeBlock>{`dayProps?: ({
   date: Temporal.PlainDate;
@@ -154,10 +140,7 @@ return (
           </div>
           <div className="space-y-2">
             <AnchorHeader id="props-renderDay">renderDay</AnchorHeader>
-            <p>
-              Function that returns a React element to render as the day of the
-              month.
-            </p>
+            <p>Function that returns a React element to render as the day of the month.</p>
             <CodeBlock>{`renderDay?: ({
   date: Temporal.PlainDate;
   disabled: boolean;
@@ -170,9 +153,8 @@ return (
           <div className="space-y-2">
             <AnchorHeader id="props-footerProps">footerProps</AnchorHeader>
             <p>
-              Function that returns an object with any and all props a{" "}
-              <Code>{`<li>`}</Code> element accepts. This is the element that
-              wraps the calendar's footer.
+              Function that returns an object with any and all props a <Code>{`<li>`}</Code> element
+              accepts. This is the element that wraps the calendar's footer.
             </p>
             <CodeBlock>{`footerProps?: ({
   date: Temporal.PlainDate;
@@ -180,10 +162,7 @@ return (
           </div>
           <div className="space-y-2">
             <AnchorHeader id="props-renderFooter">renderFooter</AnchorHeader>
-            <p>
-              Function that returns a React element to render inside the
-              calendar's footer.
-            </p>
+            <p>Function that returns a React element to render inside the calendar's footer.</p>
             <CodeBlock>{`renderFooter?: ({
   date: Temporal.PlainDate;
 }) => React.ReactNode`}</CodeBlock>

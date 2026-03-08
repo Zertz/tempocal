@@ -8,7 +8,7 @@ test("clamp (PlainDate, unbounded)", () => {
       year: 2022,
       month: 2,
       day: 2,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDate).toBe(true);
@@ -19,8 +19,8 @@ test("clamp (PlainDate, unbounded)", () => {
         year: 2022,
         month: 2,
         day: 2,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -35,7 +35,7 @@ test("clamp (PlainDate, before min)", () => {
       year: 2022,
       month: 2,
       day: 2,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDate).toBe(true);
@@ -46,8 +46,8 @@ test("clamp (PlainDate, before min)", () => {
         year: 2022,
         month: 2,
         day: 2,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -62,7 +62,7 @@ test("clamp (PlainDate, after min)", () => {
       year: 2022,
       month: 2,
       day: 2,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDate).toBe(true);
@@ -73,8 +73,8 @@ test("clamp (PlainDate, after min)", () => {
         year: 2022,
         month: 2,
         day: 3,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -90,7 +90,7 @@ test("clamp (PlainDate, before max)", () => {
       year: 2022,
       month: 2,
       day: 4,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDate).toBe(true);
@@ -101,8 +101,8 @@ test("clamp (PlainDate, before max)", () => {
         year: 2022,
         month: 2,
         day: 2,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -118,7 +118,7 @@ test("clamp (PlainDate, after max)", () => {
       year: 2022,
       month: 2,
       day: 4,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDate).toBe(true);
@@ -129,8 +129,8 @@ test("clamp (PlainDate, after max)", () => {
         year: 2022,
         month: 2,
         day: 4,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -141,7 +141,7 @@ test("clamp (PlainDateTime, unbounded)", () => {
       month: 2,
       day: 2,
       hour: 2,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDateTime).toBe(true);
@@ -153,8 +153,8 @@ test("clamp (PlainDateTime, unbounded)", () => {
         month: 2,
         day: 2,
         hour: 2,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -171,7 +171,7 @@ test("clamp (PlainDateTime, before min)", () => {
       month: 2,
       day: 2,
       hour: 2,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDateTime).toBe(true);
@@ -183,8 +183,8 @@ test("clamp (PlainDateTime, before min)", () => {
         month: 2,
         day: 2,
         hour: 2,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -201,7 +201,7 @@ test("clamp (PlainDateTime, after min)", () => {
       month: 2,
       day: 2,
       hour: 2,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDateTime).toBe(true);
@@ -213,8 +213,8 @@ test("clamp (PlainDateTime, after min)", () => {
         month: 2,
         day: 2,
         hour: 3,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -232,7 +232,7 @@ test("clamp (PlainDateTime, before max)", () => {
       month: 2,
       day: 2,
       hour: 2,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDateTime).toBe(true);
@@ -244,8 +244,8 @@ test("clamp (PlainDateTime, before max)", () => {
         month: 2,
         day: 2,
         hour: 1,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -263,7 +263,7 @@ test("clamp (PlainDateTime, after max)", () => {
       month: 2,
       day: 2,
       hour: 2,
-    })
+    }),
   );
 
   expect(result instanceof Temporal.PlainDateTime).toBe(true);
@@ -275,7 +275,7 @@ test("clamp (PlainDateTime, after max)", () => {
         month: 2,
         day: 2,
         hour: 2,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });

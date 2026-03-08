@@ -8,7 +8,7 @@ test("getMonthStartDate (PlainDate)", () => {
       year: 2022,
       month: 3,
       day: 7,
-    })
+    }),
   );
 
   expect(
@@ -17,8 +17,8 @@ test("getMonthStartDate (PlainDate)", () => {
         year: 2022,
         month: 3,
         day: 1,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -29,7 +29,7 @@ test("getMonthStartDate (PlainDateTime)", () => {
       month: 3,
       day: 7,
       hour: 2,
-    })
+    }),
   );
 
   expect(
@@ -38,7 +38,7 @@ test("getMonthStartDate (PlainDateTime)", () => {
         year: 2022,
         month: 3,
         day: 1,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });

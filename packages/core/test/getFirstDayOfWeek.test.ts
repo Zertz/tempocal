@@ -9,7 +9,7 @@ test("getFirstDayOfWeek (startOfWeek = 7)", () => {
       month: 4,
       day: 1,
     }),
-    7
+    7,
   );
 
   expect(firstDayOfWeek.dayOfWeek).toEqual(7);
@@ -20,8 +20,8 @@ test("getFirstDayOfWeek (startOfWeek = 7)", () => {
         year: 2022,
         month: 3,
         day: 27,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -32,7 +32,7 @@ test("getFirstDayOfWeek (startOfWeek = 6)", () => {
       month: 4,
       day: 1,
     }),
-    6
+    6,
   );
 
   expect(firstDayOfWeek.dayOfWeek).toEqual(6);
@@ -43,7 +43,7 @@ test("getFirstDayOfWeek (startOfWeek = 6)", () => {
         year: 2022,
         month: 3,
         day: 26,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
