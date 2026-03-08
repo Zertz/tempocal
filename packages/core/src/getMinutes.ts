@@ -3,7 +3,7 @@ import { Temporal } from "@js-temporal/polyfill";
 export function getMinutes(
   value?: Temporal.PlainDateTime,
   minValue?: Temporal.PlainDateTime,
-  maxValue?: Temporal.PlainDateTime
+  maxValue?: Temporal.PlainDateTime,
 ) {
   const minutes: {
     minute: number;
@@ -28,7 +28,7 @@ export function getMinutes(
           microsecond: 0,
           nanosecond: 0,
         }),
-        minValue
+        minValue,
       ) <= 0 &&
       (value.hour < minValue.hour || minute < minValue.minute)
     ) {
@@ -57,7 +57,7 @@ export function getMinutes(
           microsecond: 0,
           nanosecond: 0,
         }),
-        maxValue
+        maxValue,
       ) >= 0 &&
       (value.hour > maxValue.hour || minute > maxValue.minute)
     ) {

@@ -10,8 +10,8 @@ export default function UseTempocalPage() {
       </div>
       <div className="space-y-4">
         <p>
-          This hooks handles the intricacies of managing a calendar's state,
-          accounting for different modes as well as minimum and maximum values.
+          This hooks handles the intricacies of managing a calendar's state, accounting for
+          different modes as well as minimum and maximum values.
         </p>
         <CodeBlock>{`import { useTempocal } from "@tempocal/react";
 
@@ -38,35 +38,27 @@ const {
         </div>
         <div className="space-y-8">
           <div className="space-y-2">
-            <AnchorHeader id="options-clampCalendarValue">
-              clampCalendarValue
-            </AnchorHeader>
+            <AnchorHeader id="options-clampCalendarValue">clampCalendarValue</AnchorHeader>
             <p>
-              When <Code>minValue</Code> and/or <Code>maxValue</Code> are set,
-              automatically keep the calendar value within those values. For
-              example, imagine a date picker with a minimum date in July 2021.
-              If the currently selected date is in March 2022 and you use a year
-              picker to switch to 2021, this should select March 2021. However,
-              since that is earlier than the minimum,{" "}
-              <Code>clampCalendarValue</Code> will automatically select August
-              instead to keep the calendar within the minimum.
+              When <Code>minValue</Code> and/or <Code>maxValue</Code> are set, automatically keep
+              the calendar value within those values. For example, imagine a date picker with a
+              minimum date in July 2021. If the currently selected date is in March 2022 and you use
+              a year picker to switch to 2021, this should select March 2021. However, since that is
+              earlier than the minimum, <Code>clampCalendarValue</Code> will automatically select
+              August instead to keep the calendar within the minimum.
             </p>
             <CodeBlock>{`clampCalendarValue?: boolean`}</CodeBlock>
           </div>
           <div className="space-y-2">
-            <AnchorHeader id="options-clampSelectedValue">
-              clampSelectedValue
-            </AnchorHeader>
+            <AnchorHeader id="options-clampSelectedValue">clampSelectedValue</AnchorHeader>
             <p>
-              When <Code>minValue</Code> and/or <Code>maxValue</Code> are set,
-              automatically keep the selected value within those values. For
-              example, imagine a date and time picker with the minimum set to
-              July 15th at 8 AM. If the currently selected date is sometime in
-              the future at 4 AM and you select July 15th, the selected date
-              should become July 15th at 4 AM. However, since that is earlier
-              than the minimum, <Code>clampSelectedValue</Code> will
-              automatically select 8 AM instead to keep the time within the
-              minimum.
+              When <Code>minValue</Code> and/or <Code>maxValue</Code> are set, automatically keep
+              the selected value within those values. For example, imagine a date and time picker
+              with the minimum set to July 15th at 8 AM. If the currently selected date is sometime
+              in the future at 4 AM and you select July 15th, the selected date should become July
+              15th at 4 AM. However, since that is earlier than the minimum,{" "}
+              <Code>clampSelectedValue</Code> will automatically select 8 AM instead to keep the
+              time within the minimum.
             </p>
             <CodeBlock>{`clampSelectedValue?: "always" | "value-change" | "never"`}</CodeBlock>
           </div>
@@ -77,9 +69,8 @@ const {
               <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locale_identification_and_negotiation">
                 Intl API
               </ExternalLink>
-              . Typically a two-letter language code followed by a two-letter
-              country code, separated by a dash. For example,{" "}
-              <Code>"en-US"</Code>, or <Code>"fr-CA"</Code>.
+              . Typically a two-letter language code followed by a two-letter country code,
+              separated by a dash. For example, <Code>"en-US"</Code>, or <Code>"fr-CA"</Code>.
             </p>
             <CodeBlock>{`locale: Locale`}</CodeBlock>
           </div>
@@ -106,8 +97,8 @@ minValue?: Temporal.PlainDateTime`}</CodeBlock>
           <div className="space-y-2">
             <AnchorHeader id="options-setValue">setValue</AnchorHeader>
             <p>
-              Function to update the selected value, typically the setter
-              returned by <Code>React.useState</Code>.
+              Function to update the selected value, typically the setter returned by{" "}
+              <Code>React.useState</Code>.
             </p>
             <CodeBlock>{`// mode: "date"
 setValue: (value: Temporal.PlainDate) => void
@@ -124,8 +115,7 @@ setValue: (value: DateTimeRange) => void`}</CodeBlock>
           <div className="space-y-2">
             <AnchorHeader id="options-value">value</AnchorHeader>
             <p>
-              The currently selected value, typically coming from{" "}
-              <Code>React.useState</Code>.
+              The currently selected value, typically coming from <Code>React.useState</Code>.
             </p>
             <CodeBlock>{`// mode: "date"
 value: Temporal.PlainDate
@@ -145,13 +135,10 @@ value: DateTimeRange`}</CodeBlock>
         </div>
         <div className="space-y-8">
           <div className="space-y-2">
-            <AnchorHeader id="returns-calendarProps">
-              calendarProps
-            </AnchorHeader>
+            <AnchorHeader id="returns-calendarProps">calendarProps</AnchorHeader>
             <p>
-              Provided for convenience, to be spread into the{" "}
-              <Code>Calendar</Code> component's props. <Code>value</Code>{" "}
-              represents the year and month that should be shown by the
+              Provided for convenience, to be spread into the <Code>Calendar</Code> component's
+              props. <Code>value</Code> represents the year and month that should be shown by the
               calendar.
             </p>
             <CodeBlock>{`calendarProps: {
@@ -162,13 +149,10 @@ value: DateTimeRange`}</CodeBlock>
 }`}</CodeBlock>
           </div>
           <div className="space-y-2">
-            <AnchorHeader id="returns-onChangeCalendarValue">
-              onChangeCalendarValue
-            </AnchorHeader>
+            <AnchorHeader id="returns-onChangeCalendarValue">onChangeCalendarValue</AnchorHeader>
             <p>
-              Fully or partially updates the visible date. Typically used to
-              navigate the calendar using, for example, month and year
-              selectors. If <Code>params</Code> is falsy,{" "}
+              Fully or partially updates the visible date. Typically used to navigate the calendar
+              using, for example, month and year selectors. If <Code>params</Code> is falsy,{" "}
               <Code>calendarProps.value</Code> will be set to now.
             </p>
             <CodeBlock>
@@ -176,9 +160,7 @@ value: DateTimeRange`}</CodeBlock>
             </CodeBlock>
           </div>
           <div className="space-y-2">
-            <AnchorHeader id="returns-onChangeSelectedValue">
-              onChangeSelectedValue
-            </AnchorHeader>
+            <AnchorHeader id="returns-onChangeSelectedValue">onChangeSelectedValue</AnchorHeader>
             <p>Fully or partially updates the selected date or date range.</p>
             <CodeBlock>
               {`// mode: "date"
@@ -197,23 +179,22 @@ onChangeSelectedValue: (params: Temporal.PlainDateTime | Temporal.PlainDateTimeL
           <div className="space-y-2">
             <AnchorHeader id="returns-years">years</AnchorHeader>
             <p>
-              Years between <Code>minValue</Code> and <Code>maxValue</Code>,
-              inclusively, when both are specified. Returns an empty array
-              otherwise.
+              Years between <Code>minValue</Code> and <Code>maxValue</Code>, inclusively, when both
+              are specified. Returns an empty array otherwise.
             </p>
             <CodeBlock>{`years: number[]`}</CodeBlock>
           </div>
           <div className="space-y-2">
             <AnchorHeader id="returns-months">months</AnchorHeader>
             <p>
-              Months of the year, with <Code>month</Code> being 1-indexed to
-              align with Temporal API. Their names are supplied in the specified
-              locale, in the three different forms supported by{" "}
+              Months of the year, with <Code>month</Code> being 1-indexed to align with Temporal
+              API. Their names are supplied in the specified locale, in the three different forms
+              supported by{" "}
               <ExternalLink href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/format">
                 Intl.DateTimeFormat.format
               </ExternalLink>
-              . If <Code>minValue</Code> and/or <Code>maxValue</Code> are set,
-              disabled will be set accordingly.
+              . If <Code>minValue</Code> and/or <Code>maxValue</Code> are set, disabled will be set
+              accordingly.
             </p>
             <CodeBlock>{`months: {
   month: number;
@@ -226,9 +207,9 @@ onChangeSelectedValue: (params: Temporal.PlainDateTime | Temporal.PlainDateTimeL
           <div className="space-y-2">
             <AnchorHeader id="returns-hours">hours</AnchorHeader>
             <p>
-              Hours of the selected day, with <Code>hour</Code> starting at 0
-              and ending at 23. If <Code>minValue</Code> and/or{" "}
-              <Code>maxValue</Code> are set, disabled will be set accordingly.
+              Hours of the selected day, with <Code>hour</Code> starting at 0 and ending at 23. If{" "}
+              <Code>minValue</Code> and/or <Code>maxValue</Code> are set, disabled will be set
+              accordingly.
             </p>
             <CodeBlock>{`hours: {
   hour: number;
@@ -238,9 +219,9 @@ onChangeSelectedValue: (params: Temporal.PlainDateTime | Temporal.PlainDateTimeL
           <div className="space-y-2">
             <AnchorHeader id="returns-minutes">minutes</AnchorHeader>
             <p>
-              Minutes of the selected hour, with <Code>minutes</Code> starting
-              at 0 and ending at 59. If <Code>minValue</Code> and/or{" "}
-              <Code>maxValue</Code> are set, disabled will be set accordingly.
+              Minutes of the selected hour, with <Code>minutes</Code> starting at 0 and ending at
+              59. If <Code>minValue</Code> and/or <Code>maxValue</Code> are set, disabled will be
+              set accordingly.
             </p>
             <CodeBlock>{`minutes: {
   minute: number;

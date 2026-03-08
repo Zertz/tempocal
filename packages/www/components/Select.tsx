@@ -4,10 +4,10 @@ export function Select({
   className,
   label,
   ...props
-}: React.DetailedHTMLProps<
-  React.SelectHTMLAttributes<HTMLSelectElement>,
-  HTMLSelectElement
-> & { id: string; label: string }) {
+}: React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> & {
+  id: string;
+  label: string;
+}) {
   return (
     <div className={className}>
       <label className="block text-sm font-medium" htmlFor={props.id}>

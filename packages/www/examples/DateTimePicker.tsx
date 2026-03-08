@@ -12,11 +12,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat(locale, {
   timeStyle: "short",
 });
 
-export function DateTimePicker({
-  clampSelectedValue,
-}: {
-  clampSelectedValue: ClampMode;
-}) {
+export function DateTimePicker({ clampSelectedValue }: { clampSelectedValue: ClampMode }) {
   const [value, setValue] = React.useState(
     Temporal.PlainDateTime.from({
       year: 2021,
@@ -25,7 +21,7 @@ export function DateTimePicker({
       hour: 8,
       minute: 30,
       second: 0,
-    })
+    }),
   );
 
   const [minValue] = React.useState(value.subtract({ years: 2 }));
@@ -72,7 +68,7 @@ export function DateTimePicker({
             "w-full overflow-hidden rounded border transition-colors",
             value.toPlainDate().equals(date)
               ? "border-blue-600 bg-blue-100"
-              : "border-gray-300 hover:bg-gray-100"
+              : "border-gray-300 hover:bg-gray-100",
           )}
           disabled={disabled}
           onClick={() => onChangeSelectedValue(plainDateLike)}
@@ -116,9 +112,7 @@ export function DateTimePicker({
               ))}
           </select>
           <span className="row-start-2 col-span-2 text-sm">
-            {`Selected date and time: ${dateTimeFormatter.format(
-              temporalToDate(value)
-            )}`}
+            {`Selected date and time: ${dateTimeFormatter.format(temporalToDate(value))}`}
           </span>
         </>
       )}

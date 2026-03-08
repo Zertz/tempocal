@@ -9,7 +9,7 @@ test("getMonths (unbounded)", () => {
       year: 2022,
       month: 4,
       day: 1,
-    })
+    }),
   );
 
   expect(months[2].month).equal(3);
@@ -49,7 +49,7 @@ test("getMonths (with min)", () => {
       year: 2022,
       month: 4,
       day: 1,
-    })
+    }),
   );
 
   expect(months[2].month).equal(3);
@@ -90,7 +90,7 @@ test("getMonths (with max)", () => {
       year: 2022,
       month: 4,
       day: 1,
-    })
+    }),
   );
 
   expect(months[2].month).equal(3);
@@ -135,7 +135,7 @@ test("getMonths (with min and max)", () => {
       year: 2022,
       month: 4,
       day: 1,
-    })
+    }),
   );
 
   expect(months[2].month).equal(3);

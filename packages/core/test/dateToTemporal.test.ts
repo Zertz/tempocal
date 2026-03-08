@@ -15,7 +15,7 @@ test("dateToTemporal", () => {
         minute: 30,
         second: 45,
         millisecond: 600,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });

@@ -8,7 +8,7 @@ export function Basic() {
       year: 2021,
       month: 11,
       day: 25,
-    })
+    }),
   );
 
   const { calendarProps } = useTempocal({

@@ -1,9 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import {
-  getCalendarMonthDateRange,
-  getMonthStartDate,
-  getWeekdays,
-} from "@tempocal/core";
+import { getCalendarMonthDateRange, getMonthStartDate, getWeekdays } from "@tempocal/core";
 import * as React from "react";
 import { CSSProperties } from "react";
 import { Locale } from "./useTempocal";
@@ -19,28 +15,19 @@ type MonthProps = {
   startOfWeek?: number;
   value: Value;
   calendarProps?: () => Omit<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLUListElement>,
-      HTMLUListElement
-    >,
+    React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>,
     "style"
   >;
   headerProps?: (props: {
     date: Temporal.PlainDate;
-  }) => Omit<
-    React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>,
-    "style"
-  >;
+  }) => Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>, "style">;
   renderHeader?: (props: { date: Temporal.PlainDate }) => React.ReactNode;
   weekdayProps?: (props: {
     dayOfWeek: number;
     longName: string;
     shortName: string;
     narrowName: string;
-  }) => React.DetailedHTMLProps<
-    React.LiHTMLAttributes<HTMLLIElement>,
-    HTMLLIElement
-  >;
+  }) => React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>;
   renderWeekday?: (props: {
     dayOfWeek: number;
     longName: string;
@@ -52,10 +39,7 @@ type MonthProps = {
     disabled: boolean;
     plainDateLike: Temporal.PlainDateLike;
   }) => Omit<
-    React.DetailedHTMLProps<
-      React.ButtonHTMLAttributes<HTMLLIElement>,
-      HTMLLIElement
-    >,
+    React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLLIElement>, HTMLLIElement>,
     "style"
   >;
   renderDay?: (props: {
@@ -65,10 +49,7 @@ type MonthProps = {
   }) => React.ReactNode;
   footerProps?: (props: {
     date: Temporal.PlainDate;
-  }) => Omit<
-    React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>,
-    "style"
-  >;
+  }) => Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>, "style">;
   renderFooter?: (props: { date: Temporal.PlainDate }) => React.ReactNode;
 };
 
@@ -97,7 +78,7 @@ export function Calendar({
 }) {
   const months = React.useMemo(
     () => [...Array(Math.max(0, monthsBefore) + 1 + Math.max(0, monthsAfter))],
-    [monthsAfter, monthsBefore]
+    [monthsAfter, monthsBefore],
   );
 
   return (
@@ -147,22 +128,16 @@ function Month({
 }: MonthProps) {
   const { start, end } = React.useMemo(
     () => getCalendarMonthDateRange(value, rollover, startOfWeek),
-    [rollover, startOfWeek, value]
+    [rollover, startOfWeek, value],
   );
 
   const monthStartDate = React.useMemo(() => getMonthStartDate(value), [value]);
 
-  const weekdays = React.useMemo(
-    () => getWeekdays(locale, startOfWeek),
-    [locale, startOfWeek]
-  );
+  const weekdays = React.useMemo(() => getWeekdays(locale, startOfWeek), [locale, startOfWeek]);
 
   const days = React.useMemo(
-    () =>
-      [...Array(start.until(end).days + 1)].map((_, day) =>
-        start.add({ days: day })
-      ),
-    [end, start]
+    () => [...Array(start.until(end).days + 1)].map((_, day) => start.add({ days: day })),
+    [end, start],
   );
 
   const firstDay = days.at(0);
@@ -216,25 +191,20 @@ function Month({
       ))}
       {daysToPadAfter > 0 && firstDay && (
         <>
-          {[...Array(Math.floor(daysToPadAfter / firstDay.daysInWeek))].map(
-            (_, index) => (
-              <Day
-                key={index}
-                date={firstDay}
-                disabled
-                dayProps={dayProps}
-                style={{
-                  gridColumn: `span ${Math.min(
-                    daysToPadAfter,
-                    firstDay.daysInWeek
-                  )}`,
-                  opacity: daysToPadAfter,
-                  visibility: "hidden",
-                }}
-                renderDay={renderDay}
-              />
-            )
-          )}
+          {[...Array(Math.floor(daysToPadAfter / firstDay.daysInWeek))].map((_, index) => (
+            <Day
+              key={index}
+              date={firstDay}
+              disabled
+              dayProps={dayProps}
+              style={{
+                gridColumn: `span ${Math.min(daysToPadAfter, firstDay.daysInWeek)}`,
+                opacity: daysToPadAfter,
+                visibility: "hidden",
+              }}
+              renderDay={renderDay}
+            />
+          ))}
         </>
       )}
       {renderFooter && (

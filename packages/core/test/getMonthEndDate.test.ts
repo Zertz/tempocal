@@ -8,7 +8,7 @@ test("getMonthEndDate", () => {
       year: 2022,
       month: 3,
       day: 7,
-    })
+    }),
   );
 
   expect(
@@ -17,7 +17,7 @@ test("getMonthEndDate", () => {
         year: 2022,
         month: 3,
         day: 31,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });

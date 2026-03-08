@@ -4,12 +4,9 @@ import { temporalToDate } from "./temporalToDate";
 
 export function getWeekdays(
   locale: Parameters<typeof Intl.DateTimeFormat>[0],
-  startOfWeek: number
+  startOfWeek: number,
 ) {
-  const firstDayOfWeek = getFirstDayOfWeek(
-    Temporal.Now.plainDateISO(),
-    startOfWeek
-  );
+  const firstDayOfWeek = getFirstDayOfWeek(Temporal.Now.plainDateISO(), startOfWeek);
 
   const longWeekdayFormatter = new Intl.DateTimeFormat(locale, {
     weekday: "long",

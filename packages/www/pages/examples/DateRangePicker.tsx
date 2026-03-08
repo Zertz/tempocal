@@ -6,9 +6,7 @@ import { Input } from "../../components/Input";
 import { DateRangePicker } from "../../examples/DateRangePicker";
 import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function DateRangePickerPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) {
+export default function DateRangePickerPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   const [monthsBefore, setMonthsBefore] = React.useState(0);
   const [monthsAfter, setMonthsAfter] = React.useState(0);
 

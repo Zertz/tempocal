@@ -24,7 +24,7 @@ test("getHours (year before, with min)", () => {
       month: 4,
       day: 2,
       hour: 6,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -46,7 +46,7 @@ test("getHours (month before, with min)", () => {
       month: 4,
       day: 2,
       hour: 6,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -68,7 +68,7 @@ test("getHours (day before, with min)", () => {
       month: 4,
       day: 2,
       hour: 6,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -90,7 +90,7 @@ test("getHours (same day, with min)", () => {
       month: 4,
       day: 2,
       hour: 6,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -117,7 +117,7 @@ test("getHours (day after, with min)", () => {
       month: 4,
       day: 2,
       hour: 6,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -139,7 +139,7 @@ test("getHours (month after, with min)", () => {
       month: 4,
       day: 2,
       hour: 6,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -161,7 +161,7 @@ test("getHours (year after, with min)", () => {
       month: 4,
       day: 2,
       hour: 6,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -184,7 +184,7 @@ test("getHours (year before, with max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -207,7 +207,7 @@ test("getHours (month before, with max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -230,7 +230,7 @@ test("getHours (day before, with max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -253,7 +253,7 @@ test("getHours (same day, with max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -281,7 +281,7 @@ test("getHours (day after, with max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -304,7 +304,7 @@ test("getHours (month after, with max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -327,7 +327,7 @@ test("getHours (year after, with max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -355,7 +355,7 @@ test("getHours (year before, with min and max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -383,7 +383,7 @@ test("getHours (month before, with min and max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -411,7 +411,7 @@ test("getHours (day before, with min and max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -439,7 +439,7 @@ test("getHours (same day, with min and max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -472,7 +472,7 @@ test("getHours (day after, with min and max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -500,7 +500,7 @@ test("getHours (month after, with min and max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {
@@ -528,7 +528,7 @@ test("getHours (year after, with min and max)", () => {
       month: 4,
       day: 2,
       hour: 18,
-    })
+    }),
   );
 
   for (let i = 0; i < 24; i += 1) {

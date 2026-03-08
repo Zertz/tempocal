@@ -4,7 +4,7 @@ import { DatePicker } from "../examples/DatePicker";
 
 test("DatePicker renders without crashing", () => {
   const { getByText, getByTitle } = render(
-    <DatePicker clampCalendarValue locale="en-US" rollover startOfWeek={7} />
+    <DatePicker clampCalendarValue locale="en-US" rollover startOfWeek={7} />,
   );
 
   expect(getByText("Selected date: November 25, 2021")).toBeTruthy();

@@ -1,12 +1,6 @@
 import { LinkIcon } from "@heroicons/react/24/outline";
 
-export function AnchorHeader({
-  children,
-  id,
-}: {
-  children: string;
-  id: string;
-}) {
+export function AnchorHeader({ children, id }: { children: string; id: string }) {
   return (
     <div className="mb-4 flex items-end justify-between border-b border-solid border-gray-400 pb-2">
       <h4 id={id} className="text-xl font-bold">

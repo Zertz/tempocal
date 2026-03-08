@@ -10,7 +10,7 @@ test("getCalendarMonthDateRange (without rollover)", () => {
       day: 7,
     }),
     false,
-    7
+    7,
   );
 
   expect(
@@ -19,8 +19,8 @@ test("getCalendarMonthDateRange (without rollover)", () => {
         year: 2022,
         month: 3,
         day: 1,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 
   expect(
@@ -29,8 +29,8 @@ test("getCalendarMonthDateRange (without rollover)", () => {
         year: 2022,
         month: 3,
         day: 31,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });
 
@@ -42,7 +42,7 @@ test("getCalendarMonthDateRange (with rollover)", () => {
       day: 7,
     }),
     true,
-    7
+    7,
   );
 
   expect(
@@ -51,8 +51,8 @@ test("getCalendarMonthDateRange (with rollover)", () => {
         year: 2022,
         month: 6,
         day: 26,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 
   expect(
@@ -61,7 +61,7 @@ test("getCalendarMonthDateRange (with rollover)", () => {
         year: 2022,
         month: 8,
         day: 6,
-      })
-    )
+      }),
+    ),
   ).toBe(true);
 });

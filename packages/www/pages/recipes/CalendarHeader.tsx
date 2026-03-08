@@ -6,9 +6,7 @@ import { Example } from "../../components/Example";
 import { CalendarHeader } from "../../recipes/CalendarHeader";
 import { fetchFromGitHub } from "../../utils/fetchFromGitHub";
 
-export default function CalendarHeaderPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) {
+export default function CalendarHeaderPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Example demo={<Recipe />} title="CalendarHeader" {...props}>
       👀

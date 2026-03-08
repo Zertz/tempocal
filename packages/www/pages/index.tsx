@@ -34,10 +34,7 @@ export default function OverviewPage() {
             </a>
           </li>
           <li>🚛 Bring your own DOM!</li>
-          <li>
-            ✨ Calendars, date pickers (with or without time), date range,
-            anything goes!
-          </li>
+          <li>✨ Calendars, date pickers (with or without time), date range, anything goes!</li>
           <li>🤹‍♂️ Well suited for complex use cases!</li>
           <li>🤓 Available as ESM and CJS!</li>
         </ul>
@@ -48,8 +45,8 @@ export default function OverviewPage() {
         </div>
         <ul className="list-inside list-disc space-y-2">
           <li>
-            <Code>useTempocal</Code> hook handles the intricacies of managing
-            Temporal values for controlling a calendar. It can pick a:
+            <Code>useTempocal</Code> hook handles the intricacies of managing Temporal values for
+            controlling a calendar. It can pick a:
             <ul className="list-inside list-disc mt-2 pl-6 space-y-2">
               <li>Date</li>
               <li>Date range</li>
@@ -58,8 +55,8 @@ export default function OverviewPage() {
             </ul>
           </li>
           <li>
-            <Code>Calendar</Code> component covers the basics and render props
-            open up near infinite customizability. It can optionally:
+            <Code>Calendar</Code> component covers the basics and render props open up near infinite
+            customizability. It can optionally:
             <ul className="list-inside list-disc mt-2 pl-6 space-y-2">
               <li>Fill calendar with days from surrounding months</li>
               <li>Display multiple months</li>
