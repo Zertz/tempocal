@@ -47,7 +47,7 @@ type MonthProps = {
     shortName: string;
     narrowName: string;
   }) => React.ReactNode;
-  hoverValue?: Temporal.PlainDate | Temporal.PlainDateTime;
+  hoverValue?: Temporal.PlainDate;
   rangeValue?: DateRange | DateTimeRange;
   dayProps?: (props: {
     date: Temporal.PlainDate;
@@ -296,10 +296,7 @@ function Day({
         ? rangeValue[1].toPlainDate()
         : rangeValue?.[1];
 
-    const hoverDate =
-      hoverValue instanceof Temporal.PlainDateTime
-        ? hoverValue.toPlainDate()
-        : hoverValue;
+    const hoverDate = hoverValue;
 
     const isRangeSelected =
       !!rangeStart &&

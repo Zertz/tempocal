@@ -37,12 +37,11 @@ export function DateRangePicker({
     Temporal.Now.plainDateISO().add({ years: 2 })
   );
 
-  const [hoverValue, setHoveredValue] = React.useState<Temporal.PlainDate>();
-
   const {
     calendarProps,
     months,
     onChangeCalendarValue,
+    onChangeHoverValue,
     onChangeSelectedValue,
     years,
   } = useTempocal({
@@ -62,8 +61,6 @@ export function DateRangePicker({
         monthsBefore={monthsBefore}
         monthsAfter={monthsAfter}
         monthsFixedGrid={monthsFixedGrid}
-        hoverValue={hoverValue}
-        rangeValue={values}
         calendarProps={() => ({
           className: "gap-1 text-center w-72",
         })}
@@ -108,7 +105,7 @@ export function DateRangePicker({
               )}
               disabled={disabled}
               onClick={() => onChangeSelectedValue(plainDateLike)}
-              onMouseOver={() => setHoveredValue(date)}
+              onMouseOver={() => onChangeHoverValue(date)}
               type="button"
             >
               {date.day}
