@@ -2,6 +2,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import {
   getMonthEndDate,
   getMonthStartDate,
+  isDateWithinRange,
   temporalToDate,
 } from "@tempocal/core";
 import { Calendar, DateRange, useTempocal } from "@tempocal/react";
@@ -53,6 +54,14 @@ export function DateRangePicker({
     setValue: setValues,
     value: values,
   });
+
+  const [start, end] = values;
+  const { hoverValue } = calendarProps;
+  const previewEnd = end ?? hoverValue;
+  const isForward =
+    !start || !previewEnd || isDateWithinRange(start, [start, previewEnd]);
+  const displayStart = isForward ? start : previewEnd;
+  const displayEnd = isForward ? previewEnd : start;
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -152,9 +161,13 @@ export function DateRangePicker({
             </button>
             <span className="row-start-2 col-span-3 text-sm">
               {`Selected date range: ${
-                values[0] ? dateFormatter.format(temporalToDate(values[0])) : ""
+                displayStart
+                  ? dateFormatter.format(temporalToDate(displayStart))
+                  : ""
               } - ${
-                values[1] ? dateFormatter.format(temporalToDate(values[1])) : ""
+                displayEnd
+                  ? dateFormatter.format(temporalToDate(displayEnd))
+                  : ""
               }`}
             </span>
           </>
