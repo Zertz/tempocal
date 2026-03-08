@@ -32,8 +32,8 @@ return (
     renderHeader={({ date: Temporal.PlainDate }) => React.ReactNode}
     weekdayProps={({ dayOfWeek: number; longName: string; shortName: string; narrowName: string }) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>}
     renderWeekday={({ dayOfWeek: number; longName: string; shortName: string; narrowName: string }) => React.ReactNode}
-    dayProps={({ date: Temporal.PlainDate; disabled: boolean; plainDateLike: Temporal.PlainDateLike }) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>}
-    renderDay={({ date: Temporal.PlainDate; disabled: boolean; plainDateLike: Temporal.PlainDateLike }) => React.ReactNode}
+    dayProps={({ date: Temporal.PlainDate; disabled: boolean; isRangeHovered: boolean; isRangeSelected: boolean; plainDateLike: Temporal.PlainDateLike }) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>}
+    renderDay={({ date: Temporal.PlainDate; disabled: boolean; isRangeHovered: boolean; isRangeSelected: boolean; plainDateLike: Temporal.PlainDateLike }) => React.ReactNode}
     footerProps={({ date: Temporal.PlainDate }) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>}
     renderFooter={({ date: Temporal.PlainDate }) => React.ReactNode}
   />
@@ -149,6 +149,8 @@ return (
             <CodeBlock>{`dayProps?: ({
   date: Temporal.PlainDate;
   disabled: boolean;
+  isRangeHovered: boolean;
+  isRangeSelected: boolean;
   plainDateLike: Temporal.PlainDateLike;
 }) => React.DetailedHTMLProps<React.HTMLAttributes<HTMLLIElement>, HTMLLIElement>`}</CodeBlock>
           </div>
@@ -161,6 +163,8 @@ return (
             <CodeBlock>{`renderDay?: ({
   date: Temporal.PlainDate;
   disabled: boolean;
+  isRangeHovered: boolean;
+  isRangeSelected: boolean;
   plainDateLike: Temporal.PlainDateLike;
 }) => React.ReactNode`}</CodeBlock>
             <em className="block">

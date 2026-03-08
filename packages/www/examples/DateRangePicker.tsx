@@ -2,6 +2,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import {
   getMonthEndDate,
   getMonthStartDate,
+  isDateWithinRange,
   temporalToDate,
 } from "@tempocal/core";
 import { Calendar, DateRange, useTempocal } from "@tempocal/react";
@@ -37,12 +38,11 @@ export function DateRangePicker({
     Temporal.Now.plainDateISO().add({ years: 2 })
   );
 
-  const [hoverValue, setHoveredValue] = React.useState<Temporal.PlainDate>();
-
   const {
     calendarProps,
     months,
     onChangeCalendarValue,
+    onChangeHoverValue,
     onChangeSelectedValue,
     years,
   } = useTempocal({
@@ -54,6 +54,14 @@ export function DateRangePicker({
     setValue: setValues,
     value: values,
   });
+
+  const [start, end] = values;
+  const { hoverValue } = calendarProps;
+  const previewEnd = end ?? hoverValue;
+  const isForward =
+    !start || !previewEnd || isDateWithinRange(start, [start, previewEnd]);
+  const displayStart = isForward ? start : previewEnd;
+  const displayEnd = isForward ? previewEnd : start;
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -90,23 +98,8 @@ export function DateRangePicker({
           );
         }}
         weekdayProps={() => ({ className: "font-medium" })}
-        renderDay={({ date, disabled, plainDateLike }) => {
-          const isRangeSelected =
-            values[0] &&
-            values[1] &&
-            Temporal.PlainDate.compare(values[0], date) <= 0 &&
-            Temporal.PlainDate.compare(values[1], date) >= 0;
-
+        renderDay={({ date, disabled, isRangeHovered, isRangeSelected, plainDateLike }) => {
           const isSelected = values[0] && !values[1] && values[0].equals(date);
-
-          const isRangeHovered =
-            values[0] &&
-            !values[1] &&
-            hoverValue &&
-            ((Temporal.PlainDate.compare(values[0], date) <= 0 &&
-              Temporal.PlainDate.compare(hoverValue, date) >= 0) ||
-              (Temporal.PlainDate.compare(hoverValue, date) <= 0 &&
-                Temporal.PlainDate.compare(values[0], date) >= 0));
 
           return (
             <button
@@ -121,7 +114,7 @@ export function DateRangePicker({
               )}
               disabled={disabled}
               onClick={() => onChangeSelectedValue(plainDateLike)}
-              onMouseOver={() => setHoveredValue(date)}
+              onMouseOver={() => onChangeHoverValue(date)}
               type="button"
             >
               {date.day}
@@ -168,9 +161,13 @@ export function DateRangePicker({
             </button>
             <span className="row-start-2 col-span-3 text-sm">
               {`Selected date range: ${
-                values[0] ? dateFormatter.format(temporalToDate(values[0])) : ""
+                displayStart
+                  ? dateFormatter.format(temporalToDate(displayStart))
+                  : ""
               } - ${
-                values[1] ? dateFormatter.format(temporalToDate(values[1])) : ""
+                displayEnd
+                  ? dateFormatter.format(temporalToDate(displayEnd))
+                  : ""
               }`}
             </span>
           </>

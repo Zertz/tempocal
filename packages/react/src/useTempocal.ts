@@ -75,6 +75,8 @@ export function useTempocal<
   setValue: (value: RequiredValue<Mode>) => void;
   value: RequiredValue<Mode> | undefined;
 }) {
+  const [hoverValue, setHoverValue] = React.useState<Temporal.PlainDate>();
+
   const [calendarValue, setCalendarValue] = React.useState(() => {
     if (!value || (Array.isArray(value) && !value[0])) {
       return Temporal.Now.plainDateISO();
@@ -327,12 +329,17 @@ export function useTempocal<
           ? minValue.toPlainDate()
           : minValue,
       value: calendarValue,
+      hoverValue,
+      rangeValue: Array.isArray(value)
+        ? (value as DateRange | DateTimeRange)
+        : undefined,
     },
     years,
     months,
     hours,
     minutes,
     onChangeCalendarValue,
+    onChangeHoverValue: setHoverValue,
     onChangeSelectedValue,
   };
 }

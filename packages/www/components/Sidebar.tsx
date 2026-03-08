@@ -42,6 +42,7 @@ const documentation = [
       "getMonthStartDate",
       "getWeekdays",
       "getYears",
+      "isDateWithinRange",
       "temporalToDate",
     ],
   },
