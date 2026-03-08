@@ -22,6 +22,7 @@ const {
   hours,
   minutes,
   onChangeCalendarValue,
+  onChangeHoverValue,
   onChangeSelectedValue,
 } = useTempocal({
   clampCalendarValue?: boolean;
@@ -159,6 +160,8 @@ value: DateTimeRange`}</CodeBlock>
   maxValue: Temporal.PlainDate;
   minValue: Temporal.PlainDate;
   value: Temporal.PlainDate;
+  hoverValue: Temporal.PlainDate | undefined;
+  rangeValue: DateRange | DateTimeRange | undefined;
 }`}</CodeBlock>
           </div>
           <div className="space-y-2">
@@ -173,6 +176,19 @@ value: DateTimeRange`}</CodeBlock>
             </p>
             <CodeBlock>
               {`onChangeCalendarValue: (params?: Temporal.PlainDate | Temporal.PlainDateLike) => Temporal.PlainDate`}
+            </CodeBlock>
+          </div>
+          <div className="space-y-2">
+            <AnchorHeader id="returns-onChangeHoverValue">
+              onChangeHoverValue
+            </AnchorHeader>
+            <p>
+              Updates the hovered date, typically attached to{" "}
+              <Code>onMouseOver</Code> on each day button. Only relevant in{" "}
+              <Code>daterange</Code> and <Code>datetimerange</Code> modes.
+            </p>
+            <CodeBlock>
+              {`onChangeHoverValue: (value?: Temporal.PlainDate) => void`}
             </CodeBlock>
           </div>
           <div className="space-y-2">

@@ -77,10 +77,6 @@ export function useTempocal<
 }) {
   const [hoverValue, setHoverValue] = React.useState<Temporal.PlainDate>();
 
-  const onChangeHoverValue = React.useCallback((value?: Temporal.PlainDate) => {
-    setHoverValue(value);
-  }, []);
-
   const [calendarValue, setCalendarValue] = React.useState(() => {
     if (!value || (Array.isArray(value) && !value[0])) {
       return Temporal.Now.plainDateISO();
@@ -343,7 +339,7 @@ export function useTempocal<
     hours,
     minutes,
     onChangeCalendarValue,
-    onChangeHoverValue,
+    onChangeHoverValue: setHoverValue,
     onChangeSelectedValue,
   };
 }
