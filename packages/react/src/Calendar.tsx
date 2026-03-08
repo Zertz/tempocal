@@ -2,7 +2,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import {
   getCalendarMonthDateRange,
   getMonthStartDate,
-  getRangeDayState,
+  isDateWithinRange,
   getWeekdays,
 } from "@tempocal/core";
 import * as React from "react";
@@ -287,11 +287,24 @@ function Day({
       day: date.day,
     };
 
-    const { isRangeSelected, isRangeHovered } = getRangeDayState(
-      date,
-      rangeValue,
-      hoverValue
-    );
+    const rangeStart =
+      rangeValue?.[0] instanceof Temporal.PlainDateTime
+        ? rangeValue[0].toPlainDate()
+        : rangeValue?.[0];
+
+    const rangeEnd =
+      rangeValue?.[1] instanceof Temporal.PlainDateTime
+        ? rangeValue[1].toPlainDate()
+        : rangeValue?.[1];
+
+    const isRangeSelected = isDateWithinRange(date, rangeValue);
+
+    const isRangeHovered =
+      !!rangeStart &&
+      !rangeEnd &&
+      !!hoverValue &&
+      (isDateWithinRange(date, [rangeStart, hoverValue]) ||
+        isDateWithinRange(date, [hoverValue, rangeStart]));
 
     return {
       date,
