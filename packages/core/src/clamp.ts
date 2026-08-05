@@ -1,4 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
+import { Temporal } from "./temporal.js";
 
 export function clamp<Value extends Temporal.PlainDate | Temporal.PlainDateTime>(
   value: Value,

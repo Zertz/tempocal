@@ -1,5 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
-import { clamp, getHours, getMinutes, getMonths, getYears } from "@tempocal/core";
+import { Temporal, clamp, getHours, getMinutes, getMonths, getYears } from "@tempocal/core";
 import * as React from "react";
 
 export type ClampMode = "always" | "value-change" | "never";

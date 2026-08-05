@@ -1,6 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 import { getCalendarMonthDateRange } from "../src/getCalendarMonthDateRange";
+import { Temporal } from "../src/temporal.js";
 
 test("getCalendarMonthDateRange (without rollover)", () => {
   const { start, end } = getCalendarMonthDateRange(

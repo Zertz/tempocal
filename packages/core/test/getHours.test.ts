@@ -1,6 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 import { getHours } from "../src/getHours";
+import { Temporal } from "../src/temporal.js";
 
 test("getHours (unbounded)", () => {
   const hours = getHours();

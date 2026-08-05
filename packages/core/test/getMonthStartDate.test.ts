@@ -1,6 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 import { getMonthStartDate } from "../src/getMonthStartDate";
+import { Temporal } from "../src/temporal.js";
 
 test("getMonthStartDate (PlainDate)", () => {
   const date = getMonthStartDate(

@@ -1,4 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
+import { Temporal } from "./temporal.js";
 import { temporalToDate } from "./temporalToDate";
 
 export function getMonths(

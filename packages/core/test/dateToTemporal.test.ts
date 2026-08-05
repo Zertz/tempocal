@@ -1,6 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 import { dateToTemporal } from "../src/dateToTemporal";
+import { Temporal } from "../src/temporal.js";
 
 test("dateToTemporal", () => {
   const plainDateTime = dateToTemporal(new Date(2022, 2, 31, 15, 30, 45, 600));

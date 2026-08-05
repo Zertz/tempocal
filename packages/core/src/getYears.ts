@@ -1,4 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
+import { Temporal } from "./temporal.js";
 
 export function getYears(minValue: Temporal.PlainDate, maxValue: Temporal.PlainDate) {
   const years: number[] = [];
