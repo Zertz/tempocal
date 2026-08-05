@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: "20"
           cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
       - uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/.next/cache
