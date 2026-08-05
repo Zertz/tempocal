@@ -1,5 +1,13 @@
 # @tempocal/react
 
+## 0.18.3
+
+### Patch Changes
+
+- 3194775: fix trusted publishing
+- Updated dependencies [3194775]
+  - @tempocal/core@0.15.3
+
 ## 0.18.2
 
 ### Patch Changes

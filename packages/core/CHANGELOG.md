@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.15.3
+
+### Patch Changes
+
+- 3194775: fix trusted publishing
+
 ## 0.15.2
 
 ### Patch Changes
