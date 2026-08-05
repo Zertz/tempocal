@@ -8,7 +8,7 @@
   "repository": "https://github.com/Zertz/tempocal",
   "scripts": {
     "build": "turbo run build",
-    "ci:publish": "pnpm publish --access public --filter=\\!www --recursive && pnpm changeset tag",
+    "ci:publish": "pnpm publish --access public --provenance --filter=\\!www --recursive && pnpm changeset tag",
     "ci:version": "pnpm changeset version",
     "dev": "turbo run dev",
     "format": "oxfmt --write .",
