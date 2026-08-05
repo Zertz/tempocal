@@ -1,5 +1,14 @@
 # @tempocal/www
 
+## 1.9.1
+
+### Patch Changes
+
+- 77039dc: dedupe temporal import
+- Updated dependencies [77039dc]
+  - @tempocal/react@0.18.1
+  - @tempocal/core@0.15.1
+
 ## 1.9.0
 
 ### Minor Changes
