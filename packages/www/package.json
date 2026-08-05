@@ -1,7 +1,7 @@
 {
   "name": "@tempocal/www",
   "private": true,
-  "version": "1.9.2",
+  "version": "1.9.3",
   "scripts": {
     "build": "next build",
     "dev": "next",
