@@ -1,6 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { getMonthEndDate } from "./getMonthEndDate";
 import { getMonthStartDate } from "./getMonthStartDate";
+import { Temporal } from "./temporal.js";
 
 type Value = Temporal.PlainDate | Temporal.PlainDateTime;
 

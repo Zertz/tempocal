@@ -1,5 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
-import { getMonthEndDate, getMonthStartDate, temporalToDate } from "@tempocal/core";
+import { getMonthEndDate, getMonthStartDate, Temporal, temporalToDate } from "@tempocal/core";
 import { Calendar, DateRange, useTempocal } from "@tempocal/react";
 import classnames from "classnames";
 import * as React from "react";

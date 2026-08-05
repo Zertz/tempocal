@@ -1,6 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 import { getFirstDayOfWeek } from "../src/getFirstDayOfWeek";
+import { Temporal } from "../src/temporal.js";
 
 test("getFirstDayOfWeek (startOfWeek = 7)", () => {
   const firstDayOfWeek = getFirstDayOfWeek(

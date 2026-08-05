@@ -9,4 +9,5 @@ export * from "./src/getMonths";
 export * from "./src/getMonthStartDate";
 export * from "./src/getWeekdays";
 export * from "./src/getYears";
+export * from "./src/temporal";
 export * from "./src/temporalToDate";

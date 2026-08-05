@@ -1,5 +1,5 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
+import { Temporal } from "../src/temporal.js";
 import { temporalToDate } from "../src/temporalToDate";
 
 test("temporalToDate (PlainDate)", () => {

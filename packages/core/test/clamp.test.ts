@@ -1,6 +1,6 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { expect, test } from "vitest";
 import { clamp } from "../src/clamp";
+import { Temporal } from "../src/temporal.js";
 
 test("clamp (PlainDate, unbounded)", () => {
   const result = clamp(

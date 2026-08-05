@@ -1,5 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
-import { getCalendarMonthDateRange, getMonthStartDate, getWeekdays } from "@tempocal/core";
+import { Temporal, getCalendarMonthDateRange, getMonthStartDate, getWeekdays } from "@tempocal/core";
 import * as React from "react";
 import { CSSProperties } from "react";
 import { Locale } from "./useTempocal";

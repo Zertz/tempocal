@@ -1,5 +1,5 @@
-import { Temporal } from "@js-temporal/polyfill";
 import { getFirstDayOfWeek } from "./getFirstDayOfWeek";
+import { Temporal } from "./temporal.js";
 import { temporalToDate } from "./temporalToDate";
 
 export function getWeekdays(

@@ -1,4 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
+import { Temporal } from "./temporal.js";
 
 export function getMinutes(
   value?: Temporal.PlainDateTime,

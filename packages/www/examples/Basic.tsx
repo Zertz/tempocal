@@ -1,4 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
+import { Temporal } from "@tempocal/core";
 import { Calendar, useTempocal } from "@tempocal/react";
 import * as React from "react";
 

@@ -1,4 +1,4 @@
-import { Temporal } from "@js-temporal/polyfill";
+import { Temporal } from "@tempocal/core";
 import { useTempocal } from "@tempocal/react";
 import { InferGetStaticPropsType } from "next";
 import * as React from "react";
