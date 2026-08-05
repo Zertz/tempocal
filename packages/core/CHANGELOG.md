@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.15.1
+
+### Patch Changes
+
+- 77039dc: dedupe temporal import
+
 ## 0.15.0
 
 ### Minor Changes
