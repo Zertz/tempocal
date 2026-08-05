@@ -1,5 +1,14 @@
 # @tempocal/www
 
+## 1.9.2
+
+### Patch Changes
+
+- 307a921: trusted publisher
+- Updated dependencies [307a921]
+  - @tempocal/core@0.15.2
+  - @tempocal/react@0.18.2
+
 ## 1.9.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @tempocal/core
 
+## 0.15.2
+
+### Patch Changes
+
+- 307a921: trusted publisher
+
 ## 0.15.1
 
 ### Patch Changes
